@@ -33,6 +33,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		// Sujin First Commit
+		
 		return "home";
 	}
 	
