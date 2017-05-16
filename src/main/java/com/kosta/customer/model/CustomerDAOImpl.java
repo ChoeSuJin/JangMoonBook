@@ -25,20 +25,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public CustomerVO viewCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerVO viewCustomer(String id) {
+		return sqlSession.selectOne("customer.viewCustomer", id);
 	}
 
 	@Override
 	public void deleteCustomer(String id) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("customer.deleteCustomer", id);
 		
 	}
 
 	@Override
 	public void updateCustomer(CustomerVO vo) {
-		// TODO Auto-generated method stub
+		sqlSession.update("customer.updateCustomer", vo);
 		
 	}
 

@@ -27,20 +27,19 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerVO viewCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerVO viewCustomer(String id) {
+		return customerDAO.viewCustomer(id);
 	}
 
 	@Override
 	public void deleteCustomer(String id) {
-		// TODO Auto-generated method stub
+		customerDAO.deleteCustomer(id);
 		
 	}
 
 	@Override
 	public void updateCustomer(CustomerVO vo) {
-		// TODO Auto-generated method stub
+		customerDAO.updateCustomer(vo);
 		
 	}
 

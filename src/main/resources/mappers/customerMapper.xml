@@ -11,8 +11,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from customer order by id
 	</select>
 	<insert id="insertCustomer">
-		insert into Customer(id, pwd, zipcode, address1, address2,  email, phone) 
+		insert into customer(id, pwd, zipcode, address1, address2,  email, phone) 
                 values(#{id}, #{pwd}, #{zipcode}, #{address1}, #{address2}, #{email}, #{phone})
 	</insert>
+	<select id = "viewCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+		select * from customer where id = #{id}
+	</select>
+	<update id="updateCustomer">
+		update customer 
+			set zipcode=#{zipcode, jdbcType=VARCHAR}, address1=#{address1, jdbcType=VARCHAR}, address2=#{address2, jdbcType=VARCHAR}, email = #{email, jdbcType=VARCHAR}, phone= #{phone, jdbcType=VARCHAR} 
+					where id = #{id} 
+	</update>
+	<delete id="deleteCustomer">
+		delete from customer where id = #{id}
+	</delete>
 
 </mapper>
