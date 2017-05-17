@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kosta.book.HomeController;
-import com.kosta.customer.model.CustomerDAO;
-import com.kosta.customer.model.CustomerVO;
+import com.kosta.customer.model.NoticeDAO;
+import com.kosta.customer.model.NoticeVO;
 
 @Controller
-public class CustomerController {
+public class NoticeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 		
@@ -29,15 +29,15 @@ public class CustomerController {
 		
 		@RequestMapping("/list")
 		public String list(Model model) {
-			CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
+			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
 			model.addAttribute("list", customerDAO.listDao());
 			return "/list";
 		}
+		
 		@RequestMapping("/view")
 		public String view(HttpServletRequest request, Model model) {
-			
-			CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-			model.addAttribute("list", customerDAO.viewDao(request.getParameter("mWriter")));
+			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
+			model.addAttribute("list", customerDAO.viewDao(request.getParameter("title")));
 			return "/list";
 		}
 		
@@ -46,31 +46,36 @@ public class CustomerController {
 			
 			return "/writeForm";
 		}
+		
 		@RequestMapping("/viewForm")
 		public String viewForm() {
 			return "/viewForm";
 		}
 		
+		@RequestMapping("/mainPage")
+		public String mainForm() {
+			return "/mainPage";
+		}
+		
 		@RequestMapping("/write")
 		public String write(HttpServletRequest request, Model model) {
-			CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-			customerDAO.writeDao(request.getParameter("mWriter"), request.getParameter("mContent"));
+			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
+			customerDAO.writeDao(request.getParameter("title"), request.getParameter("content"));
 			return "redirect:list";
 		}
 		
 		
 		@RequestMapping("/delete")
 		public String delete(HttpServletRequest request, Model model) {
-			CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-			customerDAO.deleteDao(request.getParameter("mId"));
+			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
+			customerDAO.deleteDao(request.getParameter("title"));
 			return "redirect:list";
 		}
 		
-		
-		
-		/*@RequestMapping("/view")
-		public String view() {
-			
-			return "/view";
-		}*/
+		@RequestMapping("/content")
+		public String content(HttpServletRequest request, Model model) {
+			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
+			model.addAttribute("contentView", customerDAO.viewDao(request.getParameter("title")));
+			return "content";
+		}
 }

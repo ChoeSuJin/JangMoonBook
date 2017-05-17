@@ -11,16 +11,16 @@
 <table width="500" cellpadding="0" cellspacing="0" border="1">
 	<tr>
 		<td>번호</td>
-		<td>작성자</td>
-		<td>내용</td>
+		<td>제목</td>
+		<td>날짜</td>
 		<td>삭제</td>
 	<tr>
 	<c:forEach items="${list}" var="dto">
 	<tr>
-		<td>${dto.mId}</td>
-		<td>${dto.mWriter}</td>
-		<td>${dto.mContent}</td>
-		<td><a href="delete?mId=${dto.mId}">X</a></td>
+		<td>${dto.articleNumber}</td>
+		<td><form action="content"><a href="content?title=${dto.title}">${dto.title}</a></form></td>
+		<td>${dto.regDate}</td>
+		<td><a href="delete?title=${dto.title}">X</a></td>
 	<tr>
 	</c:forEach>
 </table>

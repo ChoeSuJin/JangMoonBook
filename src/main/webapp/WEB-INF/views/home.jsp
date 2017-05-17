@@ -16,5 +16,6 @@
 <a href="writeForm">쓰기</a>
 <a href="list">리스트 보기</a>
 <a href="viewForm">하나만 찾기</a>
+<a href="mainPage">메인페이지</a>
 </body>
 </html>

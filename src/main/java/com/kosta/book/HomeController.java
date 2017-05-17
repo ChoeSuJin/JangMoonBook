@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kosta.customer.model.CustomerDAO;
+import com.kosta.customer.model.NoticeDAO;
 
 @Controller
 public class HomeController {
@@ -31,49 +31,9 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
 		String formattedDate = dateFormat.format(date);
-		
 		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
 	}
-	/*
-	@RequestMapping("/list")
-	public String list(Model model) {
-		System.out.println("리스트 호출됨");
-		CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-		System.out.println("세션 겟 메펄");
-		model.addAttribute("list", customerDAO.listDao());
-		System.out.println("DAO 호출했음");
-		
-		return "/list";
-	}
-	
-	@RequestMapping("/writeForm")
-	public String writeForm() {
-		
-		return "/writeForm";
-	}
-	
-	@RequestMapping("/write")
-	public String write(HttpServletRequest request, Model model) {
-		CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-		customerDAO.writeDao(request.getParameter("mWriter"), request.getParameter("mContent"));
-		return "redirect:list";
-	}
-	
-	@RequestMapping("/view")
-	public String view() {
-		
-		return "/view";
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request, Model model) {
-		CustomerDAO customerDAO = sqlSession.getMapper(CustomerDAO.class);
-		customerDAO.deleteDao(request.getParameter("mId"));
-		return "redirect:list";
-	}*/
 	
 }
