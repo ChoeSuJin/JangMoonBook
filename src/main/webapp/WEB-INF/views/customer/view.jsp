@@ -14,8 +14,10 @@
 	$(document).ready(function(){
 		// 수정버튼
 			$("#btnUpdate").click(function(){
+		
 				document.form1.action="${path}/customer/update.do";
 				document.form1.submit();
+				
 			});
 	
 		// 삭제버튼
@@ -70,6 +72,7 @@
 				<td colspan = "2" align = "center">
 					<input type = "button" value = "수정하기" id = "btnUpdate">
 					<input type = "button" value = "탈퇴하기" id = "btnDelete">
+					<div style="color:red">${message}</div>				
 				</td>
 			</tr>
 		</table>	

@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	<c:if test="${message=='success'}">
+		<h2>${sessionScope.id}님 로그인 성공</h2>
+	</c:if>
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>

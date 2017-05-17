@@ -25,5 +25,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteCustomer">
 		delete from customer where id = #{id}
 	</delete>
-
+	
+	<!-- 비밀번호 일치여부 -->
+	<select id="checkPwd" resultType="int">
+		select count(*) from customer where id = #{id} and pwd=#{pwd}
+	</select>
+	
+	<!-- 로그인체크 -->
+	<select id= "loginCheck" resultType = "String">
+		select id from customer
+			where id=#{id} and pwd=#{pwd}	
+	</select>
+	<select id = "loginCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+		select * from customer where id = #{id} and pwd = #{pwd}
+	</select>
 </mapper>

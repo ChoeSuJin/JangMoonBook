@@ -1,6 +1,8 @@
 package com.kosta.customer.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,21 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Inject
 	SqlSession sqlSession;
+	
+	@Override
+	public boolean loginCheck(CustomerVO vo) {
+		String name = sqlSession.selectOne("customer.loginCheck", vo);
+		
+		return (name==null)? false : true;
+	}
+	
+	@Override
+	public CustomerVO loginCustomer(CustomerVO vo) {
+		//아이디와 비밀번호가 모두 일치하는 사람이있는지 가져옴
+		
+		return sqlSession.selectOne("customer.loginCustomer", vo);
+	}
+
 	
 	@Override
 	public List<CustomerVO> customerList() {
@@ -40,5 +57,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 		sqlSession.update("customer.updateCustomer", vo);
 		
 	}
+
+	@Override
+	public boolean checkPwd(String id, String pwd) {
+		boolean result = false;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pwd", pwd);
+		
+		int count= sqlSession.selectOne("customer.checkPwd", map);
+		if(count==1) result = true;
+		return result;
+	}
+
+	
+	
 
 }
