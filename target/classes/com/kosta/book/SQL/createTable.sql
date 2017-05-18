@@ -66,6 +66,8 @@ create table CustomerClass(
 );
 
 create table orderList(
+  orderNumber number,
+  isbn varchar2(100),
   title varchar2(50),
   publisher varchar2(50),
   quantity number,
@@ -93,3 +95,7 @@ create table Salary(
   bank varchar2(20),
   account varchar2(40)
 );
+
+
+-- Sequence
+create sequence orderNumber;	//	재고 주문에 필요한 주문번호
