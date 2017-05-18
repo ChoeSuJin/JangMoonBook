@@ -16,11 +16,36 @@ public class ManageEmployeeController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping("/mEmployee.html")
-	public ModelAndView mBranchInfo(){
+	public ModelAndView mEmployeeSelect(ManageEmployeeVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
-		List<ManageEmployeeVO> list = dao.selectAll();
+		List<ManageEmployeeVO> list = null;
+		System.out.println(vo.getName());
 		
+		if(vo.getName()!=null){
+			list = dao.selectByname(vo);
+		}else{
+			list = dao.selectAll();
+		}
+		
+		mav.addObject("employeeList", list);
+		mav.setViewName("mEmployee");
+		System.out.println("viewName : " + mav.getViewName());
+		return mav;
+	}
+	
+	@RequestMapping("/mEmployeeUD.html")
+	public ModelAndView mEmployeeDel(ManageEmployeeVO vo){
+		ModelAndView mav= new ModelAndView();
+		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
+		
+		if(vo.getPwd()!=null){
+			dao.update(vo);
+		}else{
+			dao.delete(vo);
+		}
+		
+		List<ManageEmployeeVO> list = dao.selectAll();
 		mav.addObject("employeeList", list);
 		mav.setViewName("mEmployee");
 		System.out.println("viewName : " + mav.getViewName());

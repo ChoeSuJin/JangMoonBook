@@ -2,6 +2,7 @@ package com.kosta.book.admin.mEmployee.model;
 
 public class ManageEmployeeVO {
 		private String name, 
+					   pwd,
 					   empclass,
 					   address1, 
 					   address2, 
@@ -11,6 +12,13 @@ public class ManageEmployeeVO {
 					   branch;
 		private int empno;
 		
+		
+		public String getPwd() {
+			return pwd;
+		}
+		public void setPwd(String pwd) {
+			this.pwd = pwd;
+		}
 		public String getName() {
 			return name;
 		}
