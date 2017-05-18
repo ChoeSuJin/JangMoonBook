@@ -1,5 +1,5 @@
 
--- °èÁ¤ »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create user book identified by oracle;
 
 grant resource, connect to book;

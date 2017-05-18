@@ -21,9 +21,9 @@ import com.kosta.customer.model.NoticeDAO;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-/*
+
 	@Autowired
-	private SqlSession sqlSession;*/
+	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -33,7 +33,11 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
-		return "home";
+		
+		NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
+		model.addAttribute("list", customerDAO.listDao());
+		
+		
+		return "mainPage";
 	}
-	
 }
