@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,5 +10,27 @@
 <body>
 <a href="inventoryMain.do">재고관리</a>
 <a href="salesMain.do">매출관리</a>
+
+<sec:authentication property="name" var="username"/>
+id = ${ username } <br>
+
+<br>
+<br>
+<sec:authorize access="hasAnyRole('ROLE_DIAMOND', 'ROLE_PLATINUM', 'ROLE_GOLD', 'ROLE_BRONZE')">
+알바부터
+</sec:authorize>
+<hr>
+<sec:authorize access="hasAnyRole('ROLE_DIAMOND', 'ROLE_PLATINUM', 'ROLE_GOLD')">
+매니저부터~
+</sec:authorize>
+<hr>
+<sec:authorize access="hasAnyRole('ROLE_DIAMOND', 'ROLE_PLATINUM')">
+지점장부터~
+</sec:authorize>
+<hr>
+<sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
+사장부터
+</sec:authorize>
+
 </body>
 </html>
