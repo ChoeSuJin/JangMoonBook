@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kosta.book" />
+<<<<<<< HEAD
 	<context:component-scan base-package="com.kosta.customer.controller" />
 	
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
@@ -31,6 +32,9 @@
 		<beans:property name="password" value="oracle" />
 	</beans:bean>
 	
+=======
+	<context:component-scan base-package="com.kosta.customer" />
+>>>>>>> branch 'hyeshin' of https://github.com/ChoeSuJin/JangMoonBook.git
 	
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
