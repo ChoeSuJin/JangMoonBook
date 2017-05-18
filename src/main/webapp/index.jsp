@@ -7,5 +7,6 @@
 <body>
 <a href="mBranchInfo.html?branch=광명">지점관리</a>
 <a href="mCustomer.html">회원관리</a>
+<a href="mEmployee.html">직원관리</a>
 </body>
 </html>

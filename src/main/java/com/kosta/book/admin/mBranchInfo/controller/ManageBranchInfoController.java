@@ -37,9 +37,17 @@ public class ManageBranchInfoController {
 	}
 	
 	@RequestMapping("/mBranchInfoUpdate.html")
-	public String mBranchInfo(ManageBranchInfoVO vo){
+	public ModelAndView mBranchInfo(ManageBranchInfoVO vo){
+		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		dao.update(vo);
-		return "redirect:mBranchInfo.html";
+		
+		List<ManageBranchInfoVO> list = dao.select(vo.getName());
+		
+		mav.addObject("branchInfo", list);
+		mav.setViewName("mBranchInfo");
+		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
+		
+		return mav;
 	}
 }
