@@ -38,12 +38,26 @@ public class ManageEmployeeController {
 	public ModelAndView mEmployeeDel(ManageEmployeeVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
-		
+		System.out.println("넘어온 이름 : " + vo.getName());
 		if(vo.getPwd()!=null){
 			dao.update(vo);
 		}else{
 			dao.delete(vo);
 		}
+		
+		List<ManageEmployeeVO> list = dao.selectAll();
+		mav.addObject("employeeList", list);
+		mav.setViewName("mEmployee");
+		System.out.println("viewName : " + mav.getViewName());
+		return mav;
+	}
+	
+	@RequestMapping("/mEmployeeIn.html")
+	public ModelAndView mEmployeeIn(ManageEmployeeVO vo){
+		ModelAndView mav= new ModelAndView();
+		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
+		
+		dao.insert(vo);
 		
 		List<ManageEmployeeVO> list = dao.selectAll();
 		mav.addObject("employeeList", list);

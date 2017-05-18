@@ -13,7 +13,7 @@
 <div class="container">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">지점정보</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu1">지점정보 수정</a></li>
   </ul>
   
   <div class="tab-content" style="margin-left:5%;">
@@ -33,7 +33,7 @@
 		</c:forEach>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>정보수정</h3>
+      <h3>지점정보 수정</h3>
 		<form action="mBranchInfoUpdate.html?branch=광명" method="post">
 			<table class="table table-condensed">
 				<tr><td>지점장</td><td><input type="text" name="master"></td></tr>

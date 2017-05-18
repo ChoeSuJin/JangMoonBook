@@ -5,13 +5,13 @@
   
   <mapper namespace="com.kosta.book.admin.mEmployee.model.ManageEmployeeDAO">
   	<select id="selectAll" resultType="com.kosta.book.admin.mEmployee.model.ManageEmployeeVO">
-  		select * from employee	
+  		select * from employee order by empno	
   	</select>
   	<select id="selectByname" resultType="com.kosta.book.admin.mEmployee.model.ManageEmployeeVO">
   		select * from employee where name like '%' || #{name} || '%'
   	</select>
   	<insert id="insert">
-  		insert into employee values(#{empno}, #{name}, #{empclass}, #{address1}, #{address2}, 
+  		insert into employee values(#{empno}, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
   									#{phone}, #{gender}, #{birth}, #{branch})
   	</insert>
   	<update id="update">

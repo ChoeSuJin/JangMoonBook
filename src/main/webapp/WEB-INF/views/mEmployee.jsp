@@ -35,7 +35,7 @@
 						varStatus="status">
 						<tr>
 							<td>
-								<button type="button" class="btn btn-info btn-lg"
+								<button type="button" class="btn btn-default"
 									data-toggle="modal" data-target="#myModal${ employee.empno }">${ employee.empno }</button>
 							</td>
 							<td>${ employee.name }</td>
@@ -57,7 +57,7 @@
 									</div>
 									<div class="modal-body">
 
-										<button type="button" class="btn btn-info btn-lg">수정</button>
+										<button type="button" class="btn btn-default">수정</button>
 										<div class="empInfo">
 											<form action="mEmployeeUD.html" method="post">
 												<input type="text" value="${ employee.empno }" name="empno"><br>
@@ -69,13 +69,13 @@
 													name="address1"><br> <input type="text"
 													value="${ employee.address2 }" name="address2"><br>
 												<input type="text" value="${ employee.branch }"
-													name="branch"><br> <input type="submit"
-													value="수정완료">
+													name="branch"><br> 
+												<input type="submit" class="btn btn-default" value="수정완료">
 											</form>
 										</div>
 										<form action="mEmployeeUD.html" method="post">
 											<input type="hidden" value="${employee.empno }" name="empno">
-											<input type="submit" class="btn btn-info btn-lg" value="삭제">
+											<input type="submit" class="btn btn-default" value="삭제">
 										</form>
 
 									</div>
@@ -84,23 +84,19 @@
 						</div>
 					</c:forEach>
 				</table>
-				<hr>
 				<!-- 직원 목록, 수정, 삭제 -->
 
 				<!-- 직원목록 전체 출력 버튼 -->
-				<form action="mEmployee.html" method="post">
-					<input type="submit" class="btn btn-info btn-lg" value="전체보기">
-				</form>
-
+				<form action="mEmployee.html" method="post" style="float:right;margin-top:-10px;">
+					<input type="submit" class="btn btn-default" value="전체보기">
+				</form><br><br>
+				<hr>
 				<h3>검색</h3>
 				<form action="mEmployee.html" method="post">
-					<table class="table table-condensed">
-						<tr>
-							<td width="80px">이름</td>
-							<td width="100px"><input type="text" name="name"></td>
-							<td><input type="submit" value="검색"></td>
-						</tr>
-					</table>
+					<div class="input-group">
+							<span class="input-group-addon" style="width:100px;">이름</span>
+							<input id="msg"	type="text" class="form-control" name="name" placeholder="이름을 입력하고 Enter">
+					</div>
 				</form>
 			</div>
 			<!-- 직원 추가 탭 -->
@@ -121,7 +117,7 @@
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" style="width:100px;">연락처</span> 
-							<input id="msg"	type="text" class="form-control" name="empno" placeholder="Additional Info">
+							<input id="msg"	type="text" class="form-control" name="phone" placeholder="Additional Info">
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" style="width:100px;">직급</span> 
@@ -150,32 +146,11 @@
 							<span class="input-group-addon" style="width:100px;">생년월일</span> 
 							<input id="msg"	type="text" class="form-control" name="birth" placeholder="Additional Info">
 						</div>
-						
-						<!-- <tr><td>이름</td><td><input type="text" name="name"></td></tr>
-						<tr><td>비밀번호</td><td><input type="text" name="pwd"></td></tr>
-						<tr><td>연락처</td><td><input type="text" name="phone"></td></tr>
-						<tr>
-							<td>직급</td>
-							<td>
-								<select name="empclass" class="form-control" id="sel1" style="height:40px;width:100px;">
-									<option value="직원">직원</option> 
-									<option value="매니저">매니저</option> 
-									<option value="지점장">지점장</option> 
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>성별</td>
-							<td>
-								<label class="radio-inline"><input type="radio" name="gender" value="M">M</label>
-								<label class="radio-inline"><input type="radio" name="gender" value="F">F</label>
-							</td>
-						</tr>
-						<tr><td>주소</td><td><input type="text" name="address1"></td></tr>
-						<tr><td>상세주소</td><td><input type="text" name="address2"></td></tr>
-						<tr><td>생년월일</td><td><input type="text" name="birth"></td></tr>
-						<tr><td colspan="2"><input type="submit" value="추가"></td></tr>
-					</table> -->
+						<div class="input-group">
+							<span class="input-group-addon" style="width:100px;">지점</span> 
+							<input id="msg"	type="text" class="form-control" name="branch" placeholder="Additional Info">
+						</div>
+						<input type="submit" class="btn btn-default" value="추가" style="align:center">
 				</form>
 			</div>
 
