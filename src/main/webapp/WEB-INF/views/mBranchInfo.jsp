@@ -34,7 +34,7 @@
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>지점정보 수정</h3>
-		<form action="mBranchInfoUpdate.html?branch=광명" method="post">
+		<form action="mBranchInfoUpdate.do?branch=광명" method="post">
 			<table class="table table-condensed">
 				<tr><td>지점장</td><td><input type="text" name="master"></td></tr>
 				<tr><td>번호</td><td><input type="text" name="phone"></td></tr>

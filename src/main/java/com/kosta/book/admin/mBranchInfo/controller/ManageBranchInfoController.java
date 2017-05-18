@@ -19,7 +19,7 @@ public class ManageBranchInfoController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping("/mBranchInfo.html")
+	@RequestMapping("/mBranchInfo.do")
 	public ModelAndView mBranchInfo(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
@@ -36,7 +36,7 @@ public class ManageBranchInfoController {
 		return mav;
 	}
 	
-	@RequestMapping("/mBranchInfoUpdate.html")
+	@RequestMapping("/mBranchInfoUpdate.do")
 	public ModelAndView mBranchInfo(ManageBranchInfoVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);

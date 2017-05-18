@@ -17,7 +17,7 @@ public class ManageCustomerController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping("/mCustomer.html")
+	@RequestMapping("/mCustomer.do")
 	public ModelAndView mCustomer(){
 		ModelAndView mav= new ModelAndView();
 		

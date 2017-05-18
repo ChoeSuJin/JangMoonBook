@@ -15,7 +15,7 @@ public class ManageEmployeeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping("/mEmployee.html")
+	@RequestMapping("/mEmployee.do")
 	public ModelAndView mEmployeeSelect(ManageEmployeeVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
@@ -34,7 +34,7 @@ public class ManageEmployeeController {
 		return mav;
 	}
 	
-	@RequestMapping("/mEmployeeUD.html")
+	@RequestMapping("/mEmployeeUD.do")
 	public ModelAndView mEmployeeDel(ManageEmployeeVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
@@ -52,7 +52,7 @@ public class ManageEmployeeController {
 		return mav;
 	}
 	
-	@RequestMapping("/mEmployeeIn.html")
+	@RequestMapping("/mEmployeeIn.do")
 	public ModelAndView mEmployeeIn(ManageEmployeeVO vo){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);

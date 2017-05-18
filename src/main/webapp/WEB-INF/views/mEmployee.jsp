@@ -59,7 +59,7 @@
 
 										<button type="button" class="btn btn-default">수정</button>
 										<div class="empInfo">
-											<form action="mEmployeeUD.html" method="post">
+											<form action="mEmployeeUD.do" method="post">
 												<input type="text" value="${ employee.empno }" name="empno"><br>
 												<input type="text" value="${ employee.pwd }" name="pwd"><br>
 												<input type="text" value="${ employee.empclass }"
@@ -73,7 +73,7 @@
 												<input type="submit" class="btn btn-default" value="수정완료">
 											</form>
 										</div>
-										<form action="mEmployeeUD.html" method="post">
+										<form action="mEmployeeUD.do" method="post">
 											<input type="hidden" value="${employee.empno }" name="empno">
 											<input type="submit" class="btn btn-default" value="삭제">
 										</form>
@@ -87,12 +87,12 @@
 				<!-- 직원 목록, 수정, 삭제 -->
 
 				<!-- 직원목록 전체 출력 버튼 -->
-				<form action="mEmployee.html" method="post" style="float:right;margin-top:-10px;">
+				<form action="mEmployee.do" method="post" style="float:right;margin-top:-10px;">
 					<input type="submit" class="btn btn-default" value="전체보기">
 				</form><br><br>
 				<hr>
 				<h3>검색</h3>
-				<form action="mEmployee.html" method="post">
+				<form action="mEmployee.do" method="post">
 					<div class="input-group">
 							<span class="input-group-addon" style="width:100px;">이름</span>
 							<input id="msg"	type="text" class="form-control" name="name" placeholder="이름을 입력하고 Enter">
@@ -102,7 +102,7 @@
 			<!-- 직원 추가 탭 -->
 			<div id="menu1" class="tab-pane fade">
 				<h3>직원등록</h3>
-				<form action="mEmployeeIn.html" method="post">
+				<form action="mEmployeeIn.do" method="post">
 						<div class="input-group">
 							<span class="input-group-addon" style="width:100px;">직원번호</span> 
 							<input id="msg"	type="text" class="form-control" name="empno" placeholder="Additional Info">

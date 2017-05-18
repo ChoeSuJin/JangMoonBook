@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kosta.book.admin.mInventory.model.InventoryDAO">
+	<select id="selectEmergency" resultType="com.kosta.book.admin.mInventory.model.InventoryVO">
+		<![CDATA[select * from inventory where quantity <= 3 order by quantity]]>
+	</select>
+	
+	<select id="selectNormal" resultType="com.kosta.book.admin.mInventory.model.InventoryVO">
+		select * from inventory where quantity > 3 order by quantity
+	</select>
+	
+	<select id="selectOrderList" resultType="com.kosta.book.admin.mInventory.model.OrderListVO">
+		select * from orderList
+	</select>
+	
+	<insert id="insertOrderList">
+		insert into orderlist values('${title}', '${publisher}', '${quantity }', '${ branch}', '${cost}', '${o_date}', '${isbn}', orderNumber.nextval)
+	</insert>
+	
+	<insert id="newBookInsert">
+		insert into Book_info values('${title}', '${price}', '${author}', '${publisher}', '${type}', '${isbn}', '${category}')
+	</insert>
+	
+	<update id="orderConfirm">
+		update inventory set quantity = quantity + '${quantity}' where isbn = '${ isbn }' and branch = '${branch}'
+	</update>
+	
+	<delete id="deleteOrder">
+		delete orderlist where ordernumber = '${ orderNumber }'
+	</delete>
+	
+	
+	
+</mapper>
