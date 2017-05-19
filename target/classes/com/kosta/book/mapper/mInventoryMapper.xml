@@ -5,19 +5,27 @@
     
 <mapper namespace="com.kosta.book.admin.mInventory.model.InventoryDAO">
 	<select id="selectEmergency" resultType="com.kosta.book.admin.mInventory.model.InventoryVO">
-		<![CDATA[select * from inventory where quantity <= 3 order by quantity]]>
+		<![CDATA[select * from inventory where branch =#{branch} and quantity <= 3 order by quantity]]>
 	</select>
 	
 	<select id="selectNormal" resultType="com.kosta.book.admin.mInventory.model.InventoryVO">
-		select * from inventory where quantity > 3 order by quantity
+		select * from inventory where branch =#{branch} and quantity > 3 order by quantity
 	</select>
 	
 	<select id="selectOrderList" resultType="com.kosta.book.admin.mInventory.model.OrderListVO">
-		select * from orderList
+		select * from orderList where branch = #{branch}
+	</select>
+	
+	<select id="getCost" resultType="Integer">
+		select price from book_info where isbn = #{isbn}
+	</select>
+	
+	<select id="getPublisher" resultType="String">
+		select publisher from book_info where isbn = #{isbn}
 	</select>
 	
 	<insert id="insertOrderList">
-		insert into orderlist values('${title}', '${publisher}', '${quantity }', '${ branch}', '${cost}', '${o_date}', '${isbn}', orderNumber.nextval)
+		insert into orderlist values('${title}', '${publisher}', '${quantity }', '${ branch }', '${cost}', TO_CHAR(sysdate, 'YYYYMMDD'), '${isbn}', orderNumber.nextval)
 	</insert>
 	
 	<insert id="newBookInsert">

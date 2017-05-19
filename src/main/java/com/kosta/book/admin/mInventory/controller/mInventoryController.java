@@ -2,6 +2,9 @@ package com.kosta.book.admin.mInventory.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.book.admin.login.model.EmployeeVO;
 import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.book.admin.mInventory.model.InventoryDAO;
 import com.kosta.book.admin.mInventory.model.OrderListVO;
@@ -19,15 +23,21 @@ public class mInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("inventoryMain.do")
-	public ModelAndView inventoryMainForm() {
+	@RequestMapping("inventoryMainForm.do")
+	public ModelAndView inventoryMainForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
-		List list = dao.selectEmergency();
-		List list2 = dao.selectNormal();
-		List list3 = dao.selectOrderList();
+		List list = dao.selectEmergency(branch);
+		List list2 = dao.selectNormal(branch);
+		List list3 = dao.selectOrderList(branch);
 		
 		mav.setViewName("/admin/mInventory/inventoryMain");
 		mav.addObject("list", list);
@@ -43,13 +53,17 @@ public class mInventoryController {
 	
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
 		
-		vo.setPublisher("testeee");
-		vo.setCost(10000);
-		vo.setO_date("2017-06-17");
+		// cost, publisher를 얻는 쿼리문을 작성하여 set 메소드에 입력
 		
+		
+		
+		// 날짜처리 => db에서 sysdate로 처리했읍니다
+		
+		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
+		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
 		dao.insertOrderList(vo);
-		return "redirect:inventoryMain.do";
+		return "redirect:inventoryMainForm.do";
 		
 	}
 	
@@ -66,7 +80,7 @@ public class mInventoryController {
 		dao.deleteOrder(vo);
 		
 		
-		return "redirect:inventoryMain.do";
+		return "redirect:inventoryMainForm.do";
 	}
 	
 	@RequestMapping("insertNewBook.do")
@@ -78,7 +92,7 @@ public class mInventoryController {
 		dao.newBookInsert(vo);
 		
 		
-		return "redirect:inventoryMain.do";
+		return "redirect:inventoryMainForm.do";
 	}
 
 }

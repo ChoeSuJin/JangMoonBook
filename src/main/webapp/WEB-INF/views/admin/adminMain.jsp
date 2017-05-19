@@ -8,8 +8,8 @@
 <title>JangMoonBook AdminMain</title>
 </head>
 <body>
-<a href="inventoryMain.do">재고관리</a>
-<a href="salesMain.do">매출관리</a>
+<a href="inventoryMainForm.do">재고관리</a>
+<a href="salesMainForm.do">매출관리</a>
 <a href="mBranchInfo.do">지점관리</a>
 <a href="mCustomer.do">고객관리</a>
 <a href="mEmployee.do">직원관리</a>

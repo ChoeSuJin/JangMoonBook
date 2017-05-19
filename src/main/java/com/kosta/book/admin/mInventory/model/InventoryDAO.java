@@ -6,9 +6,11 @@ import com.kosta.book.admin.mSales.model.SalesListVO;
 
 public interface InventoryDAO {
 	
-	public List<InventoryVO> selectEmergency();
-	public List<InventoryVO> selectNormal();
-	public List<OrderListVO> selectOrderList();
+	public List<InventoryVO> selectEmergency(String branch);
+	public List<InventoryVO> selectNormal(String branch);
+	public List<OrderListVO> selectOrderList(String branch);
+	public int getCost(String isbn);
+	public String getPublisher(String isbn);
 	public void insertOrderList(OrderListVO vo);
 	public void orderConfirm(OrderListVO vo);
 	public void deleteOrder(OrderListVO vo);
