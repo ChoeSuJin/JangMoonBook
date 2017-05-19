@@ -18,7 +18,7 @@ public class AdminLoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("/adminLoginForm.do")
+	@RequestMapping("/adminLogin.do")
 	public String loginForm() {
 		System.out.println("go loginForm");
 		
