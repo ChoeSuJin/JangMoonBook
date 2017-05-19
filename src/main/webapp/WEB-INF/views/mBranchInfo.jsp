@@ -10,6 +10,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!-- header -->
+<jsp:include page="admin/adminMain.jsp"/>
+<!-- header -->
 <div class="container">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">지점정보</a></li>

@@ -17,9 +17,9 @@
 <title>InventoryMain</title>
 </head>
 <body>
-
-<br><br><br>
-
+<!-- header -->
+<jsp:include page="../../admin/adminMain.jsp"/>
+<!-- header -->
 	<div class="container">
 		<h3>inventoryMain</h3>
 		<ul class="nav nav-tabs">
