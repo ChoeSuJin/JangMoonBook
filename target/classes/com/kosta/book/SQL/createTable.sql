@@ -17,7 +17,7 @@ create table Book_info (
 create table Customer (
   id varchar2(20),
   pwd varchar2(20),
-  class varchar2(20),
+  customerClass varchar2(20),
   address1 varchar2(200),
   address2 varchar2(200),
   zipcode varchar2(10),
@@ -29,7 +29,7 @@ create table Employee (
   empNo number,
   pwd varchar2(20),
   name varchar2(20),
-  class varchar2(20),
+  empClass varchar2(20),
   address1 varchar2(200),
   address2 varchar2(200),
   phone varchar2(11),
@@ -50,6 +50,7 @@ create table branch_info(
 );
 
 create table SaleList (
+  orderNumber number,
   isbn varchar2(100),
   title varchar2(50),
   id varchar2(20),
@@ -66,6 +67,8 @@ create table CustomerClass(
 );
 
 create table orderList(
+  orderNumber number,
+  isbn varchar2(100),
   title varchar2(50),
   publisher varchar2(50),
   quantity number,
@@ -93,3 +96,8 @@ create table Salary(
   bank varchar2(20),
   account varchar2(40)
 );
+
+
+-- Sequence
+create sequence orderNumber;	//	재고 주문에 필요한 주문번호
+create sequence salenumber;		//  고객들의 주문에 대한 주문번호 부여

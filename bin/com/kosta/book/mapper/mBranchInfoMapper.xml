@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoDAO">
+  	<select id="select" resultType="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoVO">
+  		select * from branch_info where name = #{name}	
+  	</select>
+  	<select id="update" resultType="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoVO">
+  		update branch_info set master=#{master}, phone=#{phone}, address1=#{address1}, address2=#{address2},
+  							   time=#{time} where name=#{name}
+  	</select>
+  </mapper>
