@@ -21,7 +21,7 @@
   
   <div class="tab-content" style="margin-left:5%;">
     <div id="home" class="tab-pane fade in active">
-      <h3>지점정보</h3>
+      <h3>지점정보</h3><br>
 		<c:forEach var="branch" items="${ branchInfo }">
 			<table class="table table-condensed">
 				<tr><td>지점 명</td><td>${ branch.name }</td></tr>
@@ -36,16 +36,37 @@
 		</c:forEach>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>지점정보 수정</h3>
+      <h3>지점정보 수정</h3><br>
 		<form action="mBranchInfoUpdate.do?branch=광명" method="post">
-			<table class="table table-condensed">
-				<tr><td>지점장</td><td><input type="text" name="master"></td></tr>
-				<tr><td>번호</td><td><input type="text" name="phone"></td></tr>
-				<tr><td>주소</td><td><input type="text" name="address1"> - <input type="text" name="address2"></td></tr>
-				<tr><td>운영시간</td><td><input type="text" name="time"></td></tr>
-				<tr><td colspan="2"><input type="submit" value="수정"></td></tr>
-			</table>
-			<input type="hidden" name="name" value="광명">
+			<c:forEach var="branch" items="${ branchInfo }">
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;height:40px;">지점장</span> 
+				<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+					   name="master" value="${ branch.master }">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;height:40px;">번호</span> 
+				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
+					   name="address1" value="${ branch.phone }">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;height:40px;">주소</span> 
+				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control"
+				       name="address1" value="${ branch.address1 }">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;height:40px;">상세주소</span> 
+				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control"
+					   name="address2" value="${ branch.address2 }">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;height:40px;">운영시간</span> 
+				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
+					   name="time" value="${ branch.time }">
+			</div>
+			<input type="hidden" name="name" value="서울">
+			<input style="width:400px;" class="btn btn-default" type="submit" value="수정">
+			</c:forEach>
 		</form>
     </div>
   </div>

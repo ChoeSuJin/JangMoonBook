@@ -56,18 +56,18 @@ id = ${ username } <br>
 	  </sec:authorize>
 	  	<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
         <li><a href="salesMain.do">매출관리</a></li>
-        <li><a href="mBranchInfo.do">지점관리</a></li>
+        <li><a href="mBranchInfo.do?branch=서울">지점관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
       <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
         <li><a href="salesMain.do">매출관리</a></li>
-        <li><a href="mBranchInfo.do">지점관리</a></li>
+        <li><a href="mBranchInfo.do?branch=서울">지점관리</a></li>
         <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </div>

@@ -20,8 +20,7 @@
 <!-- header -->
 <jsp:include page="../../admin/adminMain.jsp"/>
 <!-- header -->
-	<div class="container">
-		<h3>inventoryMain</h3>
+	<div class="container" >
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#emergency">주문요망</a></li>
 			<li><a data-toggle="tab" href="#normal">재고확인</a></li>
@@ -29,7 +28,7 @@
 			<li><a data-toggle="tab" href="#newBookInsert">신책 등록</a></li>
 		</ul>
 		<br>
-		<div class="tab-content">
+		<div class="tab-content" style="margin-left:5%;">
 			<div id="emergency" class="tab-pane fade in active">
 				<table class="table table-condensed">
 					<th>isbn</th>
@@ -114,6 +113,7 @@
 			
 			<div id="orderList" class="tab-pane fade">
 				<h3>주문내역확인</h3>
+				<br>
 				<table class="table table-condensed">
 					<th>orderNumber</th>
 					<th>isbn</th>
@@ -155,53 +155,47 @@
 			
 			<div id="newBookInsert" class="tab-pane fade">
 				<h3>신책 등록</h3>
+				<br>
 				<form action="insertNewBook.do" method="post">
-				<table class="table table-condensed">
-					<tr>
-						<td>
-							title : <input type="text" name="title">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							price : <input type="text" name="price">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							author : <input type="text" name="author">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							publisher : <input type="text" name="publisher">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							type : <input type="text" name="type">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							isbn : <input type="text" name="isbn">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							category : <input type="text" name="category">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="submit" value="등록하기">
-						</td>
-					</tr>
-				</table>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">책 이름</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="title" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">가격</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="price" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">저자</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="author" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">출판사</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="publisher" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">구분</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="type" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">ISBN</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="isbn" placeholder="Additional Info">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">카테고리</span> 
+						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
+							   name="category" placeholder="Additional Info">
+					</div>
+					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기">
 				</form>
-
 			</div>
-			
+		
 		</div>
 	</div>
 

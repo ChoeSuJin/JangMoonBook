@@ -21,7 +21,7 @@
 		<div class="tab-content" style="margin-left: 5%;">
 		<!-- 직원 목록, 수정, 삭제 -->
 		<div id="home" class="tab-pane fade in active">
-			<h3>직원목록</h3>
+			<h3>직원목록</h3><br>
 			<table class="table table-condensed">
 				<tr>
 					<th>직원번호</th>
@@ -88,7 +88,7 @@
 				<!-- 직원목록 전체 출력 버튼 -->
 			<form action="mEmployee.do" method="post" style="float:right;margin-top:-10px;">
 				<input type="submit" class="btn btn-default" value="전체보기">
-			</form><br><br>
+			</form><br>
 			<hr>
 			<h3>검색</h3>
 			<form action="mEmployee.do" method="post">
@@ -100,56 +100,64 @@
 		</div>
 		<!-- 직원 추가 탭 -->
 		<div id="menu1" class="tab-pane fade">
-			<h3>직원등록</h3>
+			<h3>직원등록</h3><br>
 			<form action="mEmployeeIn.do" method="post">
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">직원번호</span> 
-						<input id="msg"	type="text" class="form-control" name="empno" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">직원번호</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control" 
+							   name="empno" placeholder="Additional Info">
 					</div>
 					<div class="input-group" >
-						<span class="input-group-addon" style="width:100px;">이름</span> 
-						<input id="msg"	type="text" class="form-control" name="name" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">이름</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="name" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">비밀번호</span> 
-						<input id="msg"	type="text" class="form-control" name="pwd" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">비밀번호</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control" 
+						  	   name="pwd" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">연락처</span> 
-						<input id="msg"	type="text" class="form-control" name="phone" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">연락처</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="phone" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">직급</span> 
-						<select name="empclass" class="form-control" id="sel1" style="height:40px;width:196px;">
+						<span class="input-group-addon" style="width:100px;height:40px;">직급</span> 
+						<select name="empclass" class="form-control" id="sel1" style="width:300px;height:40px;">
 									<option value="직원">직원</option> 
 									<option value="매니저">매니저</option> 
 									<option value="지점장">지점장</option> 
 						</select>
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">성별</span>&nbsp;&nbsp;
-						<select name="gender" class="form-control" id="sel1" style="height:40px;width:196px;">
+						<span class="input-group-addon" style="width:100px;height:40px;">성별</span>&nbsp;&nbsp;
+						<select name="gender" class="form-control" id="sel1" style="width:300px;height:40px;">
 									<option value="M">M</option> 
 									<option value="F">F</option> 
 						</select>
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">주소</span> 
-						<input id="msg"	type="text" class="form-control" name="address1" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">주소</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="address1" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">상세주소</span> 
-						<input id="msg"	type="text" class="form-control" name="address2" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">상세주소</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="address2" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">생년월일</span> 
-						<input id="msg"	type="text" class="form-control" name="birth" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">생년월일</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="birth" placeholder="Additional Info">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">지점</span> 
-						<input id="msg"	type="text" class="form-control" name="branch" placeholder="Additional Info">
+						<span class="input-group-addon" style="width:100px;height:40px;">지점</span> 
+						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
+							   name="branch" placeholder="Additional Info">
 					</div>
-					<input type="submit" class="btn btn-default" value="추가" style="align:center">
+					<input style="width:400px;" type="submit" class="btn btn-default" value="추가">
 			</form>
 		</div>
 		</div>

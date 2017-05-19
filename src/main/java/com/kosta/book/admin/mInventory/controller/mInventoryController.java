@@ -23,7 +23,7 @@ public class mInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("inventoryMainForm.do")
+	@RequestMapping("inventoryMain.do")
 	public ModelAndView inventoryMainForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
