@@ -72,6 +72,5 @@ id = ${ username } <br>
     </div>
   </div>
 </nav>
-
 </body>
 </html>

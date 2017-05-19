@@ -50,6 +50,7 @@ create table branch_info(
 );
 
 create table SaleList (
+  orderNumber number,
   isbn varchar2(100),
   title varchar2(50),
   id varchar2(20),
@@ -99,3 +100,4 @@ create table Salary(
 
 -- Sequence
 create sequence orderNumber;	//	재고 주문에 필요한 주문번호
+create sequence salenumber;		//  고객들의 주문에 대한 주문번호 부여
