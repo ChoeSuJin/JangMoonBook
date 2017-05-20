@@ -26,7 +26,20 @@ public class HomeController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+/*=======
+	//시작 페이지로 이동
+	@RequestMapping("/")
+	public String main(Model model){
+		
+		return "main";
+	}
+	
+	*//**
+	 * Simply selects the home view to render by returning its name.
+	 *//*
+	@RequestMapping(value = "home.do", method = RequestMethod.GET)
+>>>>>>> branch 'hyeshin' of https://github.com/ChoeSuJin/JangMoonBook.git
+*/	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
