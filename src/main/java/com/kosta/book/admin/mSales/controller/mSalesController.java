@@ -22,11 +22,11 @@ public class mSalesController {
 	SqlSession sqlSession;
 	
 	
-	@RequestMapping("salesMainForm.do")
+	@RequestMapping("salesMain.do")
 	public ModelAndView salesMainForm(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("salesMainForm.do");
+		System.out.println("salesMain.do");
 		
 		SalesListVO vo = new SalesListVO();
 		
@@ -53,7 +53,7 @@ public class mSalesController {
 		mav.addObject("sumUsed", sumUsed);
 	
 		
-		mav.setViewName("/admin/mSales/SalesMain");
+		mav.setViewName("/admin/manage/SalesMain");
 		return mav;
 	}
 }

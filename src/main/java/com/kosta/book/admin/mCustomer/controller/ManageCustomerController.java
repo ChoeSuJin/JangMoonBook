@@ -26,7 +26,7 @@ public class ManageCustomerController {
  		
 		mav.addObject("customerList", list);
 		mav.addObject("count", list.size() );
-		mav.setViewName("mCustomer");
+		mav.setViewName("/admin/manage/mCustomer");
 		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
 		
 		return mav;

@@ -18,7 +18,7 @@
 </head>
 <body>
 <!-- header -->
-<jsp:include page="../../admin/adminMain.jsp"/>
+<jsp:include page="../adminMain.jsp"/>
 <!-- header -->
 	<div class="container" >
 		<ul class="nav nav-tabs">

@@ -40,7 +40,7 @@ public class ManageEmployeeController {
 		}
 		
 		mav.addObject("employeeList", list);
-		mav.setViewName("mEmployee");
+		mav.setViewName("/admin/manage/mEmployee");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}
@@ -81,7 +81,7 @@ public class ManageEmployeeController {
 		
 		List<ManageEmployeeVO> list = dao.selectAll(branch);
 		mav.addObject("employeeList", list);
-		mav.setViewName("mEmployee");
+		mav.setViewName("/admin/manage/mEmployee");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}

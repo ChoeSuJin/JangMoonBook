@@ -39,7 +39,7 @@ public class mInventoryController {
 		List list2 = dao.selectNormal(branch);
 		List list3 = dao.selectOrderList(branch);
 		
-		mav.setViewName("/admin/mInventory/inventoryMain");
+		mav.setViewName("/admin/manage/inventoryMain");
 		mav.addObject("list", list);
 		mav.addObject("list2", list2);
 		mav.addObject("list3", list3);
@@ -63,7 +63,7 @@ public class mInventoryController {
 		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
 		dao.insertOrderList(vo);
-		return "redirect:inventoryMainForm.do";
+		return "redirect:inventoryMain.do";
 		
 	}
 	
@@ -80,7 +80,7 @@ public class mInventoryController {
 		dao.deleteOrder(vo);
 		
 		
-		return "redirect:inventoryMainForm.do";
+		return "redirect:inventoryMain.do";
 	}
 	
 	@RequestMapping("insertNewBook.do")
