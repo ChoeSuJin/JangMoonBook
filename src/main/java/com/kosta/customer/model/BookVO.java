@@ -6,20 +6,20 @@ public class BookVO {
 	private String author;
 	private String publisher;
 	private String type;
-	private String ibsn;
+	private String isbn;
 	private String category;
 
 	public BookVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookVO(String title, int price, String author, String publisher, String type, String ibsn, String category) {
+	public BookVO(String title, int price, String author, String publisher, String type, String isbn, String category) {
 		this.title = title;
 		this.price = price;
 		this.author = author;
 		this.publisher =publisher;
 		this.type = type;
-		this.ibsn = ibsn;
+		this.isbn = isbn;
 		this.category = category;
 	}
 	/*Getter*/
@@ -43,8 +43,8 @@ public class BookVO {
 		return type;
 	}
 
-	public String getIbsn() {
-		return ibsn;
+	public String getIsbn() {
+		return isbn;
 	}
 
 	public String getCategory() {
@@ -72,8 +72,8 @@ public class BookVO {
 		this.type = type;
 	}
 
-	public void setIbsn(String ibsn) {
-		this.ibsn = ibsn;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public void setCategory(String category) {

@@ -13,4 +13,30 @@
 			AND category = ${param3}
 		ORDER BY TITLE DESC
 	</select>
+	<insert id="bookWrite">
+		INSERT INTO BOOK_INFO
+		(title,
+		price, 
+		author, 
+		publisher, 
+		type, 
+		isbn, 
+		category
+		 )
+		 
+		VALUES (
+			'${param1}',
+			'${param2}',
+			'${param3}',
+			'${param4}',
+			'${param5}',
+			'${param6}',
+			'${param7}'
+				)
+
+		
+		
+		
+	</insert>
+	
 </mapper>
