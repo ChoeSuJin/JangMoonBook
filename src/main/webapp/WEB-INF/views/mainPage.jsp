@@ -95,7 +95,11 @@ div.tab button.active {
 			<legend>장바구니</legend>
 		</fieldset>
 	</fieldset>
-	
+	<fieldset>
+		<legend>중고책 등록</legend>
+		<a href="usedWriteForm">Go usedWriteForm</a>
+	</fieldset>
+		
 	
 	
 	<fieldset>
