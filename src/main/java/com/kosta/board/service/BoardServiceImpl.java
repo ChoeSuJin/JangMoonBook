@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void increaseViewcnt(int bno) throws Exception {
-		
 		boardDAO.increaseViewcnt(bno);
 	}
 	

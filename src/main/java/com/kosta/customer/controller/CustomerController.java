@@ -20,23 +20,23 @@ import com.kosta.customer.service.CustomerService;
 @Controller
 public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
-								// CustomerController 클래스에 있는 Logger를 수집하겠다.
+								// CustomerController �겢�옒�뒪�뿉 �엳�뒗 Logger瑜� �닔吏묓븯寃좊떎.
 	@Inject
 	CustomerService customerService;
 	
-	//로그인페이지로 이동
+	//濡쒓렇�씤�럹�씠吏�濡� �씠�룞
 	@RequestMapping("/customer/login.do")
 	public String customerLogin(){
-		return "customer/login";	
+		return "/customer/login";	
 	}
 	
-	//로그인성공 - 메인페이지
+	//濡쒓렇�씤�꽦怨� - 硫붿씤�럹�씠吏�
 	@RequestMapping("/customer/loginCheck.do")
 	public ModelAndView loginCheck(@ModelAttribute CustomerVO vo, HttpSession session){
 		boolean result = customerService.loginCheck(vo, session);
 		ModelAndView mav = new ModelAndView();
 		if(result == true){
-			//로그인 성공
+			//濡쒓렇�씤 �꽦怨�
 			mav.setViewName("customer/main");
 			mav.addObject("message", "success");
 		}else{
@@ -67,20 +67,21 @@ public class CustomerController {
 	@RequestMapping("/customer/write.do")
 	public String write(){
 		
-		return "customer/write"; //화면가입폼으로 이동
+		return "customer/write"; //�솕硫닿��엯�뤌�쑝濡� �씠�룞
 	}
 	
-	// insert 처리
+	// insert 泥섎━
 	@RequestMapping("/customer/insert.do")
-	public String insert(@ModelAttribute CustomerVO vo){	// CustomerVO 매개변수로 받으면, vo에 값이 쌓임
-		
+	public String insert(@ModelAttribute CustomerVO vo){	// CustomerVO 留ㅺ컻蹂��닔濡� 諛쏆쑝硫�, vo�뿉 媛믪씠 �뙎�엫
+		vo.setCustomerClass("silver");
+		System.out.println("커커커ㅓ커 : " + vo.getCustomerClass());
 		customerService.insertCustomer(vo);
 		return "redirect:/customer/list.do";
 	}
 	
 	@RequestMapping("/customer/view.do")
 	public String view(String id, Model model){
-		logger.info("클릭한 아이디 : "+id);
+		logger.info("�겢由��븳 �븘�씠�뵒 : "+id);
 		
 		model.addAttribute("dto", customerService.viewCustomer(id));		
 		return "customer/view";
@@ -88,18 +89,18 @@ public class CustomerController {
 	
 	@RequestMapping("/customer/update.do")
 	public String update(@ModelAttribute CustomerVO vo, Model model){
-		//비밀번호 체크
+		//鍮꾨�踰덊샇 泥댄겕
 		boolean result = customerService.checkPwd(vo.getId(), vo.getPwd());
 		if(result){
 			customerService.updateCustomer(vo);
 			return "redirect:/customer/list.do";
 		}else{
-			//회원등급 날라감 방지
+			//�쉶�썝�벑湲� �궇�씪媛� 諛⑹�
 			CustomerVO vo2 = customerService.viewCustomer(vo.getId());
 			vo.setCustomerClass(vo2.getCustomerClass());
 			
 			model.addAttribute("dto", vo);
-			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("message", "鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.");
 			return "customer/view";
 		}
 	
@@ -109,35 +110,17 @@ public class CustomerController {
 	@RequestMapping("/customer/delete.do")
 	public String delete(@RequestParam String id, @RequestParam String pwd, Model model){
 		
-		//비밀번호 체크
+		//鍮꾨�踰덊샇 泥댄겕
 				boolean result = customerService.checkPwd(id, pwd);
 				if(result){
 					customerService.deleteCustomer(id);
 					return "redirect:/customer/list.do";
 					
 				}else{
-					model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+					model.addAttribute("message", "鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.");
 					model.addAttribute("dto", customerService.viewCustomer(id));
 					return "customer/view";
 				}
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

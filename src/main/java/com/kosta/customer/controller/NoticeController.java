@@ -31,7 +31,6 @@ public class NoticeController {
 		
 		@RequestMapping("/writeForm")
 		public String writeForm() {
-			
 			return "/writeForm";
 		}
 		

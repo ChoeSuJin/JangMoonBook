@@ -10,7 +10,7 @@ public class NoticeVO {
 	public NoticeVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public NoticeVO(String title, String regDate, String content, int articleNumber) {
 		this.title = title;
 		this.regDate = regDate;
@@ -18,7 +18,6 @@ public class NoticeVO {
 		this.articleNumber = articleNumber;
 	}
 
-	
 	public int getArticleNumber() {
 		return articleNumber;
 	}

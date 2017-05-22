@@ -10,7 +10,6 @@
 </head>
 <body>
 <h2>메인페이지</h2>
-
 <c:choose>
 	<c:when test="${sessionScope.id ==null}">
 		<a href="${path}/customer/login.do">로그인</a>

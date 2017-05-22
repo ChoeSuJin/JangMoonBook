@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>Home</title>
+<c:set var="path" value="${ pageContext.request.contextPath}"/>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -72,6 +73,17 @@ div.tab button.active {
 		<legend><h1>로그인이 필요한 기능</h1></legend>
 		<fieldset>
 			<legend>로그인</legend>
+			<c:choose>
+				<c:when test="${sessionScope.id ==null}">
+					<a href="${path}/customer/login.do">로그인</a>
+				</c:when>
+				<c:otherwise>
+					${sessionScope.id}님 환영합니다.
+					<a href="${path}/customer/logout.do"> 로그아웃 </a>
+					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
+					</a>
+				</c:otherwise>
+			</c:choose>
 		</fieldset>
 		<fieldset>
 			<legend>마이페이지</legend>

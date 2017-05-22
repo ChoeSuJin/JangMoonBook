@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kosta.customer.model.BookDAO;
-import com.kosta.customer.model.NoticeDAO;
 
 @Controller
 public class BookController {
