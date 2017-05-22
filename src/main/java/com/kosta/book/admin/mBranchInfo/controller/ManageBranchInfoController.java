@@ -38,7 +38,7 @@ public class ManageBranchInfoController {
 		List<ManageBranchInfoVO> list = dao.select(name);
 		
 		mav.addObject("branchInfo", list);
-		mav.setViewName("mBranchInfo");
+		mav.setViewName("/admin/manage/mBranchInfo");
 		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
 		
 		return mav;
@@ -46,14 +46,19 @@ public class ManageBranchInfoController {
 	
 	@RequestMapping("/mBranchInfoUpdate.do")
 	public ModelAndView mBranchInfo(ManageBranchInfoVO vo){
+		
+		System.out.println("name : " + vo.getName());
+		
 		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		dao.update(vo);
 		
+		
+		
 		List<ManageBranchInfoVO> list = dao.select(vo.getName());
 		
 		mav.addObject("branchInfo", list);
-		mav.setViewName("mBranchInfo");
+		mav.setViewName("redirect:mBranchInfo.do");
 		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
 		
 		return mav;

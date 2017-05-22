@@ -49,8 +49,9 @@
 </script>
 
 <body>
-<h3></h3>
-<br><br>
+<!-- header -->
+<jsp:include page="../adminMain.jsp"/>
+<!-- header -->
 <input type="hidden" id="sumNew" value=${ sumNew }>
 <input type="hidden" id="sumUsed" value=${ sumUsed }>
 

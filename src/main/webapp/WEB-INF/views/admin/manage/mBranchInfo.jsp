@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- header -->
-<jsp:include page="admin/adminMain.jsp"/>
+<jsp:include page="../adminMain.jsp"/>
 <!-- header -->
 <div class="container">
   <ul class="nav nav-tabs">
@@ -37,7 +37,7 @@
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>지점정보 수정</h3><br>
-		<form action="mBranchInfoUpdate.do?branch=광명" method="post">
+		<form action="mBranchInfoUpdate.do" method="post">
 			<c:forEach var="branch" items="${ branchInfo }">
 			<div class="input-group">
 				<span class="input-group-addon" style="width:100px;height:40px;">지점장</span> 
@@ -47,7 +47,7 @@
 			<div class="input-group">
 				<span class="input-group-addon" style="width:100px;height:40px;">번호</span> 
 				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
-					   name="address1" value="${ branch.phone }">
+					   name="phone" value="${ branch.phone }">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" style="width:100px;height:40px;">주소</span> 
@@ -64,7 +64,7 @@
 				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
 					   name="time" value="${ branch.time }">
 			</div>
-			<input type="hidden" name="name" value="서울">
+			<input type="hidden" name="name" value="${ branch.name }">
 			<input style="width:400px;" class="btn btn-default" type="submit" value="수정">
 			</c:forEach>
 		</form>
