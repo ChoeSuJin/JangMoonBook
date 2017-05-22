@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from customer order by id
 	</select>
 	<insert id="insertCustomer">
-		insert into customer(id, pwd, zipcode, address1, address2,  email, phone) 
-                values(#{id}, #{pwd}, #{zipcode}, #{address1}, #{address2}, #{email}, #{phone})
+		INSERT INTO CUSTOMER(ID, PWD, CUSTOMERCLASS, ZIPCODE, ADDRESS1, ADDRESS2,  EMAIL, PHONE) 
+	               VALUES(#{id}, #{pwd}, #{customerClass}, #{zipcode}, #{address1}, #{address2}, #{email}, #{phone})
 	</insert>
 	<select id = "viewCustomer" resultType = "com.kosta.customer.model.CustomerVO">
 		select * from customer where id = #{id}
