@@ -68,6 +68,92 @@ div.tab button.active {
 </head>
 <body>
 
+<div class="jumbotron" style="height: 150px;">
+  <center>
+  <p>헤드에 들어갈 내용 - 이곳은 Header입니다</p>
+  <input type="text" name="dd" placeholder="sercher"><input type="submit" value="OK">
+  </center>
+</div>
+
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#menu1">국내</a></li>
+    <li><a data-toggle="tab" href="#menu2">외국</a></li>
+    <li><a data-toggle="tab" href="#menu3">이북</a></li>
+    <li><a data-toggle="tab" href="#menu4">중고</a></li>
+  </ul>
+  
+  <div class="tab-content">
+
+    <div id="menu1" class="tab-pane fade">
+      <h3>국내도서</h3>
+      <p>
+		<a href="bookSearch?type=국내도서&category=000">000번</a><br>
+		<a href="bookSearch?type=국내도서&category=100">100번</a><br>
+		<a href="bookSearch?type=국내도서&category=200">200번</a><br>
+		<a href="bookSearch?type=국내도서&category=300">300번</a><br>
+		<a href="bookSearch?type=국내도서&category=400">400번</a><br>
+		<a href="bookSearch?type=국내도서&category=500">500번</a><br>
+		<a href="bookSearch?type=국내도서&category=600">600번</a><br>
+		<a href="bookSearch?type=국내도서&category=700">700번</a><br>
+		<a href="bookSearch?type=국내도서&category=800">800번</a><br>
+		<a href="bookSearch?type=국내도서&category=900">900번</a><br><br>
+	  </p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>외국도서</h3>
+      <p>
+ 		<a href="bookSearch?type=외국도서&category=000">000번</a><br>
+		<a href="bookSearch?type=외국도서&category=100">100번</a><br>
+		<a href="bookSearch?type=외국도서&category=200">200번</a><br>
+		<a href="bookSearch?type=외국도서&category=300">300번</a><br>
+		<a href="bookSearch?type=외국도서&category=400">400번</a><br>
+		<a href="bookSearch?type=외국도서&category=500">500번</a><br>
+		<a href="bookSearch?type=외국도서&category=600">600번</a><br>
+		<a href="bookSearch?type=외국도서&category=700">700번</a><br>
+		<a href="bookSearch?type=외국도서&category=800">800번</a><br>
+		<a href="bookSearch?type=외국도서&category=900">900번</a><br><br>
+		
+		<form action="bookSearch" method="post">
+			<input type="text" name="type">
+			<input type="text" name="category">
+			<input type="submit" value="ok"> 
+		</form>
+      </p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>E-book</h3>
+      <p>
+ 		<a href="bookSearch?type=E-book&category=000">000번</a><br>
+		<a href="bookSearch?type=E-book&category=100">100번</a><br>
+		<a href="bookSearch?type=E-book&category=200">200번</a><br>
+		<a href="bookSearch?type=E-book&category=300">300번</a><br>
+		<a href="bookSearch?type=E-book&category=400">400번</a><br>
+		<a href="bookSearch?type=E-book&category=500">500번</a><br>
+		<a href="bookSearch?type=E-book&category=600">600번</a><br>
+		<a href="bookSearch?type=E-book&category=700">700번</a><br>
+		<a href="bookSearch?type=E-book&category=800">800번</a><br>
+		<a href="bookSearch?type=E-book&category=900">900번</a><br><br>
+      </p>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <h3>중고도서</h3>
+      <p>
+ 		<a href="bookSearch?type=중고도서&category=000">000번</a><br>
+		<a href="bookSearch?type=중고도서&category=100">100번</a><br>
+		<a href="bookSearch?type=중고도서&category=200">200번</a><br>
+		<a href="bookSearch?type=중고도서&category=300">300번</a><br>
+		<a href="bookSearch?type=중고도서&category=400">400번</a><br>
+		<a href="bookSearch?type=중고도서&category=500">500번</a><br>
+		<a href="bookSearch?type=중고도서&category=600">600번</a><br>
+		<a href="bookSearch?type=중고도서&category=700">700번</a><br>
+		<a href="bookSearch?type=중고도서&category=800">800번</a><br>
+		<a href="bookSearch?type=중고도서&category=900">900번</a><br><br>
+      </p>
+    </div>
+  </div>
+</div>
+
 
 	<fieldset>
 		<legend><h1>로그인이 필요한 기능</h1></legend>
@@ -174,17 +260,7 @@ div.tab button.active {
 				style="height: 50px;">중고책</button>
 		</div>
 
-		<div id="DomesticBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">국내도서 리스트</div>
-
-		<div id="ForeignBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">외국도서 리스트</div>
-
-		<div id="EBook" class="tabcontent"
-			style="width: 200px; height: 200px;">이북리스트</div>
-
-		<div id="UsedBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">중고책 리스트</div>
+		
 
 		<script>
 			function openCity(evt, cityName) {
@@ -281,40 +357,7 @@ div.tab button.active {
 
 
 
-<div class="jumbotron" style="height: 150px;">
-  <center>
-  <p>헤드에 들어갈 내용 - 이곳은 Header입니다</p>
-  <input type="text" name="dd" placeholder="sercher"><input type="submit" value="OK">
-  </center>
-</div>
 
-<div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">국내</a></li>
-    <li><a data-toggle="tab" href="#menu1">외국</a></li>
-    <li><a data-toggle="tab" href="#menu2">이북</a></li>
-    <li><a data-toggle="tab" href="#menu3">중고</a></li>
-  </ul>
-  
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>홈키에 대한 설명</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>메뉴 1에 대한 설명</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>메뉴 2에 대한 설명</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>메뉴 3에 대한 내용
-    </div>
-  </div>
-</div>
 
 </body>
 </html> 
