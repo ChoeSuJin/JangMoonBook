@@ -7,5 +7,6 @@
 	<typeAliases>
 		<package name="com.kosta.customer"/>
 		<package name="com.kosta.board"/>
+		<package name="com.kosta.cart"/>
 	</typeAliases>
 </configuration>
