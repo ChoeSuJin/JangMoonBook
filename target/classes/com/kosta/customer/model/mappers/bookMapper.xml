@@ -21,21 +21,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		type, 
 		isbn, 
 		category
-		)
-		 
+		)		 
 		VALUES (
-			'${param1}',
-			'${param2}',
-			'${param3}',
-			'${param4}',
-			'${param5}',
-			'${param6}',
-			'${param7}'
+			'${title}',
+			${price},
+			'${author}',
+			'${publisher}',
+			'${type}',
+			'${isbn}',
+			'${category}'
 				)
 	</insert>
 	<select id="bookOneSearchDao" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
-		WHERE title = #{title}
+		WHERE title = '${title}'
+	</select>
+	<select id="bookNoTypeSearchDao" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+		WHERE TITLE like '%${title}%'
+	</select>
+	<select id="bookTypeSearchDao" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+			WHERE type like '%${type}%'
+			AND TITLE like '%${title}%'
+		ORDER BY TITLE DESC
+		
 	</select>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kosta.customer.model.NoticeDAO;
+import com.kosta.customer.model.NoticeVO;
 
 @Controller
 public class NoticeController {		
@@ -23,9 +24,9 @@ public class NoticeController {
 		}
 		
 		@RequestMapping("/view")
-		public String view(HttpServletRequest request, Model model) {
+		public String view(NoticeVO vo, Model model) {
 			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			model.addAttribute("list", customerDAO.viewDao(request.getParameter("title")));
+			model.addAttribute("list", customerDAO.viewDao(vo));
 			return "/list";
 		}
 		
@@ -45,24 +46,24 @@ public class NoticeController {
 		}
 		
 		@RequestMapping("/write")
-		public String write(HttpServletRequest request, Model model) {
+		public String write(NoticeVO vo, Model model) {
 			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			customerDAO.writeDao(request.getParameter("title"), request.getParameter("content"));
+			customerDAO.writeDao(vo);
 			return "redirect:list";
 		}
 		
 		
 		@RequestMapping("/delete")
-		public String delete(HttpServletRequest request, Model model) {
+		public String delete(NoticeVO vo, Model model) {
 			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			customerDAO.deleteDao(request.getParameter("title"));
+			customerDAO.deleteDao(vo);
 			return "redirect:list";
 		}
 		
 		@RequestMapping("/content")
-		public String content(HttpServletRequest request, Model model) {
+		public String content(NoticeVO vo, Model model) {
 			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			model.addAttribute("contentView", customerDAO.viewDao(request.getParameter("title")));
+			model.addAttribute("contentView", customerDAO.viewDao(vo));
 			return "content";
 		}
 }

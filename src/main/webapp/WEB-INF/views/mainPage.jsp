@@ -64,14 +64,111 @@ div.tab button.active {
 	border-left: none;
 	height: 300px;
 }
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: dddddd;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#topBtn:hover {
+  background-color: #555;
+}
+
+/* 검색 버튼 누르면 쫙 펴지는거 */
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+/* 검색 버튼 누르면 쫙 펴지는거 크기 */
+input[type=text]:focus {
+    width: 30%;
+}
+
+/* 이벤트 이미지 슬라이드 */
+.container {
+      padding: 80px 120px;
+  }
+  .person {
+      border: 10px solid transparent;
+      margin-bottom: 25px;
+      width: 80%;
+      height: 80%;
+      opacity: 0.7;
+  }
+  .person:hover {
+      border-color: #f1f1f1;
+  }
+  .carousel-inner img {
+      -webkit-filter: grayscale(90%);
+      filter: grayscale(90%); /* make all photos black and white */ 
+      width: 30%; /* Set width to 100% */
+      margin: auto;
+  }
+  .carousel-caption h3 {
+      color: #fff !important;
+  }
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+  }
+  
+  /**************************************************/
 </style>
 </head>
 <body>
+<button onclick="topFunction()" id="topBtn" title="top">Top</button>
+<script>
+// 버튼 누르면 위로 감
+window.onscroll = function() {scrollFunction()};
 
-<div class="jumbotron" style="height: 150px;">
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("topBtn").style.display = "block";
+    } else {
+        document.getElementById("topBtn").style.display = "none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+
+<div class="jumbotron" style="height: 200px;">
   <center>
-  <p>헤드에 들어갈 내용 - 이곳은 Header입니다</p>
-  <input type="text" name="dd" placeholder="sercher"><input type="submit" value="OK">
+  <p>어서오세요 장문Books입니다!</p>
+  <form action="bookTypeSearch" method="post">  
+	<select name="type">
+		<option value="all">모두검색</option>
+	    <option value="국내도서">국내도서</option>
+	    <option value="외국도서">외국도서</option>
+	    <option value="E-Book">E-Book</option>
+	    <option value="중고도서">중고도서</option>
+	</select>
+	<input type="text" name="title" placeholder="Search">
+	<input type="submit" value="ok">  
+  </form>
   </center>
 </div>
 
@@ -173,12 +270,11 @@ div.tab button.active {
 		</fieldset>
 		<fieldset>
 			<legend>마이페이지</legend>
+			
 		</fieldset>
 		<fieldset>
-			<legend>구입, 결제 내역</legend>
-		</fieldset>
-		<fieldset>
-			<legend>장바구니</legend>
+			<legend>장바구니, 구입, 결제 내역</legend>
+			
 		</fieldset>
 	</fieldset>
 	<fieldset>
@@ -228,63 +324,58 @@ div.tab button.active {
 		<a href="bookUpdate">책 정보 수정하기</a><br>
 		<a href="bookDelete">책 삭제하기</a>
 	</fieldset>
-	<fieldset>
-		<legend>책 검색</legend>
-		<table width="500">
-			<form action="bookSearch" method="post">
-				<tr>
-					<td>타입</td>
-					<td>title</td>
-					<td>category</td>
-				</tr>
-				<tr>
-					<td><input type="text" name="type" size="50"></td>
-					<td><input type="text" name="title" size="50"></td>
-					<td><input type="text" name="category" size="50"> <input
-						type="submit" value="OK"></td>
-				</tr>
-			</form>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>책 분류</legend>
-		수진누나가 보내준 링크로 처리
-		<div class="tab" style="width: 130px; height: 200px;">
-			<button class="tablinks" onclick="openCity(event, 'DomesticBooks')"
-				id="defaultOpen" style="height: 50px;">국내도서</button>
-			<button class="tablinks" onclick="openCity(event, 'ForeignBooks')"
-				style="height: 50px;">외국도서</button>
-			<button class="tablinks" onclick="openCity(event, 'EBook')"
-				style="height: 50px;">EBook</button>
-			<button class="tablinks" onclick="openCity(event, 'UsedBooks')"
-				style="height: 50px;">중고책</button>
-		</div>
 
-		
-
-		<script>
-			function openCity(evt, cityName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
-				tablinks = document.getElementsByClassName("tablinks");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(
-							" active", "");
-				}
-				document.getElementById(cityName).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-			document.getElementById("defaultOpen").click();
-		</script>
-	</fieldset>
-	
-	<font color="red">dd</font>
 	<fieldset>
 		<legend>이벤트 이미지 슬라이드</legend>
-		<div class="container" style="height: 30%;">
+
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="ny.jpg" alt="New York" width="1200" height="700">
+					<div class="carousel-caption">
+						<h3>New York</h3>
+						<p>The atmosphere in New York is lorem ipsum.</p>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="chicago.jpg" alt="Chicago" width="1200" height="700">
+					<div class="carousel-caption">
+						<h3>Chicago</h3>
+						<p>Thank you, Chicago - A night we won't forget.</p>
+					</div>
+				</div>
+
+				<div class="item">
+					<img src="la.jpg" alt="Los Angeles" width="1200" height="700">
+					<div class="carousel-caption">
+						<h3>LA</h3>
+						<p>Even though the traffic was a mess, we had the best time
+							playing at Venice Beach!</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button"
+				data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#myCarousel" role="button"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+		<!-- <div class="container" style="height: 30%; width:100%">
 			<h2>Carousel Example</h2>
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -317,7 +408,6 @@ div.tab button.active {
 							<p>33333</p>
 						</div>
 					</div>
-
 				</div>
 				<a class="left carousel-control" href="#myCarousel"
 					data-slide="prev"> <span
@@ -329,7 +419,7 @@ div.tab button.active {
 					class="sr-only">Next</span>
 				</a>
 			</div>
-		</div>
+		</div> -->
 	</fieldset>
 	<fieldset>
 		<legend>최근 들어온 책</legend>
@@ -342,22 +432,11 @@ div.tab button.active {
 	</fieldset>
 	<fieldset>
 		<legend>Q&A</legend>
-		혜신누나
-	</fieldset>
-	<fieldset>
-		<legend>지도</legend>
+		혜신누나가 하셨는데 어떻게 들어가야하는지 아직 모름
 	</fieldset>
 	<fieldset>
 		<legend>풋터</legend>
 	</fieldset>
-	
-<!-- </body>
-</html>
- -->
-
-
-
-
 
 </body>
 </html> 

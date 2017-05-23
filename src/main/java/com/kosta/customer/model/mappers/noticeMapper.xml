@@ -8,12 +8,12 @@
 		SELECT * FROM NOTICE ORDER BY TITLE DESC
 	</select>
 	<insert id="writeDao">
-		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{param1}, SYSDATE, BOARD_SEQ.NEXTVAL, #{param2})
+		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, BOARD_SEQ.NEXTVAL, #{content})
 	</insert>
 	<delete id="deleteDao">
-		DELETE FROM NOTICE WHERE TITLE = #{param1}
+		DELETE FROM NOTICE WHERE TITLE = #{title}
 	</delete>
 	<select id="viewDao" resultType="com.kosta.customer.model.NoticeVO">	
-		SELECT * FROM NOTICE WHERE TITLE = #{param1}
+		SELECT * FROM NOTICE WHERE TITLE = #{title}
 	</select>	
 </mapper>

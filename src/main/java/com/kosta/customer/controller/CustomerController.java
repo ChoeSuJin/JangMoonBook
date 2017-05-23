@@ -74,7 +74,6 @@ public class CustomerController {
 	@RequestMapping("/customer/insert.do")
 	public String insert(@ModelAttribute CustomerVO vo){	// CustomerVO 留ㅺ컻蹂��닔濡� 諛쏆쑝硫�, vo�뿉 媛믪씠 �뙎�엫
 		vo.setCustomerClass("silver");
-		System.out.println("커커커ㅓ커 : " + vo.getCustomerClass());
 		customerService.insertCustomer(vo);
 		return "redirect:/customer/list.do";
 	}

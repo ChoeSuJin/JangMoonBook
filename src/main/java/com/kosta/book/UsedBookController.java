@@ -19,7 +19,6 @@ public class UsedBookController {
 	
 	@RequestMapping("usedWriteForm")
 	public String writeForm() {
-		System.out.println("나 여기로 왔어요");
 		return "registerForUsedBooks/usedWriteForm";
 	}
 	/*HttpServletRequest request*/
