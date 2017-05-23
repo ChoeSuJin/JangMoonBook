@@ -97,7 +97,25 @@ create table Salary(
   account varchar2(40)
 );
 
+create table ebook_organ(
+  ono number,
+  opwd varchar2(50),
+  oname varchar2(50),
+  deadline varchar2(70),
+  type varchar2(50)
+);
 
+create table ebook_reqList(
+  ISBN number,
+  title varchar2(50),
+  com varchar2(50)
+);
+
+create table ebook_distList(
+  ISBN number,
+  title varchar2(50),
+  com varchar2(50)
+);
 -- Sequence
 create sequence orderNumber;	//	재고 주문에 필요한 주문번호
 create sequence salenumber;		//  고객들의 주문에 대한 주문번호 부여

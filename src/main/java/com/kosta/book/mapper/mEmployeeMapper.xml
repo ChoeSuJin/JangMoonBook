@@ -8,7 +8,7 @@
   		select * from employee where branch = #{branch} order by empno	
   	</select>
   	<select id="selectByname" resultType="com.kosta.book.admin.mEmployee.model.ManageEmployeeVO">
-  		select * from employee where name like '%' || #{name} || '%'
+  		select * from employee where name like '%' || #{name} || '%' and branch=#{branch} order by empno
   	</select>
   	<insert id="insert">
   		insert into employee values(#{empno}, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
