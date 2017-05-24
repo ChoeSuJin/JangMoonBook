@@ -29,14 +29,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/huhun/Desktop/workspace-sts-3.8.4.RELEASE/Mybatis_project/WebContent/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/aspectjrt-1.8.10.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/aspectjweaver-1.8.10.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/app/libs/mybatis-3.4.4.jar"/>
-	<classpathentry kind="lib" path="C:/app/libs/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/spring-aop-4.2.9.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/spring-aspects-4.2.9.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/spring-beans-4.2.9.RELEASE.jar"/>
@@ -57,7 +54,7 @@
 	<classpathentry kind="lib" path="C:/app/libs/spring-webmvc-4.2.9.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/spring-webmvc-portlet-4.2.9.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/app/libs/spring-websocket-4.2.9.RELEASE.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_131">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_111">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>

@@ -37,19 +37,19 @@ $(document).ready(function(){
         <th>금액</th>
         <th>&nbsp;</th>
       </tr>
-<c:forEach var="row" items="${map.list}" varStatus="i" >
+<c:forEach var="row" items="${map.list}"  >
 	  <tr>
 	    <td>${row.title}</td>
 	    <td><fmt:formatNumber value="${row.price}" pattern="###,###" /></td>
 	    <td>
-	    <input type="number" style="width:30px;" min="0" max="100" name="amount[${i.index}]" value="${row.amount}">
-		<input type="hidden" name="isbn[${i.index}]" value="${row.isbn}">
+	    <input type="number" style="width:30px;" min="0" max="100" name="amount" value="${row.amount}">
+		<input type="hidden" name="isbn" value="${row.isbn}">
 		</td>
 	    <td align="right">
 	    <fmt:formatNumber value="${row.money}" pattern="###,###"/></td>
 	    
  	<td>
-		    <input type = "submit" value = "수정" id="btnUpdate"></button>
+		   
  			<button id="btnDelete"><a href="/book/cart/delete.do?isbn=${row.isbn}">삭제</a></button>
  		
  			
@@ -65,7 +65,7 @@ $(document).ready(function(){
 	    </td>
 	  </tr> 
     </table>
-	<a href="${path}/board/list.do">게시판</a>
+	 <button id="btnUpdate">수정</button>
   </form>
   <h5>3만원 이상 구매하면, 배송비 무료!</h5>
   </c:otherwise>
