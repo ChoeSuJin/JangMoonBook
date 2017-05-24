@@ -34,6 +34,7 @@ public class ManageEmployeeController {
 		System.out.println(vo.getName());
 		
 		if(vo.getName()!=null){
+			vo.setBranch(branch);
 			list = dao.selectByname(vo);
 		}else{
 			list = dao.selectAll(branch);
@@ -63,7 +64,7 @@ public class ManageEmployeeController {
 		
 		List<ManageEmployeeVO> list = dao.selectAll(branch);
 		mav.addObject("employeeList", list);
-		mav.setViewName("mEmployee");
+		mav.setViewName("/admin/manage/mEmployee");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}

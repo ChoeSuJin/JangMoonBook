@@ -101,6 +101,7 @@
 		<!-- 직원 추가 탭 -->
 		<div id="menu1" class="tab-pane fade">
 			<h3>직원등록</h3><br>
+			<c:forEach var="emp" items="${ employeeList }" begin="0" end="0">
 			<form action="mEmployeeIn.do" method="post">
 					<div class="input-group">
 						<span class="input-group-addon" style="width:100px;height:40px;">직원번호</span> 
@@ -152,13 +153,10 @@
 						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
 							   name="birth" placeholder="Additional Info">
 					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">지점</span> 
-						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
-							   name="branch" placeholder="Additional Info">
-					</div>
+					<input type="hidden" name="branch" value="${ emp.branch }">
 					<input style="width:400px;" type="submit" class="btn btn-default" value="추가">
 			</form>
+			</c:forEach>
 		</div>
 		</div>
 </div>

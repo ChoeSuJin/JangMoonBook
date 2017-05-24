@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kosta.book.organ.login.model.OrganLoginDAO">
+	<select id="loginOrgan" resultType="com.kosta.book.organ.login.model.OrganLoginVO">
+		select * from ebook_organ where oname=#{oname} and opwd=#{opwd}
+	</select>
+	
+	<select id="ebookList" resultType="com.kosta.book.admin.mInventory.model.BookInfoVO">
+		select * from book_info where type = 'e_book' order by title
+	</select>
+</mapper>
