@@ -1,20 +1,14 @@
 package com.kosta.book.organ.mOrgan.model;
 
 public class ManageOrganVO {
-	private String title, com, isbn;
-	private int ebook_reqNo;
+	private String title, isbn;
+	private int ebook_reqNo, ono;
 	
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getCom() {
-		return com;
-	}
-	public void setCom(String com) {
-		this.com = com;
 	}
 	public int getEbook_reqNo() {
 		return ebook_reqNo;
@@ -28,6 +22,13 @@ public class ManageOrganVO {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+	public int getOno() {
+		return ono;
+	}
+	public void setOno(int ono) {
+		this.ono = ono;
+	}
+	
 	
 	
 }

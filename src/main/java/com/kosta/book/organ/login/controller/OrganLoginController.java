@@ -35,7 +35,7 @@ public class OrganLoginController {
 		
 		try {			
 			organ = dao.loginOrgan(vo);	//조직정보 가져오기
-			System.out.println(organ.getOname());
+			System.out.println("기관명 : " + organ.getOname());
 		} catch (Exception e) {			//조직정보 없을시(로그인 아이디x) 로그인 페이지로
 			mav.addObject("error", "error");
 			mav.setViewName("/organization/organLogin");

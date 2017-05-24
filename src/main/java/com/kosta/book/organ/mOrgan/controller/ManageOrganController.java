@@ -24,6 +24,7 @@ public class ManageOrganController {
 	
 	@RequestMapping("/OrganReqForm.do")
 	public ModelAndView oganReqForm() {
+		
 		ModelAndView mav = new ModelAndView();
 		ManageOrganDAO dao = sqlSession.getMapper(ManageOrganDAO.class);
 	
@@ -32,6 +33,7 @@ public class ManageOrganController {
 		
 		mav.addObject("ebookList",ebookList);
 		mav.setViewName("/organization/organReqForm");
+		System.out.println("뷰 이름 : " + mav.getViewName());
 		return mav;
 	}
 	
@@ -43,15 +45,16 @@ public class ManageOrganController {
 		
 		//organ session에 저장된 값을 불러와 기관명을 뽑아 vo세팅
 		OrganLoginVO ovo = (OrganLoginVO)session.getAttribute("organ");
-		String com = ovo.getOname();
-		vo.setCom(com);
+		int ono = ovo.getOno();
+		vo.setOno(ono);
 		
-		//ebook_reqList에 등록(ebook 신청)
+		//ebook_reqList에 등록(ebook 구매신청)
 		dao.ebookReq(vo);
 		List<BookInfoVO> ebookList = dao.ebookList();
 		
 		mav.addObject("ebookList",ebookList);
 		mav.setViewName("/organization/organReqForm");
+		System.out.println("뷰 이름 : " + mav.getViewName());
 		return mav;
 	}
 	
@@ -63,13 +66,47 @@ public class ManageOrganController {
 		
 		//session에서 기관명 받아서 설정.
 		OrganLoginVO ovo = (OrganLoginVO)session.getAttribute("organ");
-		String com = ovo.getOname();
+		int ono = ovo.getOno();
 
 		//기관별 ebook 신청목록 가져오기
-		List<ManageOrganVO> eList = dao.ebookReqList(com);
+		List<ManageOrganVO> eList = dao.ebookReqList(ono);
 		
 		mav.addObject("ebook_reqList", eList);
 		mav.setViewName("/organization/organReqList");
+		System.out.println("뷰 이름 : " + mav.getViewName());
+		return mav;
+	}
+	
+	@RequestMapping("/mOrganSearch.do")
+	public ModelAndView ebookSearch(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		ManageOrganDAO dao = sqlSession.getMapper(ManageOrganDAO.class);
+		
+		// title 값을 받아 검색
+		String title = request.getParameter("title");
+		List<BookInfoVO> list = dao.searchEbook(title);
+		
+		mav.addObject("ebookList", list);
+		mav.setViewName("/organization/organReqForm");
+		System.out.println("뷰 이름 : " + mav.getViewName());
+		return mav;
+	}
+	
+	@RequestMapping("/mOrganDistList.do")
+	public ModelAndView ebookDistList(HttpServletRequest request, ManageOrganVO vo){
+		ModelAndView mav = new ModelAndView();
+		ManageOrganDAO dao = sqlSession.getMapper(ManageOrganDAO.class);
+		HttpSession session = request.getSession();
+		
+		OrganLoginVO ovo = (OrganLoginVO)session.getAttribute("organ");
+		int ono = ovo.getOno();
+		vo.setOno(ono);
+		
+		List<ManageOrganVO> list = dao.ebookDistList(vo);
+		
+		mav.addObject("ebookDistList", list);
+		mav.setViewName("/organization/organDistList");
+		System.out.println("뷰 이름 : " + mav.getViewName());
 		return mav;
 	}
 }

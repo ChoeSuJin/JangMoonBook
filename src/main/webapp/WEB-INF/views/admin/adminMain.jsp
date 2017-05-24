@@ -26,17 +26,17 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
       <sec:authorize access="hasAnyRole('ROLE_GOLD')">
-        <li class="active"><a href="inventoryMain.do">재고관리</a></li>
+        <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mCustomer.do">고객관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
 	  	<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
-        <li class="active"><a href="mBranchInfo.do">지점관리</a></li>
+        <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="salesMain.do">매출관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
       <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
-        <li class="active"><a href="mBranchInfo.do">지점관리</a></li>
+        <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="salesMain.do">매출관리</a></li>
         <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>

@@ -7,5 +7,7 @@ import com.kosta.book.admin.mInventory.model.BookInfoVO;
 public interface ManageOrganDAO {
 	public void ebookReq(ManageOrganVO vo);
 	public List<BookInfoVO> ebookList();
-	public List<ManageOrganVO> ebookReqList(String com);
+	public List<ManageOrganVO> ebookReqList(int ono);
+	public List<BookInfoVO> searchEbook(String title);
+	public List<ManageOrganVO> ebookDistList(ManageOrganVO vo);
 }

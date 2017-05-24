@@ -14,10 +14,12 @@
 <!-- 구매신청 완료하면 alert창 띄우기 -->
 <jsp:include page="organHeader.jsp"/>
 <div class="container">
-      <h3>e_book 신청목록</h3><br>
-      	<c:forEach var="list" items="${ ebook_reqList }">
-      		${ list.title }<br>
-      	</c:forEach>
+  <div class="tab-content" style="margin-left:5%;">
+     <h3>e_book 신청목록</h3><br>
+      <c:forEach var="list" items="${ ebook_reqList }">
+      	${ list.title }<br>
+      </c:forEach>
+  </div>
 </div>
 </body>
 </html>

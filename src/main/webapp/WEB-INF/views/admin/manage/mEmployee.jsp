@@ -8,6 +8,17 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function filter(){
+			if($('#search').val()==""){
+				$("#tbody tr").css('display');
+			}else{
+				$("#tbody tr").css('display','none');
+				$("#tbody tr[name*='"+$('#search').val()+"']").css('display','');
+			}
+			return false;
+		}
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -22,6 +33,13 @@
 		<!-- 직원 목록, 수정, 삭제 -->
 		<div id="home" class="tab-pane fade in active">
 			<h3>직원목록</h3><br>
+			<h3>검색</h3>
+			<div class="input-group">
+				<span class="input-group-addon" style="width:100px;">이름</span>
+				<input id="search" type="text" class="form-control"
+					   placeholder="이름 입력" onkeyup='{filter();return false}' 
+					   onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
+			</div><br>
 			<table class="table table-condensed">
 				<tr>
 					<th>직원번호</th>
@@ -35,7 +53,8 @@
 				</tr>
 				<c:forEach var="employee" items="${ employeeList }"
 					varStatus="status">
-					<tr>
+					<tbody id="tbody">
+					<tr name="${ employee.name }">
 						<td>
 							<button type="button" class="btn btn-default"
 								data-toggle="modal" data-target="#myModal${ employee.empno }">${ employee.empno }</button>
@@ -48,6 +67,7 @@
 						<td>${ employee.birth }</td>
 						<td>${ employee.branch }</td>
 					</tr>
+					</tbody>
 					<div class="modal fade" id="myModal${ employee.empno }"
 						role="dialog">
 						<div class="modal-dialog">
@@ -85,18 +105,14 @@
 				</c:forEach>
 			</table>
 			<!-- 직원 목록, 수정, 삭제 -->
-				<!-- 직원목록 전체 출력 버튼 -->
+			
+			<!-- 직원목록 전체 출력 버튼 -->
 			<form action="mEmployee.do" method="post" style="float:right;margin-top:-10px;">
 				<input type="submit" class="btn btn-default" value="전체보기">
 			</form><br>
+			<!-- 직원목록 전체 출력 버튼 -->
 			<hr>
-			<h3>검색</h3>
-			<form action="mEmployee.do" method="post">
-				<div class="input-group">
-						<span class="input-group-addon" style="width:100px;">이름</span>
-						<input id="msg"	type="text" class="form-control" name="name" placeholder="이름을 입력하고 Enter">
-				</div>
-			</form>
+		
 		</div>
 		<!-- 직원 추가 탭 -->
 		<div id="menu1" class="tab-pane fade">
@@ -126,9 +142,9 @@
 					<div class="input-group">
 						<span class="input-group-addon" style="width:100px;height:40px;">직급</span> 
 						<select name="empclass" class="form-control" id="sel1" style="width:300px;height:40px;">
-									<option value="직원">직원</option> 
-									<option value="매니저">매니저</option> 
-									<option value="지점장">지점장</option> 
+									<option value="ROLE_BRONZE">직원</option> 
+									<option value="ROLE_GOLD">매니저</option> 
+									<option value="ROLE_PLATINUM">지점장</option> 
 						</select>
 					</div>
 					<div class="input-group">
