@@ -64,7 +64,9 @@ id = ${ username } <br>
         <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
+        <li><a href="mEbook.do">ebook</a></li>
 	  </sec:authorize>
+	  
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>

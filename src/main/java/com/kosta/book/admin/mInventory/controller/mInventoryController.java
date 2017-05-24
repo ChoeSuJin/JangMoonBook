@@ -92,7 +92,7 @@ public class mInventoryController {
 		dao.newBookInsert(vo);
 		
 		
-		return "redirect:inventoryMainForm.do";
+		return "redirect:inventoryMain.do";
 	}
 
 }

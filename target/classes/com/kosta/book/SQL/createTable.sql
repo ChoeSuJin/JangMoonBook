@@ -97,7 +97,49 @@ create table Salary(
   account varchar2(40)
 );
 
+create table board(
+    bno number not null,
+    title varchar2(200) not null,
+    content varchar2(4000),
+    writer varchar2(50),
+    regdate date default sysdate,
+    viewcnt number default 0,
+    primary key(bno)
+
+);
+
+create table notice(
+  title varchar2(50) not null,
+  content varchar2(3000) not null,
+  regDate DATE,
+  ArticleNumber number
+);
+
+create table ebook_organ(
+  ono number,
+  opwd varchar2(20),
+  oname varchar2(50),
+  deadline varchar2(70),
+  type varchar2(50)
+);
+
+create table ebook_distList(
+  ISBN number,
+  title varchar2(50),
+  com varchar2(50)
+);
+
+create table ebook_reqList(
+  ebook_reqNo number,
+  isbn varchar2(50),
+  title varchar2(50),
+  com varchar2(50)
+);
+
 
 -- Sequence
 create sequence orderNumber;	//	재고 주문에 필요한 주문번호
 create sequence salenumber;		//  고객들의 주문에 대한 주문번호 부여
+create sequence bno_seq;
+create sequence orgno;
+create sequence ebook_reqNo;
