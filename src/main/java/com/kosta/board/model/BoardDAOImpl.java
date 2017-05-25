@@ -1,6 +1,8 @@
 package com.kosta.board.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -14,8 +16,13 @@ public class BoardDAOImpl implements BoardDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<BoardVO> listAll() throws Exception {
-		return sqlSession.selectList("board.listAll");
+	public List<BoardVO> listAll(String searchOption,String keyword) throws Exception {
+		Map<String,Object> map=
+				new HashMap<String,Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList("board.listAll",map);
 	}
 	
 	@Override
@@ -41,6 +48,16 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void delete(int bno) throws Exception {
 		sqlSession.delete("board.delete", bno);
+	}
+
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		Map<String,String> map=
+				new HashMap<String,String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne(
+				"board.countArticle", map);
 	}
 
 	

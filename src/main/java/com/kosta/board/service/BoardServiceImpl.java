@@ -16,8 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAOImpl boardDAO;
 	
 	@Override
-	public List<BoardVO> listAll() throws Exception {
-		return boardDAO.listAll();
+	public List<BoardVO> listAll(String searchOption,String keyword) throws Exception {
+		return boardDAO.listAll( searchOption, keyword);
 	}
 	
 	@Override
@@ -44,6 +44,11 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(int bno) throws Exception {
 		boardDAO.delete(bno);
 		
+	}
+
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		return boardDAO.countArticle(searchOption, keyword);
 	}
 
 	

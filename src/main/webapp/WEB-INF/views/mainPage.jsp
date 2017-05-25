@@ -359,10 +359,28 @@ input[type=text]:focus {
 			<c:otherwise>
 					${sessionScope.id}님 환영합니다.
 					<a href="${path}/customer/logout.do"> 로그아웃 </a>
-				<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
-				</a>
-			</c:otherwise>
-		</c:choose>
+					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
+					</a>
+				</c:otherwise>
+			</c:choose>
+		</fieldset>
+		<fieldset>
+			<legend>마이페이지</legend>
+			  <c:choose>
+				<c:when test="${sessionScope.id ==null}">
+					<a href="${path}/customer/login.do">로그인</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지</a>
+				</c:otherwise>
+			</c:choose>
+		</fieldset>
+		<fieldset>
+			<legend>구입, 결제 내역</legend>
+		</fieldset>
+		<fieldset>
+			<legend>장바구니</legend>
+		</fieldset>
 	</fieldset>
 	<fieldset>
 		<legend>마이페이지 장바구니, 구입, 결제 내역</legend>

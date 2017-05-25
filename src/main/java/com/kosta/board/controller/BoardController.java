@@ -1,6 +1,8 @@
 package com.kosta.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,13 +22,23 @@ public class BoardController {
 	BoardServiceImpl boardService;
 	
 	@RequestMapping("/board/list.do")
-	public ModelAndView list() throws Exception{
-		List<BoardVO> list = boardService.listAll();
+	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
+		// 게시물 수
+				int count=boardService.countArticle(searchOption, keyword);
+		
+		List<BoardVO> list = boardService.listAll( searchOption, keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
-		mav.addObject("list", list);
+		Map<String,Object> map=
+				new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("count", count);
+		map.put("search_option", searchOption);
+		map.put("keyword", keyword);
+		mav.addObject("map", map);
 		return mav;
 	}
+	
 	
 	@RequestMapping("/board/write.do")
 	public String write(){
