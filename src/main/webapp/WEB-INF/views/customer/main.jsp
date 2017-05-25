@@ -18,6 +18,7 @@
 	${sessionScope.id}님 환영합니다.
 	<a href = "${path}/customer/logout.do">  로그아웃  </a>
 	<a href ="${path}/customer/view.do?id=${sessionScope.id}">  마이페이지  </a>
+	<a href = "${path}/cart/list.do">장바구니</a>
 	</c:otherwise>
 </c:choose>
 </body>

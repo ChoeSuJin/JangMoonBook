@@ -52,7 +52,10 @@ $(document).ready(function(){
 <h2>게시물 보기</h2>
 <div style="width:500px; text-align:center">
 <button type = "button" id="btnList">목록으로</button>
-<button type = "button" id="btnWrite">글쓰기</button>
+<c:if test="${sessionScope.id != null}">	
+	<button type="button" id="btnWrite">글쓰기</button>
+</c:if>
+	
 </div>
 <form id = "form1" name ="form1" method = "post">
 

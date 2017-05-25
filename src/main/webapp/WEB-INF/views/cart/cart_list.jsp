@@ -16,7 +16,9 @@ $(document).ready(function(){
 	$("#btnList").click(function(){
 		location.href="${path}/bookList.do"
 	});
-
+	$("#btnPay").click(function(){
+		location.href="${path}/pay/orderForm.do"
+	});
 	
 });
 </script>
@@ -71,7 +73,7 @@ $(document).ready(function(){
   </c:otherwise>
 </c:choose>
 	<button type="button" id="btnList">상품목록</button>
-	
+	<button type="button" id="btnPay">주문하기</button>
 </body>
 </html>
 

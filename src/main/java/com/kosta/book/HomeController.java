@@ -18,37 +18,13 @@ import com.kosta.customer.model.NoticeDAO;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-/*=======
-	//시작 페이지로 이동
-	@RequestMapping("/")
-	public String main(Model model){
-		
-		return "main";
-	}
-	
-	*//**
-	 * Simply selects the home view to render by returning its name.
-	 *//*
-	@RequestMapping(value = "home.do", method = RequestMethod.GET)
->>>>>>> branch 'hyeshin' of https://github.com/ChoeSuJin/JangMoonBook.git
-*/	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String home(Locale locale, Model model) {
 		NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
 		model.addAttribute("list", customerDAO.listDao());
-		
-		
 		return "mainPage";
 	}
 }

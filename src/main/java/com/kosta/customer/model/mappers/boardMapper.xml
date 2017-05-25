@@ -7,8 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "board">
 
 	<select id = "listAll" resultType="com.kosta.board.model.BoardVO">
-		select bno, title, regdate, writer, viewcnt
-			from board order by bno desc, regdate desc
+		select bno, title, content ,b.regdate, viewcnt, id from board b, customer c
+		<include refid="search" />
+        order by bno desc, regdate desc 
 	</select>
 	
 	<insert id = "insert">
@@ -16,17 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			values (bno_seq.nextval, #{title},#{writer},#{content})
 	</insert>
 	
-	<!-- 게시물 내용 보기 -->
+
 	<select id="viewBoard" resultType = "com.kosta.board.model.BoardVO">
 		select * from board where bno = #{bno}
 	</select>
 	
-	<!-- 조회수 증가처리 -->
+	
 	<update id="viewCount">
 		update board set viewcnt = viewcnt+1 where bno = #{bno}
 	</update>
 	
-	<!-- 게시물 수정 -->
+	
 	<update id="update">
 		update board set title = #{title}, content=#{content} where bno = #{bno}
 	</update>
@@ -34,6 +35,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete">
 		delete from board where bno = #{bno}
 	</delete>
+	
+	<select id="countArticle" resultType="int">
+		select count(*) 
+		from board b, customer c
+		<include refid="search" />
+	</select>
+	
+	
+	
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'all'">
+				where b.writer=c.id and
+ 				(  content like '%'||#{keyword}||'%'
+   				 or title like '%'||#{keyword}||'%' )
+			</when>
+			<otherwise>
+				where b.writer=c.id and	
+				 ${searchOption} like 
+					'%'||#{keyword}||'%'
+			</otherwise>
+		</choose>	
+	</sql>	
 
 </mapper>
 
