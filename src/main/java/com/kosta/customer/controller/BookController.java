@@ -41,7 +41,6 @@ public class BookController {
 			model.addAttribute("list", bookDAO.bookNoTypeSearchDao(vo));
 		}else if(vo.getType().equals("usedSelect")){
 			link = "registerForUsedBooks/usedSelect";
-			System.out.println("입력한 책 제목 : " + vo.getTitle());
 			model.addAttribute("list", bookDAO.usedSelectDao(vo));
 		}else{
 			model.addAttribute("list", bookDAO.bookTypeSearchDao(vo));

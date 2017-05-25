@@ -378,11 +378,9 @@ input[type=text]:focus {
 		<legend>공지</legend>
 		다시 만들것<br>
 		<a href="noticeWriteForm">쓰기</a><br>
-		<a href="noticeList">보기</a><br><!-- 
-		<a href="noticeListForm">공지 사이트로 가기</a><br>
-		<a href="noticeTitleSelectForm">제목으로 찾기</a> -->
+		<a href="noticeList">전체 공지 보기</a><br>
 
-		<table>
+		<table border="1">
 			<tr>
 				<td>글번호</td>
 				<td>제목</td>
@@ -448,7 +446,24 @@ input[type=text]:focus {
 	</fieldset>
 	<fieldset>
 		<legend>최근 들어온 책</legend>
-		일단 보류<br> 하게된다면 책 들어온 순서를 int타입으로 하여 내림차순 할것
+		<table border="1">
+			<tr>
+				<td>책 이름</td>
+				<td>책 이미지</td>
+				<td>저자</td>
+				<td>출판사</td>
+				<td>가격</td>
+			</tr>
+			<c:forEach items="${bookInfoList}" var="list" begin="0" end="4" step="1">
+				<tr>
+					<td><a href="bookDetail?title=${list.title}">${list.title}</a></td>
+					<td>이미지</td>
+					<td>${list.author}</td>
+					<td>${list.publisher}</td>
+					<td>${list.price}</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</fieldset>
 	<fieldset>
 		<legend>추천 책</legend>
