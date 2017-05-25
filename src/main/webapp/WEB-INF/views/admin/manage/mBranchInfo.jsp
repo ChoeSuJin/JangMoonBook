@@ -8,10 +8,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+	function button_event() {
+		if (confirm("수정 하시겠습니까 ?")) { //확인
+			$('#update').submit();
+		} else { //취소
+			return false;
+		}
+	}
+  </script>
 </head>
 <body>
 <!-- header -->
-<jsp:include page="../adminMain.jsp"/>
+<jsp:include page="../adminNav.jsp"/>
 <!-- header -->
 <div class="container">
   <ul class="nav nav-tabs">
@@ -28,7 +37,7 @@
 				<tr><td>지점 장</td><td>${ branch.master}</td></tr>
 				<tr><td>지점 번호</td><td>${ branch.phone }</td></tr>
 				<tr><td>지점 주소</td><td>${ branch.address1 } - ${ branch.address2 }</td></tr>
-				<tr><td>직원 수</td><td>${ branch.empCount }</td></tr>
+				<tr><td>직원 수</td><td>${ empCount }</td></tr>
 				<tr><td>수익</td><td>${ branch.sales }</td></tr>
 				<tr><td>영업 시간</td><td>${ branch.time }</td></tr>
 			</table>
@@ -37,7 +46,7 @@
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>지점정보 수정</h3><br>
-		<form action="mBranchInfoUpdate.do" method="post">
+		<form action="mBranchInfoUpdate.do" method="post" id="update">
 			<c:forEach var="branch" items="${ branchInfo }">
 			<div class="input-group">
 				<span class="input-group-addon" style="width:100px;height:40px;">지점장</span> 
@@ -65,7 +74,8 @@
 					   name="time" value="${ branch.time }">
 			</div>
 			<input type="hidden" name="name" value="${ branch.name }">
-			<input style="width:400px;" class="btn btn-default" type="submit" value="수정">
+			<input style="width:400px;" class="btn btn-default" type="button"
+				   value="수정" onclick="button_event();">
 			</c:forEach>
 		</form>
     </div>

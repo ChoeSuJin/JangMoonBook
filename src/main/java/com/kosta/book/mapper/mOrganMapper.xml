@@ -8,7 +8,7 @@
 		insert into ebook_reqList values(seq_ebook_reqNo.nextVal, #{isbn}, #{title}, #{ono})
 	</insert>
 	<select id="ebookList" resultType="com.kosta.book.admin.mInventory.model.BookInfoVO">
-		select * from book_info where type = 'e_book' order by title
+		select * from book_info where type = 'ebook' order by title
 	</select>
 	<select id="ebookReqList" resultType="com.kosta.book.organ.mOrgan.model.ManageOrganVO">
 		select * from ebook_reqList where ono=#{ono}

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<!-- 구매신청 완료하면 alert창 띄우기 -->
-	<jsp:include page="organHeader.jsp" />
+	<jsp:include page="organNav.jsp" />
 	<div class="container">
 		<div class="tab-content" style="margin-left: 5%;">
 			<h3>e_book 목록</h3>

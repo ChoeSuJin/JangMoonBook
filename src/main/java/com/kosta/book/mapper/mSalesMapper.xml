@@ -13,11 +13,11 @@
 		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
 	</select>
 	
-	<select id="sumSaleNewBook" resultType="Integer">
+	<select id="sumSaleNewBook" resultType="String">
 		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='real')
 	</select>
 	
-	<select id="sumSaleUsedBook" resultType="Integer">
+	<select id="sumSaleUsedBook" resultType="String">
 		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
 	</select>
 

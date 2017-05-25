@@ -22,7 +22,6 @@
 	</style>
 </head>
 <body>
-
 <c:url value="/j_spring_security_check" var="loginURL"></c:url>
 <div class="container">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -31,12 +30,17 @@
                 <div class="panel-title">관리자 로그인</div>
             </div>
             <div class="panel-body">
+            	<c:if test="${param.error != null}">
+					<div>
+						<p style="color:red;">로그인실패 사원번호와 비밀번호를 확인하세요.</p>
+					</div>
+				</c:if>
                 <form name='f' action="${ loginURL }" method="post" id="login-form">
                     <div>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="직원번호" autofocus>
                     </div>
                     <div>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="암호">
                     </div>
                     <div>
                         <button type="submit" class="form-control btn btn-primary">로그인</button>

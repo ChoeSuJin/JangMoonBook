@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<jsp:include page="organHeader.jsp" />
+<jsp:include page="organNav.jsp" />
 	<div class="container">
 		<div class="tab-content" style="margin-left: 5%;">
 			<h3>e_book 보유목록</h3>

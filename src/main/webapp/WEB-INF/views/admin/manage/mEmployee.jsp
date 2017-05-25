@@ -22,7 +22,7 @@
 </head>
 <body>
 <!-- header -->
-<jsp:include page="../adminMain.jsp"/>
+<jsp:include page="../adminNav.jsp"/>
 <!-- header -->
 <div class="container">
 	<ul class="nav nav-tabs">
@@ -33,7 +33,7 @@
 		<!-- 직원 목록, 수정, 삭제 -->
 		<div id="home" class="tab-pane fade in active">
 			<h3>직원목록</h3><br>
-			<h3>검색</h3>
+			
 			<div class="input-group">
 				<span class="input-group-addon" style="width:100px;">이름</span>
 				<input id="search" type="text" class="form-control"

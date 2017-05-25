@@ -23,7 +23,7 @@ public class mInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("inventoryMain.do")
+	@RequestMapping("mInventory.do")
 	public ModelAndView inventoryMainForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
@@ -39,7 +39,7 @@ public class mInventoryController {
 		List list2 = dao.selectNormal(branch);
 		List list3 = dao.selectOrderList(branch);
 		
-		mav.setViewName("/admin/manage/inventoryMain");
+		mav.setViewName("/admin/manage/mInventory");
 		mav.addObject("list", list);
 		mav.addObject("list2", list2);
 		mav.addObject("list3", list3);
@@ -56,14 +56,13 @@ public class mInventoryController {
 		// cost, publisher를 얻는 쿼리문을 작성하여 set 메소드에 입력
 		
 		
-		
 		// 날짜처리 => db에서 sysdate로 처리했읍니다
 		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
 		dao.insertOrderList(vo);
-		return "redirect:inventoryMain.do";
+		return "redirect:mInventory.do";
 		
 	}
 	
@@ -80,7 +79,7 @@ public class mInventoryController {
 		dao.deleteOrder(vo);
 		
 		
-		return "redirect:inventoryMain.do";
+		return "redirect:mInventory.do";
 	}
 	
 	@RequestMapping("insertNewBook.do")
@@ -92,7 +91,7 @@ public class mInventoryController {
 		dao.newBookInsert(vo);
 		
 		
-		return "redirect:inventoryMainForm.do";
+		return "redirect:mInventory.do";
 	}
 
 }
