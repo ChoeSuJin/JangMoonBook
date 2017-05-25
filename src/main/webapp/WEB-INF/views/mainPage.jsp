@@ -349,30 +349,23 @@ input[type=text]:focus {
 			}
 		}
 	</script>
+
 	<fieldset>
-		<legend><h1>로그인이 필요한 기능</h1></legend>
-		<fieldset>
-			<legend>로그인</legend>
-			<c:choose>
-				<c:when test="${sessionScope.id ==null}">
-					<a href="${path}/customer/login.do">로그인</a>
-				</c:when>
-				<c:otherwise>
+		<legend>로그인</legend>
+		<c:choose>
+			<c:when test="${sessionScope.id ==null}">
+				<a href="${path}/customer/login.do">로그인</a>
+			</c:when>
+			<c:otherwise>
 					${sessionScope.id}님 환영합니다.
 					<a href="${path}/customer/logout.do"> 로그아웃 </a>
-					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
-					</a>
-				</c:otherwise>
-			</c:choose>
-		</fieldset>
-		<fieldset>
-			<legend>마이페이지</legend>
-			
-		</fieldset>
-		<fieldset>
-			<legend>장바구니, 구입, 결제 내역</legend>
-			
-		</fieldset>
+				<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</fieldset>
+	<fieldset>
+		<legend>마이페이지 장바구니, 구입, 결제 내역</legend>
 	</fieldset>
 	<fieldset>
 		<legend>중고책 등록</legend>
@@ -383,60 +376,27 @@ input[type=text]:focus {
 	
 	<fieldset>
 		<legend>공지</legend>
-		수정 기능 넣어야함.<br> <a href="writeForm">쓰기</a><br> <a
-			href="list">공지 사이트로 가기</a><br> <a href="viewForm">제목으로 찾기</a>
+		다시 만들것<br>
+		<a href="noticeWriteForm">쓰기</a><br>
+		<a href="noticeList">보기</a><br><!-- 
+		<a href="noticeListForm">공지 사이트로 가기</a><br>
+		<a href="noticeTitleSelectForm">제목으로 찾기</a> -->
 
-		<table width="500" cellpadding="0" cellspacing="0" border="1">
+		<table>
 			<tr>
-				<td>번호</td>
+				<td>글번호</td>
 				<td>제목</td>
-				<td>날짜</td>
-				<td>삭제</td>
+				<td>내용</td>
+				<td>번호</td>
 			</tr>
-			<c:forEach items="${list}" var="dto">
+			<c:forEach items="${noticeList}" var="list" begin="0" end="4" step="1">
 				<tr>
-					<td>${dto.articleNumber}</td>
-					<td><form action="content">
-							<a href="content?title=${dto.title}">${dto.title}</a>
-						</form></td>
-					<td>${dto.regDate}</td>
-					<td><a href="delete?title=${dto.title}">X</a></td>
+					<td>${list.articleNumber}</td>
+					<td><a href="detailView?articleNumber=${list.articleNumber}">${list.title}</a></td>
+					<td>${list.content}</td>
+					<td>${list.regDate}</td>
 				</tr>
 			</c:forEach>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>책 등록</legend>
-		책 등록하기<form action="bookWrite" method="post">
-			제목<input type="text" name="title"><br>
-			가격<input type="text" name="price"><br>
-			저자<input type="text" name="author"><br>
-			출판사<input type="text" name="publisher"><br>
-			대분류<input type="text" name="type"><br>
-			isbn<input type="text" name="isbn"><br>
-			소분류<input type="text" name="category"><br>
-			<input type="submit" value="OK">
-		</form>
-		<a href="bookList">책 목록 보기(대, 소분류 입력하여 검색 가눙하도록)</a><br>
-		<a href="bookUpdate">책 정보 수정하기</a><br>
-		<a href="bookDelete">책 삭제하기</a>
-	</fieldset>
-	<fieldset>
-		<legend>책 검색</legend>
-		<table width="500">
-			<form action="bookSearch" method="post">
-				<tr>
-					<td>타입</td>
-					<td>title</td>
-					<td>category</td>
-				</tr>
-				<tr>
-					<td><input type="text" name="type" size="50"></td>
-					<td><input type="text" name="title" size="50"></td>
-					<td><input type="text" name="category" size="50"> <input
-						type="submit" value="OK"></td>
-				</tr>
-			</form>
 		</table>
 	</fieldset>
 	<fieldset>
@@ -462,7 +422,7 @@ input[type=text]:focus {
 				<div class="item">
 					<img src="hh.jpg" alt="이미지 설명" width="1200" height="700">
 					<div class="carousel-caption">
-						이미지 설명dd
+						이미지 설명
 					</div>
 				</div>
 

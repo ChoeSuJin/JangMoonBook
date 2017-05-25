@@ -23,8 +23,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {				
-		NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-		model.addAttribute("list", customerDAO.listDao());
+		NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
+		model.addAttribute("noticeList", noticeDAO.noticeList());
 		return "mainPage";
 	}
 }

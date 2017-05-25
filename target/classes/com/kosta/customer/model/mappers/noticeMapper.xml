@@ -4,16 +4,14 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kosta.customer.model.NoticeDAO">
-	<select id="listDao" resultType="com.kosta.customer.model.NoticeVO">	
-		SELECT * FROM NOTICE ORDER BY TITLE DESC
-	</select>
-	<insert id="writeDao">
-		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, BOARD_SEQ.NEXTVAL, #{content})
+	<insert id="noticeWrite">
+		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, NOTICE_SEQ.NEXTVAL, #{content})
 	</insert>
-	<delete id="deleteDao">
-		DELETE FROM NOTICE WHERE TITLE = #{title}
-	</delete>
-	<select id="viewDao" resultType="com.kosta.customer.model.NoticeVO">	
-		SELECT * FROM NOTICE WHERE TITLE = #{title}
-	</select>	
+	<select id="noticeList" resultType="com.kosta.customer.model.NoticeVO">	
+		SELECT * FROM NOTICE ORDER BY ARTICLENUMBER DESC
+	</select>
+	<select id="detailView" resultType="com.kosta.customer.model.NoticeVO">	
+		SELECT * FROM NOTICE WHERE articleNumber = ${articleNumber}
+	</select>
+	
 </mapper>

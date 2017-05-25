@@ -15,55 +15,31 @@ import com.kosta.customer.model.NoticeVO;
 public class NoticeController {		
 		@Autowired
 		private SqlSession sqlSession;
-		
-		@RequestMapping("/list")
-		public String list(Model model) {
-			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			model.addAttribute("list", customerDAO.listDao());
-			return "/list";
+		@RequestMapping("/noticeWirte")
+		public String noticeWirte(Model model, NoticeVO noticeVO ) {
+			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
+			noticeDAO.noticeWrite(noticeVO);
+			return "redirect:../book/";
 		}
 		
-		@RequestMapping("/view")
-		public String view(NoticeVO vo, Model model) {
-			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			model.addAttribute("list", customerDAO.viewDao(vo));
-			return "/list";
-		}
-		
-		@RequestMapping("/writeForm")
-		public String writeForm() {
-			return "/writeForm";
-		}
-		
-		@RequestMapping("/viewForm")
-		public String viewForm() {
-			return "/viewForm";
-		}
-		
-		@RequestMapping("/mainPage")
-		public String mainForm() {
-			return "/mainPage";
-		}
-		
-		@RequestMapping("/write")
-		public String write(NoticeVO vo, Model model) {
-			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			customerDAO.writeDao(vo);
-			return "redirect:list";
+		@RequestMapping("/noticeWriteForm")
+		public String noticeWriteForm(Model model) {
+			return "notice/noticeWriteForm";
 		}
 		
 		
-		@RequestMapping("/delete")
-		public String delete(NoticeVO vo, Model model) {
-			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			customerDAO.deleteDao(vo);
-			return "redirect:list";
+		@RequestMapping("/noticeList")
+		public String noticeList(Model model) {
+			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
+			model.addAttribute("noticeList", noticeDAO.noticeList());
+			return "notice/noticeList";
 		}
 		
-		@RequestMapping("/content")
-		public String content(NoticeVO vo, Model model) {
-			NoticeDAO customerDAO = sqlSession.getMapper(NoticeDAO.class);
-			model.addAttribute("contentView", customerDAO.viewDao(vo));
-			return "content";
+		@RequestMapping("/detailView")
+		public String detailsView(Model model, NoticeVO noticeVO) {
+			System.out.println(noticeVO.getArticleNumber());
+			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
+			model.addAttribute("detailView", noticeDAO.detailView(noticeVO));
+			return "notice/noticeDetailView";
 		}
 }
