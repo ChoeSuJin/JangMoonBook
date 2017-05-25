@@ -18,5 +18,5 @@ public interface ManageEbookDAO {
 	
 	
 	
-	public int getAllListCount();
+	public int getAllOrganListCount();
 }

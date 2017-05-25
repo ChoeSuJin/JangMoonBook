@@ -135,7 +135,10 @@ create table ebook_reqList(
   title varchar2(50),
   com varchar2(50)
 );
-
+create table ebook_extendReqList(
+  ono number,
+  extendDate varchar2(20)
+);
 
 -- Sequence
 create sequence orderNumber;	//	재고 주문에 필요한 주문번호

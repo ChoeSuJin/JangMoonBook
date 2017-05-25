@@ -18,6 +18,14 @@
 </head>
 <script type="text/javascript">
 
+	$(document).ready(function() {
+		$(".orgList").hide();
+		var org_currentPage = <c:out value="${org_currentPage}" />;
+		for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
+    		$("#"+ (i+1) + "").show();
+    	}
+	});
+
 	function getOrgList(ono) {
 		
 		$.ajax({
@@ -33,20 +41,110 @@
             	 var values = data.ebookList;
             	 values=JSON.stringify(values);
             	 var newVal = JSON.parse(values);
+            	 var allPage = newVal.length;
             	 
-            	$("#organBookList").html("");
-            	$("#organBookList").append("<th>isbn</th><th>title</th><th>company</th>");
+            	$("#list1").html("");
+            	$("#list1").append("<th>isbn</th><th>title</th><th>company</th>");
 
             	for(var i = 0; i< newVal.length; i++) {
-        			$("#organBookList").append("<tr><td>"+ newVal[i].isbn +"</td><td>" + newVal[i].title + "</td><td>" + newVal[i].ono + "</td></tr>");
+        			$("#list1").append("<tr><td>"+ newVal[i].isbn +"</td><td>" + newVal[i].title + "</td><td>" + newVal[i].ono + "</td></tr>");
         		}
 
-
-            	
             }
              
         })
 	}
+	
+function movePage(block, page) {
+	
+		
+		$.ajax({
+            type : "POST",
+            url : "movePage.do",
+            data : {"org_currentPage" : page,
+            		"org_currentBlock" : block },
+            dataType : "JSON",
+            error : function(){
+                alert('에러발생');
+            },
+            success : function(data){
+
+            	$("#organList").trigger("create");
+            	
+            	var org_currentPage = data.page;
+            	var org_currentBlock = data.block;
+            	var getList = data.list;
+            	
+            	alert("org_currentPage = " + org_currentPage);
+            	alert("org_currentBlock = " + org_currentBlock);
+
+            	$(".orgList").hide();
+            	
+            	for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
+            		$("#"+ (i+1) + "").show();
+            		alert(i);
+            	}
+
+            }
+             
+        })
+	}
+	
+function moveBlock(block) {
+	
+	$.ajax({
+        type : "POST",
+        url : "moveBlock.do",
+        data : {"Block" : block },
+        dataType : "JSON",
+        error : function(){
+            alert('에러발생');
+        },
+        success : function(data){
+        	
+        	var org_currentPage = data.page;
+        	var org_currentBlock = data.block;
+        	var contentPerPage = 3;
+        	var getList = data.list;
+        	
+        	/* <tr>
+			<td colspan="4" style="text-align: center;">
+			<ul class="pager">
+			<c:if test="${ org_currentBlock > 1 }">
+			  <li class="previous"><a href="moveBlock(${ org_currentBlock - 1 })">Previous</a></li>
+			</c:if>
+			</ul>
+			
+			<ul class="pagination">
+			<c:if test="${ org_allCount < contentPerPage }">
+				<li><a href="mEbook.do">1</a></li>
+				  
+			</c:if>
+			
+			<c:if test="${ org_allCount >= contentPerPage }">
+				<c:forEach var="page" begin="1" end="3">
+				
+				  <li><a onclick="movePage(${ org_currentBlock }, ${ (org_currentBlock - 1) * 3 + page })">${ (org_currentBlock - 1) * 3 + page }</a></li>
+			</c:forEach>
+			</c:if>
+			
+			</ul>
+			<ul class="pager">
+				<c:if test="${ org_currentBlock < allOrganBlock }">
+			 		 <li class="next"><a onclick="moveBlock(${ org_currentBlock + 1 })">Next</a></li>
+			  	</c:if>
+			</ul>
+			</td>
+		</tr> */
+        	
+
+
+        }
+         
+    })
+}
+	
+	
 </script>
 <body>
 <!-- header -->
@@ -63,46 +161,89 @@
 		<div class="tab-content" style="margin-left:5%;">
 
 			<div id="BookList" class="tab-pane fade in active">
-				<table class="table table-condensed" style="width : 40%; float: left;">
+					<c:set var="org_currentPage" value="${ org_currentPage }"/>
+					<c:set var="org_currentBlock" value="${ org_currentBlock }" />
+					<c:set var="org_allCount" value="${ allOrganCount }" />
+					<c:set var="allOrganBlock" value="${ allOrganBlock }" />
+					<c:set var="allOrganPage" value="${ allOrganPage }" />
+					<c:set var="pagePerBlock" value="3" />
+					<c:set var="contentPerPage" value="3" />
+				<table id="OrganListTable" class="table table-condensed" style="width : 40%; float: left;">
+					
+					
+					<div id="organList">
+					
+					<thead>
 
 					<th>ono</th>
 					<th>oname</th>
 					<th>deadline</th>
-					<th>type</th>				
-					<c:forEach var="list" items="${ organList }">
+					<th>type</th>
 					
-					<tr>
+					</thead>
+
+					<tbody>
+					<c:forEach var="list" varStatus="status" items="${ organList }">
+				
+					<tr class="orgList" id="${ status.index + 1 }">
 						<td>${ list.ono }</td>
-						<td><a onclick="getOrgList(${ list.ono });">${ list.oname }</a></td>
+						<td><a onclick="getOrgList(${ list.ono  })">${ list.oname }</a></td>
 						<td>${ list.deadline }</td>
 						<td>${ list.type }</td>
-
 					</tr>
 
 					</c:forEach>
 					
+					</tbody>
+
+					</div>
+					<!-- 기업목록 페이징 처리 -->
+					<div id="organListPaging">
+					<tr>
+						<td colspan="4" style="text-align: center;">
+						<ul class="pager">
+						<c:if test="${ org_currentBlock > 1 }">
+						  <li class="previous"><a onclick ="moveBlock(${ org_currentBlock - 1 })">Previous</a></li>
+						</c:if>
+						</ul>
+						
+						<ul class="pagination">
+						
+						<c:if test="${ org_allCount < contentPerPage }">
+							<li><a href="mEbook.do">1</a></li>
+							  
+						</c:if>
+						
+						<c:if test="${ org_allCount >= contentPerPage }">
+							<c:forEach var="page" begin="1" end="3">
+							
+							  <li><a onclick="movePage(${ org_currentBlock }, ${ (org_currentBlock - 1) * 3 + page })">${ (org_currentBlock - 1) * 3 + page }</a></li>
+						</c:forEach>
+						</c:if>
+						
+						</ul>
+						<ul class="pager">
+							<c:if test="${ org_currentBlock < allOrganBlock }">
+						 		 <li class="next"><a onclick="moveBlock(${ org_currentBlock + 1 })">Next</a></li>
+						  	</c:if>
+						</ul>
+						</td>
+					</tr>
+					</div>
+					
 				</table>
 				
 				<table id="organBookList" class="table table-condensed" style="width : 40%; margin-left:10%; float: right;">
-					<c:set var="currentPage" value="${ currentPage }"/>
-					<c:set var="currentBlock" value="${ currentBlock }" />
-					<c:set var="allPage" value="${ allPage }" />
-					<c:set var="allBlock" value="${ allBlock }"/>
+					
+					<!-- 가맹점별 대여된 ebook 목록을 ajax 메소드로 불러옴 -->
+					<!-- 부트스트랩을 끌어올 필요가있음 -->
+					<div id="list1">
+						
+					</div>				
+					
 
 				<c:if test="${ data.ebookList ne null }">
-					<th>isbn</th>
-					<th>title</th>
-					<th>company</th>
-					<div id="list1">
-						<c:forEach var="list" items="${ data.ebookList }" step="1" begin="${ (currentPage - 1) * 3 }" end="${ currentPage * 3  - 1}">
-							<tr>
-								<td>${ list.isbn }</td>
-								<td>${ list.title }</td>
-								<td>${ list.com }</td>
-							</tr>
 					
-						</c:forEach>
-					</div>				
 					
 					<tr>
 						<td colspan="4" style="text-align: center;">

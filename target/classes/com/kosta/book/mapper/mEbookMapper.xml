@@ -27,6 +27,10 @@
 		select count(*) from ebook_distlist
 	</select>
 	
+	<select id="getAllOrganListCount" resultType="Integer">
+		select count(*) from ebook_organ
+	</select>
+	
 	
 	<insert id="insertNewCompany" parameterType="com.kosta.book.admin.mEbook.model.ManageEbookOrganVO">
 		insert into ebook_organ values(orgno.nextval, #{opwd}, #{oname}, #{deadline}, #{type})

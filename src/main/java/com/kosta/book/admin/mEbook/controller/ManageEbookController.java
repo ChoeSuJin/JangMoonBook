@@ -46,20 +46,30 @@ public class ManageEbookController {
 		// page per block = 3
 
 		
-		int allCount = dao.getAllListCount();
-		int allPage = (int) Math.ceil(allCount / 3);
-		int allBlock = (int) Math.ceil(allPage / 3);
-		
+		//int allCount = dao.getAllOrganBookListCount();
+		int allOrganCount = dao.getAllOrganListCount();
+		//int allPage = (int) Math.ceil(allCount / 3);
+		//int allBlock = (int) Math.ceil(allPage / 3);
+		int allOrganPage =(allOrganCount % 3 == 0) ? allOrganCount / 3 : allOrganCount / 3 + 1;
+		int allOrganBlock = (allOrganPage % 3 == 0) ? allOrganPage / 3 : allOrganPage / 3 + 1;
 		mav.setViewName("/admin/manage/mEbook");
 		
 		//mav.addObject("ebookList", list1);
 		mav.addObject("organList", list2);
 		mav.addObject("permitList", list3);
 		mav.addObject("extendList", list4);
+		
+		mav.addObject("org_currentBlock", 1);
+		mav.addObject("org_currentPage", 1);
+		mav.addObject("allOrganCount", allOrganCount);
+		mav.addObject("allOrganPage", allOrganPage);
+		mav.addObject("allOrganBlock", allOrganBlock);
+		System.out.println("allOrganPage = " + allOrganPage);
+		System.out.println("allOrganBlock = " + allOrganBlock);
 
-		mav.addObject("allContent", allCount);
+		/*mav.addObject("allContent", allCount);
 		mav.addObject("allPage", allPage);
-		mav.addObject("allBlock", allBlock);
+		mav.addObject("allBlock", allBlock);*/
 		mav.addObject("currentPage", 1);
 		mav.addObject("currentBlock", 1);
 		return mav;
@@ -93,6 +103,44 @@ public class ManageEbookController {
 		return data;
 	}
 	
+	@RequestMapping("/movePage.do")
+	@ResponseBody
+	public HashMap<String, Object> moveOrganList(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
+		List list = dao.getEbookOrganList();
+		
+		System.out.println(map.get("org_currentPage"));
+		System.out.println(map.get("org_currentBlock"));
+		
+		
+		data.put("list", list);
+		data.put("page", map.get("org_currentPage"));
+		data.put("block", map.get("org_currentBlock"));
+		
+		
+		return data;
+	}
+	
+	@RequestMapping("/moveBlock.do")
+	@ResponseBody
+	public HashMap<String, Object> moveBlock(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
+		List list = dao.getEbookOrganList();
+		
+		System.out.println(map.get("Block"));
+		
+		
+		data.put("list", list);
+		data.put("block", map.get("Block"));
+		data.put("block", Integer.parseInt(map.get("Block")) * 3 - 2);
+		
+		
+		return data;
+	}
 	
 	
 	@RequestMapping("/insertNewCom.do")
