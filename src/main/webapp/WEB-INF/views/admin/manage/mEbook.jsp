@@ -106,38 +106,6 @@ function moveBlock(block) {
         	var org_currentBlock = data.block;
         	var contentPerPage = 3;
         	var getList = data.list;
-        	
-        	/* <tr>
-			<td colspan="4" style="text-align: center;">
-			<ul class="pager">
-			<c:if test="${ org_currentBlock > 1 }">
-			  <li class="previous"><a href="moveBlock(${ org_currentBlock - 1 })">Previous</a></li>
-			</c:if>
-			</ul>
-			
-			<ul class="pagination">
-			<c:if test="${ org_allCount < contentPerPage }">
-				<li><a href="mEbook.do">1</a></li>
-				  
-			</c:if>
-			
-			<c:if test="${ org_allCount >= contentPerPage }">
-				<c:forEach var="page" begin="1" end="3">
-				
-				  <li><a onclick="movePage(${ org_currentBlock }, ${ (org_currentBlock - 1) * 3 + page })">${ (org_currentBlock - 1) * 3 + page }</a></li>
-			</c:forEach>
-			</c:if>
-			
-			</ul>
-			<ul class="pager">
-				<c:if test="${ org_currentBlock < allOrganBlock }">
-			 		 <li class="next"><a onclick="moveBlock(${ org_currentBlock + 1 })">Next</a></li>
-			  	</c:if>
-			</ul>
-			</td>
-		</tr> */
-        	
-
 
         }
          
