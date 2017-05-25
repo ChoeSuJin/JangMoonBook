@@ -17,8 +17,8 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Override
 	public List<BoardVO> listAll(String searchOption,String keyword) throws Exception {
-		Map<String,Object> map=
-				new HashMap<String,Object>();
+		Map<String, String> map=
+				new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		

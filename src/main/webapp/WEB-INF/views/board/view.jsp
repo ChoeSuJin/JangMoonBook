@@ -69,7 +69,7 @@ $(document).ready(function(){
 		조회수 : ${dto.viewcnt}
 	</div>
 	<div> 작성자
-		${dto.writer}
+		${dto.id}
 	</div>
 	<div> 내용
 		<textarea name = "content" rows="10" cols="50">${dto.content}</textarea>	
@@ -77,9 +77,10 @@ $(document).ready(function(){
 	<div style="width:300px; text-align:center">
 		<!-- 게시물 번호가 있어야 수정, 삭제 가능(hidden으로 처리) -->
 		<input type = "hidden" name = "bno" value= "${dto.bno}">
+	<c:if test="${sesionScope.id==dto.writer}">
 		<button type = "button" id ="btnUpdate">수정하기</button>
 		<button type = "button" id = "btnDelete">삭제하기</button>
-		
+	</c:if>
 	</div>
 </form>
 </body>

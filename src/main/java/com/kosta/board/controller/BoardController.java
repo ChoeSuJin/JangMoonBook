@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,9 +23,9 @@ public class BoardController {
 	BoardServiceImpl boardService;
 	
 	@RequestMapping("/board/list.do")
-	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
+	public ModelAndView list(@RequestParam(defaultValue="title") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
 		// 게시물 수
-				int count=boardService.countArticle(searchOption, keyword);
+		int count=boardService.countArticle(searchOption, keyword);
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
 		ModelAndView mav = new ModelAndView();
@@ -33,7 +34,7 @@ public class BoardController {
 				new HashMap<String,Object>();
 		map.put("list", list);
 		map.put("count", count);
-		map.put("search_option", searchOption);
+		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
 		return mav;
@@ -46,7 +47,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/insert.do")
-	public String insert(@ModelAttribute BoardVO vo) throws Exception{
+	public String insert(@ModelAttribute BoardVO vo, HttpSession session) throws Exception{
+		String id= (String)session.getAttribute("id");
+		vo.setWriter(id);
 		boardService.create(vo);		
 		return "redirect:/board/list.do";
 	}
