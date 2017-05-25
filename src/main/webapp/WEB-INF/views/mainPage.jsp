@@ -64,95 +64,170 @@ div.tab button.active {
 	border-left: none;
 	height: 300px;
 }
+
 #topBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: dddddd;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 10px;
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	border: none;
+	outline: none;
+	background-color: dddddd;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 10px;
 }
 
 #topBtn:hover {
-  background-color: #555;
+	background-color: #555;
 }
 
 /* 검색 버튼 누르면 쫙 펴지는거 */
 input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+	width: 130px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: white;
+	background-image: url('searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
 }
 /* 검색 버튼 누르면 쫙 펴지는거 크기 */
 input[type=text]:focus {
-    width: 30%;
+	width: 30%;
 }
 
 /* 이벤트 이미지 슬라이드 */
 .container {
-      padding: 80px 120px;
-  }
-  .person {
-      border: 10px solid transparent;
-      margin-bottom: 25px;
-      width: 80%;
-      height: 80%;
-      opacity: 0.7;
-  }
-  .person:hover {
-      border-color: #f1f1f1;
-  }
-  .carousel-inner img {
-      -webkit-filter: grayscale(90%);
-      filter: grayscale(90%); /* make all photos black and white */ 
-      width: 30%; /* Set width to 100% */
-      margin: auto;
-  }
-  .carousel-caption h3 {
-      color: #fff !important;
-  }
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
-    }
-  }
-  
-  /**************************************************/
+	padding: 80px 120px;
+}
+
+.person {
+	border: 10px solid transparent;
+	margin-bottom: 25px;
+	width: 80%;
+	height: 80%;
+	opacity: 0.7;
+}
+
+.person:hover {
+	border-color: #f1f1f1;
+}
+
+.carousel-inner img {
+	-webkit-filter: grayscale(90%);
+	filter: grayscale(90%); /* make all photos black and white */
+	width: 30%; /* Set width to 100% */
+	margin: auto;
+}
+
+.carousel-caption h3 {
+	color: #fff !important;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+/**************************************************/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+/**************************************************/
 </style>
 </head>
 <body>
 <button onclick="topFunction()" id="topBtn" title="top">Top</button>
 <script>
-// 버튼 누르면 위로 감
-window.onscroll = function() {scrollFunction()};
+	// 버튼 누르면 위로 감
+	window.onscroll = function() {
+		scrollFunction()
+	};
 
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("topBtn").style.display = "block";
-    } else {
-        document.getElementById("topBtn").style.display = "none";
-    }
-}
+	function scrollFunction() {
+		if (document.body.scrollTop > 20
+				|| document.documentElement.scrollTop > 20) {
+			document.getElementById("topBtn").style.display = "block";
+		} else {
+			document.getElementById("topBtn").style.display = "none";
+		}
+	}
 
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
 </script>
 
 <div class="jumbotron" style="height: 200px;">
@@ -172,86 +247,108 @@ function topFunction() {
   </center>
 </div>
 
-<div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#menu1">국내</a></li>
-    <li><a data-toggle="tab" href="#menu2">외국</a></li>
-    <li><a data-toggle="tab" href="#menu3">이북</a></li>
-    <li><a data-toggle="tab" href="#menu4">중고</a></li>
-  </ul>
-  
-  <div class="tab-content">
+	<button id="modalBtn">Open Modal</button>
+	<div id="modalDisp" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>Modal Header</h2>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="pill" href="#menu1">국내</a></li>
+						<li><a data-toggle="tab" href="#menu2">외국</a></li>
+						<li><a data-toggle="tab" href="#menu3">이북</a></li>
+						<li><a data-toggle="tab" href="#menu4">중고</a></li>
+					</ul>
 
-    <div id="menu1" class="tab-pane fade">
-      <h3>국내도서</h3>
-      <p>
-		<a href="bookSearch?type=국내도서&category=000">000번</a><br>
-		<a href="bookSearch?type=국내도서&category=100">100번</a><br>
-		<a href="bookSearch?type=국내도서&category=200">200번</a><br>
-		<a href="bookSearch?type=국내도서&category=300">300번</a><br>
-		<a href="bookSearch?type=국내도서&category=400">400번</a><br>
-		<a href="bookSearch?type=국내도서&category=500">500번</a><br>
-		<a href="bookSearch?type=국내도서&category=600">600번</a><br>
-		<a href="bookSearch?type=국내도서&category=700">700번</a><br>
-		<a href="bookSearch?type=국내도서&category=800">800번</a><br>
-		<a href="bookSearch?type=국내도서&category=900">900번</a><br><br>
-	  </p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>외국도서</h3>
-      <p>
- 		<a href="bookSearch?type=외국도서&category=000">000번</a><br>
-		<a href="bookSearch?type=외국도서&category=100">100번</a><br>
-		<a href="bookSearch?type=외국도서&category=200">200번</a><br>
-		<a href="bookSearch?type=외국도서&category=300">300번</a><br>
-		<a href="bookSearch?type=외국도서&category=400">400번</a><br>
-		<a href="bookSearch?type=외국도서&category=500">500번</a><br>
-		<a href="bookSearch?type=외국도서&category=600">600번</a><br>
-		<a href="bookSearch?type=외국도서&category=700">700번</a><br>
-		<a href="bookSearch?type=외국도서&category=800">800번</a><br>
-		<a href="bookSearch?type=외국도서&category=900">900번</a><br><br>
-		
-		<form action="bookSearch" method="post">
-			<input type="text" name="type">
-			<input type="text" name="category">
-			<input type="submit" value="ok"> 
-		</form>
-      </p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>E-book</h3>
-      <p>
- 		<a href="bookSearch?type=E-book&category=000">000번</a><br>
-		<a href="bookSearch?type=E-book&category=100">100번</a><br>
-		<a href="bookSearch?type=E-book&category=200">200번</a><br>
-		<a href="bookSearch?type=E-book&category=300">300번</a><br>
-		<a href="bookSearch?type=E-book&category=400">400번</a><br>
-		<a href="bookSearch?type=E-book&category=500">500번</a><br>
-		<a href="bookSearch?type=E-book&category=600">600번</a><br>
-		<a href="bookSearch?type=E-book&category=700">700번</a><br>
-		<a href="bookSearch?type=E-book&category=800">800번</a><br>
-		<a href="bookSearch?type=E-book&category=900">900번</a><br><br>
-      </p>
-    </div>
-    <div id="menu4" class="tab-pane fade">
-      <h3>중고도서</h3>
-      <p>
- 		<a href="bookSearch?type=중고도서&category=000">000번</a><br>
-		<a href="bookSearch?type=중고도서&category=100">100번</a><br>
-		<a href="bookSearch?type=중고도서&category=200">200번</a><br>
-		<a href="bookSearch?type=중고도서&category=300">300번</a><br>
-		<a href="bookSearch?type=중고도서&category=400">400번</a><br>
-		<a href="bookSearch?type=중고도서&category=500">500번</a><br>
-		<a href="bookSearch?type=중고도서&category=600">600번</a><br>
-		<a href="bookSearch?type=중고도서&category=700">700번</a><br>
-		<a href="bookSearch?type=중고도서&category=800">800번</a><br>
-		<a href="bookSearch?type=중고도서&category=900">900번</a><br><br>
-      </p>
-    </div>
-  </div>
-</div>
-
-
+					<div class="tab-content">
+						<div id="menu1" class="tab-pane fade">
+							<h3>국내도서</h3>
+							<p>
+								<a href="bookSearch?type=국내도서&category=000">000번</a><br> <a
+									href="bookSearch?type=국내도서&category=100">100번</a><br> <a
+									href="bookSearch?type=국내도서&category=200">200번</a><br> <a
+									href="bookSearch?type=국내도서&category=300">300번</a><br> <a
+									href="bookSearch?type=국내도서&category=400">400번</a><br> <a
+									href="bookSearch?type=국내도서&category=500">500번</a><br> <a
+									href="bookSearch?type=국내도서&category=600">600번</a><br> <a
+									href="bookSearch?type=국내도서&category=700">700번</a><br> <a
+									href="bookSearch?type=국내도서&category=800">800번</a><br> <a
+									href="bookSearch?type=국내도서&category=900">900번</a><br>
+								<br>
+							</p>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<h3>외국도서</h3>
+							<p>
+								<a href="bookSearch?type=외국도서&category=000">000번</a><br> <a
+									href="bookSearch?type=외국도서&category=100">100번</a><br> <a
+									href="bookSearch?type=외국도서&category=200">200번</a><br> <a
+									href="bookSearch?type=외국도서&category=300">300번</a><br> <a
+									href="bookSearch?type=외국도서&category=400">400번</a><br> <a
+									href="bookSearch?type=외국도서&category=500">500번</a><br> <a
+									href="bookSearch?type=외국도서&category=600">600번</a><br> <a
+									href="bookSearch?type=외국도서&category=700">700번</a><br> <a
+									href="bookSearch?type=외국도서&category=800">800번</a><br> <a
+									href="bookSearch?type=외국도서&category=900">900번</a><br>
+								<br>
+							</p>
+						</div>
+						<div id="menu3" class="tab-pane fade">
+							<h3>E-book</h3>
+							<p>
+								<a href="bookSearch?type=E-book&category=000">000번</a><br>
+								<a href="bookSearch?type=E-book&category=100">100번</a><br>
+								<a href="bookSearch?type=E-book&category=200">200번</a><br>
+								<a href="bookSearch?type=E-book&category=300">300번</a><br>
+								<a href="bookSearch?type=E-book&category=400">400번</a><br>
+								<a href="bookSearch?type=E-book&category=500">500번</a><br>
+								<a href="bookSearch?type=E-book&category=600">600번</a><br>
+								<a href="bookSearch?type=E-book&category=700">700번</a><br>
+								<a href="bookSearch?type=E-book&category=800">800번</a><br>
+								<a href="bookSearch?type=E-book&category=900">900번</a><br>
+								<br>
+							</p>
+						</div>
+						<div id="menu4" class="tab-pane fade">
+							<h3>중고도서</h3>
+							<p>
+								<a href="bookSearch?type=중고도서&category=000">000번</a><br> <a
+									href="bookSearch?type=중고도서&category=100">100번</a><br> <a
+									href="bookSearch?type=중고도서&category=200">200번</a><br> <a
+									href="bookSearch?type=중고도서&category=300">300번</a><br> <a
+									href="bookSearch?type=중고도서&category=400">400번</a><br> <a
+									href="bookSearch?type=중고도서&category=500">500번</a><br> <a
+									href="bookSearch?type=중고도서&category=600">600번</a><br> <a
+									href="bookSearch?type=중고도서&category=700">700번</a><br> <a
+									href="bookSearch?type=중고도서&category=800">800번</a><br> <a
+									href="bookSearch?type=중고도서&category=900">900번</a><br>
+								<br>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var modal = document.getElementById('modalDisp');
+		var btn = document.getElementById("modalBtn");
+		var span = document.getElementsByClassName("close")[0];
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 	<fieldset>
 		<legend><h1>로그인이 필요한 기능</h1></legend>
 		<fieldset>
@@ -324,7 +421,24 @@ function topFunction() {
 		<a href="bookUpdate">책 정보 수정하기</a><br>
 		<a href="bookDelete">책 삭제하기</a>
 	</fieldset>
-
+	<fieldset>
+		<legend>책 검색</legend>
+		<table width="500">
+			<form action="bookSearch" method="post">
+				<tr>
+					<td>타입</td>
+					<td>title</td>
+					<td>category</td>
+				</tr>
+				<tr>
+					<td><input type="text" name="type" size="50"></td>
+					<td><input type="text" name="title" size="50"></td>
+					<td><input type="text" name="category" size="50"> <input
+						type="submit" value="OK"></td>
+				</tr>
+			</form>
+		</table>
+	</fieldset>
 	<fieldset>
 		<legend>이벤트 이미지 슬라이드</legend>
 
@@ -339,27 +453,23 @@ function topFunction() {
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
-					<img src="ny.jpg" alt="New York" width="1200" height="700">
+					<img src="hh.jpg" alt="이미지 설명" width="1200" height="700">
 					<div class="carousel-caption">
-						<h3>New York</h3>
-						<p>The atmosphere in New York is lorem ipsum.</p>
+						이미지 설명 
 					</div>
 				</div>
 
 				<div class="item">
-					<img src="chicago.jpg" alt="Chicago" width="1200" height="700">
+					<img src="hh.jpg" alt="이미지 설명" width="1200" height="700">
 					<div class="carousel-caption">
-						<h3>Chicago</h3>
-						<p>Thank you, Chicago - A night we won't forget.</p>
+						이미지 설명dd
 					</div>
 				</div>
 
 				<div class="item">
-					<img src="la.jpg" alt="Los Angeles" width="1200" height="700">
+					<img src="hh.jpg" alt="이미지 설명" width="1200" height="700">
 					<div class="carousel-caption">
-						<h3>LA</h3>
-						<p>Even though the traffic was a mess, we had the best time
-							playing at Venice Beach!</p>
+						이미지 설명
 					</div>
 				</div>
 			</div>
@@ -375,51 +485,6 @@ function topFunction() {
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-		<!-- <div class="container" style="height: 30%; width:100%">
-			<h2>Carousel Example</h2>
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-
-					<div class="item active">
-						<img src="la.jpg" alt="image1" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 첫 번째</h3>
-							<p>11111</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img src="chicago.jpg" alt="image2" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 두 번째</h3>
-							<p>22222</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img src="ny.jpg" alt="image3" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 세 번째</h3>
-							<p>33333</p>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" href="#myCarousel"
-					data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#myCarousel"
-					data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right"></span> <span
-					class="sr-only">Next</span>
-				</a>
-			</div>
-		</div> -->
 	</fieldset>
 	<fieldset>
 		<legend>최근 들어온 책</legend>
@@ -434,9 +499,5 @@ function topFunction() {
 		<legend>Q&A</legend>
 		혜신누나가 하셨는데 어떻게 들어가야하는지 아직 모름
 	</fieldset>
-	<fieldset>
-		<legend>풋터</legend>
-	</fieldset>
-
 </body>
 </html> 

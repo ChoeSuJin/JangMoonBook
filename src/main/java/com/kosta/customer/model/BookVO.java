@@ -79,4 +79,5 @@ public class BookVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
 }

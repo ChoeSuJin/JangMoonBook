@@ -9,4 +9,6 @@ public interface BookDAO {
 	public List<BookVO> bookTypeSearchDao(BookVO vo);
 	public BookVO bookOneSearchDao(BookVO vo);
 	public void bookWrite(BookVO vo);
+	public List<BookVO> usedSelectDao(BookVO vo);
+	
 }

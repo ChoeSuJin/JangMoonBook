@@ -22,10 +22,5 @@ public class UsedBookController {
 		return "registerForUsedBooks/usedWriteForm";
 	}
 	/*HttpServletRequest request*/
-	@RequestMapping("/usedWrite")
-	public String write(BookVO vo, Model model) {
-		UsedBookDAO usedBookDAO = sqlSession.getMapper(UsedBookDAO.class);
-		usedBookDAO.writeDao(vo);
-		return "redirect:../book/";
-	}
+	
 }

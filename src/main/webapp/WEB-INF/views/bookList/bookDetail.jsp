@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-µðÅ×ÀÏ ÆäÀÌÁö
+ë””í…Œì¼ íŽ˜ì´ì§€
 	<table>
 		<tr>
-			<td>Á¦¸ñ</td>
-			<td>°¡°Ý</td>
-			<td>ÀúÀÚ</td>
-			<td>ÃâÆÇ</td>
-			<td>Å¸ÀÔ</td>
-			<td>¹øÈ£</td>
-			<td>Ä«Å×</td>
+			<td>ì œëª©</td>
+			<td>ê°€ê²©</td>
+			<td>ì €ìž</td>
+			<td>ì¶œíŒ</td>
+			<td>íƒ€ìž…</td>
+			<td>ë²ˆí˜¸</td>
+			<td>ì¹´í…Œ</td>
 		</tr>
 		<tr>
 			<td>${list.title }</td>

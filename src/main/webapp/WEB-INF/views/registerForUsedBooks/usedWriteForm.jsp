@@ -1,19 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>used book write form</title>
 </head>
 <body>
-	<form action="usedWrite.do" method="post">
-		Å¸ÀÌÆ² <input type="text" name="title" /><br>
-		ÇÁ¶óÀÌ½º <input type="text" name="price" /><br>
-		ÀúÀÚ <input type="text" name="author" /><br>
-		ÃâÆÇ»ç <input type="text" name="publisher" /><br>
-		Ä«Å×°í¸® <input type="text" name="category" />
-		<input type="submit" value="ok">
+	
+	ë“±ë¡í•˜ì‹¤ ì±…ì„ ìž…ë ¥í•˜ì„¸ì—¬
+	<form action="bookTypeSearch" method="post">
+		<input type="text" name="title">
+		<input type="hidden" name="type" value="usedSelect">
+		<input type="submit" value="ok"> 
 	</form>
 </body>
 </html>
