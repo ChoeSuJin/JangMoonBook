@@ -136,8 +136,9 @@ public class ManageEbookController {
 		
 		data.put("list", list);
 		data.put("block", map.get("Block"));
-		data.put("block", Integer.parseInt(map.get("Block")) * 3 - 2);
-		
+		data.put("page", Integer.parseInt(map.get("Block")) * 3 - 2);
+		System.out.println("send Block =" + map.get("Block"));
+		System.out.println("send page = " + (Integer.parseInt(map.get("Block")) * 3 - 2));
 		
 		return data;
 	}

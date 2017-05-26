@@ -20,10 +20,20 @@
 
 	$(document).ready(function() {
 		$(".orgList").hide();
+		$(".org_page").hide();
+		$(".next").hide();
+		$(".previous").hide();
 		var org_currentPage = <c:out value="${org_currentPage}" />;
+		var org_currentBlock = <c:out value="${org_currentBlock}" />;
 		for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
     		$("#"+ (i+1) + "").show();
     	}
+		for(var i = (org_currentBlock - 1) * 3; i < (org_currentBlock) * 3; i++) {
+			$("#pg" + (i+1) + "").show();
+		}
+		
+		$("#next2").show();
+		
 	});
 
 	function getOrgList(ono) {
@@ -69,20 +79,16 @@ function movePage(block, page) {
             },
             success : function(data){
 
-            	$("#organList").trigger("create");
-            	
             	var org_currentPage = data.page;
             	var org_currentBlock = data.block;
             	var getList = data.list;
             	
-            	alert("org_currentPage = " + org_currentPage);
-            	alert("org_currentBlock = " + org_currentBlock);
 
             	$(".orgList").hide();
             	
             	for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
             		$("#"+ (i+1) + "").show();
-            		alert(i);
+            		
             	}
 
             }
@@ -102,10 +108,37 @@ function moveBlock(block) {
         },
         success : function(data){
         	
+        	$(".orgList").hide();
+    		$(".org_page").hide();
+    		$(".next").hide();
+    		$(".previous").hide();
         	var org_currentPage = data.page;
         	var org_currentBlock = data.block;
         	var contentPerPage = 3;
         	var getList = data.list;
+        	var allOrganBlock = <c:out value="${ allOrganBlock }" />;
+			var allOrganPage = <c:out value="${ allOrganPage }" />;
+			
+			
+			/* String->int 형변환 */
+			org_currentBlock *= 1;
+			org_currentPage *= 1;
+			allOrganBlock *= 1;
+			allOrganPage *= 1;
+			
+			if (allOrganBlock > org_currentBlock) {
+				$("#next"+ (org_currentBlock+1) + "").show();
+			}
+			if (org_currentBlock > 1) {
+				$("#previous"+ (org_currentBlock-1) + "").show();
+			}
+			
+			for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
+	    		$("#"+ (i+1) + "").show();
+	    	}
+			for(var i = (org_currentBlock - 1) * 3; i < (org_currentBlock) * 3; i++) {
+				$("#pg" + (i+1) + "").show();
+			}
 
         }
          
@@ -169,12 +202,6 @@ function moveBlock(block) {
 					<div id="organListPaging">
 					<tr>
 						<td colspan="4" style="text-align: center;">
-						<ul class="pager">
-						<c:if test="${ org_currentBlock > 1 }">
-						  <li class="previous"><a onclick ="moveBlock(${ org_currentBlock - 1 })">Previous</a></li>
-						</c:if>
-						</ul>
-						
 						<ul class="pagination">
 						
 						<c:if test="${ org_allCount < contentPerPage }">
@@ -183,17 +210,29 @@ function moveBlock(block) {
 						</c:if>
 						
 						<c:if test="${ org_allCount >= contentPerPage }">
-							<c:forEach var="page" begin="1" end="3">
-							
-							  <li><a onclick="movePage(${ org_currentBlock }, ${ (org_currentBlock - 1) * 3 + page })">${ (org_currentBlock - 1) * 3 + page }</a></li>
+
+						<c:forEach var="i" varStatus="status" begin="1" end="${allOrganPage }">
+							<li class="org_page" id="pg${ i }"><a onclick="movePage(${ org_currentBlock }, ${ (org_currentBlock - 1) * 3 + i })">${ (org_currentBlock - 1) * 3 + i }</a></li>
 						</c:forEach>
 						</c:if>
 						
 						</ul>
+						</td>
+						</tr>
+					<tr>
+						<td colspan="4" style="text-align: center;">
+						
 						<ul class="pager">
-							<c:if test="${ org_currentBlock < allOrganBlock }">
-						 		 <li class="next"><a onclick="moveBlock(${ org_currentBlock + 1 })">Next</a></li>
-						  	</c:if>
+						<c:forEach var="i" begin="2" end="${ allOrganBlock }">
+							 <li class="previous" id="previous${i -1 }"><a onclick ="moveBlock(${ i - 1 })">Previous</a></li>
+						</c:forEach>
+						</ul>
+						
+						<ul class="pager">
+							<c:forEach var="i" begin="1" end="${ allOrganBlock - 1}">
+								 <li class="next" id="next${ i+1 }"><a onclick="moveBlock(${ i + 1 })">Next</a></li>
+							</c:forEach>
+	 		
 						</ul>
 						</td>
 					</tr>
@@ -229,7 +268,7 @@ function moveBlock(block) {
 						</ul>
 						<ul class="pager">
 							<c:if test="${ currentBlock eq allBlock }">
-						  <li class="next"><a href="#">Next</a></li>
+						  <li class="next"><a onclick="">Next</a></li>
 						  	</c:if>
 						</ul>
 						</td>
