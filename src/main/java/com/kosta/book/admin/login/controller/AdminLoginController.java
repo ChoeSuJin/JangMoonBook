@@ -17,18 +17,17 @@ public class AdminLoginController {
 	
 	@Autowired
 	SqlSession sqlSession;
-	
+	//로그인 폼
 	@RequestMapping("/adminLoginForm.do")
 	public String loginForm() {
 		System.out.println("go loginForm");
 		
 		return "/admin/adminLogin";
 	}
-	
-	@RequestMapping("/adminMain.do")
+	//로그인 성공
+	@RequestMapping("/adminNav.do")
 	public String mainForm(Principal principal, HttpServletRequest request) {
-		
-		
+
 		String username = principal.getName();
 		System.out.println("username =" + username);
 		
@@ -38,14 +37,16 @@ public class AdminLoginController {
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("user", vo);
+		String main = "main";
+		request.setAttribute("main", main);
 		
-		return "/admin/adminMain";
+		return "/admin/adminNav";
 	}
-	
-	@RequestMapping("/fail.do")
-	public String fail() {
-		
-		return "AdminLoginFail";
+	//로그인 실패
+	@RequestMapping("/adminLoginError.do")
+	public String loginError(HttpServletRequest request){
+		String error = "error";
+		request.setAttribute("error", error);
+		return "/admin/adminLogin";
 	}
-	
 }

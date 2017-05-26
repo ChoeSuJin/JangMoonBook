@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- header -->
-<jsp:include page="../adminMain.jsp"/>
+<jsp:include page="../adminNav.jsp"/>
 <!-- header -->
 <div class="container">
   <ul class="nav nav-tabs">

@@ -7,6 +7,9 @@ public interface ManageEmployeeDAO {
 	public List<ManageEmployeeVO> selectAll(String branch);
 	public List<ManageEmployeeVO> selectByname(ManageEmployeeVO vo);
 	public void update(ManageEmployeeVO vo);
-	public void insert(ManageEmployeeVO vo);
 	public void delete(ManageEmployeeVO vo);
+	public void insertBronze(ManageEmployeeVO vo);
+	public void insertGold(ManageEmployeeVO vo);
+	public void insertPlatinum(ManageEmployeeVO vo);
+	public void insertDiamond(ManageEmployeeVO vo);
 }
