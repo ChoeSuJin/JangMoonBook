@@ -1,5 +1,5 @@
 
--- °èÁ¤ »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create user book identified by oracle;
 
 grant resource, connect to book;
@@ -18,12 +18,28 @@ create table Customer (
   id varchar2(20),
   pwd varchar2(20),
   customerClass varchar2(20),
+<<<<<<< HEAD
+=======
+  zipcode varchar2(10),
+>>>>>>> origin/hun3
   address1 varchar2(200),
   address2 varchar2(200),
-  zipcode varchar2(10),
   email varchar2(100),
   phone varchar2(11)
 );
+
+create table board(
+    bno number not null,
+    title varchar2(200) not null,
+    content varchar2(4000),
+    writer varchar2(50),
+    regdate date default sysdate,
+    viewcnt number default 0,
+    primary key(bno)
+
+);
+create sequence bno_seq;
+
 
 create table Employee (
   empNo number,
