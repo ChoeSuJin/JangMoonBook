@@ -29,7 +29,7 @@
 	</insert>
 	
 	<insert id="newBookInsert">
-		insert into Book_info values('${title}', '${price}', '${author}', '${publisher}', '${type}', '${isbn}', '${category}')
+		insert into Book_info values('${title}', '${price}', '${author}', '${publisher}', '${type}', '${isbn}', '${category}', '${image}')
 	</insert>
 	
 	<update id="orderConfirm">

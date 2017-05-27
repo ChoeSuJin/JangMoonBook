@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.1.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
@@ -23,10 +23,13 @@
 			password-parameter="password"
 			login-processing-url="/j_spring_security_check"
 			login-page="/adminloginForm.do"
-			default-target-url="/adminMain.do"
-			
+			authentication-failure-url="/adminLoginError.do?error"
+			default-target-url="/adminNav.do"
 		/>
-		
+		<security:logout 
+			logout-url="/j_spring_security_logout"
+			logout-success-url="/adminLoginForm.do"
+			invalidate-session="true" /> <!--세션 무효화-->
 	</security:http>
 
 	<security:authentication-manager>

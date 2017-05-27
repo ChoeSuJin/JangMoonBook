@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.customer.model.NoticeDAO">
+	<select id="listDao" resultType="com.kosta.customer.model.NoticeVO">	
+		SELECT * FROM NOTICE ORDER BY TITLE DESC
+	</select>
+	<insert id="writeDao">
+		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{param1}, SYSDATE, BOARD_SEQ.NEXTVAL, #{param2})
+	</insert>
+	<delete id="deleteDao">
+		DELETE FROM NOTICE WHERE TITLE = #{param1}
+	</delete>
+	<select id="viewDao" resultType="com.kosta.customer.model.NoticeVO">	
+		SELECT * FROM NOTICE WHERE TITLE = #{param1}
+	</select>	
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeDAO">
+  	<select id="getList" resultType="com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeVO">
+  		select * from customerNotice
+  	</select>
+  	
+  	<insert id="regNotice">
+  		insert into customerNotice values(#{ title }, #{ contents }, SYSDATE, seq_customerNotice.nextval)
+  	</insert>
+  	
+  	
+  </mapper>
