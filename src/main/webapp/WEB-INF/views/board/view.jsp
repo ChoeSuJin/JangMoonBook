@@ -14,7 +14,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#btnList").click(function(){
-		location.href="${path}/board/list.do"
+		location.href=
+			"${path}/board/list.do?curPage=${curPage}"
+			+"&searchOption=${searchOption}"
+			+"&keyword=${keyword}";
 	});
 	$("#btnWrite").click(function(){
 		location.href="${path}/board/write.do"

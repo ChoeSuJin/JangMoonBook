@@ -16,11 +16,13 @@ public class BoardDAOImpl implements BoardDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<BoardVO> listAll(String searchOption,String keyword) throws Exception {
-		Map<String, String> map=
-				new HashMap<String, String>();
+	public List<BoardVO> listAll(int start, int end,String searchOption,String keyword) throws Exception {
+		Map<String, Object> map=
+				new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end",end);
 		
 		return sqlSession.selectList("board.listAll",map);
 	}

@@ -3,6 +3,7 @@ package com.kosta.board.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAOImpl boardDAO;
 	
 	@Override
-	public List<BoardVO> listAll(String searchOption,String keyword) throws Exception {
-		return boardDAO.listAll( searchOption, keyword);
+	public List<BoardVO> listAll(int start, int end,String searchOption,String keyword) throws Exception {
+		return boardDAO.listAll(start, end, searchOption, keyword);
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void increaseViewcnt(int bno) throws Exception {
+	public void increaseViewcnt(int bno,HttpSession session) throws Exception {
 		boardDAO.increaseViewcnt(bno);
 	}
 	
