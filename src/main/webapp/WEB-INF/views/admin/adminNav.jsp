@@ -49,7 +49,7 @@
 	  </sec:authorize>
 	  <sec:authorize access="hasAnyRole('ROLE_WRITER')">
 	  	<li><a href="mQNABoard.do">QnA게시판</a></li>
-	  	<li><a href="mCustomerBoard.do">고객공지사항관리</a></li>
+	  	<li><a href="mCustomerNotice.do">고객공지사항관리</a></li>
 	  </sec:authorize>
       </ul>
       <c:url value="/j_spring_security_logout" var="logoutUrl"/>
