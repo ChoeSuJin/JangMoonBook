@@ -13,30 +13,7 @@
 </head>
 <body>
 <br>
-<%-- <sec:authentication property="name" var="username"/>
-id = ${ username } <br> 
 
-<sec:authorize access="hasAnyRole('ROLE_GOLD')">
-<h3>매니저</h3><hr>
-<a href="mCustomer.do">고객관리</a>
-<a href="inventoryMain.do">재고관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
-<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
-<h3>지점장</h3><hr>
-<a href="salesMain.do">매출관리</a>
-<a href="mBranchInfo.do">지점관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
-<sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
-<h3>사장</h3><hr>
-<a href="salesMain.do">매출관리</a>
-<a href="mBranchInfo.do">지점관리</a>
-<a href="mCustomer.do">고객관리</a>
-<a href="inventoryMain.do">재고관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
---%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">

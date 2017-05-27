@@ -54,10 +54,10 @@
             	 var allPage = newVal.length;
             	 
             	$("#list1").html("");
-            	$("#list1").append("<th>isbn</th><th>title</th><th>company</th>");
+            	$("#list1").append("<th>isbn</th><th>title</th><th>company</th>").trigger("create");
 
             	for(var i = 0; i< newVal.length; i++) {
-        			$("#list1").append("<tr><td>"+ newVal[i].isbn +"</td><td>" + newVal[i].title + "</td><td>" + newVal[i].ono + "</td></tr>");
+        			$("#list1").append("<tr><td>"+ newVal[i].isbn +"</td><td>" + newVal[i].title + "</td><td>" + newVal[i].ono + "</td></tr>").trigger("create");
         		}
 
             }
