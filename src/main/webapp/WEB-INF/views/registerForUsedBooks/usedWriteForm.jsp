@@ -8,6 +8,8 @@
 </head>
 <body>
 	
+	
+	
 	등록하실 책을 입력하세여
 	<form action="bookTypeSearch" method="post">
 		<input type="text" name="title">

@@ -376,14 +376,9 @@ input[type=text]:focus {
 			</c:choose>
 		</fieldset>
 		<fieldset>
-			<legend>구입, 결제 내역</legend>
-		</fieldset>
-		<fieldset>
 			<legend>장바구니</legend>
+			<a href="${path}/cart/list.do">sfsfsf</a>
 		</fieldset>
-	</fieldset>
-	<fieldset>
-		<legend>마이페이지 장바구니, 구입, 결제 내역</legend>
 	</fieldset>
 	<fieldset>
 		<legend>중고책 등록</legend>
@@ -482,11 +477,6 @@ input[type=text]:focus {
 				</tr>
 			</c:forEach>
 		</table>
-	</fieldset>
-	<fieldset>
-		<legend>추천 책</legend>
-		일단 보류<br> 방법은 2가지가 있음<br> 1. 이벤트 형식으로 Manager가 입력<br>
-		2. 월 단위 구매 횟수가 많은 순서대로 정렬
 	</fieldset>
 	<fieldset>
 		<legend>Q&A</legend>

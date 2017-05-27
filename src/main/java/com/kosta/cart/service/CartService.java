@@ -10,8 +10,8 @@ public interface CartService {
 	public void delete(String isbn);
 	public void update(int cartno);
 	public int sumMoney(String id);
-	public int countCart(String id, String isbn);		//장바구니에 상품이 있는지 확인
-	public void updateCart(CartVO vo); //장바구니 수량 변경
+	public int countCart(String id, String isbn);		//�옣諛붽뎄�땲�뿉 �긽�뭹�씠 �엳�뒗吏� �솗�씤
+	public void updateCart(CartVO vo); //�옣諛붽뎄�땲 �닔�웾 蹂�寃�
 	public void modifyCart(CartVO vo);
 	
 	//public List<CartVO> cartMoney();

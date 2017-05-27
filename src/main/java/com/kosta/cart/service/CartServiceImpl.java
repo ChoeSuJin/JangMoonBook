@@ -58,7 +58,6 @@ public class CartServiceImpl implements CartService {
 	public void modifyCart(CartVO vo) {
 		cartDAO.modifyCart(vo); 
 	}
-	
 	/*
 	 
 

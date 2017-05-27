@@ -31,14 +31,14 @@ public class CartController {
 		
 		int sumMoney=cartService.sumMoney(id);
 		
-		//배송료(3만원 이상=>무료, 미만=>2500원)
+		//諛곗넚猷�(3留뚯썝 �씠�긽=>臾대즺, 誘몃쭔=>2500�썝)
 		int fee =sumMoney>=30000 ? 0 : 2500;
 		
 		map.put("list", list);
 		map.put("count", list.size());
-		map.put("sumMoney", sumMoney);	//합계
-		map.put("fee", fee);	//배송비
-		map.put("sum", sumMoney + fee);	// 총합계 (합계 + 배송비)
+		map.put("sumMoney", sumMoney);	//�빀怨�
+		map.put("fee", fee);	//諛곗넚鍮�
+		map.put("sum", sumMoney + fee);	// 珥앺빀怨� (�빀怨� + 諛곗넚鍮�)
 		mav.setViewName("cart/cart_list");
 		mav.addObject("map", map);
 		return mav;
@@ -48,11 +48,10 @@ public class CartController {
 	public String insert(
 			@ModelAttribute CartVO vo
 			, HttpSession session) {
-		String id=
-				(String)session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		vo.setId(id);
 		
-		// 장바구니에 기존 상품이 있는지 확인-- 없으면 insert , 있으면 update
+		// �옣諛붽뎄�땲�뿉 湲곗〈 �긽�뭹�씠 �엳�뒗吏� �솗�씤-- �뾾�쑝硫� insert , �엳�쑝硫� update
 		int count=cartService.countCart(id, vo.getIsbn());
 		if(count==0){
 			cartService.insert(vo);

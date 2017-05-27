@@ -25,12 +25,9 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public void insert(CartVO vo) {
 		sqlSession.insert("cart.insert",vo);
-		
 	}
-
 	@Override
 	public void delete(String isbn) {
-		
 		sqlSession.delete("cart.delete", isbn);
 	}
 
@@ -67,7 +64,7 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	
-	
+
 	
 	
 /*

@@ -10,7 +10,7 @@
 	<form action="usedWrite" method="post">
 		제목 : <input type="text" name="title" value="${book.title}" style="border: 0px;" readonly="readonly"><br>
 		내용<br>
-		<textarea rows="20" cols="50" name="comment">내용 입력</textarea><br>
+		<textarea rows="20" cols="50" name="comment" ></textarea><br>
 		프라이스 <input type="text" name="price" /><br>
 		저자 <input type="text" name="author" value="${book.author }" style="border: 0px;" readonly="readonly"><br>
 		isbn  <input type="text" name="isbn" value="${book.isbn }" style="border: 0px;" readonly="readonly"><br>

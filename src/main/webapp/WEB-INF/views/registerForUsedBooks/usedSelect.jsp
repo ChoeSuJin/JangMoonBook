@@ -22,6 +22,7 @@
 		</tr>
 			<c:forEach items="${list}" var="dto">
 				<tr>
+										
 					<td>이미지</td>
 					<td>
 						<a href="usedBookWrite?title=${dto.title}">${dto.title}</a>

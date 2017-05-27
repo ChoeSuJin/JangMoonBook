@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kosta.customer.model.UsedBookDAO">
 	<insert id="writeDao">
-		Insert into BOOK_INFO (TITLE,PRICE,AUTHOR,PUBLISHER,TYPE,ISBN,CATEGORY)
-		values (#{title}, #{price}, #{author} ,#{publisher} ,'중고도서',#{isbn} ,#{category})
+		Insert into BOOK_INFO (TITLE,PRICE,AUTHOR,PUBLISHER,TYPE,ISBN,CATEGORY, id, book)
+		values (#{title}, #{price}, #{author} ,#{publisher} ,'중고도서',#{isbn} ,#{category}, #{id}, SEQ_BOOK.NEXTVAL)
 	</insert>
 </mapper>

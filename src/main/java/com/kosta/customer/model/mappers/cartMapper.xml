@@ -8,18 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cart">
 
 	<insert id="insert">
-		insert into cart (cartno, id, isbn, title, price, amount)
-		values (cart_seq.nextval,#{id}, #{isbn},#{title},#{price},#{amount})
+		insert into cart (status, cartno, id, isbn, title, price, amount)
+		values (#{status}, cart_seq.nextval,#{id}, #{isbn},#{title},#{price},#{amount})
 	</insert>
 
 	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
-
-		select title, price, isbn, sum(amount) amount, sum(price*amount) money from cart where id=#{id} group by title, price, isbn
-
+		select title, price, isbn, sum(amount) amount, sum(price*amount) money from cart where id=#{id} and status = '장바구니' group by title, price, isbn
 	</select>
 
 	<select id="sumMoney" resultType="int">
-		select nvl(sum(price * amount) ,0) from cart
+		select nvl(sum(price * amount) ,0) from cart where status = '장바구니'
 	</select>
 
 	<delete id="delete">
@@ -39,16 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="modify">
 		update cart set amount=#{amount} where id=#{id} and isbn=#{isbn}
 	</update> 
-
-	<!-- 
-				
-		상품별 장바구니 금액 
-		<select id="cart_money" resultType="com.kosta.cart.model.CartVO"> 
-			select title, sum(price * amount) money from cart c, book_info b where c.isbn=b.isbn group by title order by title 
-		
-		</select> 
-		
-		-->
+	
 </mapper>
 
 
