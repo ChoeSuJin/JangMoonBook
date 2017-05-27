@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="reply">
+	<update id="update">
+		update reply
+			set replytext=#{replytext}
+			where rno=#{rno}
+	</update>
+
+	<delete id="delete">
+		delete from reply
+			where rno=#{rno}
+	</delete>
+
+	<select id="detail" resultType="com.kosta.board.model.ReplyVO">
+		select * from reply
+			where rno=#{rno}
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from reply
+			where bno=#{bno}
+	</select>
+
+	<insert id="insertReply">
+		insert into reply (rno,bno,replytext,replyer)
+			values (reply_seq.nextval, #{bno}, #{replytext},#{replyer})
+	</insert>
+
+	<select id="listReply" resultType="com.kosta.board.model.ReplyVO">
+		<include refid="paging_header" />
+		select rno,bno,replytext,replyer,id
+			,r.regdate,r.updatedate
+			,(select writer from board where bno=r.bno) writer
+			from reply r, customer c
+			where
+			r.replyer=c.id and bno=#{bno}
+			order by rno desc
+		<include refid="paging_footer" />
+	</select>
+
+	<sql id="paging_header">
+		select *
+			from (
+			select rownum as rn, A.*
+			from (
+	</sql>
+	<sql id="paging_footer">
+			) A
+			) where rn between #{start} and #{end}
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
