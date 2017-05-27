@@ -11,8 +11,36 @@
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script type="text/javascript">
 	function button_event() {
+		// 지점정보 수정 유효성 검사.
+		var form = document.updateForm;
+		if(form.master.value==""){
+			alert("지점장을 입력하세요.");
+			form.master.focus();
+			return false;
+		}
+		if(form.phone.value==""){
+			alert("연락처를 입력하세요.");
+			form.phone.focus();
+			return false;
+		}
+		if(form.time.value==""){
+			alert("영업시간을 입력하세요.");
+			form.time.focus();
+			return false;
+		}
+		if(form.address1.value==""){
+			alert("주소를 입력하세요.");
+			form.address1.focus();
+			return false;
+		}
+		if(form.address2.value==""){
+			alert("상세주소를 입력하세요.");
+			form.address2.focus();
+			return false;
+		}
+		
 		if (confirm("수정 하시겠습니까 ?")) { //확인
-			$('#update').submit();
+			$('#updateForm').submit();
 		} else { //취소
 			return false;
 		}
@@ -76,10 +104,10 @@
 			<table class="table table-condensed">
 				<tr><td>지점 명</td><td>${ branch.name }</td></tr>
 				<tr><td>지점 장</td><td>${ branch.master}</td></tr>
-				<tr><td>지점 번호</td><td>${ branch.phone }</td></tr>
+				<tr><td>지점 연락처</td><td>${ branch.phone }</td></tr>
 				<tr><td>지점 주소</td><td>${ branch.address1 } - ${ branch.address2 }</td></tr>
 				<tr><td>직원 수</td><td>${ empCount }</td></tr>
-				<tr><td>수익</td><td>${ branch.sales }</td></tr>
+				<tr><td>매출</td><td>${ branch.sales }</td></tr>
 				<tr><td>영업 시간</td><td>${ branch.time }</td></tr>
 			</table>
 			<hr>
@@ -87,37 +115,36 @@
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>지점정보 수정</h3><br>
-		<form action="mBranchInfoUpdate.do" method="post" id="update">
-			<c:forEach var="branch" items="${ branchInfo }">
-			<div class="input-group">
-				<span class="input-group-addon" style="width:100px;height:40px;">지점장</span> 
-				<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-					   name="master" value="${ branch.master }">
-			</div>
-			<div class="input-group">
-				<span class="input-group-addon" style="width:100px;height:40px;">번호</span> 
-				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
-					   name="phone" value="${ branch.phone }">
-			</div>
-			
-			<div class="input-group">
-						<input type="button" class="btn btn-default" onclick="sample6_execDaumPostcode()" value="주소 검색"><br>
-						<input style="width:300px;height:40px;" id="sample6_address" type="text" class="form-control"
-							   name="address1" placeholder="주소">
-						<input style="width:300px;height:40px;" id="sample6_address2" type="text" class="form-control"
-							   name="address2" placeholder="상세주소">
-			</div>
-			
-			<div class="input-group">
-				<span class="input-group-addon" style="width:100px;height:40px;">운영시간</span> 
-				<input style="height:40px;width:300px;" id="msg"	type="text" class="form-control" 
-					   name="time" value="${ branch.time }">
-			</div>
-			<input type="hidden" name="name" value="${ branch.name }">
-			<input style="width:400px;" class="btn btn-default" type="button"
-				   value="수정" onclick="button_event();">
-			</c:forEach>
-		</form>
+      	<c:forEach var="branch" items="${ branchInfo }">
+	        <div class="col-md-6 col-md-offset-3">
+	          <form action="mBranchInfoUpdate.do" method="post" id="updateForm" name="updateForm">
+	            <div class="form-group">
+	              <label for="master">지점장</label>
+	              <input type="text" class="form-control" name="master" id="msg" value="${ branch.master }">				  
+	            </div>
+	            <div class="form-group">
+	              <label for="phone">연락처</label>
+	              <input type="text" class="form-control" name="phone" id="msg" value="${ branch.phone }">
+	            </div>
+	            <div class="form-group">
+	              <label for="time">영업시간</label>
+	              <input type="text" class="form-control" name="time"  id="InputPassword2" value="${ branch.time }">	           
+	            </div>
+	            <div class="form-group">
+	              <label for="address">
+	              	<input type="button" class="btn btn-default" onclick="sample6_execDaumPostcode()" value="주소 검색">
+	              </label>
+	              <input type="text" name="address1" class="form-control" id="sample6_address" value="${ brnach.address1 }">
+	              <input type="text" name="address2" class="form-control" id="sample6_address2" value="${ brnach.address2 }">
+	            </div>
+	            <input type="hidden" name="name" value="${ branch.name }">
+	            <div class="form-group text-center">
+	              <input type="button" class="btn btn-default" value="수정" 
+	              		 onclick="button_event();" style="float:right;width:80px;">
+	            </div>
+	          </form>
+	        </div>
+	    </c:forEach>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@
         <li><a href="mCustomer.do">고객관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
-	  	<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
+	  <sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
         <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="mSales.do">매출관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
