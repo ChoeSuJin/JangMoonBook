@@ -4,20 +4,20 @@ import java.util.Date;
 
 public class CustomerNoticeVO {
 	
-	private String title, contents;
+	private String title, content;
 	private Date regDate;
-	private int ArticleNumber;
+	private int articleNumber;
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -26,12 +26,11 @@ public class CustomerNoticeVO {
 		this.regDate = regDate;
 	}
 	public int getArticleNumber() {
-		return ArticleNumber;
+		return articleNumber;
 	}
 	public void setArticleNumber(int articleNumber) {
-		ArticleNumber = articleNumber;
+		this.articleNumber = articleNumber;
 	}
-	
 	
 	
 

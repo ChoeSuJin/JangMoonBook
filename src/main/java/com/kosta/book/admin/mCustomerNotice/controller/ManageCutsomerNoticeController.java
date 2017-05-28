@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeDAO;
+import com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeVO;
 
 @Controller
 public class ManageCutsomerNoticeController {
@@ -25,10 +26,26 @@ public class ManageCutsomerNoticeController {
 		
 		List list = dao.getList();
 		
+		for (int i = 0; i < list.size(); i++) {
+			
+			System.out.println(list.get(i));
+		}
+		
 		mav.addObject("list", list);
 		
 		mav.setViewName("/admin/manage/mCustomerNotice");
 		return mav;
+		
+	}
+	
+	@RequestMapping("regCustomerNotice.do")
+	public String RegCustomerNotice(CustomerNoticeVO vo) {
+		
+		CustomerNoticeDAO dao = sqlSession.getMapper(CustomerNoticeDAO.class);
+		
+		dao.regNotice(vo);
+		
+		return "redirect:mCustomerNotice.do";
 		
 	}
 	
