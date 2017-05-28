@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.book.admin.mAdminNotice.model.AdminNoticeDAO">
+
+<insert id="regAdminNotice">
+	insert into AdminNotice values(seq_adminNotice.nextval, #{ writer }, #{ title }, #{ content }, sysdate)
+</insert>
+
+<select id="getAdminNotice" resultType="com.kosta.book.admin.mAdminNotice.model.AdminNoticeVO">
+	select * from AdminNotice
+</select>
+
+<delete id="deleteAdminNotice">
+	delete AdminNotice where num = #{ num }
+</delete>
+
+</mapper>
