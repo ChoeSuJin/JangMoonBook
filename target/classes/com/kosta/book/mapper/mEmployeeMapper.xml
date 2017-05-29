@@ -8,10 +8,22 @@
   		select * from employee where branch = #{branch} order by empno	
   	</select>
   	<select id="selectByname" resultType="com.kosta.book.admin.mEmployee.model.ManageEmployeeVO">
-  		select * from employee where name like '%' || #{name} || '%'
+  		select * from employee where name like '%' || #{name} || '%' and branch=#{branch} order by empno
   	</select>
-  	<insert id="insert">
-  		insert into employee values(#{empno}, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
+  	<insert id="insertBronze">
+  		insert into employee values(seq_empno_bronze.nextVal, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
+  									#{phone}, #{gender}, #{birth}, #{branch})
+  	</insert>
+  	<insert id="insertGold">
+  		insert into employee values(seq_empno_gold.nextVal, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
+  									#{phone}, #{gender}, #{birth}, #{branch})
+  	</insert>
+  	<insert id="insertPlatinum">
+  		insert into employee values(seq_empno_platinum.nextVal, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
+  									#{phone}, #{gender}, #{birth}, #{branch})
+  	</insert>
+  	<insert id="insertDiamond">
+  		insert into employee values(seq_empno_diamond.nextVal, #{pwd}, #{name}, #{empclass}, #{address1}, #{address2}, 
   									#{phone}, #{gender}, #{birth}, #{branch})
   	</insert>
   	<update id="update">

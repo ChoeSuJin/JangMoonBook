@@ -5,10 +5,15 @@
   
   <mapper namespace="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoDAO">
   	<select id="select" resultType="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoVO">
-  		select * from branch_info where name = #{name}	
+  		select * from branch_info where name = #{name}
   	</select>
-  	<select id="update" resultType="com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoVO">
+  	
+  	<select id="selectEmpCount" resultType="java.lang.Integer">
+  		select count(*) from employee where branch = #{name}
+  	</select>
+  	
+  	<update id="update">
   		update branch_info set master=#{master}, phone=#{phone}, address1=#{address1}, address2=#{address2},
   							   time=#{time} where name=#{name}
-  	</select>
+  	</update>
   </mapper>

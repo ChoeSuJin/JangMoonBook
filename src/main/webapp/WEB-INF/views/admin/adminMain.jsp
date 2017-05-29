@@ -13,30 +13,7 @@
 </head>
 <body>
 <br>
-<%-- <sec:authentication property="name" var="username"/>
-id = ${ username } <br> 
 
-<sec:authorize access="hasAnyRole('ROLE_GOLD')">
-<h3>매니저</h3><hr>
-<a href="mCustomer.do">고객관리</a>
-<a href="inventoryMain.do">재고관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
-<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
-<h3>지점장</h3><hr>
-<a href="salesMain.do">매출관리</a>
-<a href="mBranchInfo.do">지점관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
-<sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
-<h3>사장</h3><hr>
-<a href="salesMain.do">매출관리</a>
-<a href="mBranchInfo.do">지점관리</a>
-<a href="mCustomer.do">고객관리</a>
-<a href="inventoryMain.do">재고관리</a>
-<a href="mEmployee.do">직원관리</a>
-</sec:authorize>
---%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -51,27 +28,28 @@ id = ${ username } <br>
       <ul class="nav navbar-nav">
       <sec:authorize access="hasAnyRole('ROLE_GOLD')">
         <li><a href="mCustomer.do">고객관리</a></li>
-        <li><a href="inventoryMainForm.do">재고관리</a></li>
+        <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
 	  	<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
-        <li><a href="salesMainForm.do">매출관리</a></li>
+        <li><a href="salesMain.do">매출관리</a></li>
         <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
       <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
-        <li><a href="salesMainForm.do">매출관리</a></li>
+        <li><a href="salesMain.do">매출관리</a></li>
         <li><a href="mBranchInfo.do">지점관리</a></li>
-        <li><a href="inventoryMainForm.do">재고관리</a></li>
+        <li><a href="inventoryMain.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
+        <li><a href="mEbook.do">ebook</a></li>
 	  </sec:authorize>
+	  
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </div>
 </nav>
-
 </body>
 </html>

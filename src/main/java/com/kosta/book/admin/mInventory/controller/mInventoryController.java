@@ -1,5 +1,7 @@
 package com.kosta.book.admin.mInventory.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.login.model.EmployeeVO;
@@ -23,7 +27,7 @@ public class mInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("inventoryMainForm.do")
+	@RequestMapping("mInventory.do")
 	public ModelAndView inventoryMainForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
@@ -39,7 +43,7 @@ public class mInventoryController {
 		List list2 = dao.selectNormal(branch);
 		List list3 = dao.selectOrderList(branch);
 		
-		mav.setViewName("/admin/mInventory/inventoryMain");
+		mav.setViewName("/admin/manage/mInventory");
 		mav.addObject("list", list);
 		mav.addObject("list2", list2);
 		mav.addObject("list3", list3);
@@ -56,14 +60,13 @@ public class mInventoryController {
 		// cost, publisher를 얻는 쿼리문을 작성하여 set 메소드에 입력
 		
 		
-		
 		// 날짜처리 => db에서 sysdate로 처리했읍니다
 		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
 		dao.insertOrderList(vo);
-		return "redirect:inventoryMainForm.do";
+		return "redirect:mInventory.do";
 		
 	}
 	
@@ -80,19 +83,38 @@ public class mInventoryController {
 		dao.deleteOrder(vo);
 		
 		
-		return "redirect:inventoryMainForm.do";
+		return "redirect:mInventory.do";
 	}
 	
 	@RequestMapping("insertNewBook.do")
-	public String newBookInsert(BookInfoVO vo) {
+	public String newBookInsert(BookInfoVO vo, HttpServletRequest request) throws IOException {
 		
 		System.out.println("insertNewBook.do");
 		
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
-		dao.newBookInsert(vo);
 		
+		System.out.println("title = " + vo.getTitle());
+		CommonsMultipartFile file = vo.getFile();
+		System.out.println("image name = " + file.getName());
 		
-		return "redirect:inventoryMainForm.do";
+		if (file != null) {
+			String fname = file.getOriginalFilename();
+			String path = request.getServletContext().getRealPath("/bookinfo");
+			String fullPath = path + "\\" + fname;
+			System.out.println("path = " + path);
+			if (!fname.equals("")) {
+				
+				FileOutputStream fs = new FileOutputStream(fullPath);
+				fs.write(file.getBytes());
+				fs.close();
+				
+			}
+			vo.setImage(fname);
+			dao.newBookInsert(vo);
+					
+		}
+		
+		return "redirect:mInventory.do";
 	}
 
 }
