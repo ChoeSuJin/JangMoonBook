@@ -1,5 +1,7 @@
 package com.kosta.book.admin.mInventory.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.login.model.EmployeeVO;
@@ -83,13 +87,32 @@ public class mInventoryController {
 	}
 	
 	@RequestMapping("insertNewBook.do")
-	public String newBookInsert(BookInfoVO vo) {
+	public String newBookInsert(BookInfoVO vo, HttpServletRequest request) throws IOException {
 		
 		System.out.println("insertNewBook.do");
 		
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
-		dao.newBookInsert(vo);
 		
+		System.out.println("title = " + vo.getTitle());
+		CommonsMultipartFile file = vo.getFile();
+		System.out.println("image name = " + file.getName());
+		
+		if (file != null) {
+			String fname = file.getOriginalFilename();
+			String path = request.getServletContext().getRealPath("/bookinfo");
+			String fullPath = path + "\\" + fname;
+			System.out.println("path = " + path);
+			if (!fname.equals("")) {
+				
+				FileOutputStream fs = new FileOutputStream(fullPath);
+				fs.write(file.getBytes());
+				fs.close();
+				
+			}
+			vo.setImage(fname);
+			dao.newBookInsert(vo);
+					
+		}
 		
 		return "redirect:mInventory.do";
 	}

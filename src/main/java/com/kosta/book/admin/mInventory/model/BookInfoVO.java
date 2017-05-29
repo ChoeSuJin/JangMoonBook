@@ -1,9 +1,13 @@
 package com.kosta.book.admin.mInventory.model;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class BookInfoVO {
 	
-	private String title, author, publisher, type, isbn, category;
+	private String title, author, publisher, type, isbn, category, image;
 	private int price;
+	private CommonsMultipartFile file;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -46,7 +50,18 @@ public class BookInfoVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
 	
 	
 

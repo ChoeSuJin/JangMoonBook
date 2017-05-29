@@ -1,5 +1,5 @@
 
--- °èÁ¤ »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create user book identified by oracle;
 
 grant resource, connect to book;
@@ -18,12 +18,28 @@ create table Customer (
   id varchar2(20),
   pwd varchar2(20),
   customerClass varchar2(20),
+<<<<<<< HEAD
+=======
+  zipcode varchar2(10),
+>>>>>>> origin/hun3
   address1 varchar2(200),
   address2 varchar2(200),
-  zipcode varchar2(10),
   email varchar2(100),
   phone varchar2(11)
 );
+
+create table board(
+    bno number not null,
+    title varchar2(200) not null,
+    content varchar2(4000),
+    writer varchar2(50),
+    regdate date default sysdate,
+    viewcnt number default 0,
+    primary key(bno)
+
+);
+create sequence bno_seq;
+
 
 create table Employee (
   empNo number,
@@ -97,12 +113,47 @@ create table Salary(
   account varchar2(40)
 );
 
+create table board(
+    bno number not null,
+    title varchar2(200) not null,
+    content varchar2(4000),
+    writer varchar2(50),
+    regdate date default sysdate,
+    viewcnt number default 0,
+    primary key(bno)
+
+);
+
+create table notice(
+  title varchar2(50) not null,
+  content varchar2(3000) not null,
+  regDate DATE,
+  ArticleNumber number
+);
+
 create table ebook_organ(
   ono number,
-  opwd varchar2(50),
+  opwd varchar2(20),
   oname varchar2(50),
   deadline varchar2(70),
   type varchar2(50)
+);
+
+create table ebook_distList(
+  ISBN number,
+  title varchar2(50),
+  com varchar2(50)
+);
+
+create table ebook_reqList(
+  ebook_reqNo number,
+  isbn varchar2(50),
+  title varchar2(50),
+  com varchar2(50)
+);
+create table ebook_extendReqList(
+  ono number,
+  extendDate varchar2(20)
 );
 
 create table ebook_reqList(
@@ -119,3 +170,6 @@ create table ebook_distList(
 -- Sequence
 create sequence orderNumber;	//	Àç°í ÁÖ¹®¿¡ ÇÊ¿äÇÑ ÁÖ¹®¹øÈ£
 create sequence salenumber;		//  °í°´µéÀÇ ÁÖ¹®¿¡ ´ëÇÑ ÁÖ¹®¹øÈ£ ºÎ¿©
+create sequence bno_seq;
+create sequence orgno;
+create sequence ebook_reqNo;

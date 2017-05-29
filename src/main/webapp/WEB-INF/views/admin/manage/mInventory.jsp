@@ -13,7 +13,7 @@
 	<script type="text/javascript">
 		function button_event() {
 			if (confirm("등록 하시겠습니까 ?")) { //확인
-				$('#update').submit();
+				$('#insert').submit();
 			} else { //취소
 				return false;
 			}
@@ -160,7 +160,7 @@
 			<div id="newBookInsert" class="tab-pane fade">
 				<h3>신책 등록</h3>
 				<br>
-				<form action="insertNewBook.do" method="post">
+				<form action="insertNewBook.do" method="post" id="insert" enctype="multipart/form-data">
 					<div class="input-group">
 						<span class="input-group-addon" style="width:100px;height:40px;">책 이름</span> 
 						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
@@ -196,7 +196,12 @@
 						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
 							   name="category" placeholder="Additional Info">
 					</div>
-					<input class="btn btn-default" style="width:400px;" type="button" value="등록하기" onclick="button_event();">
+					<div class="input-group">
+						<span class="input-group-addon" style="width:100px;height:40px;">이미지등록</span> 
+						<input style="height:40px;width:300px;" id="msg" type="file" class="form-control" 
+							   name="file" placeholder="Additional Info">
+					</div>
+					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기" onclick="button_event();">
 				</form>
 			</div>
 		
