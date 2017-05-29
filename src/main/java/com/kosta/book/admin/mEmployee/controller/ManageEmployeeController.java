@@ -22,16 +22,14 @@ public class ManageEmployeeController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping("/mEmployee.do")
-	public ModelAndView mEmployeeSelect(ManageEmployeeVO vo, HttpServletRequest request){
+	public ModelAndView mEmployee(ManageEmployeeVO vo, HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
-		
+		List<ManageEmployeeVO> list = null;
+		// session에 저장된 지점명 추출
 		HttpSession session = request.getSession();
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
-		String branch = user.getBranch();
-		
-		List<ManageEmployeeVO> list = null;
-		System.out.println(vo.getName());
+		String branch = user.getBranch();	
 		
 		if(vo.getName()!=null){	// 이름이 넘어오면 이름으로 검색 아니면 전체
 			vo.setBranch(branch);
@@ -75,25 +73,24 @@ public class ManageEmployeeController {
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
 		
 		HttpSession session = request.getSession();
-		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
-		String branch = user.getBranch();
+		System.out.println(vo.getBranch());
 		
 		String empclass = vo.getEmpclass(); //직급 별로 다른 시퀀스 부여 하기위함
 		
-		if(empclass.equalsIgnoreCase("BRONZE")){
+		if(empclass.equalsIgnoreCase("ROLE_BRONZE")){
 			dao.insertBronze(vo);	// 직원
-		}else if(empclass.equalsIgnoreCase("GOLD")){
+		}else if(empclass.equalsIgnoreCase("ROLE_GOLD")){
 			dao.insertGold(vo);		// 매니저
-		}else if(empclass.equalsIgnoreCase("PLATINUM")){
+		}else if(empclass.equalsIgnoreCase("ROLE_PLATINUM")){
 			dao.insertPlatinum(vo);	// 지점장
-		}else if(empclass.equalsIgnoreCase("DIAMOND")){
+		}else if(empclass.equalsIgnoreCase("ROLE_DIAMOND")){
 			dao.insertDiamond(vo);	// 본사 직원, 사장
 		}
 		
-		List<ManageEmployeeVO> list = dao.selectAll(branch);
+//		List<ManageEmployeeVO> list = dao.selectAll(branch);
+//		mav.addObject("employeeList", list);
 		
-		mav.addObject("employeeList", list);
-		mav.setViewName("/admin/manage/mEmployee");
+		mav.setViewName("redirect:mEmployee.do");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}

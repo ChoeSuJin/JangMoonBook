@@ -56,11 +56,6 @@ public class ManageBranchInfoController {
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		dao.update(vo);
 		
-		
-		
-		List<ManageBranchInfoVO> list = dao.select(vo.getName());
-		
-		mav.addObject("branchInfo", list);
 		mav.setViewName("redirect:mBranchInfo.do");
 		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
 		
