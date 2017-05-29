@@ -104,8 +104,7 @@ public class ManageEbookController {
 	}
 	
 	@RequestMapping("/movePage.do")
-	@ResponseBody
-	public HashMap<String, Object> moveOrganList(@RequestParam Map<String, String> map) {
+	public @ResponseBody HashMap<String, Object> moveOrganList(@RequestParam Map<String, String> map) {
 		
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
