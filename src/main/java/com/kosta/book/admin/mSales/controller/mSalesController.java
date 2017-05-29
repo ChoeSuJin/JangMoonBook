@@ -22,11 +22,11 @@ public class mSalesController {
 	SqlSession sqlSession;
 	
 	
-	@RequestMapping("salesMainForm.do")
+	@RequestMapping("mSales.do")
 	public ModelAndView salesMainForm(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("salesMainForm.do");
+		System.out.println("mSales.do");
 		
 		SalesListVO vo = new SalesListVO();
 		
@@ -42,8 +42,15 @@ public class mSalesController {
 		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
 		List list1 = dao.saleNewBook(vo);
 		List list2 = dao.saleUsedBook(vo);
-		int sumNew = dao.sumSaleNewBook(vo);
-		int sumUsed = dao.sumSaleUsedBook(vo);
+		String sumNew = dao.sumSaleNewBook(vo);
+		String sumUsed = dao.sumSaleUsedBook(vo);
+		
+		// ¾øÀ¸¸é -> 0 
+		if(sumNew==null){
+			sumNew = "0";
+		}else if(sumUsed==null){
+			sumUsed = "0";
+		}
 		
 		System.out.println("sumNew = " + sumNew);
 		
@@ -53,7 +60,7 @@ public class mSalesController {
 		mav.addObject("sumUsed", sumUsed);
 	
 		
-		mav.setViewName("/admin/mSales/SalesMain");
+		mav.setViewName("/admin/manage/mSales");
 		return mav;
 	}
 }

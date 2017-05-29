@@ -25,7 +25,8 @@ public class ManageBranchInfoController {
 	public ModelAndView mBranchInfo(HttpServletRequest request){
 		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
-			
+		ManageBranchInfoVO vo = new ManageBranchInfoVO();
+		
 		// Security Session에서 값을 가져옴
 		// String name = request.getParameter("branch");
 		HttpSession session = request.getSession();
@@ -35,10 +36,12 @@ public class ManageBranchInfoController {
 		
 		System.out.println("지점 명 : " + name);
 		
-		List<ManageBranchInfoVO> list = dao.select(name);
-		
+		List<ManageBranchInfoVO> list = dao.select(name); //지점정보
+		int empCount = dao.selectEmpCount(name);		  //지점별 직원수
+
+		mav.addObject("empCount", empCount);
 		mav.addObject("branchInfo", list);
-		mav.setViewName("mBranchInfo");
+		mav.setViewName("/admin/manage/mBranchInfo");
 		System.out.println("뷰 네임 : " + mav.getViewName());
 		
 		return mav;
@@ -46,14 +49,19 @@ public class ManageBranchInfoController {
 	
 	@RequestMapping("/mBranchInfoUpdate.do")
 	public ModelAndView mBranchInfo(ManageBranchInfoVO vo){
+		
+		System.out.println("name : " + vo.getName());
+		
 		ModelAndView mav= new ModelAndView();
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		dao.update(vo);
 		
+		
+		
 		List<ManageBranchInfoVO> list = dao.select(vo.getName());
 		
 		mav.addObject("branchInfo", list);
-		mav.setViewName("mBranchInfo");
+		mav.setViewName("redirect:mBranchInfo.do");
 		System.out.println("뷰 네임 : " + mav.getViewName());
 		
 		return mav;

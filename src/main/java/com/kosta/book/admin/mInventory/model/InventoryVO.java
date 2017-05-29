@@ -5,12 +5,21 @@ public class InventoryVO {
 	/*create table Inventory(
 			  isbn varchar2(100),
 			  title varchar2(20),
+			  author varchar2(40),
 			  quantity number,
 			  branch varchar2(20)
 			);*/
 	
-	private String isbn, title, branch;
+	private String isbn, title, branch, author;
 	private int quantity;
+	
+	
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	public String getIsbn() {
 		return isbn;
 	}
