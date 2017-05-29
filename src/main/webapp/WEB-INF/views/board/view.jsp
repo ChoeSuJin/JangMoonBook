@@ -46,6 +46,40 @@ $(document).ready(function(){
 		document.form1.action="${path}/board/update.do"
 		document.form1.submit();
 	});
+	$("#btnReply").click(function(){
+		var replytext=document.form1.replytext.value;
+		
+		if(replytext==""){
+			alert("답변을 입력하세요.")
+			document.form1.replytext.focus();
+			return;
+		}
+		
+		alert("답변이 등록되었습니다.")
+		document.form1.action="${path}/reply/insert.do"
+		document.form1.submit();
+
+	});	
+	$("#btnReplyDelete").click(function(){
+		if(confirm("답변을 삭제하시겠습니까?")){
+		document.form1.action="${path}/reply/delete.do";
+		document.form1.submit();
+		}
+	});
+	$("#btnReplyUpdate").click(function(){
+		
+		var replytext=document.form1.replytext.value;
+		
+		if(replytext==""){
+			alert("답변을 입력하세요.")
+			document.form1.replytext.focus();
+			return;
+		}
+		document.form1.action="${path}/reply/update.do"
+		document.form1.submit();
+	});
+	
+	
 	
 });
 </script>
@@ -85,6 +119,36 @@ $(document).ready(function(){
 		<button type = "button" id = "btnDelete">삭제하기</button>
 	</c:if>
 	</div>
+	
+	<div style="width:700px; text-align: center;">
+	<br>
+
+	<hr>
+	
+	<%-- <div> 관리자 답변
+	${dto.replytext}
+	
+	</div> 
+	 --%>
+	
+<%-- 
+		관리자아이디만 볼수있음!!!
+	
+	<c:if test="${sessionScope.id == 관리자 아이디 }">	
+		<textarea rows="5" cols="80" id="replytext" name="replytext" placeholder="댓글을 작성하세요"></textarea>
+		<br>
+		<button type="button" id="btnReply">댓글쓰기</button>&nbsp;
+		
+		<button type = "button" id ="btnReplyUpdate" name ="btnReplyUpdate">수정하기</button>&nbsp;
+		<button type = "button" id = "btnReplyDelete" name = "btnReplyDelete">삭제하기</button>&nbsp;
+	
+	</c:if>
+	 --%>
+	 
+</div>
 </form>
+
+
+
 </body>
 </html>

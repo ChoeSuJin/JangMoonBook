@@ -22,9 +22,7 @@ public class BoardController {
 
 	@Inject
 	BoardServiceImpl boardService;
-/*	@Inject
-	Pager pager;
-	*/
+
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(@RequestParam(defaultValue="1") int curPage,
 			@RequestParam(defaultValue="title") String searchOption, 
@@ -41,8 +39,7 @@ public class BoardController {
 		List<BoardVO> list = boardService.listAll(start, end, searchOption, keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
-		Map<String,Object> map=
-				new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("list", list);
 		map.put("count", count);
 		map.put("searchOption", searchOption);

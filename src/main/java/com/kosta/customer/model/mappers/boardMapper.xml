@@ -7,12 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "board">
 
 	<select id = "listAll" resultType="com.kosta.board.model.BoardVO">
-		<include refid="paging_header" />
-		select rownum , bno, title, content ,b.regdate, viewcnt, c.id 
-			from board b, customer c
-				<include refid="search" />
+		<include refid="paging_header" /> 
+		select rownum , bno, title, content ,regdate, viewcnt, writer       
+			from board
+			<include refid="search" />
 	        order by bno desc, regdate desc 
-	       		<include refid="paging_footer" />
+	       <include refid="paging_footer" />
 	</select>
 	
 	<insert id = "insert">
@@ -22,7 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<select id="viewBoard" resultType = "com.kosta.board.model.BoardVO">
-		select bno, title, content ,b.regdate, viewcnt, c.id, writer from board b, customer c where b.writer=c.id and bno = #{bno}
+		select bno, title, content ,b.regdate, viewcnt, c.id, writer 
+			from board b, customer c 
+		where b.writer=c.id and bno = #{bno}
 	</select>
 	
 	
@@ -40,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="countArticle" resultType="int">
-		select count(*) from board b, customer c
+		select count(*) from board
 		<include refid="search" />
 	</select>
 	
@@ -49,16 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="search">
 		<choose>
 			<when test="searchOption == 'all'">
-				where b.writer=c.id and
+				where
+			<!-- 	b.writer and c.id and -->
  				(  content like '%'||#{keyword}||'%'
    				 or title like '%'||#{keyword}||'%' )
 			</when>
 			<otherwise>
-				where b.writer=c.id and	
-				 ${searchOption} like 
+				where 
+			<!-- 	b.writer and c.id and -->
+				${searchOption} like 
 					'%'||#{keyword}||'%'
 			</otherwise>
-		</choose>	
+		</choose>
 	</sql>	
 	<sql id="paging_header">
 		select *

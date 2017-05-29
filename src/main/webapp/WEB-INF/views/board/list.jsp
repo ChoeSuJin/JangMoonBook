@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%@ include file="../session_check.jsp" %>
-<c:set var = "path" value = "${pageContext.request.contextPath}"></c:set>
+<%@ include file= "../session_check.jsp" %>
+<c:set var = "path" 	value ="${pageContext.request.contextPath}"></c:set>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 function list(page){
 	location.href=
-"${path}/board/list.do?curPage="+page+"&searchOption=${map.searchOption}"+"&keyword=${map.keyword}";
+"${path}/board/list.do?curPage=" + page + "&searchOption=${map.searchOption}" + "&keyword=${map.keyword}";
 }
 </script>
 </head>
@@ -30,9 +30,9 @@ function list(page){
 	<!-- 검색-->
 	<form name = "form1" method="post" action = "${path}/board/list.do">
 		<select name="searchOption">
-			 <option value="all" 	<c:out value="${map.searchOption=='all'?'selected':''}"/>	>내용+제목</option>
-			 <option value="content"<c:out value="${map.searchOption=='content'?'selected':''}"/>>내용</option>
-			 <option value="title"	<c:out value="${map.searchOption=='title'?'selected':''}"/> >제목</option>
+			 <option value="all" 		<c:out value="${map.searchOption=='all'?'selected':''}"/>	>내용+제목</option>
+			 <option value="content"	<c:out value="${map.searchOption=='content'?'selected':''}"/>	>내용</option>
+			 <option value="title"		<c:out value="${map.searchOption=='title'?'selected':''}"/> >제목</option>
 		</select>
 	<input name = "keyword" value="${map.keyword}">
 	<input type="submit" value="검색">
@@ -52,20 +52,20 @@ function list(page){
 			<th>조회수</th>
 		</tr>
 	<c:forEach var="row" items="${map.list}">
-  <c:choose>
+ <%--  <c:choose>
   	<c:when test="${row.show == 'y'}">
-  		<!-- show 컬럼이 y일 때 -->
+  		<!-- show 컬럼이 y일 때 --> --%>
 	  <tr>
 	  	<td>${row.bno}</td>
 	  	<td>
-	  		<a href="${path}/board/view.do?bno=${row.bno}&curPage=${map.pager.curPage}
-	&searchOption=${map.searchOption}&keyword=${map.keyword}">${row.title}</a>
-	  		<!-- 댓글 갯수 -->
+	  		<a href="${path}/board/view.do?bno=${row.bno}	&curPage=${map.pager.curPage}
+	&searchOption=${map.searchOption}	&keyword=${map.keyword}">${row.title}</a>
+	  		<%-- <!-- 댓글 갯수 -->
 	  		<c:if test="${row.cnt > 0}">
 	  		<span style="color:red;">( ${row.cnt} )</span>
-	  		</c:if>
+	  		</c:if> --%>
 	  	</td>
-	  	<td>${row.username}</td>
+	  	<td>${row.writer}</td>
 	  	<td>
 	<!-- value="날짜" pattern="출력형식" -->  	
 	<fmt:formatDate value="${row.regdate}"
@@ -73,14 +73,14 @@ function list(page){
 	  	</td>
 	  	<td>${row.viewcnt}</td>
 	  </tr>
-  	</c:when>
-  	<c:otherwise>
+  <%--  	</c:when>
+ 	<c:otherwise>
   		<!-- show 컬럼이 n일 때  -->
   	  <tr>
   	  	<td colspan="5" align="center">
 	  		<!-- 댓글 갯수 -->
 	  		<c:if test="${row.cnt > 0}">
-	  		<a href="${path}/board/view.do?bno=${row.bno}&curPage=${map.pager.curPage}
+	  		<a href="${path}/board/view.do?bno=${row.bno}	&curPage=${map.pager.curPage}
 	&searchOption=${map.searchOption}	&keyword=${map.keyword}">삭제된 게시물입니다.</a>
 	  		<span style="color:red;">( ${row.cnt} )</span>
 	  		</c:if>  	  		
@@ -88,7 +88,7 @@ function list(page){
   	  	</td>
   	  </tr>
   	</c:otherwise>
-  </c:choose>
+  </c:choose> --%>
 		</c:forEach>
 		<tr>
     <td colspan="5" align="center">
@@ -98,7 +98,7 @@ function list(page){
 <c:if test="${map.pager.curBlock > 1 }">
   <a href="javascript:list('${map.pager.prevPage}')">[이전]</a>
 </c:if>
-<c:forEach var="num" begin="${map.pager.blockBegin}"end="${map.pager.blockEnd}">
+<c:forEach var="num"  begin = "${map.pager.blockBegin}" end = "${map.pager.blockEnd}">
   <c:choose>
   	<c:when test="${num == map.pager.curPage}">
   	<!-- 현재 페이지이면 하이퍼링크 제거 -->

@@ -30,7 +30,6 @@ public class CustomerController {
 		return "/customer/login";	
 	}
 	
-	//濡쒓렇�씤�꽦怨� - 硫붿씤�럹�씠吏�
 	@RequestMapping("/customer/loginCheck.do")
 	public ModelAndView loginCheck(@ModelAttribute CustomerVO vo, HttpSession session){
 		boolean result = customerService.loginCheck(vo, session);
@@ -67,14 +66,13 @@ public class CustomerController {
 	@RequestMapping("/customer/write.do")
 	public String write(){
 		
-		return "customer/write"; //�솕硫닿��엯�뤌�쑝濡� �씠�룞
+		return "customer/write"; 
 	}
 	
-	// insert 泥섎━
+
 	@RequestMapping("/customer/insert.do")
 	public String insert(@ModelAttribute CustomerVO vo){	// CustomerVO 留ㅺ컻蹂��닔濡� 諛쏆쑝硫�, vo�뿉 媛믪씠 �뙎�엫
 		vo.setCustomerClass("silver");
-		System.out.println("커커커ㅓ커 : " + vo.getCustomerClass());
 		customerService.insertCustomer(vo);
 		return "redirect:/customer/list.do";
 	}
