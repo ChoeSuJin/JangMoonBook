@@ -1,8 +1,12 @@
 package com.kosta.pay.model;
 
+import com.kosta.cart.model.CartVO;
+
 public interface PayDAO {
 	
-	public void insert(PayVO vo) throws Exception;
-	public PayVO view(int orderno) throws Exception;
+	public void insertSaleList(CartVO vo);
+	public void insertGetDelivery(GetDeliveryVO vo);
+	public void minusInventory(CartVO vo);
+	public void updateDelivery(CartVO vo);
 
 }

@@ -25,21 +25,21 @@ public class BookController {
 	@Inject
 	CartServiceImpl cartServiceImpl;
 	
-	@RequestMapping("/bookSearch")
+	@RequestMapping("/bookSearch.do")
 	public String list(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("list", bookDAO.bookSearchDao(vo));
 		return "bookList/bookList";
 	}	
 	
-	@RequestMapping("/bookWrite")
+	@RequestMapping("/bookWrite.do")
 	public String write(BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		bookDAO.bookWrite(vo);
 		return "redirect:../book/";
 	}
 	
-	@RequestMapping("/bookTypeSearch")
+	@RequestMapping("/bookTypeSearch.do")
 	public String typeList(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		String link = "bookList/bookList";
@@ -54,27 +54,27 @@ public class BookController {
 		return link;
 	}
 	
-	@RequestMapping("/bookDetail")
+	@RequestMapping("/bookDetail.do")
 	public String bookDetail(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("list", bookDAO.bookOneSearchDao(vo));
 		return "bookList/bookDetail";
 	}
-	@RequestMapping("/usedSelect")
+	@RequestMapping("/usedSelect.do")
 	public String usedSelect(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("list", bookDAO.bookNoTypeSearchDao(vo));
 		return "registerForUsedBooks/usedSelect";
 	}
 	
-	@RequestMapping("/usedBookWrite")
+	@RequestMapping("/usedBookWrite.do")
 	public String usedBookWrite(Model model, BookVO vo, HttpSession session) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("book", bookDAO.bookOneSearchDao(vo));
 		model.addAttribute("id", session.getAttribute("id"));
 		return "registerForUsedBooks/usedWrite";
 	}
-	@RequestMapping("/usedWrite")
+	@RequestMapping("/usedWrite.do")
 	public String usedWrite(BookVO vo, HttpSession session) {
 		UsedBookDAO usedBookDAO = sqlSession.getMapper(UsedBookDAO.class);
 		vo.setId((String)session.getAttribute("id"));
@@ -83,7 +83,7 @@ public class BookController {
 	}
 	// 구매랑 장바구니 할꺼임
 	
-	@RequestMapping("/bookCart")
+	@RequestMapping("/bookCart.do")
 	public String bookCart(@ModelAttribute CartVO vo, HttpSession session) throws Exception{
 		if ((String)session.getAttribute("id")==null) {
 			System.out.println("아이디 입력 안함");

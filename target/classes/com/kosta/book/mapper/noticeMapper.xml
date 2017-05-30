@@ -5,13 +5,13 @@
 
 <mapper namespace="com.kosta.customer.model.NoticeDAO">
 	<insert id="noticeWrite">
-		INSERT INTO NOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, NOTICE_SEQ.NEXTVAL, #{content})
+		INSERT INTO customerNOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, NOTICE_SEQ.NEXTVAL, #{content})
 	</insert>
 	<select id="noticeList" resultType="com.kosta.customer.model.NoticeVO">	
-		SELECT * FROM NOTICE ORDER BY ARTICLENUMBER DESC
+		SELECT * FROM customerNOTICE ORDER BY ARTICLENUMBER DESC
 	</select>
 	<select id="detailView" resultType="com.kosta.customer.model.NoticeVO">	
-		SELECT * FROM NOTICE WHERE articleNumber = ${articleNumber}
+		SELECT * FROM customerNOTICE WHERE articleNumber = ${articleNumber}
 	</select>
 	
 </mapper>

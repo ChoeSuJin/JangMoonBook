@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.book.admin.mEbook.model.ManageEbookReqListVO;
 import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.book.organ.login.model.OrganLoginVO;
 import com.kosta.book.organ.mOrgan.model.ManageOrganDAO;
@@ -48,6 +49,8 @@ public class ManageOrganController {
 		int ono = ovo.getOno();
 		vo.setOno(ono);
 		
+		System.out.println(ono);
+		
 		//ebook_reqList에 등록(ebook 구매신청)
 		dao.ebookReq(vo);
 		List<BookInfoVO> ebookList = dao.ebookList();
@@ -69,7 +72,8 @@ public class ManageOrganController {
 		int ono = ovo.getOno();
 
 		//기관별 ebook 신청목록 가져오기
-		List<ManageOrganVO> eList = dao.ebookReqList(ono);
+		List<ManageEbookReqListVO> eList = dao.ebookReqList(ono);
+		
 		
 		mav.addObject("ebook_reqList", eList);
 		mav.setViewName("/organization/organReqList");

@@ -233,7 +233,7 @@ input[type=text]:focus {
 <div class="jumbotron" style="height: 200px;">
   <center>
   <p>어서오세요 장문Books입니다!</p>
-  <form action="bookTypeSearch" method="post">  
+  <form action="bookTypeSearch.do" method="post">  
 	<select name="type">
 		<option value="all">모두검색</option>
 	    <option value="국내도서">국내도서</option>
@@ -267,64 +267,64 @@ input[type=text]:focus {
 						<div id="menu1" class="tab-pane fade">
 							<h3>국내도서</h3>
 							<p>
-								<a href="bookSearch?type=국내도서&category=000">000번</a><br> <a
-									href="bookSearch?type=국내도서&category=100">100번</a><br> <a
-									href="bookSearch?type=국내도서&category=200">200번</a><br> <a
-									href="bookSearch?type=국내도서&category=300">300번</a><br> <a
-									href="bookSearch?type=국내도서&category=400">400번</a><br> <a
-									href="bookSearch?type=국내도서&category=500">500번</a><br> <a
-									href="bookSearch?type=국내도서&category=600">600번</a><br> <a
-									href="bookSearch?type=국내도서&category=700">700번</a><br> <a
-									href="bookSearch?type=국내도서&category=800">800번</a><br> <a
-									href="bookSearch?type=국내도서&category=900">900번</a><br>
+								<a href="bookSearch.do?type=국내도서&category=000">000번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=100">100번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=200">200번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=300">300번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=400">400번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=500">500번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=600">600번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=700">700번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=800">800번</a><br> <a
+									href="bookSearch.do?type=국내도서&category=900">900번</a><br>
 								<br>
 							</p>
 						</div>
 						<div id="menu2" class="tab-pane fade">
 							<h3>외국도서</h3>
 							<p>
-								<a href="bookSearch?type=외국도서&category=000">000번</a><br> <a
-									href="bookSearch?type=외국도서&category=100">100번</a><br> <a
-									href="bookSearch?type=외국도서&category=200">200번</a><br> <a
-									href="bookSearch?type=외국도서&category=300">300번</a><br> <a
-									href="bookSearch?type=외국도서&category=400">400번</a><br> <a
-									href="bookSearch?type=외국도서&category=500">500번</a><br> <a
-									href="bookSearch?type=외국도서&category=600">600번</a><br> <a
-									href="bookSearch?type=외국도서&category=700">700번</a><br> <a
-									href="bookSearch?type=외국도서&category=800">800번</a><br> <a
-									href="bookSearch?type=외국도서&category=900">900번</a><br>
+								<a href="bookSearch.do?type=외국도서&category=000">000번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=100">100번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=200">200번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=300">300번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=400">400번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=500">500번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=600">600번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=700">700번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=800">800번</a><br> <a
+									href="bookSearch.do?type=외국도서&category=900">900번</a><br>
 								<br>
 							</p>
 						</div>
 						<div id="menu3" class="tab-pane fade">
 							<h3>E-book</h3>
 							<p>
-								<a href="bookSearch?type=E-book&category=000">000번</a><br>
-								<a href="bookSearch?type=E-book&category=100">100번</a><br>
-								<a href="bookSearch?type=E-book&category=200">200번</a><br>
-								<a href="bookSearch?type=E-book&category=300">300번</a><br>
-								<a href="bookSearch?type=E-book&category=400">400번</a><br>
-								<a href="bookSearch?type=E-book&category=500">500번</a><br>
-								<a href="bookSearch?type=E-book&category=600">600번</a><br>
-								<a href="bookSearch?type=E-book&category=700">700번</a><br>
-								<a href="bookSearch?type=E-book&category=800">800번</a><br>
-								<a href="bookSearch?type=E-book&category=900">900번</a><br>
+								<a href="bookSearch.do?type=E-book&category=000">000번</a><br>
+								<a href="bookSearch.do?type=E-book&category=100">100번</a><br>
+								<a href="bookSearch.do?type=E-book&category=200">200번</a><br>
+								<a href="bookSearch.do?type=E-book&category=300">300번</a><br>
+								<a href="bookSearch.do?type=E-book&category=400">400번</a><br>
+								<a href="bookSearch.do?type=E-book&category=500">500번</a><br>
+								<a href="bookSearch.do?type=E-book&category=600">600번</a><br>
+								<a href="bookSearch.do?type=E-book&category=700">700번</a><br>
+								<a href="bookSearch.do?type=E-book&category=800">800번</a><br>
+								<a href="bookSearch.do?type=E-book&category=900">900번</a><br>
 								<br>
 							</p>
 						</div>
 						<div id="menu4" class="tab-pane fade">
 							<h3>중고도서</h3>
 							<p>
-								<a href="bookSearch?type=중고도서&category=000">000번</a><br> <a
-									href="bookSearch?type=중고도서&category=100">100번</a><br> <a
-									href="bookSearch?type=중고도서&category=200">200번</a><br> <a
-									href="bookSearch?type=중고도서&category=300">300번</a><br> <a
-									href="bookSearch?type=중고도서&category=400">400번</a><br> <a
-									href="bookSearch?type=중고도서&category=500">500번</a><br> <a
-									href="bookSearch?type=중고도서&category=600">600번</a><br> <a
-									href="bookSearch?type=중고도서&category=700">700번</a><br> <a
-									href="bookSearch?type=중고도서&category=800">800번</a><br> <a
-									href="bookSearch?type=중고도서&category=900">900번</a><br>
+								<a href="bookSearch.do?type=중고도서&category=000">000번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=100">100번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=200">200번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=300">300번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=400">400번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=500">500번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=600">600번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=700">700번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=800">800번</a><br> <a
+									href="bookSearch.do?type=중고도서&category=900">900번</a><br>
 								<br>
 							</p>
 						</div>
@@ -382,7 +382,7 @@ input[type=text]:focus {
 	</fieldset>
 	<fieldset>
 		<legend>중고책 등록</legend>
-		<a href="usedWriteForm">Go usedWriteForm</a>
+		<a href="usedWriteForm.do">Go usedWriteForm</a>
 	</fieldset>
 		
 	
@@ -390,8 +390,8 @@ input[type=text]:focus {
 	<fieldset>
 		<legend>공지</legend>
 		다시 만들것<br>
-		<a href="noticeWriteForm">쓰기</a><br>
-		<a href="noticeList">전체 공지 보기</a><br>
+		<a href="noticeWriteForm.do">쓰기</a><br>
+		<a href="noticeList.do">전체 공지 보기</a><br>
 
 		<table border="1">
 			<tr>
@@ -403,7 +403,7 @@ input[type=text]:focus {
 			<c:forEach items="${noticeList}" var="list" begin="0" end="4" step="1">
 				<tr>
 					<td>${list.articleNumber}</td>
-					<td><a href="detailView?articleNumber=${list.articleNumber}">${list.title}</a></td>
+					<td><a href="detailView.do?articleNumber=${list.articleNumber}">${list.title}</a></td>
 					<td>${list.content}</td>
 					<td>${list.regDate}</td>
 				</tr>
@@ -469,7 +469,7 @@ input[type=text]:focus {
 			</tr>
 			<c:forEach items="${bookInfoList}" var="list" begin="0" end="4" step="1">
 				<tr>
-					<td><a href="bookDetail?title=${list.title}">${list.title}</a></td>
+					<td><a href="bookDetail.do?title=${list.title}">${list.title}</a></td>
 					<td>이미지</td>
 					<td>${list.author}</td>
 					<td>${list.publisher}</td>
