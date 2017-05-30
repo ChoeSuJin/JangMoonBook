@@ -38,7 +38,7 @@ $(document).ready(function(){
 	
 	
 	${map.count}개의 게시물이 있습니다.
-	<table border = "1" width = "600px">
+	<table style="border: 1; width: 600px;">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>

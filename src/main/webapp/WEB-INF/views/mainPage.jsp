@@ -378,15 +378,107 @@ input[type=text]:focus {
 		<fieldset>
 			<legend>장바구니</legend>
 			<a href="${path}/cart/list.do">sfsfsf</a>
-		</fieldset>
+
+
+
+
+
+		<style type="text/css">
+#ribbon_bn {
+	padding: 0 30px;
+	max-height: 63px;
+	overflow: hidden;
+	position: relative;
+	background-color: transparent;
+}
+
+#ribbon_bn li {
+	display: none;
+}
+
+#ribbon_bn .bg2 {
+	background-color: transparent;
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 50%;
+}
+
+#ribbon_bn_in {
+	width: 950px;
+	margin: auto;
+	position: relative;
+}
+
+#ribbon_bn_in .btn_close {
+	position: absolute;
+	right: 6px;
+	top: 50%;
+	margin-top: -8px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	*overflow: visible;
+}
+
+#ribbon_bn_in .btn_close img {
+	width: 14px;
+	height: 14px;
+	padding: 1px;
+}
+</style>
+		<!-- 상단 띠배너 -->
+		<script type="text/javascript">
+			var date_server = 20170529; // 개발: 서버날짜
+		</script>
+		<div id="ribbon_bn">
+			<div class="bg2"></div>
+			<div id="ribbon_bn_in">
+				<ul>
+					<li data-start="20170529" data-end="20170604" data-color="#dfd7f7"
+						data-right="#ffe8fb"><img
+						src="http://image.kyobobook.co.kr/ink/images/prom/2017/banner/170525/bnL_w06.jpg"
+						alt="5월, 당신이 가장 좋아할 열 한가지 선물" usemap="#ribbonBnMap1" /> <map
+							name="ribbonBnMap1">
+							<!-- 링크 2개 RibbonBanner -->
+							<area shape="rect" coords="1,1,475,65"
+								href="http://www.kyobobook.co.kr/prom/2017/book/170516_event.jsp?orderClick=doy"
+								alt="매일 1천명 1천원 e-교환권X원형파우치 증정" />
+							<!-- 링크 2개 RibbonBanner -->
+							<area shape="rect" coords="476,1,950,65"
+								href="http://www.kyobobook.co.kr/eventRenewal/eventViewByPid.laf?eventPid=32717&classGb=KOR&orderClick=doz"
+								alt="한국작가 뉴 클래식 10 X 유리글래스 증정" />
+						</map></li>
+				</ul>
+				<button type="button" class="btn_close"
+					onclick="jQuery('#ribbon_bn').slideUp();">
+					<img
+						src="http://image.kyobobook.co.kr/ink/images/welcome/btn_close5.gif"
+						alt="닫기" />
+				</button>
+			</div>
+		</div>
+		<!-- *** //e:RibbonBanner *** -->
+		
 	</fieldset>
 	<fieldset>
 		<legend>중고책 등록</legend>
 		<a href="usedWriteForm">Go usedWriteForm</a>
 	</fieldset>
-		
 	
-	
+	<style type="text/css">
+	#ribbon_bn {padding:0 30px;max-height:63px;overflow:hidden;position:relative; background-color:transparent;}
+	#ribbon_bn li {display:none;}
+	#ribbon_bn .bg2 {background-color:transparent;position:absolute;right:0; height:100%;width:50%;}
+	#ribbon_bn_in {width:950px;margin:auto;position:relative;}
+	#ribbon_bn_in .btn_close {position:absolute;right:6px;top:50%;margin-top:-8px;border:none;background:transparent;cursor:pointer;width:16px;height:16px;padding:0; *overflow:visible;}
+	#ribbon_bn_in .btn_close img {width:14px;height:14px;padding:1px;}
+	</style>
+	<!-- *** //e:RibbonBanner 전용 Style *** -->
+<!-- 상단 띠배너 -->
 	<fieldset>
 		<legend>공지</legend>
 		다시 만들것<br>
@@ -446,13 +538,12 @@ input[type=text]:focus {
 			</div>
 
 			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" role="button"
-				data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel" role="button"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				<span class="sr-only">Next</span>
 			</a>
 		</div>

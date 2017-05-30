@@ -90,7 +90,7 @@ public class ManageEbookController {
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
 		ManageEbookOrganVO vo = new ManageEbookOrganVO();
 		vo.setOno(Integer.parseInt(ono));
-		List list = dao.getEbookList(vo);
+		List<ManageEbookListVO> list = dao.getEbookList(vo);
 		
 		for (int i = 0 ; i < list.size(); i++) {
 			ManageEbookListVO v = (ManageEbookListVO) list.get(i);
@@ -109,7 +109,7 @@ public class ManageEbookController {
 		
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
-		List list = dao.getEbookOrganList();
+		List<ManageEbookOrganVO> list = dao.getEbookOrganList();
 		
 		System.out.println(map.get("org_currentPage"));
 		System.out.println(map.get("org_currentBlock"));
@@ -129,7 +129,7 @@ public class ManageEbookController {
 		
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
-		List list = dao.getEbookOrganList();
+		List<ManageEbookOrganVO> list = dao.getEbookOrganList();
 		
 		System.out.println(map.get("Block"));
 		

@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.login.model.EmployeeVO;
 import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.book.admin.mInventory.model.InventoryDAO;
+import com.kosta.book.admin.mInventory.model.InventoryVO;
 import com.kosta.book.admin.mInventory.model.OrderListVO;
 
 @Controller
@@ -39,9 +39,9 @@ public class mInventoryController {
 		ModelAndView mav = new ModelAndView();
 		
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
-		List list = dao.selectEmergency(branch);
-		List list2 = dao.selectNormal(branch);
-		List list3 = dao.selectOrderList(branch);
+		List<InventoryVO> list = dao.selectEmergency(branch);
+		List<InventoryVO> list2 = dao.selectNormal(branch);
+		List<OrderListVO> list3 = dao.selectOrderList(branch);
 		
 		mav.setViewName("/admin/manage/mInventory");
 		mav.addObject("list", list);

@@ -37,7 +37,7 @@
 <body>
 <h2>로그인</h2>
 	<form name = "form1" method="post">
-		<table border = "1" width = "400px">
+		<table style="border: 1; widows: 400px;">
 			<tr>
 				<td>ID </td>
 				<td><input name = "id" id= "id"></td>

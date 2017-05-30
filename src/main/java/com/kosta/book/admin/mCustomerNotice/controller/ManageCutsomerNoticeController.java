@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeDAO;
+import com.kosta.book.admin.mCustomerNotice.model.CustomerNoticeVO;
 
 @Controller
 public class ManageCutsomerNoticeController {
@@ -23,7 +24,7 @@ public class ManageCutsomerNoticeController {
 		
 		CustomerNoticeDAO dao = sqlSession.getMapper(CustomerNoticeDAO.class);
 		
-		List list = dao.getList();
+		List<CustomerNoticeVO> list = dao.getList();
 		
 		mav.addObject("list", list);
 		
