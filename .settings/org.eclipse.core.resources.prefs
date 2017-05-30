@@ -2,11 +2,12 @@
 <<<<<<<=HEAD
 >>>>>>>=branch 'hyeshin' of https\://github.com/ChoeSuJin/JangMoonBook.git
 eclipse.preferences.version=1
+encoding//src/main/java/com/kosta/board/controller/BoardController.java=UTF-8
 encoding//src/main/java/com/kosta/cart/controller/CartController.java=UTF-8
 encoding//src/main/java/com/kosta/cart/model/CartDAO.java=UTF-8
 encoding//src/main/java/com/kosta/cart/model/CartVO.java=UTF-8
 encoding//src/main/java/com/kosta/cart/service/CartService.java=UTF-8
 encoding//src/main/java/com/kosta/customer/controller/BookController.java=UTF-8
-encoding//src/main/java/com/kosta/customer/controller/CustomerController.java=UTF-8
 encoding//src/main/java/com/kosta/customer/service/CustomerServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+encoding//src/main/webapp/resources/css/main.css=UTF-8

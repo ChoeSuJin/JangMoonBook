@@ -2,6 +2,7 @@ package com.kosta.customer.controller;
 
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,8 +26,32 @@ public class BookController {
 	@Inject
 	CartServiceImpl cartServiceImpl;
 	
-	@RequestMapping("/bookSearch")
+	@RequestMapping("/searchBook.do")
 	public String list(Model model, BookVO vo) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		model.addAttribute("list", bookDAO.searchBook(vo));
+		return "customer/orderBook";
+	}	
+	
+	@RequestMapping("/orderBook.do")
+	public String bookSearchByType(Model model, BookVO vo, HttpServletRequest request) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		vo.setType(request.getParameter("type"));
+		System.out.println("type : " + vo.getType());
+		model.addAttribute("list", bookDAO.orderBook(vo));
+		model.addAttribute("booktype", vo.getType());
+		return "customer/orderBook";
+	}	
+
+	@RequestMapping("/orderBookDetail.do")
+	public String bookDetail(Model model, BookVO vo) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		model.addAttribute("bookDetail", bookDAO.orderBookDetail(vo));
+		return "customer/orderBookDetail";
+	}
+	
+	@RequestMapping("/bookType.do")
+	public String bookType(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("list", bookDAO.bookSearchDao(vo));
 		return "bookList/bookList";
@@ -39,7 +64,7 @@ public class BookController {
 		return "redirect:../book/";
 	}
 	
-	@RequestMapping("/bookTypeSearch")
+	@RequestMapping("/bookTypeSearch.do")
 	public String typeList(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		String link = "bookList/bookList";
@@ -54,12 +79,6 @@ public class BookController {
 		return link;
 	}
 	
-	@RequestMapping("/bookDetail")
-	public String bookDetail(Model model, BookVO vo) {
-		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
-		model.addAttribute("list", bookDAO.bookOneSearchDao(vo));
-		return "bookList/bookDetail";
-	}
 	@RequestMapping("/usedSelect")
 	public String usedSelect(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
