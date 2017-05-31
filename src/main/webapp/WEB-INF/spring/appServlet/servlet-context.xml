@@ -43,7 +43,6 @@
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mapperLocations" value="classpath:com/kosta/book/mapper/*.xml" />
-		<beans:property name="configLocation" value = "classpath:/mybatis-config.xml"/>
 	</beans:bean>
 
 </beans:beans>

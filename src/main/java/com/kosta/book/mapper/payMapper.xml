@@ -3,11 +3,29 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace=" com.kosta.pay.model.PayDAO">
+<mapper namespace="com.kosta.pay.model.PayDAO">
 
 	<insert id="insertSaleList">
-		insert into salelist values(#{isbn}, #{title}, #{id}, #{price}, #{branch}, #{quantity}, #{date}, saleNumber.NEXTVAL);
+		insert into salelist values (#{isbn}, #{title}, #{id}, #{dPrice}, #{branchName}, #{quantity}, sysdate, saleNumber.NEXTVAL)
 	</insert>
+	
+	
+	<insert id="insertGetDelivery">
+	
+		insert into getDelivery values (#{orderno}, #{name}, #{zipcode}, #{address1}, #{address2}, sysdate, #{phone})
+	</insert>
+	
+	<update id="minusInventory" parameterType="com.kosta.cart.model.CartVO">
+		update inventory set quantity = quantity - #{amount} where isbn = ${isbn} and branch = 'online'
+	</update>
+	
+	<update id="updateDelivery">
+		update cart set status = '배송준비중' where id = #{ id }
+	</update>
+	
+	<select id="getOrderNo" resultType="integer">
+		select salenumber from salelist where id = #{ id } and TO_DATE(s_date,'YYYY-MM-DD') - TO_DATE(sysdate,'YYYY-MM-DD') = 0
+	</select>
 	
 	
 	

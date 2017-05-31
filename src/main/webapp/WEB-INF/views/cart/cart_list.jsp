@@ -16,23 +16,50 @@ $(document).ready(function(){
 	$("#btnList").click(function(){
 		location.href="${path}/bookList.do"
 	});
-	/* $("#btnPay").click(function(){
-		location.href="${path}/pay/orderForm.do"
-	}); */
 	var IMP = window.IMP; // 생략가능
 	IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	alert("${sessionScope.id}");
 	
 	
 });
 
+function sendCart() {
+	var cartCount = $("#lengthOfList").val();
+	for (var i = 0; i < cartCount; i++) {
+		var string = $("form[name=deliveryCart" + i + "]").serialize();
+		$.ajax( {
+			type:'POST',
+			url: '/book/pay/saleInsert.do',
+			data: string,
+			dataType : 'string',
+			success: function(data) {
+				alert(data);
+			}
+		})
+	}
+}
+
+function insertDelivery() {
+	var string = $("form[name=deliveryPay]").serialize();
+	$.ajax( {
+		type:'POST',
+		url: '/book/pay/deliveryInsert.do',
+		data: string,
+		dataType : 'string',
+		success: function(data) {
+			alert(data);
+		}
+	})
+}
+
 
 function DirectPay(name) {
-	alert("btnPay clicked");
 	var name = $("#name").val();
 	var zipcode = $("#zipcode").val();
 	var phone = $("#phone").val();
 	var sum = <c:out value="${ map.sum }" />;
-	alert(sum);
+	var cartCount = $("#lengthOfList").val();
+	
 	if(name==""){
 		alert("이름을 입력하세요");
 		$("#name").focus();
@@ -73,20 +100,21 @@ function DirectPay(name) {
 	    		},
 	    		success : function(data) {
 	    			var rsp = data.rsp;
+	    			rsp=JSON.stringify(rsp);
+	            	var newVal = JSON.parse(rsp);
 	    			var everythings_fine = data.everythings_fine;
 	    			
 	    			if ( everythings_fine ) {
 		    			var msg = '결제가 완료되었습니다.';
-		    			msg += '\n고유ID : ' + rsp.imp_uid;
-		    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-		    			msg += '\결제 금액 : ' + rsp.paid_amount;
-		    			msg += '카드 승인번호 : ' + rsp.apply_num;
 		    			
+		    			
+		    			sendCart();
+		    			insertDelivery();
 		    			alert(msg);
+		    			/* 결제완료 이후 이동하는 창은 추후 수정 요망 */
+		    			window.location.href="../main.do";
 		    		} else {
 		    			alert("아직 제대로 결제가 되지 않았습니다.");
-		    			//[3] 아직 제대로 결제가 되지 않았습니다.
-		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 		    		}
 	    		}
 	    	});
@@ -98,7 +126,7 @@ function DirectPay(name) {
 	    }
 	});
 	IMP.request_pay(param, callback);
-	$("#deliveryPay").submit();
+	
 }
 </script>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js" ></script>
@@ -206,9 +234,23 @@ function DirectPay(name) {
 				<div id="collapse1" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h2>배송정보</h2>
+						<!-- salelist에 넣으려는 값들 -->
+						<c:forEach var="row" items="${map.list}" varStatus="status">
+							<form id="deliveryCart${ status.index }" name="deliveryCart${ status.index }" action="/book/pay/saleInsert.do">
+								<input type="hidden" value="${ row.title }" name="title">
+								<input type="hidden" value="${ row.price }" name="dPrice">
+								<input type="hidden" value="${ row.isbn }" name="isbn">
+								<input type="hidden" value="${ sessionScope.id }" name="id">
+								<input type="hidden" value="online" name="branchName">
+								<input type="hidden" value="${ row.amount }" name="quantity">
+								<c:set value="${ status.index }" var="length"/>
+								
+							</form>
+						</c:forEach>
+						<input type="hidden" value="${ length + 1 }" id="lengthOfList">
 
 						<form id="deliveryPay" name="deliveryPay" method="post"
-							action="/book/pay/deliveryComplete.do">
+							action="">
 							<div>
 								주문자 <input type="text" id="name" name="name" placeholder="주문자">
 							</div>
@@ -221,11 +263,11 @@ function DirectPay(name) {
 									placeholder="주소"> <input type="text" id="address2"
 									name="address2" placeholder="상세주소"><br>
 							</div>
+								<input type="hidden" name="id" value="${ sessionScope.id }">
 							<div>
 								핸드폰 <input type="text" name="phone" id="phone">
 							</div>
 							<div style="width: 300px; text-align: center">
-							<input type="hidden" name="orderno" value="">
 								<button type="button" id="btnDirectPay" onclick="DirectPay('test')">결제하기</button>
 							</div>
 
