@@ -74,7 +74,6 @@ public class ManageOrganController {
 		//기관별 ebook 신청목록 가져오기
 		List<ManageEbookReqListVO> eList = dao.ebookReqList(ono);
 		
-		
 		mav.addObject("ebook_reqList", eList);
 		mav.setViewName("/organization/organReqList");
 		System.out.println("뷰 이름 : " + mav.getViewName());
