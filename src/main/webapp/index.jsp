@@ -9,7 +9,7 @@
 <body>
 	<a href="adminLoginForm.do">AdminLogin</a>
 	<a href="organLoginForm.do">OrganLogin</a>
-	<a href="main.do">MainPage</a>
+	<a href="starBooks.do?cmd=main">MainPage</a>
 </body>
 </html>
 

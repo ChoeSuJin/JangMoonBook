@@ -1,12 +1,9 @@
 package com.kosta.customer.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,26 +20,42 @@ public class CustomerController {
 	@Inject
 	CustomerService customerService;
 	
-	@RequestMapping("/customer/login.do")
-	public String customerLogin(){
-		return "/customer/login";	
-	}
-	
-	@RequestMapping("/customer/loginCheck.do")
-	public ModelAndView loginCheck(@ModelAttribute CustomerVO vo, HttpSession session){
-		boolean result = customerService.loginCheck(vo, session);
+	@RequestMapping("/starBooks.do")
+	public ModelAndView testmain(HttpServletRequest request, HttpSession session, CustomerVO vo){
+		String cmd = request.getParameter("cmd");
 		ModelAndView mav = new ModelAndView();
-		
-		if(result == true){
-			mav.setViewName("mainPage");
-		}else{
-			mav.setViewName("customer/login");
-			mav.addObject("message", "error");
+		System.out.println("cmd : " + cmd);
+		switch(cmd){
+		case "login" :
+			mav = login();
+			break;
+		case "logout" :
+			mav = logout(session);
+			break;
+		case "main" :
+			mav = main(vo, session, request);
+			break;
+		case "join" :
+			mav = join(vo);
+			break;
+		case "myPage" :
+			mav = myPage(session, request);
+			break;
+		case "modify" :
+			mav = modify(vo);
+			break;
 		}
+		return mav;
+	}// main controller
+	
+	
+	public ModelAndView login(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("customer/login");
 		return mav;	
 	}
 	
-	@RequestMapping("/customer/logout.do")
+	
 	public ModelAndView logout(HttpSession session){
 		customerService.logout(session);
 		ModelAndView mav = new ModelAndView();
@@ -52,60 +65,89 @@ public class CustomerController {
 		return mav;
 	}
 	
-	
-	@RequestMapping("/customer/list.do")
-	public String customerList(Model model){
-		List<CustomerVO> list =  customerService.customerList();
-		model.addAttribute("list", list);
-		return "customer/customerList";
-	}
-
-	@RequestMapping("/customer/write.do")
-	public String write(){
+	public ModelAndView main(CustomerVO vo, HttpSession session, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		Object id = session.getAttribute("id");
 		
-		return "customer/write"; 
-	}
-	
-	@RequestMapping("/customer/insert.do")
-	public String insert(@ModelAttribute CustomerVO vo){	
-		vo.setCustomerClass("silver");
-		customerService.insertCustomer(vo);
-		return "redirect:/customer/list.do";
-	}
-	
-	@RequestMapping("/customer/view.do")
-	public String view(String id, Model model){		
-		model.addAttribute("dto", customerService.viewCustomer(id));		
-		return "customer/view";
-	}
-	
-	@RequestMapping("/customer/update.do")
-	public String update(@ModelAttribute CustomerVO vo, Model model){
-
-		boolean result = customerService.checkPwd(vo.getId(), vo.getPwd());
-		if(result){
-			customerService.updateCustomer(vo);
-			return "redirect:/customer/list.do";
-		}else{
-			
-			CustomerVO vo2 = customerService.viewCustomer(vo.getId());
-			vo.setCustomerClass(vo2.getCustomerClass());
-			
-			model.addAttribute("dto", vo);
-			model.addAttribute("message", "업데이트 성공!");
-			return "customer/view";
+		if(id!=null){
+			mav.setViewName("mainPage");
+			return mav;
 		}
-	
 		
+		if(vo.getId()!=null){
+			boolean result = customerService.loginCheck(vo, session);
+			
+			if(result == true){
+				mav.setViewName("mainPage");
+			}else{
+				mav.setViewName("customer/login");
+				mav.addObject("message", "error");
+			}
+			return mav;
+		}
+			
+		mav.setViewName("mainPage");
+		
+		return mav;	
 	}
 	
-	@RequestMapping("/customer/delete.do")
+	public ModelAndView join(CustomerVO vo){
+		ModelAndView mav = new ModelAndView();
+		if(vo.getId()==null){
+			mav.setViewName("customer/join");
+			return mav;	
+		}else{
+			vo.setCustomerClass("silver");
+			customerService.insertCustomer(vo);
+			mav.setViewName("customer/login");
+		}
+		return mav;
+	}
+	
+	public ModelAndView myPage(HttpSession session, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		String id = (String)session.getAttribute("id");
+		
+		if(id==null) {
+			mav.addObject("myPageError", "error");
+			mav.setViewName("mainPage");
+			return mav;
+		}
+		
+		if(request.getParameter("error")!=null){	//정보수정 암호가 틀렸을시
+			mav.addObject("error", request.getParameter("error")); 
+		}
+		
+		mav.addObject("customer", customerService.viewCustomer(id));
+		mav.setViewName("customer/myPage");
+		
+		return mav;
+	}
+	
+	public ModelAndView modify(CustomerVO vo){
+		ModelAndView mav = new ModelAndView();
+		boolean result = customerService.checkPwd(vo.getId(), vo.getPwd());
+		
+		if(result){
+			String c_class = customerService.getClass(vo);
+			vo.setCustomerClass(c_class);
+			
+			customerService.updateCustomer(vo);
+			mav.setViewName("redirect:starBooks.do?cmd=myPage");
+			return mav;
+		}else{
+			mav.setViewName("redirect:starBooks.do?cmd=myPage&error=pwd");
+			return mav;
+		}
+	}
+	
+	@RequestMapping("/delete.do")
 	public String delete(@RequestParam String id, @RequestParam String pwd, Model model){
 	
 				boolean result = customerService.checkPwd(id, pwd);
 				if(result){
 					customerService.deleteCustomer(id);
-					return "redirect:/customer/list.do";
+					return "redirect:list.do";
 					
 				}else{
 					model.addAttribute("message", "삭제 성공");
@@ -115,3 +157,15 @@ public class CustomerController {
 		
 	}
 }
+
+/*@RequestMapping("/list.do")
+public String customerList(Model model){
+	List<CustomerVO> list =  customerService.customerList();
+	model.addAttribute("list", list);
+	return "customer/customerList";
+}*/
+
+/*@RequestMapping("/customer/write.do")
+public String write(){
+	return "customer/write"; 
+}*/

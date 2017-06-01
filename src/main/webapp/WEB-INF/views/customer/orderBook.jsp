@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${resources}/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
+    <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
 </head><!--/head-->
 
 <body>
@@ -32,7 +33,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="main.do"><p style="font-size:2.5em;color:skyblue;">StarBooks</p></a>
+							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
 						</div>
 						<div class="btn-group pull-right">
 						</div>
@@ -40,17 +41,16 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 						<c:choose>
-							<c:when test="${sessionScope.id ==null}">
+							<c:when test="${sessionScope.id == null}">
 								<ul class="nav navbar-nav">
-									<li><a href="customer/login.do"><i class="fa fa-lock"></i> Login</a></li>
+									<li><a href="starBooks.do?cmd=login"><i class="fa fa-lock"></i> Login</a></li>
 								</ul>
 							</c:when>
-							<c:when test="${sessionScope.id !=null}">
+							<c:when test="${sessionScope.id != null}">
 								<ul class="nav navbar-nav">
-									<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-									<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-									<li><a href="customer/view.do?id=${sessionScope.id}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-									<li><a href="customer/logout.do"><i class="fa fa-lock"></i> Logout</a></li>
+									<li><a href="starBooks.do?cmd=myPage"><i class="fa fa-user"></i> 마이페이지</a></li>
+									<li><a href="customer/view.do?id=${sessionScope.id}"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+									<li><a href="starBooks.do?cmd=logout"><i class="fa fa-lock"></i> Logout</a></li>
 								</ul>
 							</c:when>
 						</c:choose>
@@ -59,17 +59,6 @@
 				</div>
 			</div>
 		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-					</div>
-					<div class="col-sm-3">
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
 	<section id="advertisement">
@@ -87,75 +76,42 @@
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a href="orderBook.do?type=국내도서">국내도서</a>
-										<!-- <span class="badge pull-right"><i class="fa fa-plus"></i></span> -->
-									</h4>
+									<a href="orderBook.do?type=국내도서">국내도서</a>
 								</div>
-								<!-- <div id="in" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">총류</a></li>
-										</ul>
-									</div>
-								</div> -->
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a href="orderBook.do?type=외국도서">외국도서</a>
-									</h4>
+									<a href="orderBook.do?type=외국도서">외국도서</a>
 								</div>
 							</div>
 							
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a href="orderBook.do?type=E-Book">E-Book</a>
-									</h4>
+									<a href="orderBook.do?type=E-Book">E-Book</a>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a href="orderBook.do?type=중고도서">중고도서</a>
-									</h4>
+									<a href="orderBook.do?type=중고도서">중고도서</a>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">etc</a></h4>
+									<a href="#">etc</a>
 								</div>
 							</div>
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
-							<h2>Brands</h2>
+							<h2> 뭘하지?</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-									<li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-									<li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-									<li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-									<li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-									<li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-									<li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+									<li><a href="#"> <span class="pull-right">(50)</span>???</a></li>
+									<li><a href="#"> <span class="pull-right">(56)</span>???</a></li>
+									<li><a href="#"> <span class="pull-right">(27)</span>???</a></li>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b>$ 0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div><!--/price-range-->
-						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="${resources}/images/home/shipping.jpg" alt="??" />
-						</div><!--/shipping-->
-						
 					</div>
 				</div>
 				<c:set var="bookType" value="${booktype}"/>
@@ -363,11 +319,11 @@
 	
 
   
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${resources}/js/jquery.js"></script>
+	<script src="${resources}/js/price-range.js"></script>
+    <script src="${resources}/js/jquery.scrollUp.min.js"></script>
+	<script src="${resources}/js/bootstrap.min.js"></script>
+    <script src="${resources}/js/jquery.prettyPhoto.js"></script>
+    <script src="${resources}/js/main.js"></script>
 </body>
 </html>

@@ -23,9 +23,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 	
 	@Override
+	public String getClass(CustomerVO vo) {
+		return sqlSession.selectOne("customer.getClass", vo);
+	}
+
+	@Override
 	public CustomerVO loginCustomer(CustomerVO vo) {
-		//아이디와 비밀번호가 모두 일치하는 사람이있는지 가져옴
-		
 		return sqlSession.selectOne("customer.loginCustomer", vo);
 	}
 

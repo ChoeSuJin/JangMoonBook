@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
     <script>
 	   $(document).ready(function(){
 	      $("#btnLogin").click(function(){
@@ -39,7 +40,7 @@
 	            return;
 	         }
 	         //폼 내부의 데이터를 전송 할 주소
-	         document.form1.action="loginCheck.do";
+	         document.form1.action="starBooks.do?cmd=main";
 	         document.form1.submit();
 	      });      
 	      
@@ -54,7 +55,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<p style="font-size:2.5em;color:skyblue;"><a href="main.do">StarBooks</a></p>
+							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
 						</div>
 						<div class="btn-group pull-right">
 						</div>
@@ -83,19 +84,31 @@
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
+				
+				<div class="col-sm-4 col-sm-offset-1-login">
 					<div class="login-form"><!--login form-->
 						<h2>StarBooks Login</h2>
 						<form name="form1" method="post">
 							<input type="text" name="id" id="id" placeholder="User Id" />
 							<input type="password" name="pwd" id="pwd" placeholder="User Password" />
 							<c:if test = "${message=='error'}">
-								<div style="color:red;margin-left:10px;"> 아이디 또는 비밀번호가 일치하지 않습니다.</div>
+								<div style="color:red;">아이디 또는 비밀번호가 일치하지 않습니다.</div>
 							</c:if>
 							<input type="button" id="btnLogin" class="btn btn-default" value="login">
 						</form>
 					</div><!--/login form-->
 				</div>
+				
+				<div class="col-sm-1">
+					<h2 class="or">OR</h2>
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="signup-form"><!--sign up form-->
+						<a href="starBooks.do?cmd=join">회원가입</a>
+					</div><!--/sign up form-->
+				</div>
+				
 			</div>
 		</div>
 	</section><!--/form-->
@@ -259,11 +272,11 @@
 		
 	</footer><!--/Footer-->
 	
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${resources}/js/jquery.js"></script>
+	<script src="${resources}/js/price-range.js"></script>
+    <script src="${resources}/js/jquery.scrollUp.min.js"></script>
+	<script src="${resources}/js/bootstrap.min.js"></script>
+    <script src="${resources}/js/jquery.prettyPhoto.js"></script>
+    <script src="${resources}/js/main.js"></script>
 </body>
 </html>
