@@ -20,9 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean loginCheck(CustomerVO vo, HttpSession session) {
 		boolean result =customerDAO.loginCheck(vo);
 		if(result){
-			//true �씪 寃쎌슦 �꽭�뀡 �벑濡�
+			
 			CustomerVO vo2 = loginCustomer(vo);
-			//�꽭�뀡 蹂��닔 �벑濡�
 			session.setAttribute("id", vo2.getId());
 			session.setAttribute("pwd", vo2.getPwd());
 
@@ -32,14 +31,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerVO loginCustomer(CustomerVO vo) {
-		//�븘�씠�뵒�� 鍮꾨�踰덊샇媛� 紐⑤몢 �씪移섑븯�뒗 �뵒鍮꾩엳�뒗吏� �솗�씤
+		
 		return customerDAO.loginCustomer(vo);
 	}
 
 	@Override
 	public void logout(HttpSession session) {
 		session.invalidate();
-		//�꽭�뀡�젙蹂대�� 珥덇린�솕 �떆�궡
+		
 	}
 	
 	@Override
@@ -73,5 +72,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean checkPwd(String id, String pwd) {
 		return customerDAO.checkPwd(id,pwd);
+	}
+
+	@Override
+	public boolean idCheck(String id) {
+		return customerDAO.idCheck(id);
+	}
+
+	@Override
+	public CustomerVO pwdCheck(CustomerVO vo) {
+		return customerDAO.pwdCheck(vo);
 	}
 }

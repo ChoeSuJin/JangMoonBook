@@ -71,6 +71,25 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	
+	//아이디 중복체크
+	@Override
+	public boolean idCheck(String id) {
+		boolean result = false;
+		int count = sqlSession.selectOne("customer.idCheck", id);
+		if(count==0) result = true;
+		
+		return result;
+	}
+
+	
+	//비밀번호 찾기
+	@Override
+	public CustomerVO pwdCheck (CustomerVO vo) {
+	
+		return sqlSession.selectOne("customer.pwdCheck", vo);
+	}
+
+	
 	
 
 }

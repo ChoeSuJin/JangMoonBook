@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from customer where id = #{id}
 	</delete>
 	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType = "int">
+		select count(*) from customer where id = #{id}
+	</select>
+	
+	
 	<!-- 비밀번호 일치여부 -->
 	<select id="checkPwd" resultType="int">
 		select count(*) from customer where id = #{id} and pwd=#{pwd}
@@ -36,7 +42,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id from customer
 			where id=#{id} and pwd=#{pwd}	
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id= "pwdCheck" resultType = "com.kosta.customer.model.CustomerVO">
+		select pwd from customer
+			where id=#{id} and email=#{email}	
+	</select>
+	
 	<select id = "loginCustomer" resultType = "com.kosta.customer.model.CustomerVO">
 		select * from customer where id = #{id} and pwd = #{pwd}
 	</select>
+	
+	
 </mapper>

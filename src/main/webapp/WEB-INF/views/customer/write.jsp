@@ -53,6 +53,39 @@
         }).open();
     }
 </script>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+	
+	function checkId(){
+	var id = document.form1.id.value
+	if(id=="") alert("입력된 아이디가 없습니다.")
+	else window.open("checkId.do?id="+id,"","width=400 height=150")	
+		
+	}
+
+	/* $(document).ready(function(){
+		$("#btnLogin").click(function(){
+			var id = $("#id").val();
+			var pwd = $("#pwd").val();
+			if(id==""){
+				alert("아이디를 입력하세요");
+				$("#id").focus();
+				return;
+			}
+			if(pwd==""){
+				alert("비밀번호를 입력하세요");
+				$("#pwd").focus();
+				return;
+			}
+			//폼 내부의 데이터를 전송 할 주소
+			document.form1.action="${path}/customer/write.do";
+			document.form1.submit();
+			
+		});		
+		
+	}); */
+
+</script>
 </head>
 <body>
 <h2>회원가입</h2>
@@ -60,7 +93,9 @@
 		<table border = "1" width = "400px">
 			<tr>
 				<td>ID </td>
-				<td><input name ="id"></td>
+				<td><input name ="id">
+					<input type="button" onclick="javascript:checkId()" value="ID중복확인">
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호 </td>

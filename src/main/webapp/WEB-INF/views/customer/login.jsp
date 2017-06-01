@@ -10,6 +10,7 @@
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
+	
 	$(document).ready(function(){
 		$("#btnLogin").click(function(){
 			var id = $("#id").val();
@@ -28,19 +29,25 @@
 			document.form1.action="${path}/customer/loginCheck.do";
 			document.form1.submit();
 			
-		});		
+		});	
+		
+		$("#idCheck").click(function(){
+				
+		});
 		
 	});
+	
 
 </script>
 </head>
 <body>
 <h2>로그인</h2>
 	<form name = "form1" method="post">
-		<table border = "1" width = "400px">
+		<table border = "1" width = '400px'>
 			<tr>
 				<td>ID </td>
-				<td><input name = "id" id= "id"></td>
+				<td><input name = "id" id= "id">
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
@@ -62,6 +69,8 @@
 			</tr>
 		
 		</table>
+		<h5>비밀번호를 잊어버리셨나요?</h5>
+		<input type = "button" value = "비밀번호 찾기" onclick = "location.href= '${path}/customer/searchPw.do'">
 	</form>
 
 </body>

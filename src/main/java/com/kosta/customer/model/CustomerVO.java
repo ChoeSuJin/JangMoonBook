@@ -1,5 +1,7 @@
 package com.kosta.customer.model;
 
+import java.util.Map;
+
 public class CustomerVO {
 	
 	private String id;
@@ -22,6 +24,10 @@ public class CustomerVO {
 	public String getPwd() {
 		return pwd;
 	}
+	public String getPwd(Map<String, Object> map){
+		return pwd;
+	}
+	
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}

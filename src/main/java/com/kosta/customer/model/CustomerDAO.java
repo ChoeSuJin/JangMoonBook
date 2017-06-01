@@ -12,6 +12,6 @@ public interface CustomerDAO {
 	public void deleteCustomer(String id);  // 회원 삭제
 	public void updateCustomer(CustomerVO vo);  // 회원정보 수정
 	public boolean checkPwd(String id, String pwd);	//비밀번호 체크
-	
-
+	public boolean idCheck(String id);//아이디 중복체크
+	public CustomerVO pwdCheck(CustomerVO vo);// 비밀번호 찾기
 }
