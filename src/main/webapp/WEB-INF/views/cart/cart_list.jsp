@@ -141,7 +141,7 @@ function sendValue(name) {
 	alert(name);
 	$("#branchName").val(name);
 	$("#branchName").text(name);
-	$("#branch").val(name);
+	$("branch").val(name);
 }
 
 function showNowPay() {
@@ -159,34 +159,86 @@ function showGetPay() {
 }
 
 function clickNowPay() {
-	sendCart();
+	var date = $("#selectDate").val();
+	var getPayData = $("#directCartLength").val();
+	var branch = $("#branchName").val();
 	
-	var getNowData = $("#lengthOfList").val();
+	IMP.request_pay({
+	    pg : 'inicis',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 100,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	alert("rsp.success");
+	    	jQuery.ajax({
+	    		url: "/book/pay/directPayment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		},
+	    		success : function(data) {
+	    			var rsp = data.rsp;
+	    			rsp=JSON.stringify(rsp);
+	            	var newVal = JSON.parse(rsp);
+	    			var everythings_fine = data.everythings_fine;
+	    			
+	    			if ( everythings_fine ) {
+		    			var msg = '결제가 완료되었습니다.';
+		    			
+		    			
+		    			for (var i = 0; i < getPayData; i++) {
+		    				$("#date"+i+"").val(date);
+		    				$("#branch"+i+"").val(branch);
+		    				var string = $("form[name=directCart" + i + "]").serialize();
+		    				$.ajax( {
+		    					type:'POST',
+		    					url: '/book/pay/insertNowPay.do',
+		    					data: string,
+		    					dataType : 'string',
+		    					success: function(data) {
+		    						alert(data);
+		    					}
+		    				})
+		    			}
+		    			alert(msg);
+		    			/* 결제완료 이후 이동하는 창은 추후 수정 요망 */
+		    			window.location.href="../main.do";
+		    		} else {
+		    			alert("아직 제대로 결제가 되지 않았습니다.");
+		    		}
+	    		}
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        alert(msg);
+	    }
+	});
+	IMP.request_pay(param, callback);
 	
-	for (var i = 0; i < getNowData; i++) {
-		var string = $("form[name=directCart" + i + "]").serialize();
-		$.ajax( {
-			type:'POST',
-			url: '/book/pay/insertNowPay.do',
-			data: string,
-			dataType : 'string',
-			success: function(data) {
-				alert(data);
-			}
-		})
-	}
 }
 
 function clickGetPay() {
 	var date = $("#selectDate").val();
-	$("#date").val(date);
-	alert($("#date").val());
+	var getPayData = $("#directCartLength").val();
+	var branch = $("#branchName").val();
 	
-	var getPayData = $("#lengthOfList").val();
 	
 	for (var i = 0; i < getPayData; i++) {
+		$("#date"+i+"").val(date);
+		$("#branch"+i+"").val(branch);
 		var string = $("form[name=directCart" + i + "]").serialize();
-		alert(string);
 		$.ajax( {
 			type:'POST',
 			url: '/book/pay/insertGetPay.do',
@@ -194,6 +246,7 @@ function clickGetPay() {
 			dataType : 'string',
 			success: function(data) {
 				alert(data);
+				window.location.href="../main.do";
 			}
 		})
 	}
@@ -269,7 +322,8 @@ function clickGetPay() {
 							<td><fmt:formatNumber value="${row.price}" pattern="###,###" /></td>
 							<td><input type="number" style="width: 30px;" min="0"
 								max="100" name="amount" value="${row.amount}"> <input
-								type="hidden" name="isbn" value="${row.isbn}"></td>
+								type="hidden" name="isbn" value="${row.isbn}">
+								<input type="hidden" value="${ row.cartno }"></td>
 							<td align="right"><fmt:formatNumber value="${row.money}"
 									pattern="###,###" /></td>
 							<td>
@@ -365,13 +419,14 @@ function clickGetPay() {
 								<input type="hidden" value="${ row.isbn }" name="isbn">
 								<input type="hidden" value="${ sessionScope.id }" name="id">
 								<input type="hidden" value="${ row.amount }" name="quantity">
-								<input type="hidden" value="" id="branch" name="branch">
+								<input type="hidden" value="" id="branch${ status.index }" name="branch">
 								<input type="hidden" value="${ row.cartno }" name="cartno">
-								<input type="hidden" value="" name="date" id="date">
-								<c:set value="${ status.index }" var="length"/>
+								<input type="hidden" value="" name="date" id="date${ status.index }">
+								<c:set value="${ status.index }" var="directCartLength"/>
 								
 							</form>
 						</c:forEach>
+						<input type="hidden" value="${ directCartLength + 1 }" id="directCartLength">
 						<form action="" method="post">
 							지점 선택<input type="text" name="branchName" value="" id="branchName" onclick="selectBranch();" readonly="readonly">
 							<br> 날짜 선택<input type="date" name="selectDate" id="selectDate" value=""> <br>
