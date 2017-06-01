@@ -20,7 +20,7 @@
 	</update>
 	
 	<update id="minusDirectInventory" parameterType="com.kosta.cart.model.CartVO">
-		update inventory set quantity = quantity - #{quantity} where isbn = #{isbn} and branch = #{branchName}
+		update inventory set quantity = quantity - #{amount} where isbn = #{isbn} and branch = #{branchName}
 	</update>
 	
 	<update id="updateDelivery">
