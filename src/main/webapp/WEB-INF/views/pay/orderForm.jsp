@@ -115,7 +115,6 @@ $(document).ready(function(){
 		<button type = "button" id="btnSave">결제하기</button>
 	</div>
 
-
 </form>
 
 

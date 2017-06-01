@@ -18,7 +18,7 @@
 			<td>번호</td>
 			<td>카테</td>
 			<td rowspan="2">
-				<form action="bookCart" method="post">
+				<form action="bookCart.do" method="post">
 					<input type="radio" name="status" value="바로구매" checked="checked">바로구매
 					<input type="radio" name="status" value="장바구니">장바구니
 					<input type="hidden" name="title" value=${list.title }>

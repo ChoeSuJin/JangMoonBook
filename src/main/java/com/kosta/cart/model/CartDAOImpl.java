@@ -46,7 +46,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public int countCart(String id, String isbn) {
 		Map<String,Object> map=
-				new HashMap<>();
+				new HashMap<String,Object>();
 		map.put("id", id);
 		map.put("isbn", isbn);
 		return sqlSession.selectOne("cart.countCart",map);

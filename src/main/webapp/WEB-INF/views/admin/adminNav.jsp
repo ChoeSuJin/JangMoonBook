@@ -72,13 +72,38 @@
 			<div class="tab-content" style="margin-left: 5%;">
 				<div id="home" class="tab-pane fade in active">
 					<h3>본사 공지사항</h3>
-						공지사항 쌸라쌸라
+					<div id="viewNotice" class="tab-pane fade in active">
+				<div class="panel-group" id="accordion">
+				<table id="viewNoticeTable" class="table table-condensed">
+					<th>num</th>
+					<th>writer</th>
+					<th>title</th>
+					<th>regDate</th>
+					<c:forEach items="${ adminNotice }" var="list">
+					<div class="panel panel-default">
+						<tr class="panel-heading panel-title">						
+							<td>${ list.num }</td>
+							<td>${ list.writer }</td>
+							<td><a data-toggle="collapse" data-parent="#accordion" href="#notice${ list.num }">${ list.title }</a></td>
+							<td>${ list.regDate }</td>
+						</tr>
+					
+						<tr id="notice${ list.num }" class="panel-collapse collapse">
+							<td colspan="5"class="panel-body">${ list.content }</td>
+	
+						</tr>
+					</div>
+					</c:forEach>
+				</table>	
 				</div>
 				
-				<div id="menu1" class="tab-pane fade">
-					<h3>뭐 할 까 ?</h3>
-						??????
-				</div>
+			</div>
+			</div>
+				
+			<div id="menu1" class="tab-pane fade">
+				<h3>뭐 할 까 ?</h3>
+					??????
+			</div>
 			</div>
 		</div>
 	</c:if>
