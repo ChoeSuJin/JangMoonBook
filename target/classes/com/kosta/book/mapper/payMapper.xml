@@ -15,16 +15,32 @@
 		insert into getDelivery values (#{orderno}, #{name}, #{zipcode}, #{address1}, #{address2}, sysdate, #{phone})
 	</insert>
 	
-	<update id="minusInventory" parameterType="com.kosta.cart.model.CartVO">
-		update inventory set quantity = quantity - #{amount} where isbn = ${isbn} and branch = 'online'
+	<update id="minusOnlineInventory" parameterType="com.kosta.cart.model.CartVO">
+		update inventory set quantity = quantity - #{amount} where isbn = #{isbn} and branch = 'online'
+	</update>
+	
+	<update id="minusDirectInventory" parameterType="com.kosta.cart.model.CartVO">
+		update inventory set quantity = quantity - #{quantity} where isbn = #{isbn} and branch = #{branchName}
 	</update>
 	
 	<update id="updateDelivery">
-		update cart set status = '배송준비중' where id = #{ id }
+		update cart set status = '배송준비중' where cartno = #{ cartno }
+	</update>
+	
+	<update id="updateGetDirect">
+		update cart set status = '직접수령' where cartno = #{ cartno }
 	</update>
 	
 	<select id="getOrderNo" resultType="integer">
 		select salenumber from salelist where id = #{ id } and TO_DATE(s_date,'YYYY-MM-DD') - TO_DATE(sysdate,'YYYY-MM-DD') = 0
+	</select>
+	
+	<select id="insertGetPay">
+		insert into getdirect values (#{orderno}, #{isbn}, #{title}, #{quantity}, #{id}, #{branch}, #{getDate}, 0)
+	</select>
+	
+	<select id="insertNowPay">
+		insert into getdirect values (#{orderno}, #{isbn}, #{title}, #{quantity}, #{id}, #{branch}, #{getDate}, 1)
 	</select>
 	
 	

@@ -1,5 +1,8 @@
 package com.kosta.pay.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosta.book.admin.mSales.model.SalesListVO;
 import com.kosta.cart.model.CartVO;
 import com.kosta.pay.model.GetDeliveryVO;
+import com.kosta.pay.model.GetDirectVO;
 import com.kosta.pay.model.PayDAO;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -70,7 +74,7 @@ public class PayController {
 	
 	@RequestMapping("pay/saleInsert.do")
 	@ResponseBody
-	public String processSale(String id, String title, String dPrice, String isbn, String branchName, String quantity) {
+	public String processSale(String id, String title, String dPrice, String isbn, String branchName, String quantity, String cartno) {
 		
 		System.out.println("pay/saleInsert.do");
 		SalesListVO vo = new SalesListVO();
@@ -85,16 +89,104 @@ public class PayController {
 		cart.setIsbn(isbn);
 		cart.setAmount(Integer.parseInt(quantity));
 		cart.setId(id);
+		cart.setCartno(Integer.parseInt(cartno));
 		
 		System.out.println(vo.toString());
 		PayDAO dao = sqlSession.getMapper(PayDAO.class);
 		dao.insertSaleList(vo);
 		dao.updateDelivery(cart);
-		dao.minusInventory(cart);
+		dao.minusOnlineInventory(cart);
 		
 		return "complete";
 		
 	}
+	
+	@RequestMapping("pay/insertGetPay.do")
+	@ResponseBody
+	public String insertGetPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
+		
+		System.out.println("pay/insertGetPay.do");
+		GetDirectVO vo = new GetDirectVO();
+		CartVO cart = new CartVO();
+		SalesListVO sale = new SalesListVO();
+		PayDAO dao = sqlSession.getMapper(PayDAO.class);
+		
+		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+		Date getDate = form.parse(date);
+		System.out.println(getDate);
+		
+		vo.setBranch(branch);
+		vo.setId(id);
+		vo.setIsbn(isbn);
+		vo.setIsPaid(0);
+		vo.setQuantity(Integer.parseInt(quantity));
+		vo.setTitle(title);
+		vo.setGetDate(getDate);
+		
+
+		cart.setId(id);
+		cart.setCartno(Integer.parseInt(cartno));
+		
+		sale.setBranchName(branch);
+		sale.setdPrice(Integer.parseInt(dPrice));
+		sale.setId(id);
+		sale.setIsbn(isbn);
+		sale.setQuantity(Integer.parseInt(quantity));
+		sale.setTitle(title);
+		
+		dao.insertSaleList(sale);
+		
+		List orderno = dao.getOrderNo(id);
+		
+		vo.setOrderno((int) orderno.get(0));
+		
+		dao.insertGetPay(vo);
+		dao.updateGetDirect(cart);
+		
+		return "complete";
+		
+	}
+	
+	@RequestMapping("pay/insertNowPay.do")
+	@ResponseBody
+	public String insertNowPay(String id, String title, Date date, String dPrice, String isbn, String branch, String quantity, String cartno) {
+		
+		System.out.println("pay/insertNowPay.do");
+		GetDirectVO vo = new GetDirectVO();
+		CartVO cart = new CartVO();
+		SalesListVO sale = new SalesListVO();
+		PayDAO dao = sqlSession.getMapper(PayDAO.class);
+		
+		vo.setBranch(branch);
+		vo.setId(id);
+		vo.setIsbn(isbn);
+		vo.setIsPaid(0);
+		vo.setQuantity(Integer.parseInt(quantity));
+		vo.setTitle(title);
+		vo.setGetDate(date);
+		
+		List orderno = dao.getOrderNo(id);
+		
+		vo.setOrderno((int) orderno.get(0));
+		
+
+		cart.setId(id);
+		cart.setCartno(Integer.parseInt(cartno));
+		
+		sale.setBranchName(branch);
+		sale.setdPrice(Integer.parseInt(dPrice));
+		sale.setId(id);
+		sale.setIsbn(isbn);
+		sale.setQuantity(Integer.parseInt(quantity));
+		sale.setTitle(title);
+		
+		dao.insertNowPay(vo);;
+		dao.insertSaleList(sale);
+		dao.updateGetDirect(cart);
+		
+		return "complete";
+	}
+	
 	
 	
 }

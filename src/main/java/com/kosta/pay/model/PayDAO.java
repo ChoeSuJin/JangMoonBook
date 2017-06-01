@@ -10,7 +10,12 @@ public interface PayDAO {
 	public void insertSaleList(SalesListVO vo);
 	public void insertGetDelivery(GetDeliveryVO vo);
 	public List getOrderNo(String id);
-	public void minusInventory(CartVO vo);
+	public void minusOnlineInventory(CartVO vo);
+	public void minusDirectInventory(SalesListVO vo);
 	public void updateDelivery(CartVO vo);
+	public void updateGetDirect(CartVO vo);
+	public void insertGetPay(GetDirectVO vo);
+	public void insertNowPay(GetDirectVO vo);
+	
 
 }

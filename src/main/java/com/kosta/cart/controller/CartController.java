@@ -84,6 +84,12 @@ public class CartController {
 		return "redirect:/cart/list.do";
 	}
 	
+	@RequestMapping("selectBranch.do")
+	public String selectBranch() {
+		
+		return "/cart/selectBranch";
+	}
+	
 	
 }
 

@@ -18,8 +18,8 @@ $(document).ready(function(){
 	});
 	var IMP = window.IMP; // 생략가능
 	IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	alert("${sessionScope.id}");
-	
+	$("#btnNowPay").hide();
+	$("#btnGetPay").hide();
 	
 });
 
@@ -128,6 +128,77 @@ function DirectPay(name) {
 	IMP.request_pay(param, callback);
 	
 }
+
+function selectBranch() {
+	var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=400, top=200, width=440, height=550';
+    var url = 'selectBranch.do';
+    var name = '지점선택';
+	window.open(url, name, popupOption);
+
+}
+
+function sendValue(name) {
+	alert(name);
+	$("#branchName").val(name);
+	$("#branchName").text(name);
+	$("#branch").val(name);
+}
+
+function showNowPay() {
+	$("#btnNowPay").show();
+	$("#btnGetPay").hide();
+	$("#nowPay").prop("checked", true);
+	$("#getPay").prop("checked", false);
+}
+
+function showGetPay() {
+	$("#btnNowPay").hide();
+	$("#btnGetPay").show();
+	$("#nowPay").prop("checked", false);
+	$("#getPay").prop("checked", true);
+}
+
+function clickNowPay() {
+	sendCart();
+	
+	var getNowData = $("#lengthOfList").val();
+	
+	for (var i = 0; i < getNowData; i++) {
+		var string = $("form[name=directCart" + i + "]").serialize();
+		$.ajax( {
+			type:'POST',
+			url: '/book/pay/insertNowPay.do',
+			data: string,
+			dataType : 'string',
+			success: function(data) {
+				alert(data);
+			}
+		})
+	}
+}
+
+function clickGetPay() {
+	var date = $("#selectDate").val();
+	$("#date").val(date);
+	alert($("#date").val());
+	
+	var getPayData = $("#lengthOfList").val();
+	
+	for (var i = 0; i < getPayData; i++) {
+		var string = $("form[name=directCart" + i + "]").serialize();
+		alert(string);
+		$.ajax( {
+			type:'POST',
+			url: '/book/pay/insertGetPay.do',
+			data: string,
+			dataType : 'string',
+			success: function(data) {
+				alert(data);
+			}
+		})
+	}
+}
+
 </script>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js" ></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js" ></script>
@@ -243,6 +314,7 @@ function DirectPay(name) {
 								<input type="hidden" value="${ sessionScope.id }" name="id">
 								<input type="hidden" value="online" name="branchName">
 								<input type="hidden" value="${ row.amount }" name="quantity">
+								<input type="hidden" value="${ row.cartno }" name="cartno">
 								<c:set value="${ status.index }" var="length"/>
 								
 							</form>
@@ -285,17 +357,34 @@ function DirectPay(name) {
 				<div id="collapse2" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h3>바로수령</h3>
+						<!-- salelist에 넣으려는 값들 -->
+						<c:forEach var="row" items="${map.list}" varStatus="status">
+							<form id="directCart${ status.index }" name="directCart${ status.index }" action="">
+								<input type="hidden" value="${ row.title }" name="title">
+								<input type="hidden" value="${ row.price }" name="dPrice">
+								<input type="hidden" value="${ row.isbn }" name="isbn">
+								<input type="hidden" value="${ sessionScope.id }" name="id">
+								<input type="hidden" value="${ row.amount }" name="quantity">
+								<input type="hidden" value="" id="branch" name="branch">
+								<input type="hidden" value="${ row.cartno }" name="cartno">
+								<input type="hidden" value="" name="date" id="date">
+								<c:set value="${ status.index }" var="length"/>
+								
+							</form>
+						</c:forEach>
 						<form action="" method="post">
-							지점 선택<input type="text" name="branch" onclick="selectBranch();">
-							<br> 시간 선택<input type="text" name="time"> <br>
-							<label class="radio-inline"> <input type="radio"
-								name="nowPay">지금결제
-							</label> <label class="radio-inline"> <input type="radio"
-								name="getPay">현장결제
+							지점 선택<input type="text" name="branchName" value="" id="branchName" onclick="selectBranch();" readonly="readonly">
+							<br> 날짜 선택<input type="date" name="selectDate" id="selectDate" value=""> <br>
+							<label class="radio-inline">
+								<input type="radio" id="nowPay" name="nowPay" onclick="showNowPay();">지금결제
+							</label>
+							<label class="radio-inline">
+								<input type="radio" id="getPay" name="getPay" onclick="showGetPay();">현장결제
 							</label>
 
 							<div style="width: 300px; text-align: center">
-								<button type="button" id="btnSave">결제하기</button>
+								<button type="button" id="btnNowPay" onclick="clickNowPay();">결제하기</button>
+								<button type="button" id="btnGetPay" onclick="clickGetPay();">결제하기</button>
 							</div>
 						</form>
 					</div>
