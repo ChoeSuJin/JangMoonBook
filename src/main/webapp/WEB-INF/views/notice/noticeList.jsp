@@ -17,7 +17,7 @@
 		</tr>
 		<c:forEach items="${noticeList}" var="list">
 			<tr>
-				<td><a href="detailView?articleNumber=${list.articleNumber}">${list.title}</a></td>
+				<td><a href="detailView.do?articleNumber=${list.articleNumber}">${list.title}</a></td>
 				<td>${list.content}</td>
 				<td>${list.regDate}</td>
 				<td>${list.articleNumber}</td>

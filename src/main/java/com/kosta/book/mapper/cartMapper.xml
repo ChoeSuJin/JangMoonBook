@@ -13,7 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
-		select title, price, isbn, sum(amount) amount, sum(price*amount) money from cart where id=#{id} and status = '장바구니' group by title, price, isbn
+		select cartno, title, price, isbn, sum(amount) amount, sum(price*amount) money 
+		from cart 
+		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn
 	</select>
 
 	<select id="sumMoney" resultType="int">

@@ -37,7 +37,7 @@
 	</insert>
 	
 	<insert id="insertEbookPermit" parameterType="com.kosta.book.admin.mEbook.model.ManageEbookListVO">
-	 	insert into ebook_distList values(#{isbn}, #{title}, #{com})
+	 	insert into ebook_distList values(#{isbn}, #{title}, #{ono})
 	</insert>
 	
 	<delete id="deleteEbookPermit" parameterType="com.kosta.book.admin.mEbook.model.ManageEbookReqListVO">

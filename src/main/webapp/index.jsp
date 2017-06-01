@@ -12,5 +12,3 @@
 	<a href="starBooks.do?cmd=main">MainPage</a>
 </body>
 </html>
-
- 

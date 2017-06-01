@@ -25,7 +25,7 @@ public class CartController {
 	@RequestMapping("list.do")
 	public ModelAndView list(HttpSession session
 			, ModelAndView mav){
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		String id = (String)session.getAttribute("id");
 		List<CartVO> list=cartService.listCart(id);
 		
@@ -82,6 +82,12 @@ public class CartController {
 			cartService.modifyCart(vo); 
 		}
 		return "redirect:/cart/list.do";
+	}
+	
+	@RequestMapping("selectBranch.do")
+	public String selectBranch() {
+		
+		return "/cart/selectBranch";
 	}
 	
 	

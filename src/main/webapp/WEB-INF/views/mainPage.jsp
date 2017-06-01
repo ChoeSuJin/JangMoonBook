@@ -199,6 +199,7 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -210,6 +211,7 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -428,7 +430,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="footer-widget">
 			<div class="container">
 				<div class="row">

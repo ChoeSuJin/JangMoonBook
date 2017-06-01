@@ -57,7 +57,7 @@ public class BookController {
 		return "bookList/bookList";
 	}	
 	
-	@RequestMapping("/bookWrite")
+	@RequestMapping("/bookWrite.do")
 	public String write(BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		bookDAO.bookWrite(vo);
@@ -86,14 +86,14 @@ public class BookController {
 		return "registerForUsedBooks/usedSelect";
 	}
 	
-	@RequestMapping("/usedBookWrite")
+	@RequestMapping("/usedBookWrite.do")
 	public String usedBookWrite(Model model, BookVO vo, HttpSession session) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		model.addAttribute("book", bookDAO.bookOneSearchDao(vo));
 		model.addAttribute("id", session.getAttribute("id"));
 		return "registerForUsedBooks/usedWrite";
 	}
-	@RequestMapping("/usedWrite")
+	@RequestMapping("/usedWrite.do")
 	public String usedWrite(BookVO vo, HttpSession session) {
 		UsedBookDAO usedBookDAO = sqlSession.getMapper(UsedBookDAO.class);
 		vo.setId((String)session.getAttribute("id"));
@@ -102,7 +102,7 @@ public class BookController {
 	}
 	// 구매랑 장바구니 할꺼임
 	
-	@RequestMapping("/bookCart")
+	@RequestMapping("/bookCart.do")
 	public String bookCart(@ModelAttribute CartVO vo, HttpSession session) throws Exception{
 		if ((String)session.getAttribute("id")==null) {
 			System.out.println("아이디 입력 안함");

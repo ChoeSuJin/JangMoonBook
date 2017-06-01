@@ -53,6 +53,12 @@ public class SalesListVO {
 	public void setSaleNumber(int saleNumber) {
 		this.saleNumber = saleNumber;
 	}
+	@Override
+	public String toString() {
+		return "SalesListVO [isbn=" + isbn + ", title=" + title + ", id=" + id + ", branchName=" + branchName
+				+ ", s_date=" + s_date + ", dPrice=" + dPrice + ", quantity=" + quantity + ", saleNumber=" + saleNumber
+				+ "]";
+	}
 	
 	
 	

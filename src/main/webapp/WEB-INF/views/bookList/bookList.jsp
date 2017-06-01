@@ -23,7 +23,7 @@
 				<tr>
 					<td>이미지</td>
 					<td>
-						<a href="bookDetail?title=${dto.title}">${dto.title}</a>
+						<a href="bookDetail.do?title=${dto.title}">${dto.title}</a>
 					</td>
 					<td>${dto.price}</td>
 					<td>${dto.author }</td>

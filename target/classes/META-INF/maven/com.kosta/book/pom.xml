@@ -31,6 +31,15 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+				
+
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
@@ -157,12 +166,6 @@
 
 		<!-- Servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
@@ -197,16 +200,6 @@
 			<version>4.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.4</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
@@ -216,6 +209,37 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.5.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.5.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.5.4</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.squareup.retrofit2</groupId>
+		  <artifactId>retrofit</artifactId>
+		  <version>2.3.0</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<repositories>
@@ -223,6 +247,10 @@
 			<id>oracle</id>
 			<name>ORACLE JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
+		</repository>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
 		</repository>
 	</repositories>
 
