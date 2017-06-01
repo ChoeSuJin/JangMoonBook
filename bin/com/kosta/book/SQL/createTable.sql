@@ -18,12 +18,28 @@ create table Customer (
   id varchar2(20),
   pwd varchar2(20),
   customerClass varchar2(20),
+<<<<<<< HEAD
+  zipcode varchar2(10),
+=======
+>>>>>>> refs/remotes/origin/master
   address1 varchar2(200),
   address2 varchar2(200),
-  zipcode varchar2(10),
   email varchar2(100),
   phone varchar2(11)
 );
+
+create table board(
+    bno number not null,
+    title varchar2(200) not null,
+    content varchar2(4000),
+    writer varchar2(50),
+    regdate date default sysdate,
+    viewcnt number default 0,
+    primary key(bno)
+
+);
+create sequence bno_seq;
+
 
 create table Employee (
   empNo number,
@@ -50,6 +66,7 @@ create table branch_info(
 );
 
 create table SaleList (
+  orderNumber number,
   isbn varchar2(100),
   title varchar2(50),
   id varchar2(20),
@@ -66,6 +83,8 @@ create table CustomerClass(
 );
 
 create table orderList(
+  orderNumber number,
+  isbn varchar2(100),
   title varchar2(50),
   publisher varchar2(50),
   quantity number,
@@ -93,3 +112,8 @@ create table Salary(
   bank varchar2(20),
   account varchar2(40)
 );
+
+
+-- Sequence
+create sequence orderNumber;	//	재고 주문에 필요한 주문번호
+create sequence salenumber;		//  고객들의 주문에 대한 주문번호 부여

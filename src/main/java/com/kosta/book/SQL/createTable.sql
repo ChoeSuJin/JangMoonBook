@@ -63,6 +63,7 @@ create table branch_info(
 );
 
 create table SaleList (
+  orderNumber number,
   isbn varchar2(100),
   title varchar2(50),
   id varchar2(20),
@@ -79,6 +80,8 @@ create table CustomerClass(
 );
 
 create table orderList(
+  orderNumber number,
+  isbn varchar2(100),
   title varchar2(50),
   publisher varchar2(50),
   quantity number,
@@ -106,3 +109,8 @@ create table Salary(
   bank varchar2(20),
   account varchar2(40)
 );
+
+
+-- Sequence
+create sequence orderNumber;	//	��� �ֹ��� �ʿ��� �ֹ���ȣ
+create sequence salenumber;		//  ������ �ֹ��� ���� �ֹ���ȣ �ο�

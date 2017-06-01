@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- customerMapper.xml -->
+<mapper namespace = "customer">
+	
+	<select id="customerList"
+			resultType="com.kosta.customer.model.CustomerVO">
+		select * from customer order by id
+	</select>
+	<insert id="insertCustomer">
+		INSERT INTO CUSTOMER(ID, PWD, CUSTOMERCLASS, ZIPCODE, ADDRESS1, ADDRESS2,  EMAIL, PHONE) 
+	               VALUES(#{id}, #{pwd}, #{customerClass}, #{zipcode}, #{address1}, #{address2}, #{email}, #{phone})
+	</insert>
+	<select id = "viewCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+		select * from customer where id = #{id}
+	</select>
+	<update id="updateCustomer">
+		update customer 
+			set zipcode=#{zipcode, jdbcType=VARCHAR}, address1=#{address1, jdbcType=VARCHAR}, address2=#{address2, jdbcType=VARCHAR}, email = #{email, jdbcType=VARCHAR}, phone= #{phone, jdbcType=VARCHAR} 
+					where id = #{id} 
+	</update>
+	<delete id="deleteCustomer">
+		delete from customer where id = #{id}
+	</delete>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType = "int">
+		select count(*) from customer where id = #{id}
+	</select>
+	
+	
+	<!-- 비밀번호 일치여부 -->
+	<select id="checkPwd" resultType="int">
+		select count(*) from customer where id = #{id} and pwd=#{pwd}
+	</select>
+	
+	<!-- 로그인체크 -->
+	<select id= "loginCheck" resultType = "String">
+		select id from customer
+			where id=#{id} and pwd=#{pwd}	
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id= "pwdCheck" resultType = "com.kosta.customer.model.CustomerVO">
+		select pwd from customer
+			where id=#{id} and email=#{email}	
+	</select>
+	
+	<select id = "loginCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+		select * from customer where id = #{id} and pwd = #{pwd}
+	</select>
+	
+	
+</mapper>

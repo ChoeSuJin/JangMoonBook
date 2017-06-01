@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="reply">
+    
+    <!-- 댓글 입력 -->
+    <insert id="insertReply">
+        INSERT INTO reply (rno, bno, replytext, replyer)
+        VALUES (reply_seq.NEXTVAL, #{bno}, #{replytext}, #{replyer})
+    </insert>
+   
+   <select id="viewReply" resultType="com.kosta.board.model.ReplyVO">
+   		select * from reply r , board b
+   		where bno=#{bno}
+   </select>
+    
+    <update id="update">
+		update reply
+			set replytext=#{replytext}
+			where rno=#{rno}
+	</update>
+
+	<delete id="delete">
+		delete from reply
+			where rno=#{rno}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
