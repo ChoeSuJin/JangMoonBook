@@ -78,7 +78,7 @@ function moveNewPage(block, page) {
 }
 
 function moveNewBlock(block) {
-
+	var branch = '<c:out value="${sessionScope.user.branch}" />';
 	$.ajax({
 	    type : "POST",
 	    url : "moveNewBlock.do",
@@ -210,7 +210,7 @@ function moveNewBlock(block) {
 							<c:forEach var="i" begin="1" end="${ allNewBlock - 1}">
 								 <li class="newNext" id="newNext${ i+1 }"><a onclick="moveNewBlock(${ i + 1 })">Next</a></li>
 							</c:forEach>
-						</ul>
+							</ul>
 						</td>
 					</tr>
 				</table>
