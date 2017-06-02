@@ -19,20 +19,25 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+
+		var pagePerBlock = 3;
+		var contentPerPage = 10;
+		
 		$(".orgList").hide();
 		$(".org_page").hide();
 		$(".next").hide();
 		$(".previous").hide();
 		var org_currentPage = <c:out value="${org_currentPage}" />;
 		var org_currentBlock = <c:out value="${org_currentBlock}" />;
-		for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
-    		$("#"+ (i+1) + "").show();
+		for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+    		$("#"+ (i+1) + "").show(500);
+
     	}
-		for(var i = (org_currentBlock - 1) * 3; i < (org_currentBlock) * 3; i++) {
-			$("#pg" + (i+1) + "").show();
+		for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
+			$("#pg" + (i+1) + "").show(500);
 		}
 		
-		$("#next2").show();
+		$("#next2").show(500);
 		
 	});
 
@@ -54,11 +59,17 @@
             	 var allPage = newVal.length;
             	 
             	$("#list1").html("");
-            	$("#list1").append("<th>isbn</th><th>title</th><th>company</th>").trigger("create");
-
-            	for(var i = 0; i< newVal.length; i++) {
-        			$("#list1").append("<tr><td>"+ newVal[i].isbn +"</td><td>" + newVal[i].title + "</td><td>" + newVal[i].ono + "</td></tr>").trigger("create");
-        		}
+            	var html = '<table class="table table-condensed" style="width : 45%; float: right;">'
+            				+ '<th>isbn</th><th>title</th>';
+            	if (newVal.length == 0) {
+            		html += '<tr><td colsapn=2>대여한 책이 없습니당</td></tr>';
+            	} else{
+	            	for(var i = 0; i< newVal.length; i++) {
+	            		html += '<tr><td>'+ newVal[i].isbn +'</td><td>' + newVal[i].title + '</td><td>';
+	                }
+            	}
+            	html += '</table>';
+            	$("#list1").prepend(html);
 
             }
              
@@ -67,6 +78,8 @@
 	
 function movePage(block, page) {
 	
+	var pagePerBlock = 3;
+	var contentPerPage = 10;
 		
 		$.ajax({
             type : "POST",
@@ -86,8 +99,8 @@ function movePage(block, page) {
 
             	$(".orgList").hide();
             	
-            	for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
-            		$("#"+ (i+1) + "").show();
+            	for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+            		$("#"+ (i+1) + "").show(500);
             		
             	}
 
@@ -97,6 +110,9 @@ function movePage(block, page) {
 	}
 	
 function moveBlock(block) {
+	var pagePerBlock = 3;
+	var contentPerPage = 10;
+
 	
 	$.ajax({
         type : "POST",
@@ -127,17 +143,17 @@ function moveBlock(block) {
 			allOrganPage *= 1;
 			
 			if (allOrganBlock > org_currentBlock) {
-				$("#next"+ (org_currentBlock+1) + "").show();
+				$("#next"+ (org_currentBlock+1) + "").show(500);
 			}
 			if (org_currentBlock > 1) {
-				$("#previous"+ (org_currentBlock-1) + "").show();
+				$("#previous"+ (org_currentBlock-1) + "").show(500);
 			}
 			
-			for(var i = (org_currentPage - 1) * 3; i < (org_currentPage) * 3; i++) {
-	    		$("#"+ (i+1) + "").show();
+			for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+	    		$("#"+ (i+1) + "").show(500);
 	    	}
-			for(var i = (org_currentBlock - 1) * 3; i < (org_currentBlock) * 3; i++) {
-				$("#pg" + (i+1) + "").show();
+			for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
+				$("#pg" + (i+1) + "").show(500);
 			}
 
         }
@@ -168,7 +184,7 @@ function moveBlock(block) {
 					<c:set var="allOrganBlock" value="${ allOrganBlock }" />
 					<c:set var="allOrganPage" value="${ allOrganPage }" />
 					<c:set var="pagePerBlock" value="3" />
-					<c:set var="contentPerPage" value="3" />
+					<c:set var="contentPerPage" value="10" />
 				<table id="OrganListTable" class="table table-condensed" style="width : 40%; float: left;">
 					<div id="organList">
 					
@@ -198,8 +214,17 @@ function moveBlock(block) {
 					</div>
 					<!-- 기업목록 페이징 처리 -->
 					<div id="organListPaging">
+
 					<tr>
-						<td colspan="4" style="text-align: center;">
+						<td style="text-align: center;">
+						
+						<ul class="pager">
+						<c:forEach var="i" begin="2" end="${ allOrganBlock }">
+							 <li class="previous" id="previous${ i -1 }"><a onclick ="moveBlock(${ i - 1 })">Previous</a></li>
+						</c:forEach>
+						</ul>
+						</td>
+						<td colspan="2" style="text-align: center;">
 						<ul class="pagination">
 						
 						<c:if test="${ org_allCount < contentPerPage }">
@@ -216,16 +241,8 @@ function moveBlock(block) {
 						
 						</ul>
 						</td>
-						</tr>
-					<tr>
-						<td colspan="4" style="text-align: center;">
 						
-						<ul class="pager">
-						<c:forEach var="i" begin="2" end="${ allOrganBlock }">
-							 <li class="previous" id="previous${i -1 }"><a onclick ="moveBlock(${ i - 1 })">Previous</a></li>
-						</c:forEach>
-						</ul>
-						
+						<td>
 						<ul class="pager">
 							<c:forEach var="i" begin="1" end="${ allOrganBlock - 1}">
 								 <li class="next" id="next${ i+1 }"><a onclick="moveBlock(${ i + 1 })">Next</a></li>
@@ -241,7 +258,6 @@ function moveBlock(block) {
 				<table id="organBookList" class="table table-condensed" style="width : 40%; margin-left:10%; float: right;">
 					
 					<!-- 가맹점별 대여된 ebook 목록을 ajax 메소드로 불러옴 -->
-					<!-- 부트스트랩을 끌어올 필요가있음 -->
 					<div id="list1">
 						
 					</div>				
