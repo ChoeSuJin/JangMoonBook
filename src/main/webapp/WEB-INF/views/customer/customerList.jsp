@@ -15,7 +15,7 @@
 
 	<h2>회원목록</h2>
 
-	<table border = "1" width = "900px">
+	<table style="border: 1; width: 900px;">
 		<tr>
 		 	<th>ID </th>
 		 	<th>Password </th>
@@ -45,14 +45,3 @@
 	<input type = "button" value = "회원가입" onclick = "location.href= '${path}/customer/write.do'">
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

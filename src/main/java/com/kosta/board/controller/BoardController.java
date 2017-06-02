@@ -24,13 +24,12 @@ public class BoardController {
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
 		// 게시물 수
-				int count=boardService.countArticle(searchOption, keyword);
+		int count=boardService.countArticle(searchOption, keyword);
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
-		Map<String,Object> map=
-				new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("list", list);
 		map.put("count", count);
 		map.put("search_option", searchOption);
@@ -38,7 +37,6 @@ public class BoardController {
 		mav.addObject("map", map);
 		return mav;
 	}
-	
 	
 	@RequestMapping("/board/write.do")
 	public String write(){
@@ -53,7 +51,7 @@ public class BoardController {
 	
 	@RequestMapping("/board/view.do")
 	public ModelAndView view(@RequestParam int bno) throws Exception{
-		//조회수 증가처리
+		//議고쉶�닔 利앷�泥섎━
 		boardService.increaseViewcnt(bno);
 		
 		ModelAndView mav = new ModelAndView();
@@ -73,5 +71,4 @@ public class BoardController {
 		boardService.delete(bno);
 		return "redirect:/board/list.do";
 	}
-	
 }

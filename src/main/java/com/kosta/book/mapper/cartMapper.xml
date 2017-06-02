@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="cart">
+
+	<insert id="insert">
+		insert into cart (status, cartno, id, isbn, title, price, amount)
+		values (#{status}, cart_seq.nextval,#{id}, #{isbn},#{title},#{price},#{amount})
+	</insert>
+
+	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
+		select cartno, title, price, isbn, sum(amount) amount, sum(price*amount) money 
+		from cart 
+		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn
+	</select>
+
+	<select id="sumMoney" resultType="int">
+		select nvl(sum(price * amount) ,0) from cart where status = '장바구니'
+	</select>
+
+	<delete id="delete">
+		delete from cart where isbn=#{isbn}
+	</delete>
+
+	<!-- 장바구니에 기존상품이 있는지 확인 -->
+	<select id="countCart" resultType="int">
+		select count(*) from cart where id=#{id} and isbn=#{isbn}
+	</select>
+
+	<!-- 기존 상품이 있으면 장바구니 수정 -->
+	<update id="update">
+		update cart set amount=amount+#{amount} where id=#{id} and isbn=#{isbn}
+	</update>
+
+	<update id="modify">
+		update cart set amount=#{amount} where id=#{id} and isbn=#{isbn}
+	</update> 
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table width="500" cellpadding="0" cellspacing="0" border="1">
+<table style="width: 500px; border: 1">
 		<tr>
 			<td>제목</td>
 			<td>가격</td>
@@ -20,8 +21,9 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>
+
 						<form action="content">
-							<a href="content?title=${dto.title}">${dto.title}</a>
+							<a href="content.do?title=${dto.title}">${dto.title}</a>
 						</form>
 					</td>
 					<td>${dto.price}</td>

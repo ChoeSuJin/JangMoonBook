@@ -25,7 +25,7 @@
 										
 					<td>이미지</td>
 					<td>
-						<a href="usedBookWrite?title=${dto.title}">${dto.title}</a>
+						<a href="usedBookWrite.do?title=${dto.title}">${dto.title}</a>
 					</td>
 					<td>${dto.price}</td>
 					<td>${dto.author }</td>

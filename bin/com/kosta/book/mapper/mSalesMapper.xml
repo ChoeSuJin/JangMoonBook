@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.book.admin.mSales.model.SalesDAO">
+
+	<select id="saleNewBook" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
+		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='real')
+	</select>
+	
+	<select id="saleUsedBook" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
+		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
+	</select>
+	
+	<select id="sumSaleNewBook" resultType="String">
+		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='real')
+	</select>
+	
+	<select id="sumSaleUsedBook" resultType="String">
+		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
+	</select>
+
+</mapper>

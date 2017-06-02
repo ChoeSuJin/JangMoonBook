@@ -4,14 +4,15 @@ import java.util.List;
 
 public interface CustomerDAO {
 
-	public boolean loginCheck(CustomerVO vo);  // 로그인
-	public CustomerVO loginCustomer(CustomerVO vo);	//로그인 성공여부
-	public List<CustomerVO> customerList(); // 회원 목록
-	public void insertCustomer(CustomerVO vo); //회원가입
-	public CustomerVO viewCustomer(String id); //마이페이지
-	public void deleteCustomer(String id);  // 회원 삭제
-	public void updateCustomer(CustomerVO vo);  // 회원정보 수정
-	public boolean checkPwd(String id, String pwd);	//비밀번호 체크
+	public boolean loginCheck(CustomerVO vo);  // 濡쒓렇�씤
+	public CustomerVO loginCustomer(CustomerVO vo);	//濡쒓렇�씤 �꽦怨듭뿬遺�
+	public List<CustomerVO> customerList(); // �쉶�썝 紐⑸줉
+	public void insertCustomer(CustomerVO vo); //�쉶�썝媛��엯
+	public CustomerVO viewCustomer(String id); //留덉씠�럹�씠吏�
+	public void deleteCustomer(String id);  // �쉶�썝 �궘�젣
+	public void updateCustomer(CustomerVO vo);  // �쉶�썝�젙蹂� �닔�젙
+	public boolean checkPwd(String id, String pwd);	//鍮꾨�踰덊샇 泥댄겕
+	public String getClass(CustomerVO vo);	//鍮꾨�踰덊샇 泥댄겕
 	
 
 }

@@ -8,13 +8,14 @@ import com.kosta.customer.model.CustomerVO;
 
 public interface CustomerService {
 	
-	public boolean loginCheck(CustomerVO vo, HttpSession session);	//로그인
-	public CustomerVO loginCustomer(CustomerVO vo);	//로그인 성공여부
-	public void logout(HttpSession session);	//로그아웃
-	public List<CustomerVO> customerList(); // 회원 목록
-	public void insertCustomer(CustomerVO vo); //회원가입
-	public CustomerVO viewCustomer(String id); //마이페이지
-	public void deleteCustomer(String id);  // 회원 삭제
-	public void updateCustomer(CustomerVO vo);  // 회원정보 수정
-	public boolean checkPwd(String id, String pwd);	//비밀번호 체크
+	public boolean loginCheck(CustomerVO vo, HttpSession session);
+	public CustomerVO loginCustomer(CustomerVO vo);	
+	public void logout(HttpSession session);	
+	public List<CustomerVO> customerList(); 
+	public void insertCustomer(CustomerVO vo);
+	public CustomerVO viewCustomer(String id); 
+	public void deleteCustomer(String id); 
+	public void updateCustomer(CustomerVO vo);
+	public boolean checkPwd(String id, String pwd);
+	public String getClass(CustomerVO vo);
 }
