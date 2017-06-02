@@ -5,12 +5,13 @@
     
 <mapper namespace="com.kosta.book.organ.mOrgan.model.ManageOrganDAO">
 	<insert id="ebookReq">
-		insert into ebook_reqList values(seq_ebook_reqNo.nextVal, #{isbn}, #{title}, #{ono})
+
+		insert into ebook_reqList values(reqNo.nextVal, #{isbn}, #{title}, #{ono})
 	</insert>
 	<select id="ebookList" resultType="com.kosta.book.admin.mInventory.model.BookInfoVO">
 		select * from book_info where type = 'ebook' order by title
 	</select>
-	<select id="ebookReqList" resultType="com.kosta.book.organ.mOrgan.model.ManageOrganVO">
+	<select id="ebookReqList" resultType="com.kosta.book.admin.mEbook.model.ManageEbookReqListVO">
 		select * from ebook_reqList where ono=#{ono}
 	</select>
 	<select id="searchEbook" resultType="com.kosta.book.admin.mInventory.model.BookInfoVO">

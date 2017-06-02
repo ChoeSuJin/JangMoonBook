@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <html>
 <head>
 <title>직 원 관 리</title>
@@ -10,17 +10,46 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript">
-		function filter(){
-			if($('#search').val()==""){
-				$("#tbody tr").css('display');
-			}else{
-				$("#tbody tr").css('display','none');
-				$("#tbody tr[name*='"+$('#search').val()+"']").css('display','');
+		// 직원등록 폼 유효성 검사
+		function button_event() {
+			var form = document.empInsertForm;
+			if(form.name.value==""){
+				alert("이름을 입력하세요.");
+				form.name.focus();
+				return false;
 			}
-			return false;
+			if(form.pwd.value==""){
+				alert("암호를 입력하세요.");
+				form.pwd.focus();
+				return false;
+			}
+			if(form.phone.value==""){
+				alert("연락처를 입력하세요.");
+				form.phone.focus();
+				return false;
+			}
+			if(form.birth.value==""){
+				alert("주민번호 앞자리를 입력하세요.");
+				form.birth.focus();
+				return false;
+			}
+			if(form.address1.value==""){
+				alert("주소를 입력하세요.");
+				form.address1.focus();
+				return false;
+			}
+			if(form.address2.value==""){
+				alert("상세주소를 입력하세요.");
+				form.address2.focus();
+				return false;
+			}
+			if (confirm("직원을 등록 하시겠습니까 ?")) { //확인
+				$('#empInsertForm').submit();
+			} else { //취소
+				return false;
+			}
 		}
-		
-		function sample6_execDaumPostcode() {
+		function execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
 	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -52,11 +81,9 @@
 	                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
 	                }
 
-	                // 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('sample6_address').value = fullAddr;
-
-	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById('sample6_address2').focus();
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('address1').value = fullAddr;
+	                document.getElementById('address2').focus();
 	            }
 	        }).open();
 	    }
@@ -75,13 +102,28 @@
 		<!-- 직원 목록, 수정, 삭제 -->
 		<div id="home" class="tab-pane fade in active">
 			<h3>직원목록</h3><br>
+			<!-- 이름으로 직원 검색 -->
+			<form action="mEmployee.do" method="post">
+				<div class="input-group" style="float:left;">
+					<span class="input-group-addon" style="width:100px;">이름</span>
+					<input id="search" type="text" name="name" class="form-control" placeholder="이름 입력">
+				</div>
+				<div style="float:left;">
+					<input type="submit" class="btn btn-default" value="검색">
+				</div>
+			</form>
+			<!-- 이름으로 직원 검색 -->
 			
-			<div class="input-group">
-				<span class="input-group-addon" style="width:100px;">이름</span>
-				<input id="search" type="text" class="form-control"
-					   placeholder="이름 입력" onkeyup='{filter();return false}' 
-					   onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
-			</div><br>
+			<!-- 직원목록 전체 출력 버튼 -->
+			<div style="float:right;margin-top:-15px;">
+				<form action="mEmployee.do" method="post">
+					<input type="submit" class="btn btn-default" value="전체보기">
+				</form>
+			</div>
+			<!-- 직원목록 전체 출력 버튼 -->
+			<br><br>
+			
+			<!-- 직원 목록 출력 -->
 			<table class="table table-condensed">
 				<tr>
 					<th>직원번호</th>
@@ -110,106 +152,109 @@
 						<td>${ employee.branch }</td>
 					</tr>
 					</tbody>
-					<div class="modal fade" id="myModal${ employee.empno }"
-						role="dialog">
+			<!-- 직원 목록 출력 -->
+			
+			<!-- 직원 목록, 수정, 삭제 -->
+					<div class="modal fade" id="myModal${ employee.empno }"	role="dialog">
 						<div class="modal-dialog">
 							<!-- Modal content-->
 							<div class="modal-content">
+								
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">직원관리</h4>
 								</div>
 								<div class="modal-body">
-										<button type="button" class="btn btn-default">수정</button>
+								
+									<!-- 직원 정보 수정 -->
 									<div class="empInfo">
-										<form action="mEmployeeUD.do" method="post">
-											<input type="text" value="${ employee.empno }" name="empno"><br>
-											<input type="text" value="${ employee.pwd }" name="pwd"><br>
-											<input type="text" value="${ employee.empclass }"
-												name="empclass"><br> <input type="text"
-												value="${ employee.phone }" name="phone"><br>
-											<input type="text" value="${ employee.address1 }"
-												name="address1"><br> <input type="text"
-												value="${ employee.address2 }" name="address2"><br>
-											<input type="text" value="${ employee.branch }"
-												name="branch"><br> 
-											<input type="submit" class="btn btn-default" value="수정완료">
+										<form action="mEmployeeUD.do" method="post" name="empUpdateForm">
+											<div class="form-group">
+									             <label for="name">직원번호</label>
+									             <input readonly="readonly" class="form-control" name="empno" id="msg" value="${ employee.empno }">				  
+									        </div>
+											<div class="form-group">
+									             <label for="password">비밀번호</label>
+									             <input type="password" class="form-control" name="pwd" id="msg" value="${ employee.pwd }">				  
+									           </div>
+											<div class="form-group">
+									             <label for="phone">연락처</label>
+									             <input type="text" class="form-control" name="phone" id="msg" value="${ employee.phone }">				  
+									        </div>
+											<input type="submit" value="수정완료" class="btn btn-default" style="float:right;">
 										</form>
 									</div>
-									<form action="mEmployeeUD.do" method="post">
-										<input type="hidden" value="${employee.empno }" name="empno">
+									<!-- 직원 정보 수정 -->
+									
+									<!-- 직원 삭제 -->
+									<form action="mEmployeeUD.do" method="post" id="delete">
+										<input type="hidden" value="${employee.empno}" name="empno">
 										<input type="submit" class="btn btn-default" value="삭제">
 									</form>
-									</div>
+									<!-- 직원 삭제 -->
+								</div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-			</table>
-			<!-- 직원 목록, 수정, 삭제 -->
-			
-			<!-- 직원목록 전체 출력 버튼 -->
-			<form action="mEmployee.do" method="post" style="float:right;margin-top:-10px;">
-				<input type="submit" class="btn btn-default" value="전체보기">
-			</form><br>
-			<!-- 직원목록 전체 출력 버튼 -->
-			<hr>
+			</table><hr>
+		</div>
+		<!-- 직원 목록, 수정, 삭제 -->
 		
-		</div>
 		<!-- 직원 추가 탭 -->
-		<div id="menu1" class="tab-pane fade">
+		<div id="menu1" class="tab-pane">
 			<h3>직원등록</h3><br>
-			<c:forEach var="emp" items="${ employeeList }" begin="0" end="0">
-			<form action="mEmployeeIn.do" method="post">
-					<div class="input-group" >
-						<span class="input-group-addon" style="width:100px;height:40px;">이름</span> 
-						<input style="width:300px;height:40px;" id="name" type="text" class="form-control"
-							   name="name" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">비밀번호</span> 
-						<input style="width:300px;height:40px;" id="pwd" type="text" class="form-control" 
-						  	   name="pwd" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">연락처</span> 
-						<input style="width:300px;height:40px;" id="phone" type="text" class="form-control"
-							   name="phone" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">직급</span> 
-						<select name="empclass" class="form-control" id="sel1" style="width:300px;height:40px;">
-									<option value="BRONZE">직원</option> 
-									<option value="GOLD">매니저</option> 
-						</select>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">성별</span>&nbsp;&nbsp;
-						<select name="gender" class="form-control" id="sel2" style="width:300px;height:40px;">
-									<option value="M">M</option> 
-									<option value="F">F</option> 
-						</select>
-					</div>
+				<form role="form" action="mEmployeeIn.do" method="post" id="empInsertForm" name="empInsertForm">
+					<div class="form-group">
+			             <label for="name">이름</label>
+			             <input type="text" class="form-control" name="name" id="msg" placeholder="Additional Info">				  
+			           </div>
+					<div class="form-group">
+			             <label for="password">비밀번호</label>
+			             <input type="password" class="form-control" name="pwd" id="msg" placeholder="Additional Info">				  
+			           </div>
+					<div class="form-group">
+			             <label for="phone">연락처</label>
+			             <input type="text" class="form-control" name="phone" id="msg" placeholder="Additional Info without -">				  
+			           </div>
+					<div class="form-group">
+			           <label for="empclass">직급</label>
+			           <select name="empclass" class="form-control" id="sel1">
+					 	   <option value="ROLE_BRONZE">직원</option> 
+						   <option value="ROLE_GOLD">매니저</option> 
+					   </select>				  
+			        </div>
+					<div class="form-group">
+			             <label for="gender">성별</label>
+			             <select name="gender" class="form-control" id="sel2">
+							  <option value="M">M</option> 
+							  <option value="F">F</option> 
+					  	 </select>			  
+			        </div>
+			        <div class="form-group">
+			          <label for="birth">생년월일</label>
+			          <input type="text" class="form-control" name="birth" id="msg" placeholder="Additional Info">				  
+			        </div>
 					
-					<div class="input-group">
-						<input type="button" class="btn btn-default" onclick="sample6_execDaumPostcode()" value="주소 검색"><br>
-						<input style="width:300px;height:40px;" id="sample6_address" type="text" class="form-control"
-							   name="address1" placeholder="주소">
-						<input style="width:300px;height:40px;" id="sample6_address2" type="text" class="form-control"
-							   name="address2" placeholder="상세주소">
+					<!-- 주소 -->
+					<div class="form-group">
+						<label for="address">
+							<input type="button" class="btn btn-default" onclick="execDaumPostcode()" value="주소 검색">
+						</label>
+						<input type="text" name="address1" class="form-control" id="address1" placeholder="주소를 검색하세요">
+						<input type="text" name="address2" class="form-control" id="address2" placeholder="상세주소를 입력하세요">
 					</div>
+					<!-- 주소 -->
 					
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">생년월일</span> 
-						<input style="width:300px;height:40px;" id="msg" type="text" class="form-control"
-							   name="birth" placeholder="Additional Info">
-					</div>
+					<c:forEach var="emp" items="${ employeeList }" begin="0" end="0">
 					<input type="hidden" name="branch" value="${ emp.branch }">
-					<input style="width:400px;" type="submit" class="btn btn-default" value="추가">
-			</form>
-			</c:forEach>
+					<input type="hidden" name="cmd" value="insert">					
+					</c:forEach>
+					<input style="float:right;width:100px;" type="button" 
+						   class="btn btn-info" value="추가" onclick="button_event()">
+				</form>
 		</div>
-		</div>
+	</div>
 </div>
 </body>
 </html>

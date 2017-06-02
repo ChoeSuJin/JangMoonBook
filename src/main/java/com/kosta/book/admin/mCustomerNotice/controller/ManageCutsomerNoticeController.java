@@ -26,10 +26,26 @@ public class ManageCutsomerNoticeController {
 		
 		List<CustomerNoticeVO> list = dao.getList();
 		
+		for (int i = 0; i < list.size(); i++) {
+			
+			System.out.println(list.get(i));
+		}
+		
 		mav.addObject("list", list);
 		
 		mav.setViewName("/admin/manage/mCustomerNotice");
 		return mav;
+		
+	}
+	
+	@RequestMapping("regCustomerNotice.do")
+	public String RegCustomerNotice(CustomerNoticeVO vo) {
+		
+		CustomerNoticeDAO dao = sqlSession.getMapper(CustomerNoticeDAO.class);
+		
+		dao.regNotice(vo);
+		
+		return "redirect:mCustomerNotice.do";
 		
 	}
 	

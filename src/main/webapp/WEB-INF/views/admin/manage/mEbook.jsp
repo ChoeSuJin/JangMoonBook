@@ -291,12 +291,12 @@ function moveBlock(block) {
 						<td>${ list.reqNo }</td>
 						<td>${ list.isbn }</td>
 						<td>${ list.title }</td>
-						<td>${ list.com }</td>
+						<td>${ list.ono }</td>
 						<td>
 						<input type="hidden" name="reqNo" value="${list.reqNo }">
 						<input type="hidden" name="isbn" value="${ list.isbn }">
 						<input type="hidden" name="title" value="${ list.title }">
-						<input type="hidden" name="com" value="${ list.com }">
+						<input type="hidden" name="ono" value="${ list.ono }">
 
 						<input type="submit" value="대여승인"></td>
 					</tr>

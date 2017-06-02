@@ -13,7 +13,7 @@ public class UsedBookController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping("usedWriteForm")
+	@RequestMapping("usedWriteForm.do")
 	public String writeForm(HttpSession session) {
 		String id=(String)session.getAttribute("id");
 		String url = null;

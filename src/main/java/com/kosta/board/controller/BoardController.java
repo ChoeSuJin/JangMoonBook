@@ -23,7 +23,7 @@ public class BoardController {
 	
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
-		// 寃뚯떆臾� �닔
+		// 게시물 수
 		int count=boardService.countArticle(searchOption, keyword);
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
