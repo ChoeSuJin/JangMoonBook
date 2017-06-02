@@ -9,7 +9,7 @@
 <body>
 	노티스 롸이트 폶
 	
-	<form action="noticeWirte" method="post">
+	<form action="noticeWirte.do" method="post">
 		제목 <input type="text" name="title">
 	 	내용 <input type="text" name="content">
 	 	<input type="submit" value="ok">

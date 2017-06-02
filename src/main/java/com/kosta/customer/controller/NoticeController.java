@@ -15,27 +15,27 @@ import com.kosta.customer.model.NoticeVO;
 public class NoticeController {		
 		@Autowired
 		private SqlSession sqlSession;
-		@RequestMapping("/noticeWirte")
+		@RequestMapping("/noticeWirte.do")
 		public String noticeWirte(Model model, NoticeVO noticeVO ) {
 			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
 			noticeDAO.noticeWrite(noticeVO);
 			return "redirect:../book/";
 		}
 		
-		@RequestMapping("/noticeWriteForm")
+		@RequestMapping("/noticeWriteForm.do")
 		public String noticeWriteForm(Model model) {
 			return "notice/noticeWriteForm";
 		}
 		
 		
-		@RequestMapping("/noticeList")
+		@RequestMapping("/noticeList.do")
 		public String noticeList(Model model) {
 			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);
 			model.addAttribute("noticeList", noticeDAO.noticeList());
 			return "notice/noticeList";
 		}
 		
-		@RequestMapping("/detailView")
+		@RequestMapping("/detailView.do")
 		public String detailsView(Model model, NoticeVO noticeVO) {
 			System.out.println(noticeVO.getArticleNumber());
 			NoticeDAO noticeDAO = sqlSession.getMapper(NoticeDAO.class);

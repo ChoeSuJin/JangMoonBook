@@ -1,5 +1,7 @@
 package com.kosta.customer.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,14 +39,28 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		if(result == true){
 			//濡쒓렇�씤 �꽦怨�
-			mav.setViewName("customer/main");
-			mav.addObject("message", "success");
+			mav.setViewName("redirect:../main.do");
 		}else{
 			mav.setViewName("customer/login");
 			mav.addObject("message", "error");
 		}
 		return mav;	
 	}
+	
+	@RequestMapping("/customer/main.do")
+	public ModelAndView myPage(@ModelAttribute CustomerVO vo, HttpSession session){
+		boolean result = customerService.loginCheck(vo, session);
+		ModelAndView mav = new ModelAndView();
+		if(result == true){
+			mav.setViewName("customer/main");
+		}else{
+			mav.setViewName("customer/login");
+			mav.addObject("message", "error");
+		}
+		return mav;	
+	}
+	
+	
 	
 	@RequestMapping("/customer/logout.do")
 	public ModelAndView logout(HttpSession session){

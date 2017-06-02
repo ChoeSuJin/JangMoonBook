@@ -10,12 +10,13 @@ public class BookVO {
 	private String category;
 	private int sql;
 	private String id;
+	private String book;
 
 	public BookVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookVO(String title, int price, String author, String publisher, String type, String isbn, String category, int sql, String id) {
+	public BookVO(String title, int price, String author, String publisher, String type, String isbn, String category, int sql, String id, String book) {
 		this.title = title;
 		this.price = price;
 		this.author = author;
@@ -25,12 +26,17 @@ public class BookVO {
 		this.category = category;
 		this.sql = sql;
 		this.id = id;
+		this.book = book;
 	}
 	/*Getter*/
 	
 	
 	public String getTitle() {
 		return title;
+	}
+
+	public String getBook() {
+		return book;
 	}
 
 	public String getId() {
@@ -69,6 +75,10 @@ public class BookVO {
 	
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setBook(String book) {
+		this.book = book;
 	}
 
 	public void setId(String id) {

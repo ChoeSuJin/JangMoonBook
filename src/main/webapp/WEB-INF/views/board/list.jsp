@@ -20,23 +20,24 @@ $(document).ready(function(){
 </head>
 <body>
 	<h2>게시판 목록</h2>
-	
+
 	<!-- 검색-->
-	<form name = "form1" method="post" action = "${path}/board/list.do">
+	<form name="form1" method="post" action="${path}/board/list.do">
 		<select name="searchOption">
-			 <option value="all" <c:out value="${map.searchOption=='all'?'selected':''}"/>	>내용+제목</option>
-			 <option value="content"<c:out value="${map.searchOption=='content'?'selected':''}"/>>내용</option>
-			 <option value="title"<c:out value="${map.search_option=='title'?'selected':''}"/> >제목</option>
-		</select>
-	<input name = "keyword" value="${map.keyword}">
-	<input type="submit" value="검색">
-	<c:if test="${sessionScope.id != null}">	
-	<button type="button" id="btnWrite">글쓰기</button>
-</c:if>
-	
+			<option value="all"
+				<c:out value="${map.searchOption=='all'?'selected':''}"/>>내용+제목</option>
+			<option value="content"
+				<c:out value="${map.searchOption=='content'?'selected':''}"/>>내용</option>
+			<option value="title"
+				<c:out value="${map.search_option=='title'?'selected':''}"/>>제목</option>
+		</select> <input name="keyword" value="${map.keyword}"> <input
+			type="submit" value="검색">
+		<c:if test="${sessionScope.id != null}">
+			<button type="button" id="btnWrite">글쓰기</button>
+		</c:if>
 	</form>
-	
-	
+
+
 	${map.count}개의 게시물이 있습니다.
 	<table style="border: 1; width: 600px;">
 		<tr>

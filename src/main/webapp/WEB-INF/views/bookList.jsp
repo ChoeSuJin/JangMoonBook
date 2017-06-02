@@ -21,8 +21,8 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>
-						<form action="content">
-							<a href="content?title=${dto.title}">${dto.title}</a>
+						<form action="content.do">
+							<a href="content.do?title=${dto.title}">${dto.title}</a>
 						</form>
 					</td>
 					<td>${dto.price}</td>

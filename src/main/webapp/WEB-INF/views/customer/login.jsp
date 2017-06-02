@@ -55,7 +55,6 @@
 						<div style="color:red;"> 아이디 또는 비밀번호가 일치하지 않습니다.</div>
 					</c:if>
 					<c:if test = "${message=='logout'}">
-						<!-- alert("로그아웃되었습니다."); -->
 					</c:if>
 				
 				</td>	

@@ -20,8 +20,9 @@ public class PayController {
 	
 	@RequestMapping("orderForm.do")
 	public String orderForm(){
+		
 		return "pay/orderForm";
-	} 
+	}
 	
 	@RequestMapping("orderview.do")
 	public ModelAndView insert(@ModelAttribute PayVO vo, @RequestParam int orderno) throws Exception{
@@ -32,5 +33,4 @@ public class PayController {
 		mav.addObject("list", payService.view(orderno));		
 		return mav;
 	}
-	
 }
