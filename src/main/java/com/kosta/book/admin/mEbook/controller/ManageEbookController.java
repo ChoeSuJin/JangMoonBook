@@ -48,7 +48,7 @@ public class ManageEbookController {
 		
 		//int allCount = dao.getAllOrganBookListCount();
 		int allOrganCount = dao.getAllOrganListCount();
-		int allOrganPage =(allOrganCount % 3 == 0) ? allOrganCount / 3 : allOrganCount / 3 + 1;
+		int allOrganPage =(allOrganCount % 10 == 0) ? allOrganCount / 10 : allOrganCount / 10 + 1;
 		int allOrganBlock = (allOrganPage % 3 == 0) ? allOrganPage / 3 : allOrganPage / 3 + 1;
 		mav.setViewName("/admin/manage/mEbook");
 		

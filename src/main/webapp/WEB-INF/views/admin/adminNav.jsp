@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,33 +73,33 @@
 			<div class="tab-content" style="margin-left: 5%;">
 				<div id="home" class="tab-pane fade in active">
 					<h3>본사 공지사항</h3>
-					<div id="viewNotice" class="tab-pane fade in active">
-				<div class="panel-group" id="accordion">
-				<table id="viewNoticeTable" class="table table-condensed">
-					<th>num</th>
-					<th>writer</th>
-					<th>title</th>
-					<th>regDate</th>
-					<c:forEach items="${ adminNotice }" var="list">
-					<div class="panel panel-default">
-						<tr class="panel-heading panel-title">						
-							<td>${ list.num }</td>
-							<td>${ list.writer }</td>
-							<td><a data-toggle="collapse" data-parent="#accordion" href="#notice${ list.num }">${ list.title }</a></td>
-							<td>${ list.regDate }</td>
-						</tr>
-					
-						<tr id="notice${ list.num }" class="panel-collapse collapse">
-							<td colspan="5"class="panel-body">${ list.content }</td>
-	
-						</tr>
-					</div>
-					</c:forEach>
-				</table>	
-				</div>
+					<div id="viewNotice">
+						<div class="panel-group" id="accordion">
+						<table id="viewNoticeTable" class="table table-striped">
+							<tr class="info">
+							<th>num</th>
+							<th>writer</th>
+							<th>title</th>
+							<th>regDate</th>
+							</tr>
+							<c:forEach items="${ adminNotice }" var="list">
+								<tr class="panel panel-default panel-heading panel-title">						
+									<td>${ list.num }</td>
+									<td>${ list.writer }</td>
+									<td><a data-toggle="collapse" data-parent="#accordion" href="#notice${ list.num }">${ list.title }</a></td>
+									<td><fmt:formatDate value="${ list.regDate }" type="date"/></td>
+								</tr>
+							
+								<tr id="notice${ list.num }" class="panel-collapse collapse">
+									<td colspan="5"class="panel-body">${ list.content }</td>
+			
+								</tr>
+							</c:forEach>
+						</table>	
+						</div>
 				
-			</div>
-			</div>
+					</div>
+				</div>
 				
 			<div id="menu1" class="tab-pane fade">
 				<h3>뭐 할 까 ?</h3>
