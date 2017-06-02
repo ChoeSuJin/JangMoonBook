@@ -43,6 +43,4 @@
 		insert into getdirect values (#{orderno}, #{isbn}, #{title}, #{quantity}, #{id}, #{branch}, #{getDate}, 1)
 	</select>
 	
-	
-	
 </mapper>

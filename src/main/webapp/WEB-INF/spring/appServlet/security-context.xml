@@ -12,7 +12,7 @@
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="book"></property>
 		<property name="password" value="oracle"></property>
-	</bean>
+</bean>
 	
 	<security:http>
 	
@@ -35,7 +35,8 @@
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service
-				data-source-ref="dataSource" users-by-username-query="select empno, pwd, 1 from employee where empno = ?"
+				data-source-ref="dataSource" 
+				users-by-username-query="select empno, pwd, 1 from employee where empno = ?"
 				authorities-by-username-query="select empno, empclass from employee where empno = ?"
 				/>
 		</security:authentication-provider>

@@ -10,9 +10,6 @@ public class CustomerVO {
 	private String zipcode;
 	private String email;
 	private String phone;
-	
-	//getter, setter
-	
 	public String getId() {
 		return id;
 	}
@@ -62,13 +59,6 @@ public class CustomerVO {
 		this.phone = phone;
 	}
 	
-	//toString()
 	
-	@Override
-	public String toString() {
-		return "CustomerVO [id=" + id + ", pwd=" + pwd + ", customerClass=" + customerClass + ", address1=" + address1
-				+ ", address2=" + address2 + ", zipcode=" + zipcode + ", email=" + email + ", phone=" + phone + "]";
-	}
-	
-
+	//getter, setter
 }

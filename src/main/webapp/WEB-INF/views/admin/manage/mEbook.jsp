@@ -30,13 +30,14 @@
 		var org_currentPage = <c:out value="${org_currentPage}" />;
 		var org_currentBlock = <c:out value="${org_currentBlock}" />;
 		for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
-    		$("#"+ (i+1) + "").show();
+    		$("#"+ (i+1) + "").show(500);
+
     	}
 		for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
-			$("#pg" + (i+1) + "").show();
+			$("#pg" + (i+1) + "").show(500);
 		}
 		
-		$("#next2").show();
+		$("#next2").show(500);
 		
 	});
 
@@ -99,7 +100,7 @@ function movePage(block, page) {
             	$(".orgList").hide();
             	
             	for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
-            		$("#"+ (i+1) + "").show();
+            		$("#"+ (i+1) + "").show(500);
             		
             	}
 
@@ -142,17 +143,17 @@ function moveBlock(block) {
 			allOrganPage *= 1;
 			
 			if (allOrganBlock > org_currentBlock) {
-				$("#next"+ (org_currentBlock+1) + "").show();
+				$("#next"+ (org_currentBlock+1) + "").show(500);
 			}
 			if (org_currentBlock > 1) {
-				$("#previous"+ (org_currentBlock-1) + "").show();
+				$("#previous"+ (org_currentBlock-1) + "").show(500);
 			}
 			
 			for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
-	    		$("#"+ (i+1) + "").show();
+	    		$("#"+ (i+1) + "").show(500);
 	    	}
 			for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
-				$("#pg" + (i+1) + "").show();
+				$("#pg" + (i+1) + "").show(500);
 			}
 
         }
@@ -225,7 +226,6 @@ function moveBlock(block) {
 						</c:forEach>
 						</ul>
 						</td>
-						
 						<td colspan="2" style="text-align: center;">
 						<ul class="pagination">
 						

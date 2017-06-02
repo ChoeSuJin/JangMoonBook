@@ -67,6 +67,6 @@
 
 	<!-- session 유효시간 설정(분단위) -->
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>180</session-timeout>
 	</session-config>
 </web-app>
