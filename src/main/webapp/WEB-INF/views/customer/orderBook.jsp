@@ -125,7 +125,7 @@
 							<input type="submit" value="검색">
 						</form><br><br><br>
 						
-						<c:forEach var="book"  items="${ list }">
+						<c:forEach var="book" items="${ list }" begin="${ start }" end="${ end }">
 							<div class="col-sm-4">
 								<div class="product-image-wrapper">
 									<div class="single-products">
@@ -148,10 +148,19 @@
 						</c:forEach>
 						
 						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
+							<c:if test="${beginB eq 'no'}">
+							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${begin}" end="${suend}">
+								<li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${i}&currentBlock=${currentBlock}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${suendB eq 'no'}">
+							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5+1}&currentBlock=${currentBlock+1}">▶</a></li>
+							</c:if>
+							<!-- <li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>
 							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
+							<li><a href="">&raquo;</a></li> -->
 						</ul>
 					</div><!--features_items-->
 				</div>

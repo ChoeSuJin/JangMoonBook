@@ -34,10 +34,22 @@ public class BookController {
 		model.addAttribute("list", bookDAO.bookSearchDao(vo));
 		
 		/*List list = bookDAO.bookNoTypeSearchDao(vo);*/
+		
+		return "customer/orderBook";
+	}	
+	
+	@RequestMapping("/orderBook.do")
+	public String bookSearchByType(Model model, BookVO vo, HttpServletRequest request) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		vo.setType(request.getParameter("type"));
+		System.out.println("type : " + vo.getType());
+		model.addAttribute("list", bookDAO.orderBook(vo));
+		model.addAttribute("booktype", vo.getType());
+		
 		List list = bookDAO.bookSearchDao(vo);
 		
 		int contents = list.size();	// 검색된 책 갯수
-		int contentsPerPage = 20;
+		int contentsPerPage = 18;
 		int currentBlock = 0;
 		int currentPage = 0;
 		int PagePerBlock = 5;
@@ -81,24 +93,15 @@ public class BookController {
 		model.addAttribute("end", end);
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("type", vo.getType());
-		model.addAttribute("pagenum", request.getAttribute("pageNum"));
 		model.addAttribute("contents", contents);
-		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("currentBlock", currentBlock);
 		model.addAttribute("begin", begin);
 		model.addAttribute("suend", suend);
 		model.addAttribute("beginB", beginB);
 		model.addAttribute("suendB", suendB);
-		return "customer/orderBook";
-	}	
-	
-	@RequestMapping("/orderBook.do")
-	public String bookSearchByType(Model model, BookVO vo, HttpServletRequest request) {
-		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
-		vo.setType(request.getParameter("type"));
-		System.out.println("type : " + vo.getType());
-		model.addAttribute("list", bookDAO.orderBook(vo));
-		model.addAttribute("booktype", vo.getType());
+
+		
+		
 		return "customer/orderBook";
 	}	
 
@@ -139,7 +142,7 @@ public class BookController {
 		}
 		model.addAttribute("list", list);
 		int contents = list.size();	// 검색된 책 갯수
-		int contentsPerPage = 20;
+		int contentsPerPage = 18;
 		int currentBlock = 0;
 		int currentPage = 0;
 		int PagePerBlock = 5;
@@ -180,9 +183,7 @@ public class BookController {
 		model.addAttribute("end", end);
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("type", vo.getType());
-		model.addAttribute("pagenum", request.getAttribute("pageNum"));
 		model.addAttribute("contents", contents);
-		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("currentBlock", currentBlock);
 		model.addAttribute("begin", begin);
 		model.addAttribute("suend", suend);

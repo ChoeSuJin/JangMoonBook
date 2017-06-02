@@ -71,5 +71,4 @@ public class BoardController {
 		boardService.delete(bno);
 		return "redirect:/board/list.do";
 	}
-	
 }
