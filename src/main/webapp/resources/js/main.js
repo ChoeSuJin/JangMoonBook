@@ -298,5 +298,188 @@ function join_check(){
 	}
 }//e JoinForm_check
 
+$(document).ready(function(){
+	$("#btnList").click(function(){
+		location.href="${path}/bookList.do"
+	});
+	var IMP = window.IMP; // 생략가능
+	IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	$("#btnNowPay").hide();
+	$("#btnGetPay").hide();
+	
+});
 
+function sendCart() {
+	var cartCount = $("#lengthOfList").val();
+	for (var i = 0; i < cartCount; i++) {
+		var string = $("form[name=deliveryCart" + i + "]").serialize();
+		$.ajax( {
+			type:'POST',
+			url: '/book/pay/saleInsert.do',
+			data: string,
+			dataType : 'string',
+			success: function(data) {
+				alert(data);
+			}
+		})
+	}
+}
 
+function insertDelivery() {
+	var string = $("form[name=deliveryPay]").serialize();
+	$.ajax( {
+		type:'POST',
+		url: '/book/pay/deliveryInsert.do',
+		data: string,
+		dataType : 'string',
+		success: function(data) {
+			alert(data);
+		}
+	})
+}
+
+function selectBranch() {
+	var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=400, top=200, width=440, height=550';
+    var url = 'selectBranch.do';
+    var name = '지점선택';
+	window.open(url, name, popupOption);
+
+}
+
+function sendValue(name) {
+	alert(name);
+	$("#branchName").val(name);
+	$("#branchName").text(name);
+	$("branch").val(name);
+}
+
+function showNowPay() {
+	$("#btnNowPay").show();
+	$("#btnGetPay").hide();
+	$("#nowPay").prop("checked", true);
+	$("#getPay").prop("checked", false);
+}
+
+function showGetPay() {
+	$("#btnNowPay").hide();
+	$("#btnGetPay").show();
+	$("#nowPay").prop("checked", false);
+	$("#getPay").prop("checked", true);
+}
+
+function clickNowPay() {
+	var date = $("#selectDate").val();
+	var getPayData = $("#directCartLength").val();
+	var branch = $("#branchName").val();
+	
+	IMP.request_pay({
+	    pg : 'inicis',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 100,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	alert("rsp.success");
+	    	jQuery.ajax({
+	    		url: "/book/pay/directPayment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		},
+	    		success : function(data) {
+	    			var rsp = data.rsp;
+	    			rsp=JSON.stringify(rsp);
+	            	var newVal = JSON.parse(rsp);
+	    			var everythings_fine = data.everythings_fine;
+	    			
+	    			if ( everythings_fine ) {
+		    			var msg = '결제가 완료되었습니다.';
+		    			
+		    			
+		    			for (var i = 0; i < getPayData; i++) {
+		    				$("#date"+i+"").val(date);
+		    				$("#branch"+i+"").val(branch);
+		    				var string = $("form[name=directCart" + i + "]").serialize();
+		    				$.ajax( {
+		    					type:'POST',
+		    					url: '/book/pay/insertNowPay.do',
+		    					data: string,
+		    					dataType : 'string',
+		    					success: function(data) {
+		    						alert(data);
+		    					}
+		    				})
+		    			}
+		    			alert(msg);
+		    			/* 결제완료 이후 이동하는 창은 추후 수정 요망 */
+		    			window.location.href="../main.do";
+		    		} else {
+		    			alert("아직 제대로 결제가 되지 않았습니다.");
+		    		}
+	    		}
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        alert(msg);
+	    }
+	});
+	IMP.request_pay(param, callback);
+	
+}
+
+function clickGetPay() {
+	var date = $("#selectDate").val();
+	var getPayData = $("#directCartLength").val();
+	var branch = $("#branchName").val();
+	
+	
+	for (var i = 0; i < getPayData; i++) {
+		$("#date"+i+"").val(date);
+		$("#branch"+i+"").val(branch);
+		var string = $("form[name=directCart" + i + "]").serialize();
+		$.ajax( {
+			type:'POST',
+			url: '/book/pay/insertGetPay.do',
+			data: string,
+			dataType : 'string',
+			success: function(data) {
+				alert(data);
+				window.location.href="../main.do";
+			}
+		})
+	}
+}
+
+function check_cart() {
+	var session = $("#session").val();
+	  
+	if (session == "") {
+		alert("장바구니 기능을 이용하시려면 로그인을 하세요");
+		return false;
+	} else {
+		document.cartForm.submit();
+	}
+	
+}
+
+function show_payment2() {	
+	$('.payment1').hide();
+	$('.payment2').show();
+	$('#nowPay').prop('checked', true);
+	$('#btnGetPay').hide();
+}
+function show_payment1() {	
+	$('.payment2').hide();
+	$('.payment1').show();
+}

@@ -931,7 +931,6 @@ h2.title {
   border: 0 none;
   border-radius: 0;
   color: #FE980F;
-  
   font-size: 15px;
   margin-bottom: 25px;
 }
@@ -1468,7 +1467,14 @@ h2.title {
   display: block;
   padding: 6px 25px;
 }
-
+.cartBtn {
+  background: #FE980F;
+  border: medium none;
+  border-radius: 0;
+  color: #FFFFFF;
+  display: block;
+  padding: 6px 25px;
+}
 .signup-form {
 	font-size: 1.5em;
 	margin-left: 30px;
@@ -1604,6 +1610,9 @@ h2.title {
 .breadcrumbs .breadcrumb > li + li:before {
   content: " ";
 }
+#cart_items {
+	margin-top:50px;
+}
 
 #cart_items .cart_info {
   border: 1px solid #E6E4DF;
@@ -1687,13 +1696,8 @@ h2.title {
   float: left;
 }
 
-
-.cart_quantity_input {
-  color: #696763;
-  float: left;
-  font-size: 16px;
-  text-align: center;
-  
+.cart_quantity p{
+  font-size: 18px;
 }
 
 
@@ -2562,5 +2566,14 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
 }
-
-
+.cart_total {
+	margin-left: 78%;
+	margin-top: -50px;
+}
+.cart_total_payment {
+	margin-left: 36px;
+	font-size: 1.5em;
+}
+.payment2{
+	display:none;
+}

@@ -22,45 +22,14 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${resources}/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   	<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
   	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
-						</div>
-						<div class="btn-group pull-right">
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-						<c:choose>
-							<c:when test="${sessionScope.id == null}">
-								<ul class="nav navbar-nav">
-									<li><a href="starBooks.do?cmd=login"><i class="fa fa-lock"></i> Login</a></li>
-								</ul>
-							</c:when>
-							<c:when test="${sessionScope.id != null}">
-								<ul class="nav navbar-nav">
-									<li><a href="starBooks.do?cmd=myPage"><i class="fa fa-user"></i> 마이페이지</a></li>
-									<li><a href="customer/view.do?id=${sessionScope.id}"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
-									<li><a href="starBooks.do?cmd=logout"><i class="fa fa-lock"></i> Logout</a></li>
-								</ul>
-							</c:when>
-						</c:choose>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	</header><!--/header-->
+	<!-- header -->
+	<jsp:include page="customerHeader.jsp"/>
+	<!-- header -->
 	
 	<section id="form"><!--form-->
 		<div class="container">
@@ -97,6 +66,11 @@
 			</div>
 		</div>
 	</section><!--/form-->
+	
+	<!-- footer -->
+	<jsp:include page="customerFooter.jsp" />
+	<!-- footer -->
+	
 	<script>
 		$(document).ready(function(){
 			var error = document.getElementById("error").value
