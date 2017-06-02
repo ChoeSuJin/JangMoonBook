@@ -20,6 +20,106 @@
 		}
   </script>
 </head>
+
+<script>
+$(document).ready(function() {
+	$(".normalList").hide();
+	$(".normalPage").hide();
+	$(".normalNext").hide();
+	$(".normalPrevious").hide();
+	var currentPage = <c:out value="${currentPage}" />;
+	var currentBlock = <c:out value="${currentBlock}" />;
+	for(var i = (currentPage - 1) * 10; i < (currentPage) * 10; i++) {
+		$("#normal"+ (i+1) + "").show();
+	}
+	for(var i = (currentBlock - 1) * 5; i < (currentBlock) * 5; i++) {
+		$("#normalPg" + (i+1) + "").show();
+	}
+	
+	$("#normalNext2").show();	
+});
+
+function movePage(block, page) {
+	var branch = '<c:out value="${sessionScope.user.branch}" />';
+	$.ajax({
+        type : "POST",
+        url : "moveInventoryPage.do",
+        data : {"currentPage" : page,
+        		"currentBlock" : block,
+        		"branch" : branch},
+        dataType : "JSON",
+        error : function(){
+            alert('에러발생');
+        },
+        success : function(data){
+
+        	var currentPage = data.page;
+        	var currentBlock = data.block;
+        	var getList = data.list;
+        	
+
+        	$(".normalList").hide();
+        	
+        	for(var i = (currentPage - 1) * 10; i < (currentPage) * 10; i++) {
+        		$("#normal"+ (i+1) + "").show();
+        		
+        	}
+
+        }
+         
+    })
+}
+
+function moveBlock(block) {
+	var branch = '<c:out value="${sessionScope.user.branch}" />';
+	$.ajax({
+	    type : "POST",
+	    url : "moveInventoryBlock.do",
+	    data : {"Block" : block,
+	    		"branch" : branch},
+	    dataType : "JSON",
+	    error : function(){
+	        alert('에러발생');
+	    },
+	    success : function(data){
+	    	
+	    	$(".normalList").hide();
+	    	$(".normalPage").hide();
+	    	$(".normalNext").hide();
+	    	$(".normalPrevious").hide();
+	    	var currentPage = data.page;
+	    	var currentBlock = data.block;
+	    	var contentPerPage = 10;
+	    	var getList = data.list;
+	    	var allBlock = <c:out value="${ allBlock }" />;
+			var allPage = <c:out value="${ allPage }" />;
+			
+			
+			/* String->int 형변환 */
+			currentBlock *= 1;
+			currentPage *= 1;
+			allBlock *= 1;
+			allPage *= 1;
+			
+			if (allBlock > currentBlock) {
+				$("#normalNext"+ (currentBlock+1) + "").show();
+			}
+			if (currentBlock > 1) {
+				$("#normalPrevious"+ (currentBlock-1) + "").show();
+			}
+			
+			for(var i = (currentPage - 1) * 10; i < (currentPage) * 10; i++) {
+	    		$("#normal"+ (i+1) + "").show();
+	    	}
+			for(var i = (currentBlock - 1) * 5; i < (currentBlock) * 5; i++) {
+				$("#normalPg" + (i+1) + "").show();
+			}
+	
+	    }
+	     
+	})
+}	
+</script>
 <body>
 <!-- header -->
 <jsp:include page="../adminNav.jsp"/>
@@ -30,6 +130,7 @@
 			<li><a data-toggle="tab" href="#normal">재고확인</a></li>
 			<li><a data-toggle="tab" href="#orderList">주문확인</a></li>
 			<li><a data-toggle="tab" href="#newBookInsert">신책 등록</a></li>
+			<li><a data-toggle="tab" href="#getDirectList">수령 확인</a></li>
 		</ul>
 		<br>
 		<div class="tab-content" style="margin-left:5%;">
@@ -97,19 +198,62 @@
 			</div>
 
 			<div id="normal" class="tab-pane fade">
+				<c:set var="currentPage" value="${ currentPage }"/>
+				<c:set var="currentBlock" value="${ currentBlock }" />
+				<c:set var="allCount" value="${ allCount }" />
+				<c:set var="allBlock" value="${ allBlock }" />
+				<c:set var="allPage" value="${ allPage }" />
+				<c:set var="pagePerBlock" value="5" />
+				<c:set var="contentPerPage" value="10" />
+				
 				<table class="table table-condensed">
 					<th>ISBN</th>
 					<th>제목</th>
 					<th>수량</th>
 					<th>지점</th>
-					<c:forEach items="${ list2 }" var="list">
-						<tr>
+					<c:forEach items="${ list2 }" var="list" varStatus="status">
+						<tr class="normalList" id="normal${ status.index }">
 							<td>${ list.isbn }</td>
 							<td>${ list.title }</td>
 							<td>${ list.quantity }</td>
 							<td>${ list.branch }</td>
 						</tr>
 					</c:forEach>
+					
+					<!-- 페이징 -->
+					<tr>
+						<!-- Previous -->
+						<td>
+							<ul class="pager">
+							<c:forEach var="i" begin="2" end="${ allBlock }">
+								 <li class="normalPrevious" id="normalPrevious${ i -1 }"><a onclick ="moveBlock(${ i - 1 })">Previous</a></li>
+							</c:forEach>
+							</ul>
+						</td>
+						<!-- Paging -->
+						<td colspan="2">
+							<ul class="pagination" style="text-align: center;">
+						
+							<c:if test="${ allCount < contentPerPage }">
+								<li><a href="mInventory.do">1</a></li>
+							</c:if>
+							
+							<c:if test="${ allCount >= contentPerPage }">
+								<c:forEach var="i" varStatus="status" begin="1" end="${ allPage }">
+									<li class="normalPage" id="normalPg${ i }"><a onclick="movePage(${ currentBlock }, ${ (currentBlock - 1) * pagePerBlock  + i })">${ (currentBlock - 1) * pagePerBlock + i }</a></li>
+								</c:forEach>
+							</c:if>
+							</ul>
+						</td>
+						<!-- Next -->
+						<td>
+							<ul class="pager">
+							<c:forEach var="i" begin="1" end="${ allBlock - 1}">
+								 <li class="normalNext" id="normalNext${ i+1 }"><a onclick="moveBlock(${ i + 1 })">Next</a></li>
+							</c:forEach>
+							</ul>
+						</td>
+					</tr>
 				</table>
 
 			</div>
@@ -203,6 +347,39 @@
 					</div>
 					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기" onclick="button_event();">
 				</form>
+			</div>
+			<div id="getDirectList" class="tab-pane fade">
+				<table class="table table-condensed">
+					<th>orderno</th>
+					<th>isbn</th>
+					<th>title</th>
+					<th>quantity</th>
+					<th>id</th>
+					<th>getDate</th>
+					<th>isPaid</th>
+					<th>수령확인</th>
+					<c:forEach items="${ list4 }" var="list">
+						<tr>
+							<td>${ list.orderno }</td>
+							<td>${ list.isbn }</td>
+							<td>${ list.title }</td>
+							<td>${ list.quantity }</td>
+							<td>${ list.id }</td>
+							<td>${ list.getDate }</td>
+							<td>${ list.isPaid }</td>
+							<td>
+								<form action="proGetDirect.do" method="post">
+									<input type="hidden" name="orderno" value="${ list.orderno }">
+									<input type="hidden" name="branch" value="${ list.branch }">
+									<input type="hidden" name="isbn" value="${ list.isbn }">
+									<input type="hidden" name="quantity" value="${ list.quantity }">
+									<input type="hidden" name="id" value="${ list.id }">
+									<input type="submit" name="수령확인">
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>		
 			</div>
 		
 		</div>

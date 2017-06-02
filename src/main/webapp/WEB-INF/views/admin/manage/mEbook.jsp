@@ -31,6 +31,7 @@
 		var org_currentBlock = <c:out value="${org_currentBlock}" />;
 		for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
     		$("#"+ (i+1) + "").show(500);
+
     	}
 		for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
 			$("#pg" + (i+1) + "").show(500);
