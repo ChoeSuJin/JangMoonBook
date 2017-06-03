@@ -187,8 +187,6 @@ function moveBlock(block) {
 					<c:set var="pagePerBlock" value="3" />
 					<c:set var="contentPerPage" value="10" />
 				<table id="OrganListTable" class="table table-condensed" style="width : 40%; float: left;">
-					
-					
 					<div id="organList">
 					
 					<thead>

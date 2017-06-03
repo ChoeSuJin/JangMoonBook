@@ -42,6 +42,7 @@ public class BookVO {
 		return title;
 	}
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -49,7 +50,6 @@ public class BookVO {
 	public int getPrice() {
 		return price;
 	}
-
 	public void setPrice(int price) {
 		this.price = price;
 	}

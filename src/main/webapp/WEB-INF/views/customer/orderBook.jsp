@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -25,7 +24,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
     <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
-    
+    <c:set var="contents" value="${ contents }"/>
+	<c:set var="contentsPerPage" value="20" />
+	<c:set var="PagePerBlock" value="5" />
+	<c:set var="allPage" value="${ contents / contenstPerPage }" />
+	<c:set var="allBlock" value="${ allPage / PagePerBlock }" />
+	<c:set var="currentBlock" value="${ currentBlock }"/>
+	<c:set var="currentPage" value="${ currentPage }"/>
+	<c:set var="start" value="${ start }"/>
+	<c:set var="end" value="${ end }"/>
 </head><!--/head-->
 
 <body>
@@ -99,7 +106,7 @@
 							<input type="submit" value="검색">
 						</form><br><br><br>
 						
-						<c:forEach var="book"  items="${ list }">
+						<c:forEach var="book"  items="${ list }" begin="${ start }" end="${ end }">
 							<div class="col-sm-4">
 								<div class="product-image-wrapper">
 									<div class="single-products">
@@ -130,10 +137,15 @@
 							</div>
 						</c:forEach>
 						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
+							<c:if test="${beginB eq 'no'}">
+							   <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${begin}" end="${suend}">
+								<li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${i}&currentBlock=${currentBlock}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${suendB eq 'no'}">
+							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5+1}&currentBlock=${currentBlock+1}">▶</a></li>
+							</c:if>
 						</ul>
 					</div><!--features_items-->
 				</div>

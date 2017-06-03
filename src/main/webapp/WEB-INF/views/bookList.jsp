@@ -8,32 +8,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!--  -->
-	
-	<table>
+<table style="width: 500px; border: 1">
 		<tr>
-			<td>이미지</td>
-			<td>책이름</td>
-			<td>책가격</td>
-			<td>글쓴이</td>
+			<td>제목</td>
+			<td>가격</td>
+			<td>저자</td>
 			<td>출판사</td>
 			<td>대분류</td>
 			<td>소분류</td>
+			<td>ISBN</td>
 		</tr>
 			<c:forEach items="${list}" var="dto">
 				<tr>
-										
-					<td>이미지</td>
 					<td>
-						<a href="usedBookWrite.do?title=${dto.title}">${dto.title}</a>
+
+						<form action="content">
+							<a href="content.do?title=${dto.title}">${dto.title}</a>
+						</form>
 					</td>
 					<td>${dto.price}</td>
-					<td>${dto.author }</td>
+					<td>${dto.author}</td>
 					<td>${dto.publisher}</td>
 					<td>${dto.type}</td>
 					<td>${dto.category}</td>
+					<td>${dto.isbn}</td>
 				</tr>
 			</c:forEach>
 	</table>
+
 </body>
 </html>

@@ -209,10 +209,12 @@ function moveBlock(block) {
 				<c:set var="contentPerPage" value="10" />
 				
 				<table class="table table-condensed">
+				<tr>
 					<th>ISBN</th>
 					<th>제목</th>
 					<th>수량</th>
 					<th>지점</th>
+
 					<c:forEach items="${ list2 }" var="list" varStatus="status">
 						<tr class="normalList" id="normal${ status.index }">
 							<td>${ list.isbn }</td>
@@ -263,6 +265,7 @@ function moveBlock(block) {
 			<div id="orderList" class="tab-pane fade">
 				<h3>주문내역확인</h3>
 				<br>
+				<form action="orderConfirm.do" method="post">
 				<table class="table table-condensed">
 					<tr>
 						<th>주문번호</th>
@@ -276,30 +279,29 @@ function moveBlock(block) {
 						<th>입고 확인</th>
 					</tr>
 					<c:forEach items="${ list3 }" var="list">
-						<form action="orderConfirm.do" method="post">
-							<tr>
-								<td>${ list.orderNumber }</td>
-								<td>${ list.isbn }</td>
-								<td>${ list.title }</td>
-								<td>${ list.publisher }</td>
-								<td>${ list.quantity }</td>
-								<td>${ list.branch }</td>
-								<td>${ list.cost }</td>
-								<td>${ list.o_date }</td>
-								<input type="hidden" value="${ list.orderNumber }" name="orderNumber">
-								<input type="hidden" value="${ list.isbn }" name="isbn">
-								<input type="hidden" value="${ list.title }" name="title">
-								<input type="hidden" value="${ list.publisher }" name="publisher">
-								<input type="hidden" value="${ list.quantity }" name="quantity">
-								<input type="hidden" value="${ list.branch }" name="branch">
-								<input type="hidden" value="${ list.cost }" name="cost">
-								<input type="hidden" value="${ list.o_date }" name="o_date">
-								<td><input type="submit" class="btn btn-default" value="입고확인"> </td>
-							</tr>
-						</form>
+					<tr>
+						<td>${ list.orderNumber }</td>
+						<td>${ list.isbn }</td>
+						<td>${ list.title }</td>
+						<td>${ list.publisher }</td>
+						<td>${ list.quantity }</td>
+						<td>${ list.branch }</td>
+						<td>${ list.cost }</td>
+						<td>${ list.o_date }</td>
+						<input type="hidden" value="${ list.orderNumber }" name="orderNumber">
+						<input type="hidden" value="${ list.isbn }" name="isbn">
+						<input type="hidden" value="${ list.title }" name="title">
+						<input type="hidden" value="${ list.publisher }" name="publisher">
+						<input type="hidden" value="${ list.quantity }" name="quantity">
+						<input type="hidden" value="${ list.branch }" name="branch">
+						<input type="hidden" value="${ list.cost }" name="cost">
+						<input type="hidden" value="${ list.o_date }" name="o_date">
+						<td><input type="submit" class="btn btn-default" value="입고확인"> </td>
+					</tr>
 
 					</c:forEach>
 				</table>
+				</form>
 
 			</div>
 			
@@ -386,10 +388,6 @@ function moveBlock(block) {
 		
 		</div>
 	</div>
-
-
-
-
 
 </body>
 </html>
