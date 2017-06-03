@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert">
 		insert into cart (status, cartno, id, isbn, title, price, amount)
-		values (#{status}, cart_seq.nextval,#{id}, #{isbn},#{title},#{price},#{amount})
+		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount})
 	</insert>
 
 	<select id="listCart" resultType="com.kosta.cart.model.CartVO">

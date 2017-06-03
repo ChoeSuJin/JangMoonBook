@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,12 +8,12 @@
 <head>
 <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
     <title>StarBooks</title>
-    <link href="${resources}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${resources}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${resources}/css/bootstrap.min.css?ver=1" rel="stylesheet">
+    <link href="${resources}/css/font-awesome.min.css?ver=1" rel="stylesheet">
     <link href="${resources}/css/prettyPhoto.css" rel="stylesheet">
     <link href="${resources}/css/price-range.css" rel="stylesheet">
     <link href="${resources}/css/animate.css" rel="stylesheet">
-	<link href="${resources}/css/main.css" rel="stylesheet">
+	<link href="${resources}/css/main.css?ver=1" rel="stylesheet">
 	<link href="${resources}/css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -24,42 +25,13 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
     <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
+    
 </head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
-						</div>
-						<div class="btn-group pull-right">
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-						<c:choose>
-							<c:when test="${sessionScope.id == null}">
-								<ul class="nav navbar-nav">
-									<li><a href="starBooks.do?cmd=login"><i class="fa fa-lock"></i> Login</a></li>
-								</ul>
-							</c:when>
-							<c:when test="${sessionScope.id != null}">
-								<ul class="nav navbar-nav">
-									<li><a href="starBooks.do?cmd=myPage"><i class="fa fa-user"></i> 마이페이지</a></li>
-									<li><a href="customer/view.do?id=${sessionScope.id}"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
-									<li><a href="starBooks.do?cmd=logout"><i class="fa fa-lock"></i> Logout</a></li>
-								</ul>
-							</c:when>
-						</c:choose>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	</header><!--/header-->
+	<!-- header -->
+	<jsp:include page="customerHeader.jsp"/>
+	<!-- header -->
 	
 	<section id="advertisement">
 		<div class="container">
@@ -114,7 +86,9 @@
 						</div><!--/brands_products-->
 					</div>
 				</div>
+				
 				<c:set var="bookType" value="${booktype}"/>
+				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">${booktype}</h2>
@@ -140,13 +114,21 @@
 									            <p>${book.title}</p>
 									           </c:otherwise> 
 									          </c:choose>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
+									        <form action="cartInsert.do" method="post" name="cartForm">
+												<input type="hidden" name="status" value="장바구니">
+												<input type="hidden" name="isbn" value="${book.isbn}">
+												<input type="hidden" name="title" value="${book.title}">
+												<input type="hidden" name="image" value="${book.image}">
+												<input type="hidden" name="price" value="${book.price}">
+												<input type="hidden" name="amount" value="1">
+												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
+												<input type="button" onclick="check_cart()" class="btn btn-default add-to-cart" value="장바구니">
+											</form>
 										</div>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-						
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>
@@ -159,166 +141,10 @@
 		</div>
 	</section>
 	
-	<footer id="footer"><!--Footer-->
-		<div class="footer-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="companyinfo">
-							<h2><span>e</span>-shopper</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="address">
-							<img src="images/home/map.png" alt="" />
-							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Service</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Online Help</a></li>
-								<li><a href="">Contact Us</a></li>
-								<li><a href="">Order Status</a></li>
-								<li><a href="">Change Location</a></li>
-								<li><a href="">FAQ’s</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Quock Shop</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">T-Shirt</a></li>
-								<li><a href="">Mens</a></li>
-								<li><a href="">Womens</a></li>
-								<li><a href="">Gift Cards</a></li>
-								<li><a href="">Shoes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Policies</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Terms of Use</a></li>
-								<li><a href="">Privecy Policy</a></li>
-								<li><a href="">Refund Policy</a></li>
-								<li><a href="">Billing System</a></li>
-								<li><a href="">Ticket System</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Company Information</a></li>
-								<li><a href="">Careers</a></li>
-								<li><a href="">Store Location</a></li>
-								<li><a href="">Affillate Program</a></li>
-								<li><a href="">Copyright</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<form action="#" class="searchform">
-								<input type="text" placeholder="Your email address" />
-								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-								<p>Get the most recent updates from <br />our site and be updated your self...</p>
-							</form>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-Shopper. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
-				</div>
-			</div>
-		</div>
-		
-	</footer><!--/Footer-->
+	<!-- footer -->
+	<jsp:include page="customerFooter.jsp" />
+	<!-- footer -->
 	
-
-  
     <script src="${resources}/js/jquery.js"></script>
 	<script src="${resources}/js/price-range.js"></script>
     <script src="${resources}/js/jquery.scrollUp.min.js"></script>

@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>지점선택</title>
-
+<title>Insert title here</title>
 <script type="text/javascript">
 function sendValue(name) {
 	opener.sendValue(name);
@@ -17,6 +16,8 @@ function sendValue(name) {
 
 지점을 선택하세요
 <a onclick="sendValue('서울');" value="서울">서울</a>
+
+
 
 </body>
 </html>

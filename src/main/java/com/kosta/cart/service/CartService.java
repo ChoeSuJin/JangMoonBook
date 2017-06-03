@@ -10,11 +10,10 @@ public interface CartService {
 	public void delete(String isbn);
 	public void update(int cartno);
 	public int sumMoney(String id);
-	public int countCart(String id, String isbn);		//�옣諛붽뎄�땲�뿉 �긽�뭹�씠 �엳�뒗吏� �솗�씤
-	public void updateCart(CartVO vo); //�옣諛붽뎄�땲 �닔�웾 蹂�寃�
+	public int countCart(String id, String isbn);
+	public void updateCart(CartVO vo);
 	public void modifyCart(CartVO vo);
 	
-	//public List<CartVO> cartMoney();
 	}
 	
 
