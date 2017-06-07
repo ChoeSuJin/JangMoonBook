@@ -24,7 +24,7 @@ public class ManageCutsomerNoticeController {
 		
 		CustomerNoticeDAO dao = sqlSession.getMapper(CustomerNoticeDAO.class);
 		
-		List list = dao.getList();
+		List<CustomerNoticeVO> list = dao.getList();
 		
 		for (int i = 0; i < list.size(); i++) {
 			

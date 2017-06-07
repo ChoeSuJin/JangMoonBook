@@ -48,9 +48,7 @@ public class ManageEbookController {
 		
 		//int allCount = dao.getAllOrganBookListCount();
 		int allOrganCount = dao.getAllOrganListCount();
-		//int allPage = (int) Math.ceil(allCount / 3);
-		//int allBlock = (int) Math.ceil(allPage / 3);
-		int allOrganPage =(allOrganCount % 3 == 0) ? allOrganCount / 3 : allOrganCount / 3 + 1;
+		int allOrganPage =(allOrganCount % 10 == 0) ? allOrganCount / 10 : allOrganCount / 10 + 1;
 		int allOrganBlock = (allOrganPage % 3 == 0) ? allOrganPage / 3 : allOrganPage / 3 + 1;
 		mav.setViewName("/admin/manage/mEbook");
 		
@@ -90,7 +88,7 @@ public class ManageEbookController {
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
 		ManageEbookOrganVO vo = new ManageEbookOrganVO();
 		vo.setOno(Integer.parseInt(ono));
-		List list = dao.getEbookList(vo);
+		List<ManageEbookListVO> list = dao.getEbookList(vo);
 		
 		for (int i = 0 ; i < list.size(); i++) {
 			ManageEbookListVO v = (ManageEbookListVO) list.get(i);
@@ -108,7 +106,7 @@ public class ManageEbookController {
 		
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
-		List list = dao.getEbookOrganList();
+		List<ManageEbookOrganVO> list = dao.getEbookOrganList();
 		
 		System.out.println(map.get("org_currentPage"));
 		System.out.println(map.get("org_currentBlock"));
@@ -128,7 +126,7 @@ public class ManageEbookController {
 		
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
-		List list = dao.getEbookOrganList();
+		List<ManageEbookOrganVO> list = dao.getEbookOrganList();
 		
 		System.out.println(map.get("Block"));
 		

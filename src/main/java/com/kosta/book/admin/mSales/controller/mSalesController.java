@@ -40,8 +40,8 @@ public class mSalesController {
 		
 		
 		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
-		List list1 = dao.saleNewBook(vo);
-		List list2 = dao.saleUsedBook(vo);
+		List<SalesListVO> list1 = dao.saleNewBook(vo);
+		List<SalesListVO> list2 = dao.saleUsedBook(vo);
 		String sumNew = dao.sumSaleNewBook(vo);
 		String sumUsed = dao.sumSaleUsedBook(vo);
 		

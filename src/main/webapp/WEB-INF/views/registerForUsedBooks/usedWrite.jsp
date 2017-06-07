@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>	
-	<form action="usedWrite" method="post">
+	<form action="usedWrite.do" method="post">
 		제목 : <input type="text" name="title" value="${book.title}" style="border: 0px;" readonly="readonly"><br>
 		내용<br>
 		<textarea rows="20" cols="50" name="comment" ></textarea><br>

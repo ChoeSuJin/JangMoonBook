@@ -1,7 +1,6 @@
 package com.kosta.customer.controller;
 
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -57,7 +56,7 @@ public class CustomerController {
 		return mav;	
 	}
 	
-	
+
 	public ModelAndView logout(HttpSession session){
 		customerService.logout(session);
 		ModelAndView mav = new ModelAndView();

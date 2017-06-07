@@ -27,7 +27,6 @@ import com.siot.IamportRestClient.response.Payment;
 @Controller
 public class PayController {
 	
-	
 	@Autowired
 	private SqlSession sqlSession;
 	
