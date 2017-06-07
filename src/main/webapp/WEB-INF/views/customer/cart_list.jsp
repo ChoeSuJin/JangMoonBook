@@ -43,7 +43,7 @@
 				 	</c:when>
 				 	<c:otherwise>
 				 	<div class="table-responsive cart_info">
-				            <table border="0" class="table table-condensed">
+				            <table class="table table-condensed">
 				              <thead>
 				               <tr class="cart_menu">
 				                  <td class="image">상품</td>
@@ -59,7 +59,7 @@
 				               <c:forEach var="cart" items="${map.list}">
 					 			<form id="form1" name="form1" method="post" action="${path}/cart/update.do">
 				                   <tbody>
-									 <tr>
+									 <tr style="hegiht:80px;">
 									 	<td class="cart_product">
 											<a href=""><img src="${resources}/images/cart/one.png" alt=""></a>
 										</td>
@@ -84,10 +84,10 @@
 											<a href="">상품주문</a>
 										</td>
 				                     </tr>
-										<input type="hidden" name="isbn" value="${cart.isbn}">
-					                    <input type="hidden" name="cartno" value="${ cart.cartno }">
-					                    <input type="hidden" name="amount" value="${ cart.amount }">
 					               	</tbody>
+									<input type="hidden" name="isbn" value="${cart.isbn}">
+					                <input type="hidden" name="cartno" value="${ cart.cartno }">
+					                <input type="hidden" name="amount" value="${ cart.amount }">
 							       </form>
 				               	</c:forEach>
 				            </table>

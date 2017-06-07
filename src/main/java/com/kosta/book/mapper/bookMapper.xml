@@ -13,6 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY TITLE DESC
 	</select>
 	
+	<select id="orderBookCategory" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+		WHERE category = #{category}
+	</select>
+	
 	<select id="orderBook" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
@@ -24,13 +30,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="orderBookDetail" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
-		WHERE title = #{title}
+		WHERE isbn = #{isbn}
 	</select>
 	
 	<select id="searchBook" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 			WHERE type = #{type}
+			AND TITLE like '%${title}%'
+		ORDER BY TITLE
+	</select>
+	
+	<select id="searchBookCategory" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+			WHERE category = #{category}
 			AND TITLE like '%${title}%'
 		ORDER BY TITLE
 	</select>

@@ -93,15 +93,15 @@
 					</div>
 				</div>
 				
-				<c:set var="bookType" value="${booktype}"/>
+				<c:set var="bookCg" value="${bookCategory}"/>
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">${booktype}</h2>
+						<h2 class="title text-center">${bookCg}</h2>
 						
-						<form action="searchBook.do" method="post" style="float:right;margin-right:17px;">
+						<form action="searchBookCategory.do" method="post" style="float:right;margin-right:17px;">
 							<input type="text" name="title" placeholder="책 제목 입력">
-							<input type="hidden" name="type" value="${booktype}">
+							<input type="hidden" name="category" value="${bookCg}">
 							<input type="submit" value="검색">
 						</form><br><br><br>
 						

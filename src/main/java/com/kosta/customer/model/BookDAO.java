@@ -5,7 +5,9 @@ import java.util.List;
 public interface BookDAO {
 	
 	public List<BookVO> searchBook(BookVO vo);
+	public List<BookVO> searchBookCategory(BookVO vo);
 	public List<BookVO> orderBook(BookVO vo);
+	public List<BookVO> orderBookCategory(BookVO vo);
 	public BookVO orderBookDetail(BookVO vo);
 	
 	public List<BookVO> bookNoTypeSearchDao(BookVO vo);

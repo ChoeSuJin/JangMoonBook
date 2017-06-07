@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerVO;
 
 public interface CustomerService {
 	
+	public List<BookVO> bestSeller();
+	public List<BookVO> newBook();
 	public boolean loginCheck(CustomerVO vo, HttpSession session);
 	public CustomerVO loginCustomer(CustomerVO vo);	
 	public void logout(HttpSession session);	

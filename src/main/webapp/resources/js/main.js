@@ -467,8 +467,12 @@ function check_cart() {
 	if (session == "") {
 		alert("장바구니 기능을 이용하시려면 로그인을 하세요");
 		return false;
-	} else {
-		document.cartForm.submit();
+	}
+	
+	if (confirm("장바구니에 담으시겠습니까?")) { //확인
+		return true;
+	} else { //취소
+		return false;
 	}
 	
 }

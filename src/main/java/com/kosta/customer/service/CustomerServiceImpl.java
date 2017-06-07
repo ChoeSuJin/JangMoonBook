@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerDAOImpl;
 import com.kosta.customer.model.CustomerVO;
 
@@ -16,6 +17,19 @@ public class CustomerServiceImpl implements CustomerService {
 	@Inject
 	CustomerDAOImpl customerDAO;
 	
+	
+	
+	@Override
+	public List<BookVO> bestSeller() {
+		return customerDAO.bestSeller();
+	}
+
+	
+	@Override
+	public List<BookVO> newBook() {
+		return customerDAO.newBook();
+	}
+
 	@Override
 	public boolean loginCheck(CustomerVO vo, HttpSession session) {
 		boolean result =customerDAO.loginCheck(vo);

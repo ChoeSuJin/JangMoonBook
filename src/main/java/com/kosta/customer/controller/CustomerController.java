@@ -1,16 +1,18 @@
 package com.kosta.customer.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerVO;
 import com.kosta.customer.service.CustomerService;
 
@@ -68,8 +70,12 @@ public class CustomerController {
 	public ModelAndView main(CustomerVO vo, HttpSession session, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		Object id = session.getAttribute("id");
+		List<BookVO> bsetlist = customerService.bestSeller();
+		List<BookVO> newlist = customerService.newBook();
 		
 		if(id!=null){
+			mav.addObject("bestSeller", bsetlist);
+			mav.addObject("newBook", newlist);
 			mav.setViewName("mainPage");
 			return mav;
 		}
@@ -78,6 +84,8 @@ public class CustomerController {
 			boolean result = customerService.loginCheck(vo, session);
 			
 			if(result == true){
+				mav.addObject("bestSeller", bsetlist);
+				mav.addObject("newBook", newlist);
 				mav.setViewName("mainPage");
 			}else{
 				mav.setViewName("customer/login");
@@ -85,7 +93,9 @@ public class CustomerController {
 			}
 			return mav;
 		}
-			
+		
+		mav.addObject("bestSeller", bsetlist);
+		mav.addObject("newBook", newlist);
 		mav.setViewName("mainPage");
 		
 		return mav;	

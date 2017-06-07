@@ -5,7 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- customerMapper.xml -->
 <mapper namespace = "customer">
-
+	<select id="bestSeller" resultType="com.kosta.customer.model.BookVO">
+		select sum(s.quantity), s.isbn, s.title, b.image, b.price from salelist s inner
+		join book_info b on s.isbn = b.isbn group by s.isbn, s.title, s.quantity, b.image, b.price 
+		order by sum(s.quantity) desc
+	</select>
+	
+	<select id="newBook" resultType="com.kosta.customer.model.BookVO">
+		select * from book_info order by book desc
+	</select>
+	
 	<select id="getClass" resultType="String">
 		select customerClass
 		from customer

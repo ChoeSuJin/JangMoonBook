@@ -26,11 +26,21 @@ public class BookController {
 	@Inject
 	CartServiceImpl cartServiceImpl;
 	
+	// 이문열이 건드린것
 	@RequestMapping("/searchBook.do")
-	public String list(Model model, BookVO vo) {
+	public String searchBook(Model model, BookVO vo) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		model.addAttribute("booktype", vo.getType());
 		model.addAttribute("list", bookDAO.searchBook(vo));
 		return "customer/orderBook";
+	}	
+	
+	@RequestMapping("/searchBookCategory.do")
+	public String searchBookCategory(Model model, BookVO vo) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		model.addAttribute("bookCategory", vo.getCategory());
+		model.addAttribute("list", bookDAO.searchBookCategory(vo));
+		return "customer/orderBookCategory";
 	}	
 	
 	@RequestMapping("/orderBook.do")
@@ -38,14 +48,27 @@ public class BookController {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
 		vo.setType(request.getParameter("type"));
 		System.out.println("type : " + vo.getType());
+		
 		model.addAttribute("list", bookDAO.orderBook(vo));
 		model.addAttribute("booktype", vo.getType());
 		return "customer/orderBook";
 	}	
+	
+	@RequestMapping("/orderBookCategory.do")
+	public String bookSearchByCategory(Model model, BookVO vo, HttpServletRequest request) {
+		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		vo.setType(request.getParameter("category"));
+		System.out.println("category : " + vo.getCategory());
+		
+		model.addAttribute("list", bookDAO.orderBookCategory(vo));
+		model.addAttribute("bookCategory", vo.getCategory());
+		return "customer/orderBookCategory";
+	}	
 
 	@RequestMapping("/orderBookDetail.do")
-	public String bookDetail(Model model, BookVO vo) {
+	public String bookDetail(Model model, BookVO vo, HttpServletRequest request) {
 		BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
+		vo.setIsbn(request.getParameter("isbn"));
 		model.addAttribute("bookDetail", bookDAO.orderBookDetail(vo));
 		return "customer/orderBookDetail";
 	}
@@ -78,6 +101,7 @@ public class BookController {
 		}
 		return link;
 	}
+	// 이문열이 건드린것
 	
 	@RequestMapping("/usedSelect")
 	public String usedSelect(Model model, BookVO vo) {

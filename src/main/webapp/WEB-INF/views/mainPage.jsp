@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <html lang="en">
 <head>
 <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -43,54 +45,36 @@
 							<li data-target="#slider-carousel" data-slide-to="2"></li>
 							<li data-target="#slider-carousel" data-slide-to="3"></li>
 							<li data-target="#slider-carousel" data-slide-to="4"></li>
+							<li data-target="#slider-carousel" data-slide-to="5"></li>
 						</ol>
 						
 						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<div class="carousel-inner-header">문재인의 운명</div>
-									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
-								</div>
-								<div class="col-sm-6">
-									<img src="${resources}/images/book/문재인.jpg" class="girl img-responsive" style="height:500px;"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<div class="carousel-inner-header">호모 데우스</div>
-									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
-								</div>
-								<div class="col-sm-6">
-									<img src="${resources}/images/book/호모데우스.jpg" class="girl img-responsive" style="height:500px;"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<div class="carousel-inner-header">언어의 온도</div>
-									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
-								</div>
-								<div class="col-sm-6">
-									<img src="${resources}/images/book/언어의온도.jpg" class="girl img-responsive" style="height:500px;"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<div class="carousel-inner-header">82년생 김지영</div>
-									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
-								</div>
-								<div class="col-sm-6">
-									<img src="${resources}/images/book/82년생김지영.jpg" class="girl img-responsive" style="height:500px;"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<div class="carousel-inner-header">보노보노처럼 살다니 다행이야</div>
-									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
-								</div>
-								<div class="col-sm-6">
-									<img src="${resources}/images/book/보노보노.jpg" class="girl img-responsive" style="height:500px;"/>
-								</div>
-							</div>
+							<c:forEach var="bestSeller" items="${bestSeller}" varStatus="status" begin="0" end="5">
+								<c:choose>
+								<c:when test="${status.index==0}">
+									<div class="item active">
+										<div class="col-sm-6">
+											<div class="carousel-inner-header">문재인의 운명</div>
+											<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+										</div>
+										<div class="col-sm-6">
+											<img src="${resources}/images/book/${bestSeller.image}.jpg" class="girl img-responsive" style="height:500px;"/>
+										</div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="item">
+										<div class="col-sm-6">
+											<div class="carousel-inner-header">호모 데우스</div>
+											<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+										</div>
+										<div class="col-sm-6">
+											<img src="${resources}/images/book/${bestSeller.image}.jpg" class="girl img-responsive" style="height:500px;"/>
+										</div>
+									</div>
+								</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</div>
 						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
@@ -142,12 +126,19 @@
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
-							<h2> 뭘하지?</h2>
+							<h2> 분류별 검색</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>???</a></li>
+									<li><a href="orderBookCategory.do?category=000"> <span class="pull-right">(000)</span>총류</a></li>
+									<li><a href="orderBookCategory.do?category=100"> <span class="pull-right">(100)</span>철학</a></li>
+									<li><a href="orderBookCategory.do?category=200"> <span class="pull-right">(200)</span>종교</a></li>
+									<li><a href="orderBookCategory.do?category=300"> <span class="pull-right">(300)</span>사회과학</a></li>
+									<li><a href="orderBookCategory.do?category=400"> <span class="pull-right">(400)</span>순수과학</a></li>
+									<li><a href="orderBookCategory.do?category=500"> <span class="pull-right">(500)</span>기술과학</a></li>
+									<li><a href="orderBookCategory.do?category=600"> <span class="pull-right">(600)</span>예술</a></li>
+									<li><a href="orderBookCategory.do?category=700"> <span class="pull-right">(700)</span>언어</a></li>
+									<li><a href="orderBookCategory.do?category=800"> <span class="pull-right">(800)</span>문학</a></li>
+									<li><a href="orderBookCategory.do?category=900"> <span class="pull-right">(900)</span>역사</a></li>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
@@ -158,72 +149,37 @@
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Best Seller</h2>
 						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="${resources}/images/book/문재인.jpg" alt="" />
-										 <%--  <c:choose>
-									     	<c:when test="${fn:length(book.title) > 14}">
-									    	  <p>${fn:substring(book.title,0,13)}...</p>
-									    	</c:when>
-									    	<c:otherwise>
-									   		  <p>${book.title}</p>
-									    	</c:otherwise> 
-										</c:choose> --%>
-										<p>문재인의 운명</p>
-										<a href="" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
+						<c:forEach var="bestSeller" items="${bestSeller}" varStatus="status" begin="0" end="5">
+							<div class="col-sm-4">
+								<div class="product-image-wrapper">
+									<div class="single-products">
+										<div class="productinfo text-center">
+											<a href="orderBookDetail.do?isbn=${bestSeller.isbn}">
+												<img src="${resources}/images/book/${bestSeller.image}.jpg" alt="" />
+											</a>
+											 	<c:choose>
+										     	<c:when test="${fn:length(bestSeller.title) > 14}">
+										    	  <p>${fn:substring(bestSeller.title,0,13)}...</p>
+										    	</c:when>
+										    	<c:otherwise>
+										   		  <p>${bestSeller.title}</p>
+										    	</c:otherwise> 
+												</c:choose>
+											<!-- <a href="" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a> -->
+											<form action="cartInsert.do" method="post" name="cartForm">
+												<input type="hidden" name="isbn" value="${bestSeller.isbn}">
+												<input type="hidden" name="title" value="${bestSeller.title}">
+												<input type="hidden" name="price" value="${bestSeller.price}">
+												<input type="hidden" name="status" value="장바구니">
+												<input type="hidden" name="amount" value="1">
+												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
+												<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="${resources}/images/book/호모데우스.jpg" alt="" />
-										<p>호모 데우스</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="${resources}/images/book/언어의온도.jpg" alt="" />
-										<p>언어의 온도</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="${resources}/images/book/82년생김지영.jpg" alt="" />
-										<p>82년생 김지영</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="${resources}/images/book/보노보노.jpg" alt="" />
-										<p>보노보노처럼 살다니 다행이야</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>장바구니</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						</c:forEach>
 					</div><!--features_items-->
 					
 					<div class="recommended_items"><!--recommended_items-->
@@ -231,88 +187,81 @@
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="item active">	
+							
+								<div class="item active">
+									<c:forEach var="nb" items="${newBook}" begin="0" end="2">
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+													<p>${nb.title}</p>
+													 <form action="cartInsert.do" method="post" name="cartForm">
+														<input type="hidden" name="isbn" value="${nb.isbn}">
+														<input type="hidden" name="title" value="${nb.title}">
+														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="status" value="장바구니">
+														<input type="hidden" name="amount" value="1">
+														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
+														<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
+													</form>
 												</div>
 												
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
-								<div class="item">	
+								
+								<div class="item">
+									<c:forEach var="nb" items="${newBook}" begin="3" end="5">
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+													<p>${nb.title}</p>
+													 <form action="cartInsert.do" method="post" name="cartForm">
+														<input type="hidden" name="isbn" value="${nb.isbn}">
+														<input type="hidden" name="title" value="${nb.title}">
+														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="status" value="장바구니">
+														<input type="hidden" name="amount" value="1">
+														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
+														<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
+													</form>
 												</div>
-												
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
+								
+								<div class="item">
+									<c:forEach var="nb" items="${newBook}" begin="6" end="8">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<p>${nb.title}</p>
+													 <form action="cartInsert.do" method="post" name="cartForm">
+														<input type="hidden" name="isbn" value="${nb.isbn}">
+														<input type="hidden" name="title" value="${nb.title}">
+														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="status" value="장바구니">
+														<input type="hidden" name="amount" value="1">
+														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
+														<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
+													</form>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									</c:forEach>
+								</div>
+								
 							</div>
 							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
 								<i class="fa fa-angle-left"></i>

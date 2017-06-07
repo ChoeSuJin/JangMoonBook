@@ -53,6 +53,7 @@ public class CartController {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
 		
+		System.out.println(vo.getIsbn());
 		int count=cartService.countCart(id, vo.getIsbn());
 		
 		if(count==0){
@@ -60,7 +61,7 @@ public class CartController {
 		}else{
 			cartService.updateCart(vo);
 		}
-		return "redirect:/cart/list.do";
+		return "redirect:cartList.do";
 	}
 	
 	@RequestMapping("cartDelete.do")
