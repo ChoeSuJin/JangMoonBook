@@ -22,10 +22,16 @@ public class AdminLoginController {
 	SqlSession sqlSession;
 	//로그인 폼
 	@RequestMapping("/adminLoginForm.do")
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
+		
 		System.out.println("go loginForm");
 		
-		return "/admin/adminLogin";
+		if (session.getAttribute("user") == null) {
+			return "/admin/adminLogin";
+		} else {
+			return "redirect:adminNav.do";
+		}
+		
 	}
 	//로그인 성공
 	@RequestMapping("/adminNav.do")

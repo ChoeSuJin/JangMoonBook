@@ -57,8 +57,10 @@ public class AdminNoticeController {
 		AdminNoticeVO vo = new AdminNoticeVO();
 		vo.setNum(num);
 		
+		dao.deleteAdminNotice(vo);
 		
-		return "redirecd:mAdminNotice.do";
+		
+		return "redirect:mAdminNotice.do";
 	}
 
 }
