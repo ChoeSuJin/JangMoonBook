@@ -7,14 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.kosta.customer.model.CustomerDAOImpl;
+import com.kosta.customer.model.CustomerDAO;
 import com.kosta.customer.model.CustomerVO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
 	@Inject
-	CustomerDAOImpl customerDAO;
+	CustomerDAO customerDAO;
 	
 	@Override
 	public boolean loginCheck(CustomerVO vo, HttpSession session) {

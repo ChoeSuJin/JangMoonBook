@@ -16,7 +16,7 @@ $(document).ready(function(){
 		//페이지 주소 변경(이동)
 		location.href="${path}/board/write.do"
 	});	
-});
+});-*----------------------------------------------------
 
 function list(page){
 	location.href=

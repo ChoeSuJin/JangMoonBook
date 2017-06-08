@@ -52,13 +52,6 @@ public class mInventoryController {
 		System.out.println("branch = " + vo.getBranch());
 	
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
-		
-		// cost, publisher를 얻는 쿼리문을 작성하여 set 메소드에 입력
-		
-		
-		
-		// 날짜처리 => db에서 sysdate로 처리했읍니다
-		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
@@ -71,8 +64,7 @@ public class mInventoryController {
 	@RequestMapping("orderConfirm.do")
 	public String orderConfirm(OrderListVO vo) {
 		
-		System.out.println("orderConfirm.do");
-		
+		System.out.println("orderConfirm.do");	
 		System.out.println("quantity = " + vo.getQuantity());
 		System.out.println("isbn = " + vo.getIsbn());
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
