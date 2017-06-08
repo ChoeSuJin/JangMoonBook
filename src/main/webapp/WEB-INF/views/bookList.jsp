@@ -1,27 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<table width="500" cellpadding="0" cellspacing="0" border="1">
+<table style="width: 500px; border: 1">
 		<tr>
-			<td>Á¦¸ñ</td>
-			<td>°¡°Ý</td>
-			<td>ÀúÀÚ</td>
-			<td>ÃâÆÇ»ç</td>
-			<td>´ëºÐ·ù</td>
-			<td>¼ÒºÐ·ù</td>
+			<td>ì œëª©</td>
+			<td>ê°€ê²©</td>
+			<td>ì €ìž</td>
+			<td>ì¶œíŒì‚¬</td>
+			<td>ëŒ€ë¶„ë¥˜</td>
+			<td>ì†Œë¶„ë¥˜</td>
 			<td>ISBN</td>
 		</tr>
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>
+
 						<form action="content">
-							<a href="content?title=${dto.title}">${dto.title}</a>
+							<a href="content.do?title=${dto.title}">${dto.title}</a>
 						</form>
 					</td>
 					<td>${dto.price}</td>

@@ -1,3 +1,4 @@
+
 package com.kosta.board.model;
 
 import java.util.Date;

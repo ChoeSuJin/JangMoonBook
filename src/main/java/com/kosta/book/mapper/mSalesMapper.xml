@@ -6,19 +6,19 @@
 <mapper namespace="com.kosta.book.admin.mSales.model.SalesDAO">
 
 	<select id="saleNewBook" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
-		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='real')
+		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='국내도서' or type='외국도서')
 	</select>
 	
 	<select id="saleUsedBook" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
-		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
+		select * from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='중고')
 	</select>
 	
-	<select id="sumSaleNewBook" resultType="Integer">
-		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='real')
+	<select id="sumSaleNewBook" resultType="String">
+		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='국내도서' or type='외국도서')
 	</select>
 	
-	<select id="sumSaleUsedBook" resultType="Integer">
-		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='used')
+	<select id="sumSaleUsedBook" resultType="String">
+		select sum(quantity * dprice) from salelist where branchName like '${branchName}' and isbn in (select isbn from book_info where type='중고')
 	</select>
 
 </mapper>

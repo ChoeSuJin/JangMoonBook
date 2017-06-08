@@ -16,6 +16,10 @@
 		select * from orderList where branch = #{branch}
 	</select>
 	
+	<select id="selectGetDirectList" resultType="com.kosta.pay.model.GetDirectVO">
+		select * from getDirect where branch = #{branch}
+	</select>
+	
 	<select id="getCost" resultType="Integer">
 		select price from book_info where isbn = #{isbn}
 	</select>
@@ -36,10 +40,20 @@
 		update inventory set quantity = quantity + '${quantity}' where isbn = '${ isbn }' and branch = '${branch}'
 	</update>
 	
+	<update id="minusInventory" parameterType="com.kosta.pay.model.GetDirectVO">
+		update inventory set quantity = quantity - #{quantity} where isbn = #{isbn} and branch = #{branch}
+	</update>
+	
+	<update id="updatePaid" parameterType="com.kosta.pay.model.GetDirectVO">
+		update getDirect set isPaid = 1 where orderno = #{ orderno }
+	</update>
+	
 	<delete id="deleteOrder">
 		delete orderlist where ordernumber = '${ orderNumber }'
 	</delete>
 	
-	
+	<delete id="deleteGetDirect">
+		delete getDirect where isbn = #{isbn} and branch = #{branch} and id = #{id}
+	</delete>
 	
 </mapper>

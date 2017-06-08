@@ -1,324 +1,517 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<html lang="en">
 <head>
-<title>Home</title>
-<c:set var="path" value="${ pageContext.request.contextPath}"/>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-* {
-	box-sizing: border-box
-}
+<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
+    <title>StarBooks</title>
+    <link href="${resources}/css/bootstrap.min.css?ver=1" rel="stylesheet">
+    <link href="${resources}/css/font-awesome.min.css?ver=1" rel="stylesheet">
+    <link href="${resources}/css/prettyPhoto.css?ver=1" rel="stylesheet">
+    <link href="${resources}/css/price-range.css?ver=1" rel="stylesheet">
+    <link href="${resources}/css/animate.css?ver=1" rel="stylesheet">
+	<link href="${resources}/css/main.css?ver=1" rel="stylesheet">
+	<link href="${resources}/css/responsive.css?ver=1" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="${resources}/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${resources}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${resources}/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
+    <!-- font -->
+    <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
+</head><!--/head-->
 
-body {
-	font-family: "Lato", sans-serif;
-}
-
-/* Style the tab */
-div.tab {
-	float: left;
-	border: 1px solid #ccc;
-	background-color: #f1f1f1;
-	width: 30%;
-	height: 300px;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-	display: block;
-	background-color: inherit;
-	color: black;
-	padding: 22px 16px;
-	width: 100%;
-	border: none;
-	outline: none;
-	text-align: left;
-	cursor: pointer;
-	transition: 0.3s;
-	font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-	background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-div.tab button.active {
-	background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-	float: left;
-	padding: 0px 12px;
-	border: 1px solid #ccc;
-	width: 70%;
-	border-left: none;
-	height: 300px;
-}
-</style>
-</head>
 <body>
-
-
-	<fieldset>
-		<legend><h1>로그인이 필요한 기능</h1></legend>
-		<fieldset>
-			<legend>로그인</legend>
-			<c:choose>
-				<c:when test="${sessionScope.id ==null}">
-					<a href="${path}/customer/login.do">로그인</a>
-				</c:when>
-				<c:otherwise>
-					${sessionScope.id}님 환영합니다.
-					<a href="${path}/customer/logout.do"> 로그아웃 </a>
-					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지
-					</a>
-				</c:otherwise>
-			</c:choose>
-		</fieldset>
-		<fieldset>
-			<legend>마이페이지</legend>
-			  <c:choose>
-				<c:when test="${sessionScope.id ==null}">
-					<a href="${path}/customer/login.do">로그인</a>
-				</c:when>
-				<c:otherwise>
-					<a href="${path}/customer/view.do?id=${sessionScope.id}"> 마이페이지</a>
-				</c:otherwise>
-			</c:choose>
-		</fieldset>
-		<fieldset>
-			<legend>구입, 결제 내역</legend>
-		</fieldset>
-		<fieldset>
-			<legend>장바구니</legend>
-		</fieldset>
-	</fieldset>
-	
-	
-	
-	<fieldset>
-		<legend>공지</legend>
-		수정 기능 넣어야함.<br> <a href="writeForm">쓰기</a><br> <a
-			href="list">공지 사이트로 가기</a><br> <a href="viewForm">제목으로 찾기</a>
-
-		<table width="500" cellpadding="0" cellspacing="0" border="1">
-			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>날짜</td>
-				<td>삭제</td>
-			</tr>
-			<c:forEach items="${list}" var="dto">
-				<tr>
-					<td>${dto.articleNumber}</td>
-					<td><form action="content">
-							<a href="content?title=${dto.title}">${dto.title}</a>
-						</form></td>
-					<td>${dto.regDate}</td>
-					<td><a href="delete?title=${dto.title}">X</a></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>책 등록</legend>
-		책 등록하기<form action="bookWrite" method="post">
-			제목<input type="text" name="title"><br>
-			가격<input type="text" name="price"><br>
-			저자<input type="text" name="author"><br>
-			출판사<input type="text" name="publisher"><br>
-			대분류<input type="text" name="type"><br>
-			isbn<input type="text" name="isbn"><br>
-			소분류<input type="text" name="category"><br>
-			<input type="submit" value="OK">
-		</form>
-		<a href="bookList">책 목록 보기(대, 소분류 입력하여 검색 가눙하도록)</a><br>
-		<a href="bookUpdate">책 정보 수정하기</a><br>
-		<a href="bookDelete">책 삭제하기</a>
-	</fieldset>
-	<fieldset>
-		<legend>책 검색</legend>
-		<table width="500">
-			<form action="bookSearch" method="post">
-				<tr>
-					<td>타입</td>
-					<td>title</td>
-					<td>category</td>
-				</tr>
-				<tr>
-					<td><input type="text" name="type" size="50"></td>
-					<td><input type="text" name="title" size="50"></td>
-					<td><input type="text" name="category" size="50"> <input
-						type="submit" value="OK"></td>
-				</tr>
-			</form>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>책 분류</legend>
-		수진누나가 보내준 링크로 처리
-		<div class="tab" style="width: 130px; height: 200px;">
-			<button class="tablinks" onclick="openCity(event, 'DomesticBooks')"
-				id="defaultOpen" style="height: 50px;">국내도서</button>
-			<button class="tablinks" onclick="openCity(event, 'ForeignBooks')"
-				style="height: 50px;">외국도서</button>
-			<button class="tablinks" onclick="openCity(event, 'EBook')"
-				style="height: 50px;">EBook</button>
-			<button class="tablinks" onclick="openCity(event, 'UsedBooks')"
-				style="height: 50px;">중고책</button>
-		</div>
-
-		<div id="DomesticBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">국내도서 리스트</div>
-
-		<div id="ForeignBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">외국도서 리스트</div>
-
-		<div id="EBook" class="tabcontent"
-			style="width: 200px; height: 200px;">이북리스트</div>
-
-		<div id="UsedBooks" class="tabcontent"
-			style="width: 200px; height: 200px;">중고책 리스트</div>
-
-		<script>
-			function openCity(evt, cityName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
-				tablinks = document.getElementsByClassName("tablinks");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(
-							" active", "");
-				}
-				document.getElementById(cityName).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-			document.getElementById("defaultOpen").click();
-		</script>
-	</fieldset>
-	
-	<font color="red">dd</font>
-	<fieldset>
-		<legend>이벤트 이미지 슬라이드</legend>
-		<div class="container" style="height: 30%;">
-			<h2>Carousel Example</h2>
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-
-					<div class="item active">
-						<img src="la.jpg" alt="image1" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 첫 번째</h3>
-							<p>11111</p>
+	<header id="header"><!--header-->
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
+						</div>
+						<div class="btn-group pull-right">
 						</div>
 					</div>
-
-					<div class="item">
-						<img src="chicago.jpg" alt="image2" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 두 번째</h3>
-							<p>22222</p>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+						<c:choose>
+							<c:when test="${sessionScope.id == null}">
+								<ul class="nav navbar-nav">
+									<li><a href="starBooks.do?cmd=login"><i class="fa fa-lock"></i> Login</a></li>
+								</ul>
+							</c:when>
+							<c:when test="${sessionScope.id != null}">
+								<ul class="nav navbar-nav">
+									<li><a href="starBooks.do?cmd=myPage"><i class="fa fa-user"></i> 마이페이지</a></li>
+									<li><a href="customer/view.do?id=${sessionScope.id}"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+									<li><a href="starBooks.do?cmd=logout"><i class="fa fa-lock"></i> Logout</a></li>
+								</ul>
+							</c:when>
+						</c:choose>
 						</div>
 					</div>
-
-					<div class="item">
-						<img src="ny.jpg" alt="image3" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>이미지 세 번째</h3>
-							<p>33333</p>
-						</div>
-					</div>
-
 				</div>
-				<a class="left carousel-control" href="#myCarousel"
-					data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#myCarousel"
-					data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right"></span> <span
-					class="sr-only">Next</span>
-				</a>
+			</div>
+		</div><!--/header-middle-->
+	</header><!--/header-->
+	
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+							<li data-target="#slider-carousel" data-slide-to="3"></li>
+							<li data-target="#slider-carousel" data-slide-to="4"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-6">
+									<div class="carousel-inner-header">문재인의 운명</div>
+									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+								</div>
+								<div class="col-sm-6">
+									<img src="${resources}/images/book/문재인.jpg" class="girl img-responsive" style="height:500px;"/>
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<div class="carousel-inner-header">호모 데우스</div>
+									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+								</div>
+								<div class="col-sm-6">
+									<img src="${resources}/images/book/호모데우스.jpg" class="girl img-responsive" style="height:500px;"/>
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<div class="carousel-inner-header">언어의 온도</div>
+									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+								</div>
+								<div class="col-sm-6">
+									<img src="${resources}/images/book/언어의온도.jpg" class="girl img-responsive" style="height:500px;"/>
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<div class="carousel-inner-header">82년생 김지영</div>
+									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+								</div>
+								<div class="col-sm-6">
+									<img src="${resources}/images/book/82년생김지영.jpg" class="girl img-responsive" style="height:500px;"/>
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<div class="carousel-inner-header">보노보노처럼 살다니 다행이야</div>
+									<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
+								</div>
+								<div class="col-sm-6">
+									<img src="${resources}/images/book/보노보노.jpg" class="girl img-responsive" style="height:500px;"/>
+								</div>
+							</div>
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
 			</div>
 		</div>
-	</fieldset>
-	<fieldset>
-		<legend>최근 들어온 책</legend>
-		일단 보류<br> 하게된다면 책 들어온 순서를 int타입으로 하여 내림차순 할것
-	</fieldset>
-	<fieldset>
-		<legend>추천 책</legend>
-		일단 보류<br> 방법은 2가지가 있음<br> 1. 이벤트 형식으로 Manager가 입력<br>
-		2. 월 단위 구매 횟수가 많은 순서대로 정렬
-	</fieldset>
-	<fieldset>
-		<legend>Q&A</legend>
-		혜신누나
-	</fieldset>
-	<fieldset>
-		<legend>지도</legend>
-	</fieldset>
-	<fieldset>
-		<legend>풋터</legend>
-	</fieldset>
+	</section><!--/slider-->
 	
-<!-- </body>
-</html>
- -->
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a href="orderBook.do?type=국내도서">국내도서</a>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a href="orderBook.do?type=외국도서">외국도서</a>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a href="orderBook.do?type=E-Book">E-Book</a>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a href="orderBook.do?type=중고도서">중고도서</a>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a href="#">etc</a>
+								</div>
+							</div>
+						</div><!--/category-products-->
+					
+						<div class="brands_products"><!--brands_products-->
+							<h2> 뭘하지?</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+									<li><a href="#"> <span class="pull-right">(50)</span>???</a></li>
+									<li><a href="#"> <span class="pull-right">(56)</span>???</a></li>
+									<li><a href="#"> <span class="pull-right">(27)</span>???</a></li>
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Best Seller</h2>
+						
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${resources}/images/book/문재인.jpg" alt="" />
+										<p>문재인의 운명</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${resources}/images/book/호모데우스.jpg" alt="" />
+										<p>호모 데우스</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${resources}/images/book/언어의온도.jpg" alt="" />
+										<p>언어의 온도</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${resources}/images/book/82년생김지영.jpg" alt="" />
+										<p>82년생 김지영</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="${resources}/images/book/보노보노.jpg" alt="" />
+										<p>보노보노처럼 살다니 다행이야</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div><!--features_items-->
+					
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>e</span>-shopper</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe1.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe2.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe3.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe4.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />
+							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Online Help</a></li>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Order Status</a></li>
+								<li><a href="#">Change Location</a></li>
+								<li><a href="#">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">T-Shirt</a></li>
+								<li><a href="#">Mens</a></li>
+								<li><a href="#">Womens</a></li>
+								<li><a href="#">Gift Cards</a></li>
+								<li><a href="#">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Terms of Use</a></li>
+								<li><a href="#">Privecy Policy</a></li>
+								<li><a href="#">Refund Policy</a></li>
+								<li><a href="#">Billing System</a></li>
+								<li><a href="#">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Company Information</a></li>
+								<li><a href="#">Careers</a></li>
+								<li><a href="#">Store Location</a></li>
+								<li><a href="#">Affillate Program</a></li>
+								<li><a href="#">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
 
-
-
-<div class="jumbotron" style="height: 150px;">
-  <center>
-  <p>헤드에 들어갈 내용 - 이곳은 Header입니다</p>
-  <input type="text" name="dd" placeholder="sercher"><input type="submit" value="OK">
-  </center>
-</div>
-
-<div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">국내</a></li>
-    <li><a data-toggle="tab" href="#menu1">외국</a></li>
-    <li><a data-toggle="tab" href="#menu2">이북</a></li>
-    <li><a data-toggle="tab" href="#menu3">중고</a></li>
-  </ul>
   
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>홈키에 대한 설명</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>메뉴 1에 대한 설명</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>메뉴 2에 대한 설명</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>메뉴 3에 대한 내용
-    </div>
-  </div>
-</div>
-
+    <script src="${resources}/js/jquery.js"></script>
+	<script src="${resources}/js/bootstrap.min.js"></script>
+	<script src="${resources}/js/jquery.scrollUp.min.js"></script>
+	<script src="${resources}/js/price-range.js"></script>
+    <script src="${resources}/js/jquery.prettyPhoto.js"></script>
+    <script src="${resources}/js/main.js"></script>
 </body>
-</html> 
+</html>
