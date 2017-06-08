@@ -35,35 +35,54 @@
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
-				
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<c:set var="cm" value="${customer}"/>
-						<p class="myPage-form-header">내 계정 정보</p>
-						<form class="myPage-form" name="myPage" action="starBooks.do?cmd=modify" method="post">
-							아이디 <input type="text" name="id" id="id" disabled="disabled" value="${cm.id}">
-							암호 <input type="password" name="pwd" id="pwd" style="display:none">
-							CLASS <input type="text" name="customerClass" id="customerclass" disabled="disabled" value="${cm.customerClass}">
-							이메일 <input type="text" name="email" id="email" disabled="disabled" value="${cm.email}">
-							연락처 <input type="text" name="phone" id="phone" disabled="disabled" value="${cm.phone}">
+				<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#myPage" data-toggle="tab">계정정보</a></li>
+								<li><a href="#reviews" data-toggle="tab">구매목록</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="myPage">
+								<div>
+									<div class="login-form"><!--login form-->
+										<c:set var="cm" value="${customer}"/>
+										<form class="myPage-form" name="myPage" action="starBooks.do?cmd=modify" method="post" style="width:600px;margin:0 auto;">
+											아이디 <input type="text" name="d_id" id="d_id" disabled="disabled" value="${cm.id}">
+											<input type="hidden" name="id" id="id" value="${cm.id}">
+											암호 <input type="password" name="pwd" id="pwd" style="display:none" placeholder="기존의 암호를 입력하세요.">
+											CLASS <input type="text" name="customerClass" id="customerclass" disabled="disabled" value="${cm.customerClass}">
+											이메일 <input type="text" name="email" id="email" disabled="disabled" value="${cm.email}">
+											연락처 <input type="text" name="phone" id="phone" disabled="disabled" value="${cm.phone}">
+											
+											<input type="button" style="display:none" id="address" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+											
+											우편번호 <input type="text" name="zipcode" id="sample6_postcode" disabled="disabled" value="${cm.zipcode}">
+											주소 <input type="text" name="address1" id="sample6_address" disabled="disabled" value="${cm.address1}">
+											상세주소 <input type="text" name="address2" id="sample6_address2" disabled="disabled" value="${cm.address2}">
+											<input type="button" id="modify_user" value="개인정보 수정">
+											<input type="button" id="ok" value="수정완료" onclick="check_modify()" style="display:none">
+											<input type="button" id="cancel" value="취소" onclick="modify_user()"  style="display:none">
+											<input type="hidden" id="error" value="${error}"><!-- 암호에러 -->
+										</form>
+									</div><!--/login form-->
+								</div>
+							</div>
 							
-							<input type="button" style="display:none" id="address" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+							<div class="tab-pane fade" id="reviews" >
+							  <div style="margin:0 auto;">
+								<c:forEach var="p" items="${purchase}">
+									<ul>
+										<li><a href="#"><i class="fa fa-user"></i>${p.id}</a></li>
+										<li><a href="#"><i class="fa fa-clock-o"></i>${p.s_date}</a></li>
+									</ul>
+									<p style="margin-left:20px;margin-top:-5px;margin-bottom:20px;">책 이름 : ${p.title} &nbsp;&nbsp;&nbsp; ${p.quantity} 권</p>										
+								</c:forEach>
+							  </div>
+							</div>
 							
-							우편번호 <input type="text" name="zipcode" id="sample6_postcode" disabled="disabled" value="${cm.zipcode}">
-							주소 <input type="text" name="address1" id="sample6_address" disabled="disabled" value="${cm.address1}">
-							상세주소 <input type="text" name="address2" id="sample6_address2" disabled="disabled" value="${cm.address2}">
-							<input type="button" id="modify_user" value="개인정보 수정">
-							<input type="button" id="ok" value="수정완료" onclick="check_modify()" style="display:none">
-							<input type="button" id="cancel" value="취소" onclick="modify_user()"  style="display:none">
-							<input type="hidden" id="error" value="${error}"><!-- 암호에러 -->
-						</form>
-					</div><!--/login form-->
-				</div>
-				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-					</div>
-				</div>
-				
+						</div>
+					</div><!--/category-tab-->
 			</div>
 		</div>
 	</section><!--/form-->

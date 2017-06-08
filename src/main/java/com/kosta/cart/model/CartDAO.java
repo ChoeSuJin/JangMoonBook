@@ -2,12 +2,14 @@ package com.kosta.cart.model;
 
 import java.util.List;
 
+import com.kosta.book.admin.mInventory.model.BookInfoVO;
+
 
 public interface CartDAO {
 
 	public List<CartVO> listCart(String id);
 	public void insert(CartVO vo);
-	public void delete(String isbn);
+	public void delete(BookInfoVO vo);
 	public void update(int cartno);
 	public int sumMoney(String id);
 	public int countCart(String id, String isbn);	//�옣諛붽뎄�땲�뿉 �씠誘� �긽�뭹�씠 �떞寃쇰뒗吏� �솗�씤

@@ -10,21 +10,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			type = #{type}
 			AND category = #{category}
-		ORDER BY TITLE DESC
+		ORDER BY book 
+	</select>
+	
+	<select id="orderBookCategory" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+		WHERE category = #{category}
 	</select>
 	
 	<select id="orderBook" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE
-			type = #{type}
-		ORDER BY TITLE
+			type = #{type} and category=#{category}
+		ORDER BY book
 	</select>
 	
 	<select id="orderBookDetail" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
-		WHERE title = #{title}
+		WHERE isbn = #{isbn}
 	</select>
 	
 	<select id="searchBook" resultType="com.kosta.customer.model.BookVO">
@@ -32,7 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BOOK_INFO
 			WHERE type = #{type}
 			AND TITLE like '%${title}%'
-		ORDER BY TITLE
+		ORDER BY book 
+	</select>
+	
+	<select id="searchBookCategory" resultType="com.kosta.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+			WHERE category = #{category}
+			AND TITLE like '%${title}%'
+		ORDER BY book 
 	</select>
 	
 	<select id="allList" resultType="com.kosta.customer.model.BookVO">
@@ -65,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (TYPE = '국내도서'
 			OR TYPE = '외국도서'
 			OR TYPE = 'E-Book') 
-		ORDER BY TITLE DESC
+		ORDER BY book 
 	</select>
 	<select id="bookNoTypeSearchDao" resultType="com.kosta.customer.model.BookVO">
 		SELECT * 
@@ -77,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BOOK_INFO
 			WHERE type like '%${type}%'
 			AND TITLE like '%${title}%'
-		ORDER BY TITLE DESC
+		ORDER BY book
 		
 	</select>
 	<select id="usedSelectDao" resultType="com.kosta.customer.model.BookVO">
@@ -87,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (TYPE = '국내도서'
 			OR TYPE = '외국도서'
 			OR TYPE = 'E-Book') 
-		ORDER BY TITLE DESC
+		ORDER BY book 
 		
 	</select>
 </mapper>

@@ -44,7 +44,7 @@
 								<input type="password" name="pwd2" placeholder="비밀번호 확인">
 								<input type="text" name="email" placeholder="이메일 주소">
 								<input type="text" name="phone" placeholder="연락처 - 기호 없이 입력하세요">
-								<input type="button" id="zipcode" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 								<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
 								<input type="text" id="sample6_address" name="address1" placeholder="주소">
 								<input type="text" id="sample6_address2" name="address2" placeholder="상세주소">

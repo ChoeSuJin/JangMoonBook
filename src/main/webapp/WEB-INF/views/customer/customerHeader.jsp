@@ -7,18 +7,19 @@
     <title>StarBooks Header</title>
 </head><!--/head-->
 <body>
+	<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
 	<header id="header"><!--header-->
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
+							<a href="starBooks.do?cmd=main"><img class="logo" src="${resources}/images/home/starbooks_logo.png"></a>
 						</div>
 						<div class="btn-group pull-right">
 						</div>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8" style="margin-top:35px;">
 						<div class="shop-menu pull-right">
 						<c:choose>
 							<c:when test="${sessionScope.id == null}">
@@ -39,6 +40,36 @@
 				</div>
 			</div>
 		</div><!--/header-middle-->
+		
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="starBooks.do?cmd=main" class="active">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="">Products</a></li>
+										<li><a href="">Product Details</a></li> 
+                                    </ul>
+                                </li> 
+								<li><a href="404.html">404</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+		
 	</header><!--/header-->
 </body>
 </html>

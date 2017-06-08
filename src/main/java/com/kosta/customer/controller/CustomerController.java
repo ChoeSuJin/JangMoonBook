@@ -1,6 +1,6 @@
 package com.kosta.customer.controller;
 
-
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerVO;
 import com.kosta.customer.service.CustomerService;
 
@@ -68,8 +69,12 @@ public class CustomerController {
 	public ModelAndView main(CustomerVO vo, HttpSession session, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		Object id = session.getAttribute("id");
+		List<BookVO> bsetlist = customerService.bestSeller();
+		List<BookVO> newlist = customerService.newBook();
 		
 		if(id!=null){
+			mav.addObject("bestSeller", bsetlist);
+			mav.addObject("newBook", newlist);
 			mav.setViewName("mainPage");
 			return mav;
 		}
@@ -78,6 +83,8 @@ public class CustomerController {
 			boolean result = customerService.loginCheck(vo, session);
 			
 			if(result == true){
+				mav.addObject("bestSeller", bsetlist);
+				mav.addObject("newBook", newlist);
 				mav.setViewName("mainPage");
 			}else{
 				mav.setViewName("customer/login");
@@ -85,7 +92,9 @@ public class CustomerController {
 			}
 			return mav;
 		}
-			
+		
+		mav.addObject("bestSeller", bsetlist);
+		mav.addObject("newBook", newlist);
 		mav.setViewName("mainPage");
 		
 		return mav;	
@@ -108,16 +117,17 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		
-		if(id==null) {
+		if(id==null) { //ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			mav.addObject("myPageError", "error");
 			mav.setViewName("mainPage");
 			return mav;
 		}
 		
-		if(request.getParameter("error")!=null){	//Á¤º¸¼öÁ¤ ¾ÏÈ£°¡ Æ²·ÈÀ»½Ã
+		if(request.getParameter("error")!=null){	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			mav.addObject("error", request.getParameter("error")); 
 		}
 		
+		mav.addObject("purchase",customerService.saleList(id));
 		mav.addObject("customer", customerService.viewCustomer(id));
 		mav.setViewName("customer/myPage");
 		
@@ -150,7 +160,7 @@ public class CustomerController {
 					return "redirect:list.do";
 					
 				}else{
-					model.addAttribute("message", "»èÁ¦ ¼º°ø");
+					model.addAttribute("message", "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					model.addAttribute("dto", customerService.viewCustomer(id));
 					return "customer/view";
 				}

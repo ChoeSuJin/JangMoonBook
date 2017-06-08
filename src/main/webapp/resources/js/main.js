@@ -80,7 +80,6 @@ $('#modify_user').click(function(){
 	$('#cancel').show();
 	$('#address').show();
 	$('#sample6_postcode').attr("disabled", false);
-	$('#id').attr("disabled", false);
 	$('#email').attr("disabled", false);
 	$('#phone').attr("disabled", false);
 	$('#sample6_address').attr("disabled", false);
@@ -468,19 +467,14 @@ function check_cart() {
 	if (session == "") {
 		alert("장바구니 기능을 이용하시려면 로그인을 하세요");
 		return false;
-	} else {
-		document.cartForm.submit();
+	}
+	
+	if (confirm("장바구니에 담으시겠습니까?")) { //확인
+		return true;
+	} else { //취소
+		return false;
 	}
 	
 }
 
-function show_payment2() {	
-	$('.payment1').hide();
-	$('.payment2').show();
-	$('#nowPay').prop('checked', true);
-	$('#btnGetPay').hide();
-}
-function show_payment1() {	
-	$('.payment2').hide();
-	$('.payment1').show();
-}
+

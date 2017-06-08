@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kosta.book.admin.mInventory.model.BookInfoVO;
+
 
 @Repository
 public class CartDAOImpl implements CartDAO {
@@ -27,8 +29,8 @@ public class CartDAOImpl implements CartDAO {
 		sqlSession.insert("cart.insert",vo);
 	}
 	@Override
-	public void delete(String isbn) {
-		sqlSession.delete("cart.delete", isbn);
+	public void delete(BookInfoVO vo) {
+		sqlSession.delete("cart.delete", vo);
 	}
 
 	@Override
