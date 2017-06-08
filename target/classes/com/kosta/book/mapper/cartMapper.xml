@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<!-- 장바구니에 기존상품이 있는지 확인 -->
-	<select id="countCart" resultType="int">
+	<select id="countCart" resultType="com.kosta.cart.model.CartVO">
 		select count(*) from cart where id=#{id} and isbn=#{isbn}
 	</select>
 

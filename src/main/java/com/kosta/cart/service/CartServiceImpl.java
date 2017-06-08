@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int countCart(String id, String isbn) {
+	public CartVO countCart(String id, String isbn) {
 	
 		return cartDAO.countCart(id, isbn);
 	}

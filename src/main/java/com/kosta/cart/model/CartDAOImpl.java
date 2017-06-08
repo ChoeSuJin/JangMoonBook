@@ -46,7 +46,7 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public int countCart(String id, String isbn) {
+	public CartVO countCart(String id, String isbn) {
 
 		Map<String,Object> map=
 				new HashMap<String,Object>();

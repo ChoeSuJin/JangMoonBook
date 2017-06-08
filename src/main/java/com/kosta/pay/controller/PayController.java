@@ -123,7 +123,7 @@ public class PayController {
 	
 	@RequestMapping("pay/insertGetPay.do")
 	@ResponseBody
-	public String insertGetPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
+	public void insertGetPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
 		
 		System.out.println("pay/insertGetPay.do");
 		GetDirectVO vo = new GetDirectVO();
@@ -163,7 +163,6 @@ public class PayController {
 		dao.insertGetPay(vo);
 		dao.updateGetDirect(cart);
 		
-		return "complete";
 		
 	}
 	
@@ -171,7 +170,7 @@ public class PayController {
 	@ResponseBody
 	public String insertNowPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
 		
-		System.out.println("pay/insertGetPay.do");
+		System.out.println("pay/insertNowPay.do");
 		GetDirectVO vo = new GetDirectVO();
 		CartVO cart = new CartVO();
 		SalesListVO sale = new SalesListVO();

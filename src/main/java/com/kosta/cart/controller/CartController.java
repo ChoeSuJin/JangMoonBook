@@ -57,9 +57,9 @@ public class CartController {
 		vo.setId(id);
 		
 		System.out.println(vo.getIsbn());
-		int count=cartService.countCart(id, vo.getIsbn());
+		CartVO status =cartService.countCart(id, vo.getIsbn());
 		
-		if(count==0){
+		if(status == null || status.getStatus() != "장바구니"){
 			cartService.insert(vo);
 		}else{
 			cartService.updateCart(vo);

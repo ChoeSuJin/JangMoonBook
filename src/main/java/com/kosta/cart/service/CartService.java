@@ -11,7 +11,7 @@ public interface CartService {
 	public void delete(BookInfoVO vo);
 	public void update(int cartno);
 	public int sumMoney(String id);
-	public int countCart(String id, String isbn);
+	public CartVO countCart(String id, String isbn);
 	public void updateCart(CartVO vo);
 	public void modifyCart(CartVO vo);
 	

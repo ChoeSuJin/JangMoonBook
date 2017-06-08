@@ -420,7 +420,7 @@ function clickNowPay() {
 		    			}
 		    			alert(msg);
 		    			/* 결제완료 이후 이동하는 창은 추후 수정 요망 */
-		    			window.location.href="../main.do";
+		    			window.location.href="../book/starBooks.do?cmd=main";
 		    		} else {
 		    			alert("아직 제대로 결제가 되지 않았습니다.");
 		    		}
@@ -454,7 +454,11 @@ function clickGetPay() {
 			dataType : 'string',
 			success: function(data) {
 				alert(data);
-				window.location.href="../main.do";
+				window.location.href="../book/starBooks.do?cmd=main";
+			},
+			error : function() {
+				alert("clickGetPay error");
+				window.location.href="../book/starBooks.do?cmd=main";
 			}
 		})
 	}
