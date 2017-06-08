@@ -61,7 +61,7 @@
 				                   <tbody>
 									 <tr style="hegiht:80px;">
 									 	<td class="cart_product">
-											<a href=""><img src="${resources}/images/cart/one.png" alt=""></a>
+											<a href=""><img src="${resources}/images/book/${cart.image}.png" alt=""></a>
 										</td>
 										<td class="cart_description">
 											<h4>${cart.title}</h4>
@@ -78,7 +78,7 @@
 											</p>
 										</td>
 				                        <td class="cart_delete">
-											<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+											<a class="cart_quantity_delete" href="cartDelete.do?isbn=${cart.isbn}"><i class="fa fa-times"></i></a>
 										</td>
 										<td>
 											<a href="">상품주문</a>

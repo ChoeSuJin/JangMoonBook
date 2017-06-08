@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta.book.admin.mSales.model.SalesListVO;
 import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerDAOImpl;
 import com.kosta.customer.model.CustomerVO;
@@ -20,10 +21,14 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	
 	@Override
+	public List<SalesListVO> saleList(String id) {
+		return customerDAO.saleList(id);
+	}
+
+	@Override
 	public List<BookVO> bestSeller() {
 		return customerDAO.bestSeller();
 	}
-
 	
 	@Override
 	public List<BookVO> newBook() {

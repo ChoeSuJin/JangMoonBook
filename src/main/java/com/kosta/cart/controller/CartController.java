@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.cart.model.CartVO;
 import com.kosta.cart.service.CartService;
+import com.kosta.customer.model.CustomerVO;
 
 @Controller
 public class CartController {
@@ -66,9 +68,11 @@ public class CartController {
 	}
 	
 	@RequestMapping("cartDelete.do")
-	public String delete(@RequestParam String isbn) {
-		cartService.delete(isbn);
-		return "redirect:/cart/list.do";
+	public String delete(BookInfoVO vo, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		vo.setId(id);
+		cartService.delete(vo);
+		return "redirect:cartList.do";
 	}
 	
 	

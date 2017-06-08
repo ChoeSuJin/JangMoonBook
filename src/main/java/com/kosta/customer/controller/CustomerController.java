@@ -117,7 +117,7 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		
-		if(id==null) {
+		if(id==null) { //로그인이 안되있을때
 			mav.addObject("myPageError", "error");
 			mav.setViewName("mainPage");
 			return mav;
@@ -127,6 +127,7 @@ public class CustomerController {
 			mav.addObject("error", request.getParameter("error")); 
 		}
 		
+		mav.addObject("purchase",customerService.saleList(id));
 		mav.addObject("customer", customerService.viewCustomer(id));
 		mav.setViewName("customer/myPage");
 		

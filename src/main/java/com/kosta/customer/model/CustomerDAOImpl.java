@@ -9,19 +9,23 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kosta.book.admin.mSales.model.SalesListVO;
+
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
 
 	@Inject
 	SqlSession sqlSession;
 	
-	
-	
+	@Override
+	public List<SalesListVO> saleList(String id) {
+		return sqlSession.selectList("customer.saleList", id);
+	}
+
 	@Override
 	public List<BookVO> bestSeller() {
 		return sqlSession.selectList("customer.bestSeller");
 	}
-
 	
 	@Override
 	public List<BookVO> newBook() {
@@ -85,8 +89,5 @@ public class CustomerDAOImpl implements CustomerDAO {
 		if(count==1) result = true;
 		return result;
 	}
-
-	
-	
 
 }

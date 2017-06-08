@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from book_info order by book desc
 	</select>
 	
+	<select id="saleList" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
+		select * from salelist where id=#{id} order by s_date
+	</select>
+	
 	<select id="getClass" resultType="String">
 		select customerClass
 		from customer

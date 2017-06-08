@@ -5,7 +5,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Abel);
-
+.logo{
+	width:230px;
+}
 body {
   font-family:'Hanna', serif;
   background:;
@@ -1448,7 +1450,8 @@ h2.title {
 }
 
 .myPage-form-header {
-	text-align: center;
+	width: 100%;
+	margin:0 auto;
 	font-size: 1.8em;
 }
 .login-form #address{
@@ -2574,6 +2577,4 @@ h2.title {
 	margin-left: 36px;
 	font-size: 1.5em;
 }
-.payment2{
-	display:none;
-}
+

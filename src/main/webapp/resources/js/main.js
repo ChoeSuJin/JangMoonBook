@@ -79,7 +79,6 @@ $('#modify_user').click(function(){
 	$('#cancel').show();
 	$('#address').show();
 	$('#sample6_postcode').attr("disabled", false);
-	$('#id').attr("disabled", false);
 	$('#email').attr("disabled", false);
 	$('#phone').attr("disabled", false);
 	$('#sample6_address').attr("disabled", false);
@@ -477,13 +476,3 @@ function check_cart() {
 	
 }
 
-function show_payment2() {	
-	$('.payment1').hide();
-	$('.payment2').show();
-	$('#nowPay').prop('checked', true);
-	$('#btnGetPay').hide();
-}
-function show_payment1() {	
-	$('.payment2').hide();
-	$('.payment1').show();
-}

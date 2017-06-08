@@ -94,55 +94,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=국내도서">국내도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=외국도서">외국도서</a>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=E-Book">E-Book</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=중고도서">중고도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="#">etc</a>
-								</div>
-							</div>
-						</div><!--/category-products-->
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2> 분류별 검색</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<li><a href="orderBookCategory.do?category=000"> <span class="pull-right">(000)</span>총류</a></li>
-									<li><a href="orderBookCategory.do?category=100"> <span class="pull-right">(100)</span>철학</a></li>
-									<li><a href="orderBookCategory.do?category=200"> <span class="pull-right">(200)</span>종교</a></li>
-									<li><a href="orderBookCategory.do?category=300"> <span class="pull-right">(300)</span>사회과학</a></li>
-									<li><a href="orderBookCategory.do?category=400"> <span class="pull-right">(400)</span>순수과학</a></li>
-									<li><a href="orderBookCategory.do?category=500"> <span class="pull-right">(500)</span>기술과학</a></li>
-									<li><a href="orderBookCategory.do?category=600"> <span class="pull-right">(600)</span>예술</a></li>
-									<li><a href="orderBookCategory.do?category=700"> <span class="pull-right">(700)</span>언어</a></li>
-									<li><a href="orderBookCategory.do?category=800"> <span class="pull-right">(800)</span>문학</a></li>
-									<li><a href="orderBookCategory.do?category=900"> <span class="pull-right">(900)</span>역사</a></li>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-					</div>
+					<jsp:include page="customer/sidebar.jsp"/>
 				</div>
 				
 				<div class="col-sm-9 padding-right">
@@ -183,7 +135,7 @@
 					</div><!--features_items-->
 					
 					<div class="recommended_items"><!--recommended_items-->
-						<h2 class="title text-center">recommended items</h2>
+						<h2 class="title text-center">NEW BOOK</h2>
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
@@ -194,8 +146,15 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<p>${nb.title}</p>
+													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													  <c:choose>
+												     	<c:when test="${fn:length(nb.title) > 14}">
+												    	  <p>${fn:substring(nb.title,0,13)}...</p>
+												    	</c:when>
+												    	<c:otherwise>
+												   		  <p>${nb.title}</p>
+												    	</c:otherwise> 
+													  </c:choose>
 													 <form action="cartInsert.do" method="post" name="cartForm">
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">
@@ -219,8 +178,15 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<p>${nb.title}</p>
+													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													  <c:choose>
+												     	<c:when test="${fn:length(nb.title) > 14}">
+												    	  <p>${fn:substring(nb.title,0,13)}...</p>
+												    	</c:when>
+												    	<c:otherwise>
+												   		  <p>${nb.title}</p>
+												    	</c:otherwise> 
+													  </c:choose>
 													 <form action="cartInsert.do" method="post" name="cartForm">
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">
@@ -243,8 +209,15 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<p>${nb.title}</p>
+													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													  <c:choose>
+												     	<c:when test="${fn:length(nb.title) > 14}">
+												    	  <p>${fn:substring(nb.title,0,13)}...</p>
+												    	</c:when>
+												    	<c:otherwise>
+												   		  <p>${nb.title}</p>
+												    	</c:otherwise> 
+													  </c:choose>
 													 <form action="cartInsert.do" method="post" name="cartForm">
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">

@@ -30,56 +30,20 @@
 	<jsp:include page="customerHeader.jsp" />
 	<!-- header -->
 	
-	<section style="margin-top:100px;">
+	<section id="advertisement">
+		<div class="container">
+			<img src="${resources}/images/home/starbooks_logo.png" alt="logo" style="height:230px;"/>
+		</div>
+	</section>
+	
+	<section>
 		<div class="container">
 			<div class="row">
 				<!-- category -->
 				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=국내도서">국내도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=외국도서">외국도서</a>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=E-Book">E-Book</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=중고도서">중고도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="#">etc</a>
-								</div>
-							</div>
-						</div>
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2> 뭘하지?</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>???</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					<jsp:include page="sidebar.jsp"/>
 				</div>
 				<!-- category -->
-				
 				
  				<div class="col-sm-9 padding-right">
 					<!-- BookDetail -->
@@ -87,7 +51,7 @@
 					<div class="product-details">
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="${resources}/images/book/book.jpg" alt="" />
+								<img src="${resources}/images/book/${detail.book}.jpg" alt="" />
 							</div>
 						</div>
 						<div class="col-sm-7">
@@ -100,6 +64,8 @@
 									<form action="cartInsert.do" method="post">
 										<input type="text" name="amount" value="1" />
 										<input type="hidden" name="isbn" value="${detail.isbn}">
+										<input type="hidden" name="title" value="${detail.title}">
+										<input type="hidden" name="price" value="${detail.price}">
 										<input type="hidden" name="status" value="장바구니">
 										<input type="hidden" id="session" name="session" value="${sessionScope.id}">
 										<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">

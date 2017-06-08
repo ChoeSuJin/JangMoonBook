@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.cart.model.CartDAO;
 import com.kosta.cart.model.CartVO;
 
@@ -28,8 +29,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void delete(String isbn) {
-		 cartDAO.delete(isbn);
+	public void delete(BookInfoVO vo) {
+		 cartDAO.delete(vo);
 	}
 
 	@Override

@@ -2,8 +2,12 @@ package com.kosta.customer.model;
 
 import java.util.List;
 
+import com.kosta.book.admin.mSales.model.SalesListVO;
+
 public interface CustomerDAO {
 
+	
+	public List<SalesListVO> saleList(String id);  
 	public List<BookVO> bestSeller();  
 	public List<BookVO> newBook();  
 	public boolean loginCheck(CustomerVO vo);  
