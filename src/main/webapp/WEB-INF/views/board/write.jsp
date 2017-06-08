@@ -15,15 +15,15 @@
 $(document).ready(function(){
 	
 	$("#btnSave").click(function(){
-		var writer=document.form1.writer.value;
+		//var writer=document.form1.writer.value;
 		var content=document.form1.content.value;
 		var title=document.form1.title.value;
 		//var title=$("#title").val();
-		if(writer==""){
+		/* if(writer==""){
 			alert("이름을 입력하세요");
 			document.form1.writer.focus();
 			return;
-		} 
+		}  */
 		if(content==""){
 			alert("내용을 입력하세요");
 			document.form1.content.focus();
@@ -46,9 +46,6 @@ $(document).ready(function(){
 <form id = "form1" name ="form1" method = "post" action="${path}/board/insert.do">
 	<div> 제목
 		<input name ="title"  size = "50">
-	</div>
-	<div> 작성자
-		<input name = "writer" value="${ sessionScope.id }" readonly="readonly">
 	</div>
 	<div> 내용
 		<textarea name = "content" rows="10" cols="50"></textarea>	
