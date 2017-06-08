@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.board.model.BoardVO;
 import com.kosta.board.service.BoardServiceImpl;
-import com.kosta.board.service.ReplyServiceImpl;
 
 @Controller
 public class BoardController {
@@ -22,17 +21,12 @@ public class BoardController {
 	@Inject
 	BoardServiceImpl boardService;
 	
-	@Inject
-	ReplyServiceImpl replyService;
-	
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
 		// 게시물 수
 		int count=boardService.countArticle(searchOption, keyword);
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
-		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -57,12 +51,11 @@ public class BoardController {
 	
 	@RequestMapping("/board/view.do")
 	public ModelAndView view(@RequestParam int bno) throws Exception{
-		//議고쉶�닔 利앷�泥섎━
 		boardService.increaseViewcnt(bno);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/view");
 		mav.addObject("dto", boardService.read(bno));
-		mav.addObject("reply", replyService.view(bno));
 		return mav;
 	}
 	

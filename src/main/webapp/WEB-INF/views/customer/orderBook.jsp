@@ -24,15 +24,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
     <link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
-    <c:set var="contents" value="${ contents }"/>
-	<c:set var="contentsPerPage" value="20" />
-	<c:set var="PagePerBlock" value="5" />
-	<c:set var="allPage" value="${ contents / contenstPerPage }" />
-	<c:set var="allBlock" value="${ allPage / PagePerBlock }" />
-	<c:set var="currentBlock" value="${ currentBlock }"/>
-	<c:set var="currentPage" value="${ currentPage }"/>
-	<c:set var="start" value="${ start }"/>
-	<c:set var="end" value="${ end }"/>
+    
 </head><!--/head-->
 
 <body>
@@ -42,7 +34,7 @@
 	
 	<section id="advertisement">
 		<div class="container">
-			<img src="${resources}/images/shop/advertisement.jpg" alt="" />
+			<img src="${resources}/images/home/starbooks_logo.png" alt="logo" style="height:230px;"/>
 		</div>
 	</section>
 	
@@ -50,48 +42,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=국내도서">국내도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=외국도서">외국도서</a>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=E-Book">E-Book</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="orderBook.do?type=중고도서">중고도서</a>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a href="#">etc</a>
-								</div>
-							</div>
-						</div><!--/category-products-->
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2> 뭘하지?</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>???</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>???</a></li>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-					</div>
+					<jsp:include page="sidebar.jsp"/>
 				</div>
 				
 				<c:set var="bookType" value="${booktype}"/>
@@ -106,39 +57,38 @@
 							<input type="submit" value="검색">
 						</form><br><br><br>
 						
-						<c:forEach var="book"  items="${ list }" begin="${ start }" end="${ end }">
+						<c:forEach var="book" items="${ list }" begin="${ start }" end="${ end }">
 							<div class="col-sm-4">
 								<div class="product-image-wrapper">
 									<div class="single-products">
 										<div class="productinfo text-center">
-											<a href="orderBookDetail.do?title=${book.title}"><img src="${resources}/images/book/book.jpg" alt="" /></a>
-											<h4>${book.price}원</h4>
+											<a href="orderBookDetail.do?isbn=${book.isbn}"><img src="${resources}/images/book/${book.book}.jpg" alt="" /></a>
 											  <c:choose>
-									           <c:when test="${fn:length(book.title) > 14}">
-									            <p>${fn:substring(book.title,0,13)}...</p>
+									           <c:when test="${fn:length(book.title) >= 16}">
+									            <p style="font-size:1.2em;">${fn:substring(book.title,0,16)}...</p>
 									           </c:when>
 									           <c:otherwise>
-									            <p>${book.title}</p>
+									            <p style="font-size:1.2em;">${book.title}</p>
 									           </c:otherwise> 
 									          </c:choose>
+											<p style="color:skyblue">${book.price}원</p>
 									        <form action="cartInsert.do" method="post" name="cartForm">
-												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="isbn" value="${book.isbn}">
 												<input type="hidden" name="title" value="${book.title}">
-												<input type="hidden" name="image" value="${book.image}">
 												<input type="hidden" name="price" value="${book.price}">
+												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
-												<input type="button" onclick="check_cart()" class="btn btn-default add-to-cart" value="장바구니">
+												<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
 											</form>
 										</div>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-						<ul class="pagination">
+						<ul class="pagination" style="margin-left:30px;">
 							<c:if test="${beginB eq 'no'}">
-							   <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
+							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
 							</c:if>
 							<c:forEach var="i" begin="${begin}" end="${suend}">
 								<li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${i}&currentBlock=${currentBlock}">${i}</a></li>

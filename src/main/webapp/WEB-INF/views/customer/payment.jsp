@@ -24,7 +24,6 @@
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
   	<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
   	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-  	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js" ></script>
 </head><!--/head-->
 
 <body>

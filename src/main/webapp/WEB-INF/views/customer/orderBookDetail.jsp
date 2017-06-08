@@ -30,12 +30,6 @@
 	<jsp:include page="customerHeader.jsp" />
 	<!-- header -->
 	
-	<section id="advertisement">
-		<div class="container">
-			<img src="${resources}/images/home/starbooks_logo.png" alt="logo" style="height:230px;"/>
-		</div>
-	</section>
-	
 	<section>
 		<div class="container">
 			<div class="row">
@@ -54,6 +48,7 @@
 								<img src="${resources}/images/book/${detail.book}.jpg" alt="" />
 							</div>
 						</div>
+						${detail.book}
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 								<img src="${resources}/images/product-details/new.jpg" class="newarrival" alt="" />

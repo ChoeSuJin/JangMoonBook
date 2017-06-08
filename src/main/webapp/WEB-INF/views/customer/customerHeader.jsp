@@ -49,20 +49,12 @@
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
 								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="starBooks.do?cmd=main" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="">Products</a></li>
-										<li><a href="">Product Details</a></li> 
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">404</a></li>
+								<li><a href="board/list.do">QnA</a></li>
 							</ul>
 						</div>
 					</div>

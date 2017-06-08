@@ -1,4 +1,3 @@
-
 /*price range*/
 
  $('#sl2').slider();
@@ -476,5 +475,4 @@ function check_cart() {
 	}
 	
 }
-
 
