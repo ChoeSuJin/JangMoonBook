@@ -51,6 +51,7 @@ $(document).ready(function(){
 		<textarea name = "content" rows="10" cols="50"></textarea>	
 	</div>
 	<div style="width:300px; text-align:center">
+		<input type="hidden" name="writer" value="${ sessionScope.id }">
 		<button type = "button" id="btnSave">글쓰기</button>
 	</div>
 </form>

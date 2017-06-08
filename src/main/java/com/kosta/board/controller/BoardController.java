@@ -14,12 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.board.model.BoardVO;
 import com.kosta.board.service.BoardServiceImpl;
+import com.kosta.board.service.ReplyServiceImpl;
 
 @Controller
 public class BoardController {
 
 	@Inject
 	BoardServiceImpl boardService;
+	
+	@Inject
+	ReplyServiceImpl replyService;
 	
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
@@ -55,10 +59,10 @@ public class BoardController {
 	public ModelAndView view(@RequestParam int bno) throws Exception{
 		//議고쉶�닔 利앷�泥섎━
 		boardService.increaseViewcnt(bno);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/view");
 		mav.addObject("dto", boardService.read(bno));
+		mav.addObject("reply", replyService.view(bno));
 		return mav;
 	}
 	

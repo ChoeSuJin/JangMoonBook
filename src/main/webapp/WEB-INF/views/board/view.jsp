@@ -125,25 +125,19 @@ $(document).ready(function(){
 
 	<hr>
 	
-	<%-- <div> 관리자 답변
-	${dto.replytext}
-	
-	</div> 
-	 --%>
-	
-<%-- 
-		관리자아이디만 볼수있음!!!
-	
-	<c:if test="${sessionScope.id == 관리자 아이디 }">	
-		<textarea rows="5" cols="80" id="replytext" name="replytext" placeholder="댓글을 작성하세요"></textarea>
-		<br>
-		<button type="button" id="btnReply">댓글쓰기</button>&nbsp;
-		
-		<button type = "button" id ="btnReplyUpdate" name ="btnReplyUpdate">수정하기</button>&nbsp;
-		<button type = "button" id = "btnReplyDelete" name = "btnReplyDelete">삭제하기</button>&nbsp;
-	
+	<c:if test="${ reply ==  null }">
+		<div>
+			관리자 답변이 등록되지않았어용
+		</div>
 	</c:if>
-	 --%>
+	
+	<c:if test="${ reply != null }">
+		<div> 관리자 답변
+		${ reply.replytext }
+		
+		</div>		
+	</c:if>
+	
 	 
 </div>
 </form>
