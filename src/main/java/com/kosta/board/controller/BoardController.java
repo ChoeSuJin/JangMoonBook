@@ -27,6 +27,12 @@ public class BoardController {
 		int count=boardService.countArticle(searchOption, keyword);
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getTitle());
+			
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
 		Map<String,Object> map = new HashMap<String,Object>();

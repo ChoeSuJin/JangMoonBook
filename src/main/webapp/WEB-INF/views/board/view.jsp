@@ -81,6 +81,11 @@ $(document).ready(function(){
 		<button type = "button" id = "btnDelete">삭제하기</button>
 		
 	</div>
+	<div> 관리자 답변
+		${dto.replytext}
+	
+	</div> 
+	
 </form>
 </body>
 </html>

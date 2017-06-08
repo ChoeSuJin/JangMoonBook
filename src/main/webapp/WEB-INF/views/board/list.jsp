@@ -47,7 +47,7 @@ $(document).ready(function(){
 			<th>날짜</th>
 			<th>조회수</th>
 		</tr>
-		<c:forEach var="list" items="${list}">	
+		<c:forEach var="list" items="${map.list}">	
 			<tr>
 				<th>${list.bno}</th>
 				<th><a href="${path}/board/view.do?bno=${list.bno}">${list.title}</a></th>
