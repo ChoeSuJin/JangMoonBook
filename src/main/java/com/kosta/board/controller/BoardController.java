@@ -28,10 +28,6 @@ public class BoardController {
 		
 		List<BoardVO> list = boardService.listAll( searchOption, keyword);
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getTitle());
-			
-		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/list");
