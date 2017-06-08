@@ -48,7 +48,7 @@ $(document).ready(function(){
 		<input name ="title"  size = "50">
 	</div>
 	<div> 작성자
-		<input name = "writer">
+		<input name = "writer" value="${ sessionScope.id }" readonly="readonly">
 	</div>
 	<div> 내용
 		<textarea name = "content" rows="10" cols="50"></textarea>	
