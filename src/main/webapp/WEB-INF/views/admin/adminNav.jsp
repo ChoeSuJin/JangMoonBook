@@ -6,12 +6,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 메인</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="${resources}/js/main.js"></script>
+  <script type="text/javascript">
+  	$(document).ready(function() {
+  		var id = '<c:out value="${sessionScope.user.name}" />';
+		var initLogin = '<c:out value="${sessionScope.isInitLogin}" />';
+  		notifyAdminDoList(id, initLogin);
+  		var todayNoticeCount = '<c:out value="${todayNotice}"/>';
+  		notifyTodayAdminNotice(initLogin, todayNoticeCount);
+  		<c:set value="1" var="isInitLogin" scope="session"/>
+  		
+  		<sec:authorize access="hasAnyRole('ROLE_GOLD')">
+  			
+	  	</sec:authorize>
+	  	
+	  	<sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
+		  	var emergencyBook = ${emergencyBook};
+	  		notifyEmergencyBook(initLogin, emergencyBook);
+	  		
+	  		var directBook = ${ directBook };
+	  		notifyDirectBook(initLogin, directBook);
+	 	</sec:authorize>
+	 	
+    	<sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
+    
+		</sec:authorize>
+		
+		<sec:authorize access="hasAnyRole('ROLE_EBOOK')">
+      		var ebookCount = ${requestEbook};
+      		notifyRequestEbook(initLogin, ebookCount);
+		</sec:authorize>
+	  	<sec:authorize access="hasAnyRole('ROLE_WRITER')">
+	  		var qnaCount = ${ notDoQnA };
+	  		notifyDoQnA(initLogin, qnaCount);
+		</sec:authorize>
+		
+		<sec:authorize access="hasAnyRole('ROLE_ONLINE')">
+	  		var emergencyBook = ${emergencyBook};
+	  		notifyEmergencyBook(initLogin, emergencyBook);
+	 	</sec:authorize>
+  			
+  	});
+  </script>
 </head>
 <body>
 <br>
@@ -71,7 +114,6 @@
 		<div class="container">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#home">본사 공지사항</a></li>
-				<li><a data-toggle="tab" href="#menu1">뭐 할 까 ?</a></li>
 			</ul>
 
 			<div class="tab-content" style="margin-left: 5%;">
@@ -104,13 +146,9 @@
 				
 					</div>
 				</div>
-				
-			<div id="menu1" class="tab-pane fade">
-				<h3>뭐 할 까 ?</h3>
-					??????
-			</div>
 			</div>
 		</div>
 	</c:if>
+	
 </body>
 </html>

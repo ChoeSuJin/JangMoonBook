@@ -20,7 +20,7 @@ public class AdminLoginController {
 	
 	@Autowired
 	SqlSession sqlSession;
-	//·Î±×ÀÎ Æû
+	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping("/adminLoginForm.do")
 	public String loginForm(HttpSession session) {
 		
@@ -33,7 +33,7 @@ public class AdminLoginController {
 		}
 		
 	}
-	//·Î±×ÀÎ ¼º°ø
+	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminNav.do")
 	public String mainForm(Principal principal, HttpServletRequest request) {
 
@@ -48,14 +48,31 @@ public class AdminLoginController {
 		AdminNoticeDAO dao2 = sqlSession.getMapper(AdminNoticeDAO.class);
 		List<AdminNoticeVO> list = dao2.getAdminNotice();
 		
+		if (session.getAttribute("isInitLogin") == null) {
+			session.setAttribute("isInitLogin", 0);
+		}
+		
+		String branch = vo.getBranch();
+		
+		int todayAdminNotice = dao2.getTodayNotice();
+		int notDoQnA = dao.getCountNotDoQnA();
+		int emergencyBook = dao.getCountEmergencyBook(branch);
+		int directBook = dao.getCountDirectBook(branch);
+		int requestEbook = dao.getCountRequestEbook();
 		
 		session.setAttribute("user", vo);
 		String main = "main";
 		request.setAttribute("main", main);
 		request.setAttribute("adminNotice", list);
+		request.setAttribute("todayNotice", todayAdminNotice);
+		request.setAttribute("notDoQnA", notDoQnA);
+		request.setAttribute("emergencyBook", emergencyBook);
+		request.setAttribute("directBook", directBook);
+		request.setAttribute("requestEbook", requestEbook);
+		
 		return "/admin/adminNav";
 	}
-	//·Î±×ÀÎ ½ÇÆÐ
+	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminLoginError.do")
 	public String loginError(HttpServletRequest request){
 		String error = "error";

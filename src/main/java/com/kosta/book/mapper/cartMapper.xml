@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update cart set amount=#{amount} where id=#{id} and isbn=#{isbn}
 	</update>
 	
-	<select id="getDiscountRate" resultType="">
+	<select id="getDiscountRate" resultType="String">
 		select discount from customerclass where name = (select customerclass from customer where id = #{ id })
 	</select>
 	

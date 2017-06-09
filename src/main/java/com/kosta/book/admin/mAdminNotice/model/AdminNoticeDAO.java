@@ -9,5 +9,7 @@ public interface AdminNoticeDAO {
 	public List<AdminNoticeVO> getAdminNotice();
 	
 	public void deleteAdminNotice(AdminNoticeVO vo);
+	
+	public int getTodayNotice();
 
 }

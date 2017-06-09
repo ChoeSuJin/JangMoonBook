@@ -480,3 +480,173 @@ function check_cart() {
 	
 }
 
+/*Admin 웹 푸시 알림 관련 처리*/
+
+function notifyAdminDoList(id, isInitLogin) {
+	if (isInitLogin == 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification("Hi slave " + id +"!");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification("Hi slave " + id +"!");
+				}
+			});
+		}
+		return 1;
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyTodayAdminNotice(isInitLogin, todayCount) {
+	if (isInitLogin == 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification("오늘 등록된 " + todayCount + "건의 사내 공지사항");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification("오늘 등록된 " + todayCount + "건의 사내 공지사항");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyRequestEbook(isInitLogin, ebookCount) {
+	if (ebookCount != 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification(ebookCount + "건의 새로운 Ebook 대여 요청");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification(ebookCount + "건의 새로운 Ebook 대여 요청");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyDoQnA(isInitLogin, qnaCount) {
+	if (qnaCount != 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification(qnaCount + "건의 미처리된 QnA");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification(qnaCount + "건의 미처리된 QnA");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyEmergencyBook(isInitLogin, emergencyBook) {
+	if (emergencyBook != 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification(emergencyBook + "건의 입고요망");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification(emergencyBook + "건의 입고요망");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyDirectBook(isInitLogin, directBook) {
+	if (directBook != 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification("오늘 " + directBook + "건 수령 예정");
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification("오늘 " + directBook + "건 수령 예정");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
