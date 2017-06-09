@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kosta.book.admin.mOnlineInventory.model.OnlineInventoryDAO">
+	<select id="selectEmergency" resultType="com.kosta.book.admin.mOnlineInventory.model.InventoryVO">
+		<![CDATA[select * from inventory where branch = 'online' and quantity <= 3 order by quantity]]>
+	</select>
+	
+	<select id="selectNormal" resultType="com.kosta.book.admin.mOnlineInventory.model.InventoryVO">
+		select * from inventory where branch = 'online' and quantity > 3 order by quantity
+	</select>
+	
+	<select id="selectOrderList" resultType="com.kosta.book.admin.mOnlineInventory.model.OrderListVO">
+		select * from orderList where branch = 'online'
+	</select>
+	
+	<select id="getCost" resultType="Integer">
+		select price from book_info where isbn = #{isbn}
+	</select>
+	
+	<select id="getPublisher" resultType="String">
+		select publisher from book_info where isbn = #{isbn}
+	</select>
+	
+	<insert id="insertOrderList">
+		insert into orderlist values('${title}', '${publisher}', '${quantity }', 'online', '${cost}', TO_CHAR(sysdate, 'YYYYMMDD'), '${isbn}', orderNumber.nextval)
+	</insert>
+	
+	<update id="orderConfirm">
+		update inventory set quantity = quantity + '${quantity}' where isbn = '${ isbn }' and branch = 'online'
+	</update>
+	
+	<delete id="deleteOrder">
+		delete orderlist where ordernumber = '${ orderNumber }'
+	</delete>
+
+	
+</mapper>

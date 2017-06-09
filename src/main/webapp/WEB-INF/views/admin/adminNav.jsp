@@ -52,6 +52,10 @@
 	  	<li><a href="mQNABoard.do">QnA게시판</a></li>
 	  	<li><a href="mCustomerNotice.do">고객공지사항관리</a></li>
 	  </sec:authorize>
+	  <sec:authorize access="hasAnyRole('ROLE_ONLINE')">
+	  	<li><a href="mOnlineSale.do">온라인판매보기</a></li>
+	  	<li><a href="mOnlineInventory.do">온라인재고관리</a></li>
+	  </sec:authorize>
       </ul>
       <c:url value="/j_spring_security_logout" var="logoutUrl"/>
       <ul class="nav navbar-nav navbar-right">

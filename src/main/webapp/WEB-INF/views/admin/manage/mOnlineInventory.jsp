@@ -5,22 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>재 고 관 리</title>
+<title>온라인 재고관리</title>
 	<link href="${resources}/css/responsive.css?ver=1" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="${resources}/css/bootstrap.min.css?ver=1" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		function button_event() {
-			if (confirm("등록 하시겠습니까 ?")) { //확인
-				$('#insert').submit();
-			} else { //취소
-				return false;
-			}
-		}
-  </script>
 </head>
 
 <script>
@@ -45,7 +36,7 @@ function movePage(block, page) {
 	var branch = '<c:out value="${sessionScope.user.branch}" />';
 	$.ajax({
         type : "POST",
-        url : "moveInventoryPage.do",
+        url : "moveOnlineInventoryPage.do",
         data : {"currentPage" : page,
         		"currentBlock" : block,
         		"branch" : branch},
@@ -76,7 +67,7 @@ function moveBlock(block) {
 	var branch = '<c:out value="${sessionScope.user.branch}" />';
 	$.ajax({
 	    type : "POST",
-	    url : "moveInventoryBlock.do",
+	    url : "moveOnlineInventoryBlock.do",
 	    data : {"Block" : block,
 	    		"branch" : branch},
 	    dataType : "JSON",
@@ -131,8 +122,6 @@ function moveBlock(block) {
 			<li class="active"><a data-toggle="tab" href="#emergency">주문요망</a></li>
 			<li><a data-toggle="tab" href="#normal">재고확인</a></li>
 			<li><a data-toggle="tab" href="#orderList">주문확인</a></li>
-			<li><a data-toggle="tab" href="#newBookInsert">신책 등록</a></li>
-			<li><a data-toggle="tab" href="#getDirectList">수령 확인</a></li>
 		</ul>
 		<br>
 		<div class="tab-content" style="margin-left:5%;">
@@ -169,7 +158,7 @@ function moveBlock(block) {
 												<h4 class="modal-title">추가 주문하기</h4>
 											</div>
 											
-											<form action="orderInven.do" method="post">
+											<form action="orderOnlineInven.do" method="post">
 												<div class="modal-body">
 													<p style="font-size:1.3em;float:left;">${ list.isbn }</p>
 													<p style="font-size:1.3em;margin-left:40px;float:left;">${ list.title }</p>
@@ -239,7 +228,7 @@ function moveBlock(block) {
 							<ul class="pagination" style="text-align: center;">
 						
 							<c:if test="${ allCount < contentPerPage }">
-								<li><a href="mInventory.do">1</a></li>
+								<li><a href="mOnlineInventory.do">1</a></li>
 							</c:if>
 							
 							<c:if test="${ allCount >= contentPerPage }">
@@ -265,7 +254,7 @@ function moveBlock(block) {
 			<div id="orderList" class="tab-pane fade">
 				<h3>주문내역확인</h3>
 				<br>
-				<form action="orderConfirm.do" method="post">
+				<form action="orderOnlineConfirm.do" method="post">
 				<table class="table table-condensed">
 					<tr>
 						<th>주문번호</th>
@@ -305,86 +294,6 @@ function moveBlock(block) {
 
 			</div>
 			
-			<div id="newBookInsert" class="tab-pane fade">
-				<h3>신책 등록</h3>
-				<br>
-				<form action="insertNewBook.do" method="post" id="insert" enctype="multipart/form-data">
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">책 이름</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="title" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">가격</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="price" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">저자</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="author" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">출판사</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="publisher" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">구분</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="type" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">ISBN</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="isbn" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">카테고리</span> 
-						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
-							   name="category" placeholder="Additional Info">
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" style="width:100px;height:40px;">이미지등록</span> 
-						<input style="height:40px;width:300px;" id="msg" type="file" class="form-control" 
-							   name="file" placeholder="Additional Info">
-					</div>
-					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기" onclick="button_event();">
-				</form>
-			</div>
-			<div id="getDirectList" class="tab-pane fade">
-				<table class="table table-condensed">
-					<th>orderno</th>
-					<th>isbn</th>
-					<th>title</th>
-					<th>quantity</th>
-					<th>id</th>
-					<th>getDate</th>
-					<th>isPaid</th>
-					<th>수령확인</th>
-					<c:forEach items="${ list4 }" var="list">
-						<tr>
-							<td>${ list.orderno }</td>
-							<td>${ list.isbn }</td>
-							<td>${ list.title }</td>
-							<td>${ list.quantity }</td>
-							<td>${ list.id }</td>
-							<td>${ list.getDate }</td>
-							<td>${ list.isPaid }</td>
-							<td>
-								<form action="proGetDirect.do" method="post">
-									<input type="hidden" name="orderno" value="${ list.orderno }">
-									<input type="hidden" name="branch" value="${ list.branch }">
-									<input type="hidden" name="isbn" value="${ list.isbn }">
-									<input type="hidden" name="quantity" value="${ list.quantity }">
-									<input type="hidden" name="id" value="${ list.id }">
-									<input type="submit" name="수령확인">
-								</form>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>		
-			</div>
 		
 		</div>
 	</div>
