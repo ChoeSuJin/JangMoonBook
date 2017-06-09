@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "board">
 
 	<select id = "listAll" resultType="com.kosta.board.model.BoardVO">
-		select bno, title, content ,b.regdate, viewcnt, id from board b, customer c
+		select bno, title, writer, content ,b.regdate, viewcnt, id from board b, customer c
 		<include refid="search" />
         order by bno desc, regdate desc 
 	</select>

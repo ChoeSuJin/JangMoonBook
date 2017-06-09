@@ -47,6 +47,10 @@
 				
 				<c:set var="bookType" value="${booktype}"/>
 				
+				<!-- img 랜덤으로 가져오기 위한 것 -->
+				<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+				<!-- img 랜덤으로 가져오기 위한 것 -->
+				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">${booktype}</h2>
@@ -62,7 +66,7 @@
 								<div class="product-image-wrapper">
 									<div class="single-products">
 										<div class="productinfo text-center">
-											<a href="orderBookDetail.do?isbn=${book.isbn}"><img src="${resources}/images/book/${book.book}.jpg" alt="" /></a>
+											<a href="orderBookDetail.do?isbn=${book.isbn}"><img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" /></a>
 											  <c:choose>
 									           <c:when test="${fn:length(book.title) >= 16}">
 									            <p style="font-size:1.2em;">${fn:substring(book.title,0,16)}...</p>
@@ -76,6 +80,7 @@
 												<input type="hidden" name="isbn" value="${book.isbn}">
 												<input type="hidden" name="title" value="${book.title}">
 												<input type="hidden" name="price" value="${book.price}">
+												<input type="hidden" name="image" value="${book.image}">
 												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -86,18 +91,18 @@
 								</div>
 							</div>
 						</c:forEach>
-						<ul class="pagination" style="margin-left:30px;">
-							<c:if test="${beginB eq 'no'}">
-							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
-							</c:if>
-							<c:forEach var="i" begin="${begin}" end="${suend}">
-								<li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${i}&currentBlock=${currentBlock}">${i}</a></li>
-							</c:forEach>
-							<c:if test="${suendB eq 'no'}">
-							    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5+1}&currentBlock=${currentBlock+1}">▶</a></li>
-							</c:if>
-						</ul>
 					</div><!--features_items-->
+					<ul class="pagination" style="margin-left:30px;">
+						<c:if test="${beginB eq 'no'}">
+						    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5-5}&currentBlock=${currentBlock-1}">◀</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${begin}" end="${suend}">
+							<li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${i}&currentBlock=${currentBlock}">${i}</a></li>
+						</c:forEach>
+						<c:if test="${suendB eq 'no'}">
+						    <li><a href="http://${ pageContext.request.serverName}:${ pageContext.request.serverPort}${pageContext.request.contextPath}${uri}?type=${type}&category=${category}&currentPage=${currentBlock*5+1}&currentBlock=${currentBlock+1}">▶</a></li>
+						</c:if>
+					</ul>
 				</div>
 			</div>
 		</div>

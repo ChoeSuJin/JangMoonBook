@@ -1,15 +1,15 @@
 package com.kosta.cart.model;
 
 public class CartVO {
-	private int cartno;  //�옣諛붽뎄�땲踰덊샇
-	private String id; //�쉶�썝�븘�씠�뵒
+	private int cartno;
+	private String id;
 	private String isbn;
 	private String title;
 	private String image;
 	private String status;
-	private int price;	//媛�寃�
-	private int amount; //�닔�웾
-	private int money;	//�빀怨�
+	private int price;	
+	private int amount; 
+	private int money;	
 	
 	public int getCartno() {
 		return cartno;

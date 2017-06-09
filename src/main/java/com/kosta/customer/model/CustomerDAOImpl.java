@@ -17,6 +17,18 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Inject
 	SqlSession sqlSession;
 	
+	
+	
+	@Override
+	public List<SalesListVO> myEbook(String id) {
+		return sqlSession.selectList("customer.myEbook", id);
+	}
+
+	@Override
+	public int checkPwdMypage(CustomerVO vo) {
+		return sqlSession.selectOne("customer.checkPwdMypage", vo);
+	}
+
 	@Override
 	public List<SalesListVO> saleList(String id) {
 		return sqlSession.selectList("customer.saleList", id);

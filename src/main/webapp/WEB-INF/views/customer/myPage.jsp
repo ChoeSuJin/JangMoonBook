@@ -24,9 +24,15 @@
     <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
   	<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
   	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head><!--/head-->
 
 <body>
+	<!-- img 랜덤으로 가져오기 위한 것 -->
+	<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+	<!-- img 랜덤으로 가져오기 위한 것 -->
+	
 	<!-- header -->
 	<jsp:include page="customerHeader.jsp"/>
 	<!-- header -->
@@ -39,6 +45,7 @@
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#myPage" data-toggle="tab">계정정보</a></li>
 								<li><a href="#reviews" data-toggle="tab">구매목록</a></li>
+								<li><a href="#My-E_book" data-toggle="tab">보유 E-Book</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -60,8 +67,8 @@
 											주소 <input type="text" name="address1" id="sample6_address" disabled="disabled" value="${cm.address1}">
 											상세주소 <input type="text" name="address2" id="sample6_address2" disabled="disabled" value="${cm.address2}">
 											<input type="button" id="modify_user" value="개인정보 수정">
-											<input type="button" id="ok" value="수정완료" onclick="check_modify()" style="display:none">
-											<input type="button" id="cancel" value="취소" onclick="modify_user()"  style="display:none">
+											<input type="submit" id="ok" value="수정완료" onclick="return check_modify()" style="display:none">
+											<input type="button" id="cancel" value="취소" onclick="modify_cancle()"  style="display:none">
 											<input type="hidden" id="error" value="${error}"><!-- 암호에러 -->
 										</form>
 									</div><!--/login form-->
@@ -75,29 +82,48 @@
 										<li><a href="#"><i class="fa fa-user"></i>${p.id}</a></li>
 										<li><a href="#"><i class="fa fa-clock-o"></i>${p.s_date}</a></li>
 									</ul>
-									<p style="margin-left:20px;margin-top:-5px;margin-bottom:20px;">책 이름 : ${p.title} &nbsp;&nbsp;&nbsp; ${p.quantity} 권</p>										
+									<p style="margin-left:20px;margin-top:-5px;margin-bottom:20px;">책 이름 : ${p.title} &nbsp;&nbsp;&nbsp; 구입권수 : ${p.quantity} 권</p>										
 								</c:forEach>
 							  </div>
 							</div>
-							
+
+							<div class="tab-pane fade" id="My-E_book">
+								<div style="margin: 0 auto;">
+									<div class="container">
+										<div class="row">
+											<div class="col-sm-9 padding-right" style="margin-left:30px;">
+												<div class="features_items">
+													<c:forEach var="ebook" items="${myEbook}">
+														<div class="col-sm-4">
+															<div class="product-image-wrapper">
+																<div class="single-products">
+																	<div class="productinfo text-center">
+																		<a href="">
+																			<img style="width:200px;height:250px;"src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
+																			<br>${ebook.title}
+																		</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:forEach>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div><!--/category-tab-->
+				</div>
 			</div>
-		</div>
-	</section><!--/form-->
+		</section><!--/form-->
 	
 	<!-- footer -->
 	<jsp:include page="customerFooter.jsp" />
 	<!-- footer -->
-	
-	<script>
-		$(document).ready(function(){
-			var error = document.getElementById("error").value
-			if(error!=null){
-				alert('암호가 틀렷습니다. 다시 수정해주세요.');
-			}
-		});
-	</script>
+
     <script src="${resources}/js/jquery.js"></script>
 	<script src="${resources}/js/price-range.js"></script>
     <script src="${resources}/js/jquery.scrollUp.min.js"></script>

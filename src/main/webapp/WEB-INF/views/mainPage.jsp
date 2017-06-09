@@ -54,7 +54,7 @@
 								<c:when test="${status.index==0}">
 									<div class="item active">
 										<div class="col-sm-6">
-											<div class="carousel-inner-header">문재인의 운명</div>
+											<div class="carousel-inner-header">${bestSeller.title}</div>
 											<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
 										</div>
 										<div class="col-sm-6">
@@ -65,7 +65,7 @@
 								<c:otherwise>
 									<div class="item">
 										<div class="col-sm-6">
-											<div class="carousel-inner-header">호모 데우스</div>
+											<div class="carousel-inner-header">${bestSeller.title}</div>
 											<p>제19대 대한민국 대통령 당선기념 특별판『문재인의 운명』. 이 책은 노무현 전 대통령 서거 2주기를 맞아 노 전 대통령이 생전에 ....</p>
 										</div>
 										<div class="col-sm-6">
@@ -122,6 +122,7 @@
 												<input type="hidden" name="isbn" value="${bestSeller.isbn}">
 												<input type="hidden" name="title" value="${bestSeller.title}">
 												<input type="hidden" name="price" value="${bestSeller.price}">
+												<input type="hidden" name="image" value="${bestSeller.image}">
 												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -140,13 +141,17 @@
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 							
+								<!-- img 랜덤으로 가져오기 위한 것 -->
+								<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+								<!-- img 랜덤으로 가져오기 위한 것 -->
+								
 								<div class="item active">
 									<c:forEach var="nb" items="${newBook}" begin="0" end="2">
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													<img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
 													  <c:choose>
 												     	<c:when test="${fn:length(nb.title) > 14}">
 												    	  <p>${fn:substring(nb.title,0,13)}...</p>
@@ -159,6 +164,7 @@
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="image" value="${nb.image}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -178,7 +184,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													<img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
 													  <c:choose>
 												     	<c:when test="${fn:length(nb.title) > 14}">
 												    	  <p>${fn:substring(nb.title,0,13)}...</p>
@@ -191,6 +197,7 @@
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="image" value="${nb.image}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -209,7 +216,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="${resources}/images/book/${nb.image}.jpg" alt="" />
+													<img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
 													  <c:choose>
 												     	<c:when test="${fn:length(nb.title) > 14}">
 												    	  <p>${fn:substring(nb.title,0,13)}...</p>
@@ -222,6 +229,7 @@
 														<input type="hidden" name="isbn" value="${nb.isbn}">
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
+														<input type="hidden" name="image" value="${nb.image}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">

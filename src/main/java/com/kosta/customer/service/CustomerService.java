@@ -10,6 +10,7 @@ import com.kosta.customer.model.CustomerVO;
 
 public interface CustomerService {
 	
+	public List<SalesListVO> myEbook(String id);
 	public List<SalesListVO> saleList(String id);
 	public List<BookVO> bestSeller();
 	public List<BookVO> newBook();
@@ -22,5 +23,6 @@ public interface CustomerService {
 	public void deleteCustomer(String id); 
 	public void updateCustomer(CustomerVO vo);
 	public boolean checkPwd(String id, String pwd);
+	public int checkPwdMypage(CustomerVO vo);
 	public String getClass(CustomerVO vo);
 }

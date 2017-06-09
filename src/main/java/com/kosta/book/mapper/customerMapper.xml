@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from book_info order by book desc
 	</select>
 	
+	<select id="myEbook" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
+		select * from salelist 
+		where id=#{id} and isbn 
+		in (select isbn from book_info where type = 'E-Book')
+	</select>
+	
 	<select id="saleList" resultType="com.kosta.book.admin.mSales.model.SalesListVO">
 		select * from salelist where id=#{id} order by s_date
 	</select>
@@ -48,7 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 비밀번호 일치여부 -->
 	<select id="checkPwd" resultType="int">
-		select count(*) from customer where id = #{id} and pwd=#{pwd}
+		select count(*) from customer where id=#{id} and pwd=#{pwd}
+	</select>
+	
+	<select id="checkPwdMypage" resultType="int">
+		select count(*) from customer where id=#{id} and pwd=#{pwd}
 	</select>
 	
 	<!-- 로그인체크 -->

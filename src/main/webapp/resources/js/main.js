@@ -87,12 +87,13 @@ $('#modify_user').click(function(){
 });
 
 function check_modify(){
+	
 	//아이디 입력여부 검사
 	if(document.myPage.id.value=="")
 	{
 	 alert("아이디를 입력하지 않았습니다.")
 	 document.myPage.id.focus()
-	 return
+	 return false;
 	}
 	//아이디 유효성 검사 (영문소문자, 숫자만 허용)
 	for (i=0;i<document.myPage.id.value.length ;i++ )
@@ -102,7 +103,7 @@ function check_modify(){
 	  {
 	  alert ("아이디는 소문자, 숫자만 입력가능합니다.")
 	  document.myPage.id.focus()
-	  return
+	  return false;
 	  }
 	}
 	//아이디에 공백 사용하지 않기
@@ -110,28 +111,28 @@ function check_modify(){
 	{
 	 alert("아이디에 공백을 사용할 수 없습니다.")
 	 document.myPage.id.focus()
-	 return
+	 return false;
 	}
 	//아이디 길이 체크 (6~12자)
 	if (document.myPage.id.value.length<6 || document.myPage.id.value.length>12)
 	{
 	 alert ("아이디를 6~12자까지 입력해주세요.")
 	 document.myPage.id.focus()
-	 return
+	 return false;
 	}
 	//비밀번호 입력여부 체크
 	if(document.myPage.pwd.value=="")
 	{
 	 alert("비밀번호를 입력하지 않았습니다.")
 	 document.myPage.pwd.focus()
-	 return
+	 return false;
 	}
 	//비밀번호 길이 체크(4~8자 까지 허용)
 	if (document.myPage.pwd.value.length<4 || document.myPage.pwd.value.length>8)
 	{
 	 alert ("비밀번호를 4~8자까지 입력해주세요.")
 	 document.myPage.pwd.focus()
-	 return
+	 return false;
 	}
 	
 	//이메일 입력 여부와 형식 체크
@@ -141,12 +142,12 @@ function check_modify(){
 	if(email==""){
 		alert("이메일을 입력하지 않았습니다.")
 		document.myPage.email.focus()
-		return
+		return false;
 	}
 	if(!regEmail.test(email)){
 		alert("이메일 형식이 올바르지 않습니다.")
 		document.myPage.email.focus()
-		return
+		return false;
 	}
 	
 	//연락처 입력 여부와 형식 체크
@@ -156,35 +157,53 @@ function check_modify(){
 	if(phone.length>11){
 		alert("연락처를 확인하세요.")
 		document.myPage.phone.focus()	
-		return
+		return false;
 	}
 	if(!regPhone.test(phone)){
 		alert("연락처는 숫자만 입력가능합니다.")
 		document.myPage.phone.focus()	
-		return
+		return false;
 	}
 	
 	//주소 입력 여부 확인
 	if(document.myPage.zipcode.value==""){
 		alert("주소검색으로 우편번호를 입력하세요.")
 		document.myPage.zipcode.focus()	
-		return
+		return false;
 	}
 	if(document.myPage.address1.value==""){
 		alert("주소를 검색하세요.")
 		document.myPage.address1.focus()		
-		return
+		return false;
 	}
 	if(document.myPage.address2.value==""){
 		alert("상세주소를 입력하세요.")
 		document.myPage.address2.focus()		
-		return
+		return false;
 	}
 	
+	$.ajax({
+	    type : "POST",
+	    url  : "checkPwd.do",
+	    data : {"id" : $('#d_id').val(),
+	          	"pwd" : $('#pwd').val()},
+	    dataType : "JSON",
+	    
+	    error : function(){
+	        alert('error ajax!');
+	    },
+	    success : function(data){
+			if(data.result==0){
+				alert('비밀번호가 일치하지 않습니다. 다시 입력하세요');
+				return false;
+			}
+	    }
+	})
+	
 	if (confirm("개인정보를 수정하시겠습니까 ?")) { //확인
-		document.myPage.submit();
+		return true;
 	} else { //취소
-		return;
+		return false;
 	}
 }//e myPage_check
 

@@ -1,6 +1,9 @@
 package com.kosta.customer.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.book.admin.mEbook.model.ManageEbookDAO;
+import com.kosta.book.admin.mEbook.model.ManageEbookOrganVO;
 import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerVO;
 import com.kosta.customer.service.CustomerService;
@@ -117,22 +123,42 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		
-		if(id==null) { //�α����� �ȵ�������
+		if(id==null) {
 			mav.addObject("myPageError", "error");
 			mav.setViewName("mainPage");
 			return mav;
 		}
 		
-		if(request.getParameter("error")!=null){	//�������� ��ȣ�� Ʋ������
+		if(request.getParameter("error")!=null){	
 			mav.addObject("error", request.getParameter("error")); 
 		}
 		
+		mav.addObject("myEbook",customerService.myEbook(id));
 		mav.addObject("purchase",customerService.saleList(id));
 		mav.addObject("customer", customerService.viewCustomer(id));
 		mav.setViewName("customer/myPage");
 		
 		return mav;
 	}
+	
+	@RequestMapping("/checkPwd.do")
+	public @ResponseBody HashMap<String, Object> checkPwd(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		CustomerVO vo = new CustomerVO();
+		
+		System.out.println(map.get("id"));
+		System.out.println(map.get("pwd"));
+		vo.setId(map.get("id"));  vo.setPwd(map.get("pwd"));
+		
+		int result = customerService.checkPwdMypage(vo);
+		System.out.println("result : " + result);
+		
+		data.put("result", result);
+		
+		return data;
+	}
+	
 	
 	public ModelAndView modify(CustomerVO vo){
 		ModelAndView mav = new ModelAndView();
@@ -160,22 +186,10 @@ public class CustomerController {
 					return "redirect:list.do";
 					
 				}else{
-					model.addAttribute("message", "���� ����");
+					model.addAttribute("message", "dd");
 					model.addAttribute("dto", customerService.viewCustomer(id));
 					return "customer/view";
 				}
 		
 	}
 }
-
-/*@RequestMapping("/list.do")
-public String customerList(Model model){
-	List<CustomerVO> list =  customerService.customerList();
-	model.addAttribute("list", list);
-	return "customer/customerList";
-}*/
-
-/*@RequestMapping("/customer/write.do")
-public String write(){
-	return "customer/write"; 
-}*/

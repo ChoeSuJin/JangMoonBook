@@ -8,18 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cart">
 
 	<insert id="insert">
-		insert into cart (status, cartno, id, isbn, title, price, amount)
-		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount})
+		insert into cart (status, cartno, id, isbn, title, price, amount,image)
+		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount},#{image})
 	</insert>
 
 	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
-		select cartno, title, price, isbn, sum(amount) amount, sum(price*amount) money 
+		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
 		from cart
-		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn
+		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn, image
+		order by cartno
 	</select>
 
 	<select id="sumMoney" resultType="int">
-		select nvl(sum(price * amount) ,0) from cart where status = '장바구니'
+		select nvl(sum(price * amount) ,0) from cart where status = '장바구니' and id=#{id}
 	</select>
 
 	<delete id="delete">

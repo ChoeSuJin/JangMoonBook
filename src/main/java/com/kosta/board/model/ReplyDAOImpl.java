@@ -1,7 +1,5 @@
 package com.kosta.board.model;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
