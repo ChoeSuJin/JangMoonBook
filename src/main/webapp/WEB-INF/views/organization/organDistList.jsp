@@ -2,12 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
+<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
 <head>
 <title>Insert title here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+  	function openEbook(title) {
+  		var path = '<c:out value="${ resources }"/>';
+  		var title = title;
+  		
+  		var options = {
+  			pdfOpenParams : {
+  				navpanes: 1,
+  				toolbar: 0,
+  				statusbar: 1,
+  				view: "FitV"
+  			}
+  		};
+  		
+  		alert(title);
+  		PDFObject.embed(""+ path +"/ebook/test.pdf", "#viewBook", options);
+  		$("#openEbook").show();
+  	}
+  </script>
 </head>
 <body>
 <jsp:include page="organNav.jsp" />
@@ -29,15 +47,41 @@
 				</tr>
 				<c:forEach var="ed" items="${ ebookDistList }" varStatus="status">
 					<tr>
-						<td>${ ed.title }</td>
+						<td><a onclick="openEbook('${ ed.title }')" data-toggle="modal" data-target="#openEbook">${ ed.title } </a></td>
 						<td>${ ed.isbn }</td>
 					</tr>
+					<!-- Modal -->
+					  <div class="modal fade" id="openEbook" role="dialog">
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">${ ed.title }</h4>
+					        </div>
+					        <div class="modal-body" id="viewBook">
+					          
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+					      
+					    </div>
+					  </div>
 				</c:forEach>
 			</table>
 			<form action="" method="post" style="float:right;margin-top:-10px;">
 				<input type="submit" class="btn btn-default" value="전체보기">
 			</form><br>
 		</div>
+		
+
 	</div>
+	<script src="${resources}/js/jquery.js"></script>
+	<script src="${resources}/js/bootstrap.min.js"></script>
+	<script src="${resources}/js/jquery.scrollUp.min.js"></script>
+	<script src="${resources}/js/pdfobject.js"></script>
 </body>
 </html>

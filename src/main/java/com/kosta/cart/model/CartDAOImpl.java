@@ -66,6 +66,11 @@ public class CartDAOImpl implements CartDAO {
 		sqlSession.update("cart.modify", vo); 
 	}
 
+	@Override
+	public String getDiscountRate(String id) {
+		return sqlSession.selectOne("cart.getDiscountRate", id);
+	}
+
 	
 
 	

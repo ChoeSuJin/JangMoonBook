@@ -30,9 +30,11 @@ public class CartController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		String id = (String)session.getAttribute("id");
 		
+		String discountRate = cartService.getDiscountRate(id);
+		
 		List<CartVO> list=cartService.listCart(id);
 		
-		int sumMoney=cartService.sumMoney(id);
+		int sumMoney=cartService.sumMoney(id) * ( 100 - (Integer.parseInt(discountRate))) / 100;
 		
 		int fee = sumMoney >= 30000 ? 0 : 2500;
 		
@@ -41,6 +43,7 @@ public class CartController {
 		map.put("sumMoney", sumMoney);	
 		map.put("fee", fee);	
 		map.put("sum", sumMoney + fee);	
+		map.put("discountRate", discountRate);
 		mav.addObject("map", map);
 		
 		if(request.getParameter("cmd")!=null){ // 장바구니 탭에서 전체주문 버튼

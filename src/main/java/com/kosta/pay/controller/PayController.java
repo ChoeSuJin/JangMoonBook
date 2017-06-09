@@ -101,7 +101,7 @@ public class PayController {
 		CartVO cart = new CartVO();
 		vo.setId(id);
 		vo.setTitle(title);
-		vo.setdPrice(Integer.parseInt(dPrice));
+		vo.setdPrice((int)Math.round(Double.valueOf(dPrice)));
 		vo.setIsbn(isbn);
 		vo.setBranchName(branchName);
 		vo.setQuantity(Integer.parseInt(quantity));
@@ -134,6 +134,7 @@ public class PayController {
 		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
 		Date getDate = form.parse(date);
 		System.out.println(getDate);
+		System.out.println(dPrice);
 		
 		vo.setBranch(branch);
 		vo.setId(id);
@@ -148,7 +149,7 @@ public class PayController {
 		cart.setCartno(Integer.parseInt(cartno));
 		
 		sale.setBranchName(branch);
-		sale.setdPrice(Integer.parseInt(dPrice));
+		sale.setdPrice((int)Math.round(Double.valueOf(dPrice)));
 		sale.setId(id);
 		sale.setIsbn(isbn);
 		sale.setQuantity(Integer.parseInt(quantity));
@@ -193,7 +194,7 @@ public class PayController {
 		cart.setCartno(Integer.parseInt(cartno));
 		
 		sale.setBranchName(branch);
-		sale.setdPrice(Integer.parseInt(dPrice));
+		sale.setdPrice((int)Math.round(Double.valueOf(dPrice)));
 		sale.setId(id);
 		sale.setIsbn(isbn);
 		sale.setQuantity(Integer.parseInt(quantity));

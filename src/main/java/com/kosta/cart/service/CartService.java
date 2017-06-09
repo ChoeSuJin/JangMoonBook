@@ -15,6 +15,8 @@ public interface CartService {
 	public void updateCart(CartVO vo);
 	public void modifyCart(CartVO vo);
 	
+	public String getDiscountRate(String id);
+	
 	}
 	
 

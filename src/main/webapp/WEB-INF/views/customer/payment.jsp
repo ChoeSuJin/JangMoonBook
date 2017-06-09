@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html lang="en">
 <head>
 <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -47,13 +48,14 @@
 										<c:forEach var="row" items="${map.list}" varStatus="status">
 						                     <form id="deliveryCart${ status.index }" name="deliveryCart${ status.index }" action="/book/pay/saleInsert.do">
 						                        <input type="hidden" value="${ row.title }" name="title">
-						                        <input type="hidden" value="${ row.price }" name="dPrice">
+						                        <input type="hidden" value="${ row.price * (100 - map.discountRate) / 100 }" name="dPrice">
 						                        <input type="hidden" value="${ row.isbn }" name="isbn">
 						                        <input type="hidden" value="${ sessionScope.id }" name="id">
 						                        <input type="hidden" value="online" name="branchName">
 						                        <input type="hidden" value="${ row.amount }" name="quantity">
 						                        <input type="hidden" value="${ row.cartno }" name="cartno">
 						                        <c:set value="${ status.index }" var="length"/>
+						                        <c:set value="${ row.amount * (100 - map.discountRate) * row.price / 100 + sum}" var="sum" />
 				                    		 </form>
 				                  		</c:forEach>
 			                  		<input type="hidden" value="${ length + 1 }" id="lengthOfList">
@@ -66,7 +68,8 @@
 					                          <input type="text" id="sample6_address2" name="address2" placeholder="상세주소">
 					                          <input type="hidden" name="id" value="${ sessionScope.id }">
 											  <input type="text" name="phone" id="phone" placeholder="전화번호">
-					                          <button type="button" id="btnDirectPay" class="btn btn-default add-to-cart" 
+											  
+					                          	결제가<fmt:formatNumber value="${ sum }" pattern="###,###" />원<button type="button" id="btnDirectPay" class="btn btn-default add-to-cart" 
 					                          		  onclick="DirectPay('${ sessionScope.id}')" style="float:right">결제하기</button>
 					                  </form>
 					                 </div>
@@ -79,7 +82,7 @@
 							        <c:forEach var="row" items="${map.list}" varStatus="status">
 								        <form id="directCart${ status.index }" name="directCart${ status.index }" action="">
 									        <input type="hidden" value="${ row.title }" name="title">
-									        <input type="hidden" value="${ row.price }" name="dPrice">
+									        <input type="hidden" value="${ row.price * (100 - map.discountRate) / 100 }" name="dPrice">
 									        <input type="hidden" value="${ row.isbn }" name="isbn">
 									        <input type="hidden" value="${ sessionScope.id }" name="id">
 									        <input type="hidden" value="${ row.amount }" name="quantity">
@@ -87,6 +90,7 @@
 									        <input type="hidden" value="${ row.cartno }" name="cartno">
 									        <input type="hidden" value="" name="date" id="date${ status.index }">
 									        <c:set value="${ status.index }" var="directCartLength"/>
+									        <c:set value="${ row.amount * (100 - map.discountRate) * row.price / 100 + directSum}" var="directSum" />
 							        	</form>
 							        </c:forEach>
 							        <input type="hidden" value="${ directCartLength + 1 }" id="directCartLength">
@@ -95,6 +99,7 @@
 								            날짜 선택<input type="date" name="selectDate" id="selectDate" value=""> <br>
 									      지금결제<input type="radio" id="nowPay" name="nowPay" onclick="showNowPay();"><br>
 									      현장결제<input type="radio" id="getPay" name="getPay" onclick="showGetPay();">
+									     결제가<fmt:formatNumber value="${ sum }" pattern="###,###" />원
 									    <button type="button" id="btnNowPay" class="btn btn-default add-to-cart" onclick="clickNowPay();">지금결제</button>
 									    <button type="button" id="btnGetPay" class="btn btn-default add-to-cart" onclick="clickGetPay();">현장결제</button>
 							        </form>

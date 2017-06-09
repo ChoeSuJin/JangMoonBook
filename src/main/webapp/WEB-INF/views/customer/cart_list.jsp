@@ -101,6 +101,7 @@
 								      총상품금액 : <fmt:formatNumber value="${map.sumMoney}"
 								    pattern="###,###" />원 <br> 배송비 : ${map.fee} 원<br> 최종
 								      결제금액 : 총 <fmt:formatNumber value="${map.sum}" pattern="###,###" />원
+								    (${ map.discountRate }% 할인 적용)
 							    </p>
 							</div>
 					</c:otherwise>

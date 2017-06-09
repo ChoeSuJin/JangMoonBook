@@ -10,7 +10,6 @@
 	<a href="adminLoginForm.do">AdminLogin</a>
 	<a href="organLoginForm.do">OrganLogin</a>
 	<a href="starBooks.do?cmd=main">MainPage</a>
-	<a href="cartList.do">cart</a>
 	<a href="board/list.do">QnA게시판</a>
 </body>
 </html>

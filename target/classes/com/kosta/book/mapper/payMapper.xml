@@ -43,4 +43,8 @@
 		insert into getdirect values (#{orderno}, #{isbn}, #{title}, #{quantity}, #{id}, #{branch}, #{getDate}, 1)
 	</select>
 	
+	<select id="getDiscountRate" resultType="String">
+		select discount from customerclass where name = (select customerclass from customer where id = #{ id })
+	</select>
+	
 </mapper>

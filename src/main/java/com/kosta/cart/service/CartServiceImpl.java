@@ -69,6 +69,12 @@ public class CartServiceImpl implements CartService {
 	
 	*/
 
+	@Override
+	public String getDiscountRate(String id) {
+		
+		return cartDAO.getDiscountRate(id);
+	}
+
 
 
 }

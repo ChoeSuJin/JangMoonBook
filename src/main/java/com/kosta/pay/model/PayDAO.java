@@ -17,5 +17,7 @@ public interface PayDAO {
 	public void insertGetPay(GetDirectVO vo);
 	public void insertNowPay(GetDirectVO vo);
 	
+	public String getDiscountRate(String id);
+	
 
 }
