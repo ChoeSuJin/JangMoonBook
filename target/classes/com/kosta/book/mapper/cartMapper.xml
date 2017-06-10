@@ -7,6 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="cart">
 
+	<select id="checkInsertEbook" resultType="int">
+		select count(*) 
+		from cart 
+		where id=#{id} and isbn in (select isbn from book_info where type='E-Book')
+	</select>
+	
+	<select id="checkInsertEbookSalelist" resultType="int">
+		select count(*) 
+		from salelist
+		where id=#{id} and isbn in (select isbn from book_info where type='E-Book')
+	</select>
+	
 	<insert id="insert">
 		insert into cart (status, cartno, id, isbn, title, price, amount,image)
 		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount},#{image})
@@ -14,13 +26,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
 		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
-		from cart
-		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn, image
-		order by cartno
+     	from cart
+      	where id=#{id} and status = '장바구니' and isbn not in (select isbn from book_info where type='E-Book')
+    	group by cartno, title, price, isbn, image
+      	order by cartno
+	</select>
+	
+	<select id="listCartEbook" resultType="com.kosta.cart.model.CartVO">
+		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
+     	from cart
+      	where id=#{id} and status = '장바구니' and isbn in (select isbn from book_info where type='E-Book')
+    	group by cartno, title, price, isbn, image
+      	order by cartno
 	</select>
 
 	<select id="sumMoney" resultType="int">
-		select nvl(sum(price * amount) ,0) from cart where status = '장바구니' and id=#{id}
+		select nvl(sum(price * amount) ,0) 
+		from cart 
+		where status = '장바구니' and id=#{id} and isbn not in (select isbn from book_info where type='E-Book')
+	</select>
+	
+	<select id="sumMoneyEbook" resultType="int">
+		select nvl(sum(price * amount) ,0) 
+		from cart 
+		where status = '장바구니' and id=#{id} and isbn in (select isbn from book_info where type='E-Book')
 	</select>
 
 	<delete id="delete">

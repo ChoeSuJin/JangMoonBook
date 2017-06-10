@@ -59,7 +59,7 @@ public class BoardController {
 	@RequestMapping("/boardInsert.do")
 	public String insert(@ModelAttribute BoardVO vo) throws Exception{
 		boardService.create(vo);		
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 	
 	@RequestMapping("/boardView.do")
@@ -84,12 +84,12 @@ public class BoardController {
 	@RequestMapping("/boardUpdate.do")
 	public String update(@ModelAttribute BoardVO vo) throws Exception{
 		boardService.update(vo);
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 	
 	@RequestMapping("/boardDelete.do")
 	public String delete(@RequestParam int bno) throws Exception{
 		boardService.delete(bno);
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 }

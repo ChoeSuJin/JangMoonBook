@@ -29,25 +29,37 @@ public class CartController {
 	public ModelAndView list(HttpSession session, ModelAndView mav, HttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		String id = (String)session.getAttribute("id");
+		String error = request.getParameter("error");
 		
 		List<CartVO> list=cartService.listCart(id);
+		List<CartVO> eList=cartService.listCartEbook(id);
 		
 		int sumMoney=cartService.sumMoney(id);
+		int esumMoney=cartService.sumMoneyEbook(id);
 		
 		int fee = sumMoney >= 30000 ? 0 : 2500;
 		
 		map.put("list", list);
+		map.put("elist", eList);
 		map.put("count", list.size());
-		map.put("sumMoney", sumMoney);	
+		map.put("ecount", eList.size());
+		map.put("sumMoney", sumMoney);
+		map.put("esumMoney", esumMoney);
 		map.put("fee", fee);	
 		map.put("sum", sumMoney + fee);	
+		if(error!=null) session.setAttribute("error", error);//ebook이 있는데 insert 할때 에러	
 		mav.addObject("map", map);
 		
-		if(request.getParameter("cmd")!=null){ // 장바구니 탭에서 전체주문 버튼
+		String cmd = request.getParameter("cmd");
+		System.out.println("cmd : " + cmd);
+		
+		if(cmd == null){
+			mav.setViewName("customer/cart_list");
+		}else if(cmd.equals("payment")){ // 장바구니 탭에서 전체주문 버튼
 			mav.setViewName("customer/payment");
-			return mav;
+		}else if(cmd.equals("epayment")){
+			mav.setViewName("customer/epayment");
 		}
-		mav.setViewName("customer/cart_list");
 		return mav;
 	}
 
@@ -55,9 +67,24 @@ public class CartController {
 	public String insert(@ModelAttribute CartVO vo, HttpSession session) {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
+		String type = vo.getType(); //ebook은 count 증가 x 하기 위함
 		
 		System.out.println(vo.getIsbn());
 		int count=cartService.countCart(id, vo.getIsbn());
+		
+		if(type.equals("E-Book")){
+			int check1 = cartService.checkInsertEbook(vo); // 장바구니에 ebook이 있는지 체크
+			int check2 = cartService.checkInsertEbookSalelist(vo); // 장바구니에 ebook이 있는지 체크
+			int check_f = check1 + check2;
+			System.out.println("check_ebook : " + check_f);
+			
+			if(check_f >= 1){ // 장바구니에 ebook이 있는지 체크
+				return "redirect:cartList.do?error=alreadyEbook";
+			}
+			
+			cartService.insert(vo);
+			return "redirect:cartList.do";
+		}
 		
 		if(count==0){
 			cartService.insert(vo);
@@ -75,7 +102,7 @@ public class CartController {
 		return "redirect:cartList.do";
 	}
 	
-	
+	/*
 	@RequestMapping("cartUpdate.do")
 	public String update(@RequestParam int[] amount
 			, @RequestParam String[] isbn
@@ -90,13 +117,13 @@ public class CartController {
 			cartService.modifyCart(vo); 
 		}
 		return "redirect:/cart/list.do";
-	}
+	}*/
 	
-	@RequestMapping("selectBranch.do")
+	/*@RequestMapping("selectBranch.do")
 	public String selectBranch() {
 		
 		return "/customer/selectBranch";
-	}
+	}*/
 	
 	
 }

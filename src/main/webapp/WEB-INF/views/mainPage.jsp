@@ -123,6 +123,7 @@
 												<input type="hidden" name="title" value="${bestSeller.title}">
 												<input type="hidden" name="price" value="${bestSeller.price}">
 												<input type="hidden" name="image" value="${bestSeller.image}">
+												<input type="hidden" name="type" value="${bestSeller.type}">
 												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -165,6 +166,7 @@
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
 														<input type="hidden" name="image" value="${nb.image}">
+														<input type="hidden" name="type" value="${nb.type}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -198,6 +200,7 @@
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
 														<input type="hidden" name="image" value="${nb.image}">
+														<input type="hidden" name="type" value="${nb.type}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">
@@ -230,6 +233,7 @@
 														<input type="hidden" name="title" value="${nb.title}">
 														<input type="hidden" name="price" value="${nb.price}">
 														<input type="hidden" name="image" value="${nb.image}">
+														<input type="hidden" name="type" value="${nb.type}">
 														<input type="hidden" name="status" value="장바구니">
 														<input type="hidden" name="amount" value="1">
 														<input type="hidden" id="session" name="session" value="${sessionScope.id}">

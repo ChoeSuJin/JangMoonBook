@@ -81,6 +81,7 @@
 												<input type="hidden" name="title" value="${book.title}">
 												<input type="hidden" name="price" value="${book.price}">
 												<input type="hidden" name="image" value="${book.image}">
+												<input type="hidden" name="type" value="${book.type}">
 												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">
