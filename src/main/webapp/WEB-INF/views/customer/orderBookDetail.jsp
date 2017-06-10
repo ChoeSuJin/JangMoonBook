@@ -39,16 +39,20 @@
 				</div>
 				<!-- category -->
 				
+				<!-- img 랜덤으로 가져오기 위한 것 -->
+				<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+				<!-- img 랜덤으로 가져오기 위한 것 -->
+				
  				<div class="col-sm-9 padding-right">
 					<!-- BookDetail -->
 					<c:set var="detail" value="${bookDetail}"/>
 					<div class="product-details">
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="${resources}/images/book/${detail.book}.jpg" alt="" />
+								<img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
 							</div>
 						</div>
-						${detail.book}
+						
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 								<img src="${resources}/images/product-details/new.jpg" class="newarrival" alt="" />
@@ -61,6 +65,7 @@
 										<input type="hidden" name="isbn" value="${detail.isbn}">
 										<input type="hidden" name="title" value="${detail.title}">
 										<input type="hidden" name="price" value="${detail.price}">
+										<input type="hidden" name="image" value="${detail.image}">
 										<input type="hidden" name="status" value="장바구니">
 										<input type="hidden" id="session" name="session" value="${sessionScope.id}">
 										<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">

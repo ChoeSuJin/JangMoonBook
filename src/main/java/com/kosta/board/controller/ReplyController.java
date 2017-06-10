@@ -22,7 +22,7 @@ public class ReplyController {
     @Inject
     ReplyService replyService;
     
-    // 댓글 입력
+    // �뙎湲� �엯�젰
     @RequestMapping("insert.do")
     public String insert(@ModelAttribute ReplyVO vo, HttpSession session){
         String id = (String) session.getAttribute("id");
@@ -35,7 +35,7 @@ public class ReplyController {
     public ModelAndView view(@RequestParam int bno) throws Exception{
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("board/view");
-    	mav.addObject("dto", replyService.view(bno));
+    	mav.addObject("reply", replyService.view(bno));
     	
     	return mav;
     }

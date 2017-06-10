@@ -18,8 +18,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Inject
 	CustomerDAOImpl customerDAO;
 	
-	
-	
+	@Override
+	public List<SalesListVO> myEbook(String id) {
+		return customerDAO.myEbook(id);
+	}
+
+	@Override
+	public int checkPwdMypage(CustomerVO vo) {
+		return customerDAO.checkPwdMypage(vo);
+	}
+
 	@Override
 	public List<SalesListVO> saleList(String id) {
 		return customerDAO.saleList(id);

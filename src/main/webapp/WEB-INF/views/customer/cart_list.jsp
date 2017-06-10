@@ -35,6 +35,10 @@
 	<jsp:include page="customerHeader.jsp"/>
 	<!-- header -->
 	
+	<!-- img 랜덤으로 가져오기 위한 것 -->
+	<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+	<!-- img 랜덤으로 가져오기 위한 것 -->
+	
 	<section id="cart_items">
 		<div class="container">
 				<c:choose>
@@ -56,12 +60,13 @@
 				                  <td></td>
 				               </tr>
 				               </thead>
+				               
 				               <c:forEach var="cart" items="${map.list}">
 					 			<form id="form1" name="form1" method="post" action="${path}/cart/update.do">
 				                   <tbody>
 									 <tr style="hegiht:80px;">
 									 	<td class="cart_product">
-											<a href=""><img src="${resources}/images/book/${cart.image}.png" alt=""></a>
+											<a href=""><img src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" style="width:70px;height:95px;"></a>
 										</td>
 										<td class="cart_description">
 											<h4>${cart.title}</h4>
