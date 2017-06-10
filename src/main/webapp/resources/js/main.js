@@ -1,5 +1,6 @@
 /*price range*/
 
+
  $('#sl2').slider();
 
 	var RGBChange = function() {
@@ -312,13 +313,16 @@ function sendCart() {
 	var cartCount = $("#lengthOfList").val();
 	for (var i = 0; i < cartCount; i++) {
 		var string = $("form[name=deliveryCart" + i + "]").serialize();
+		alert(string);
 		$.ajax( {
 			type:'POST',
 			url: '/book/pay/saleInsert.do',
 			data: string,
-			dataType : 'string',
+			dataType : 'text',
 			success: function(data) {
-				alert(data);
+				if (data.length != 0) {
+					notifyChangeClass(data);
+				}
 			}
 		})
 	}
@@ -385,7 +389,6 @@ function clickNowPay() {
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	    	alert("rsp.success");
 	    	jQuery.ajax({
 	    		url: "/book/pay/directPayment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 	    		type: 'POST',
@@ -412,9 +415,11 @@ function clickNowPay() {
 		    					type:'POST',
 		    					url: '/book/pay/insertNowPay.do',
 		    					data: string,
-		    					dataType : 'string',
+		    					dataType : 'text',
 		    					success: function(data) {
-		    						alert(data);
+		    						if (data.length != 0) {
+		    							notifyChangeClass(data);
+		    						}
 		    					}
 		    				})
 		    			}
@@ -641,6 +646,34 @@ function notifyDirectBook(isInitLogin, directBook) {
 				// If the user accepts, let's create a notification
 				if (permission === "granted") {
 					var notification = new Notification("오늘 " + directBook + "건 수령 예정");
+				}
+			});
+		}
+	}
+	else {
+			
+	}
+	
+}
+
+function notifyChangeClass(msg) {
+	if (msg.length != 0) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+		// Let's check whether notification permissions have already been granted
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification(msg);
+		}
+		
+		// Otherwise, we need to ask the user for permission
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+				// If the user accepts, let's create a notification
+				if (permission === "granted") {
+					var notification = new Notification(msg);
 				}
 			});
 		}

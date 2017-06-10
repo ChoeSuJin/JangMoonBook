@@ -1,5 +1,6 @@
 package com.kosta.pay.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.book.admin.mSales.model.SalesListVO;
 import com.kosta.cart.model.CartVO;
+import com.kosta.customer.model.CustomerVO;
 import com.kosta.pay.model.GetDeliveryVO;
 import com.kosta.pay.model.GetDirectVO;
 import com.kosta.pay.model.PayDAO;
@@ -92,9 +94,9 @@ public class PayController {
 		return "";
 	}
 	
-	@RequestMapping("pay/saleInsert.do")
+	@RequestMapping(value="pay/saleInsert.do", produces="application/text; charset=utf8")
 	@ResponseBody
-	public String processSale(String id, String title, String dPrice, String isbn, String branchName, String quantity, String cartno) {
+	public String processSale(String id, String title, String dPrice, String isbn, String branchName, String quantity, String cartno) throws UnsupportedEncodingException {
 		
 		System.out.println("pay/saleInsert.do");
 		SalesListVO vo = new SalesListVO();
@@ -117,7 +119,24 @@ public class PayController {
 		dao.updateDelivery(cart);
 		dao.minusOnlineInventory(cart);
 		
-		return "complete";
+		CustomerVO customer = dao.getCustomerInfo(id);
+		int sum6Month = dao.sum6MonthSale(id);
+		String newClass;
+		if (sum6Month < 50000)
+			newClass = "silver";
+		else if (sum6Month >= 50000 && sum6Month < 200000)
+			newClass = "gold";
+		else
+			newClass = "platinum";
+		System.out.println("newClass = " + newClass);
+		System.out.println(customer.getCustomerClass());
+		if (!customer.getCustomerClass().equals(newClass)) {
+			dao.updateCustomerClass(id, newClass);
+			String msg = id + "님의 등급이" + newClass + "로 변경되었습니다.";
+			return msg;
+		}
+		else
+			return "";
 		
 	}
 	
@@ -165,9 +184,11 @@ public class PayController {
 		dao.updateGetDirect(cart);
 		
 		
+		
+		
 	}
 	
-	@RequestMapping("pay/insertNowPay.do")
+	@RequestMapping(value="pay/insertNowPay.do", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String insertNowPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
 		
@@ -209,7 +230,25 @@ public class PayController {
 		dao.insertNowPay(vo);;
 		dao.updateGetDirect(cart);
 		
-		return "complete";
+		CustomerVO customer = dao.getCustomerInfo(id);
+		int sum6Month = dao.sum6MonthSale(id);
+		String newClass;
+		if (sum6Month < 50000)
+			newClass = "silver";
+		else if (sum6Month >= 50000 && sum6Month < 200000)
+			newClass = "gold";
+		else
+			newClass = "platinum";
+		System.out.println("newClass = " + newClass);
+		System.out.println(customer.getCustomerClass());
+		if (!customer.getCustomerClass().equals(newClass)) {
+			dao.updateCustomerClass(id, newClass);
+			String msg = id + "님의 등급이" + newClass + "로 변경되었습니다.";
+			return msg;
+		}
+		else
+			return "";
+		
 	}
 	
 	

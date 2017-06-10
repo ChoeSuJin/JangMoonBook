@@ -117,12 +117,12 @@
 	<jsp:include page="customerFooter.jsp" />
 	<!-- footer -->
 	
-    <script src="${resources}/js/jquery.js"></script>
+    <script src="${resources}/js/jquery.js" charset="UTF-8"></script>
 	<script src="${resources}/js/price-range.js"></script>
     <script src="${resources}/js/jquery.scrollUp.min.js"></script>
 	<script src="${resources}/js/bootstrap.min.js"></script>
     <script src="${resources}/js/jquery.prettyPhoto.js"></script>
-    <script src="${resources}/js/main.js"></script>
+    <script src="${resources}/js/main.js" charset="UTF-8"></script>
     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js" ></script>
     <script>
     function DirectPay(name) {
@@ -161,7 +161,6 @@
     	}, function(rsp) {
     	    if ( rsp.success ) {
     	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-    	    	alert("rsp.success");
     	    	jQuery.ajax({
     	    		url: "/book/pay/deliverPayment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
     	    		type: 'POST',
@@ -183,6 +182,7 @@
     		    			sendCart();
     		    			insertDelivery();
     		    			alert(msg);
+    		    			
     		    			/* 결제완료 이후 이동하는 창은 추후 수정 요망 */
     		    			window.location.href="../book/starBooks.do?cmd=main";
     		    		} else {

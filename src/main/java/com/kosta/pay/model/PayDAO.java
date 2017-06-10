@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kosta.book.admin.mSales.model.SalesListVO;
 import com.kosta.cart.model.CartVO;
+import com.kosta.customer.model.CustomerVO;
 
 public interface PayDAO {
 	
@@ -18,6 +19,9 @@ public interface PayDAO {
 	public void insertNowPay(GetDirectVO vo);
 	
 	public String getDiscountRate(String id);
+	public int sum6MonthSale(String id);
+	public CustomerVO getCustomerInfo(String id);
+	public void updateCustomerClass(String id, String newClass);
 	
 
 }
