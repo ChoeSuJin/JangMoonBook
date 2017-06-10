@@ -8,24 +8,32 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kosta.book.admin.mEbook.model.ManageEbookDAO;
-import com.kosta.book.admin.mEbook.model.ManageEbookOrganVO;
 import com.kosta.customer.model.BookVO;
 import com.kosta.customer.model.CustomerVO;
+import com.kosta.customer.model.EmailVO;
 import com.kosta.customer.service.CustomerService;
+import com.kosta.customer.service.EmailSender;
 
 @Controller
 public class CustomerController {
 	
 	@Inject
 	CustomerService customerService;
+	
+	@Inject
+	EmailSender emailSender;
+	
+	EmailVO email;
+	CustomerVO customerVO;
 	
 	@RequestMapping("/starBooks.do")
 	public ModelAndView testmain(HttpServletRequest request, HttpSession session, CustomerVO vo){
@@ -50,6 +58,9 @@ public class CustomerController {
 			break;
 		case "modify" :
 			mav = modify(vo);
+			break;
+		case "searchPwd" :
+			mav = SearchPw();
 			break;
 		}
 		return mav;
@@ -192,4 +203,38 @@ public class CustomerController {
 				}
 		
 	}
+	
+	/*비밀번호 찾기 관련 메소드*/
+	
+	public ModelAndView SearchPw(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("customer/searchPw");
+		return mav;
+	}
+	
+	
+	@RequestMapping("sendpw.do")
+	 public String sendEmailAction (@ModelAttribute CustomerVO vo,@ModelAttribute EmailVO email, Model model) throws Exception {
+		CustomerVO vo2=customerService.pwdCheck(vo); 
+		
+       String id=(String)vo.getId();
+       String e_mail=(String)vo.getEmail();
+       String pwd = vo2.getPwd();
+       
+       if(pwd!=null) {
+           email.setContent("비밀번호는 "+pwd+" 입니다.");
+           email.setReceiver(e_mail);
+           email.setSubject(id+"님 비밀번호입니다.");
+           emailSender.sendEmail(email);
+           System.out.println("메일전송");
+           return "redirect:/starBooks.do?cmd=main";
+      
+       }else {
+        System.out.println("에러남");
+        return "redirect:starBooks.do?cmd=login";
+	        }
+       
+	    }
+
+	
 }

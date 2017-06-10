@@ -104,4 +104,14 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean checkPwd(String id, String pwd) {
 		return customerDAO.checkPwd(id,pwd);
 	}
+
+	@Override
+	public boolean idCheck(String id) {
+		return customerDAO.idCheck(id);
+	}
+
+	@Override
+	public CustomerVO pwdCheck(CustomerVO vo) {
+		return customerDAO.pwdCheck(vo);
+	}
 }

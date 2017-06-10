@@ -78,6 +78,7 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<a href="starBooks.do?cmd=join">회원가입</a>
+						<a href="starBooks.do?cmd=searchPwd">비밀번호찾기</a>
 					</div><!--/sign up form-->
 				</div>
 				

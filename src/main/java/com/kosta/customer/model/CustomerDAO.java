@@ -21,6 +21,7 @@ public interface CustomerDAO {
 	public boolean checkPwd(String id, String pwd);	
 	public int checkPwdMypage(CustomerVO vo);	
 	public String getClass(CustomerVO vo);	
-	
+	public boolean idCheck(String id);//아이디 중복체크
+	public CustomerVO pwdCheck(CustomerVO vo);// 비밀번호 찾기
 
 }

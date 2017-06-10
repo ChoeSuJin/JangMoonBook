@@ -102,4 +102,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return result;
 	}
 
+	
+	@Override
+	public boolean idCheck(String id) {
+		boolean result = false;
+		int count = sqlSession.selectOne("customer.idCheck", id);
+		if(count==0) result = true;
+		
+		return result;
+	}
+
+	
+	@Override
+	public CustomerVO pwdCheck (CustomerVO vo) {
+	
+		return sqlSession.selectOne("customer.pwdCheck", vo);
+	}
+
+	
+	
+
 }

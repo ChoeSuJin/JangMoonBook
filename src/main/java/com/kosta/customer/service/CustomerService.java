@@ -25,4 +25,6 @@ public interface CustomerService {
 	public boolean checkPwd(String id, String pwd);
 	public int checkPwdMypage(CustomerVO vo);
 	public String getClass(CustomerVO vo);
+	public CustomerVO pwdCheck(CustomerVO vo);
+	public boolean idCheck(String id);
 }
