@@ -8,23 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script>
-  	function openEbook(title) {
-  		var path = '<c:out value="${ resources }"/>';
-  		var title = title;
-  		
-  		var options = {
-  			pdfOpenParams : {
-  				navpanes: 1,
-  				toolbar: 0,
-  				statusbar: 1,
-  				view: "FitV"
-  			}
-  		};
-  		
-  		alert(title);
-  		PDFObject.embed(""+ path +"/ebook/test.pdf", "#viewBook", options);
-  		$("#openEbook").show();
-  	}
+  function openEbook(index, title) {
+		var path = '<c:out value="${ resources }"/>';
+		var title = title;
+		
+		var options = {
+			pdfOpenParams : {
+				navpanes: 1,
+				toolbar: 0,
+				statusbar: 1,
+				view: "FitV"
+			}
+		};
+		
+		PDFObject.embed(""+ path +"/ebook/test.pdf", "#viewBook" + index + "", options);
+		$("#openEbook" + index + "").show();
+	}
   </script>
 </head>
 <body>
@@ -47,27 +46,27 @@
 				</tr>
 				<c:forEach var="ed" items="${ ebookDistList }" varStatus="status">
 					<tr>
-						<td><a onclick="openEbook('${ ed.title }')" data-toggle="modal" data-target="#openEbook">${ ed.title } </a></td>
+						<td><a onclick="openEbook('${ status.index }', '${ status.index }')" data-toggle="modal" data-target="#openEbook${ status.index }">${ ed.title } </a></td>
 						<td>${ ed.isbn }</td>
 					</tr>
 					<!-- Modal -->
-					  <div class="modal fade" id="openEbook" role="dialog">
+					  <div class="modal fade" id="openEbook${ status.index }" role="dialog">
 					    <div class="modal-dialog">
-					    
-					      <!-- Modal content-->
+				    
+				      <!-- Modal content-->
 					      <div class="modal-content">
 					        <div class="modal-header">
 					          <button type="button" class="close" data-dismiss="modal">&times;</button>
 					          <h4 class="modal-title">${ ed.title }</h4>
 					        </div>
-					        <div class="modal-body" id="viewBook">
-					          
+					        <div class="modal-body" id="viewBook${ status.index }">
+								          
 					        </div>
-					        <div class="modal-footer">
-					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					        </div>
+						        <div class="modal-footer">
+						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        </div>
 					      </div>
-					      
+							      
 					    </div>
 					  </div>
 				</c:forEach>

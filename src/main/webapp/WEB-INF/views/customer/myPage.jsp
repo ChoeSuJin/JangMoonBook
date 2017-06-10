@@ -26,6 +26,27 @@
   	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script>
+  	function openEbook(index, title) {
+  		var path = '<c:out value="${ resources }"/>';
+  		var title = title;
+  		
+  		var options = {
+  			pdfOpenParams : {
+  				navpanes: 1,
+  				toolbar: 0,
+  				statusbar: 1
+  			}
+  		};
+  		
+  		PDFObject.embed(""+ path +"/ebook/test.pdf", "#viewBook" + index + "", options);
+  		$("#openEbook" + index + "").show();
+  	}
+  </script>
+  <style type="text/css">
+  .modal-dialog { width: 80%; height: 1000px; margin: 0; padding: 0; }
+  .modal-body{ height: 700px; }
+  </style>
 </head><!--/head-->
 
 <body>
@@ -93,12 +114,32 @@
 										<div class="row">
 											<div class="col-sm-9 padding-right" style="margin-left:30px;">
 												<div class="features_items">
-													<c:forEach var="ebook" items="${myEbook}">
+													<c:forEach var="ebook" items="${myEbook}" varStatus="status">
+														<!-- Modal -->
+														  <div class="modal fade" id="openEbook${ status.index }" role="dialog">
+														    <div class="modal-dialog">
+														    
+														      <!-- Modal content-->
+														      <div class="modal-content">
+														        <div class="modal-header">
+														          <button type="button" class="close" data-dismiss="modal">&times;</button>
+														          <h4 class="modal-title">${ ebook.title }</h4>
+														        </div>
+														        <div class="modal-body" id="viewBook${ status.index }">
+														          
+														        </div>
+														        <div class="modal-footer">
+														          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+														        </div>
+														      </div>
+														      
+														    </div>
+														  </div>
 														<div class="col-sm-4">
 															<div class="product-image-wrapper">
 																<div class="single-products">
 																	<div class="productinfo text-center">
-																		<a href="">
+																		<a onclick="openEbook('${ status.index }','${ ebook.title }')" data-toggle="modal" data-target="#openEbook${ status.index }">
 																			<img style="width:200px;height:250px;"src="${resources}/images/book/${random.nextInt(147)+8}.jpg" alt="" />
 																			<br>${ebook.title}
 																		</a>
@@ -119,6 +160,7 @@
 				</div>
 			</div>
 		</section><!--/form-->
+		
 	
 	<!-- footer -->
 	<jsp:include page="customerFooter.jsp" />
@@ -130,5 +172,6 @@
 	<script src="${resources}/js/bootstrap.min.js"></script>
     <script src="${resources}/js/jquery.prettyPhoto.js"></script>
     <script src="${resources}/js/main.js"></script>
+    <script src="${resources}/js/pdfobject.js"></script>
 </body>
 </html>
