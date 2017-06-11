@@ -1542,6 +1542,15 @@ h2.title {
   padding: 6px 25px;
 }
 
+.login-form form #btnFindPw {
+  background: #93B658;
+  border: medium none;
+  border-radius: 0;
+  color: #FFFFFF;
+  display: block;
+  padding: 6px 25px;
+}
+
 .login-form label{
 
 }

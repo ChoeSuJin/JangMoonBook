@@ -4,9 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
+<c:set var="path" value="${ pageContext.request.contextPath}"/>
+    <title>StarBooks</title>
+    <link href="${resources}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${resources}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${resources}/css/prettyPhoto.css" rel="stylesheet">
+    <link href="${resources}/css/price-range.css" rel="stylesheet">
+    <link href="${resources}/css/animate.css" rel="stylesheet">
+	<link href="${resources}/css/main.css" rel="stylesheet">
+	<link href="${resources}/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="${resources}/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${resources}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${resources}/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${resources}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${resources}/images/ico/apple-touch-icon-57-precomposed.png">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<c:set var="path" value="${ pageContext.request.contextPath}"/>
 	<script type="text/javascript">
 		document.ready(function(){
 			var msg = $('#msg').value;
@@ -31,30 +51,39 @@
 	</script>
 </head>
 <body>
-<h2 align="center">비밀번호 찾기</h2>
-<div align="center">
-<p >아이디와 이메일 주소를 입력해 주세요.</p>
-<form action="${path}/sendpw.do" name="pwsearch" method="post" >
-	<table border="1" >
-		
-		<tr>
-			<td>아이디</td>
-			<td>e-mail</td>
-		</tr>
-		<tr>
-			<td><input type="text" name="id"/></td>
-			<td><input type="text" name="email" /></td>
-		</tr>
-		<tr align="center">
-			<td colspan="2"><input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
-		<c:if test=	"${message='EmailSended'}">
-			비밀번호 정보가 이메일로 발송되었습니다.  
-		</c:if>
-		</tr>
-	</table>
 
-</form>
-
+<!-- header -->
+	<jsp:include page="customerHeader.jsp"/>
+	<!-- header -->
+	
+	<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-sm-4 col-sm-offset-1-login">
+					<div class="login-form"><!--login form-->
+						<h2>StarBooks SearchPassword</h2>
+						<form action="${path}/sendpw.do" name="pwsearch" method="post" >
+							<input type="text" name="id" placeholder="아이디를 입력하세요."/>
+							<input type="text" name="email" placeholder="가입할 때 입력한 이메일을 입력해주세요"/>
+							<input type="button" class="btn btn-default" id="btnFindPw" value="비밀번호 찾기 " onclick="search()" />
+						</form>
+					</div><!--/login form-->
+				</div>				
+			</div>
+		</div>
+	</section><!--/form-->
+	
+	<!-- footer -->
+	<jsp:include page="customerFooter.jsp" />
+	<!-- footer -->
+	
+    <script src="${resources}/js/jquery.js"></script>
+	<script src="${resources}/js/price-range.js"></script>
+    <script src="${resources}/js/jquery.scrollUp.min.js"></script>
+	<script src="${resources}/js/bootstrap.min.js"></script>
+    <script src="${resources}/js/jquery.prettyPhoto.js"></script>
+    <script src="${resources}/js/main.js"></script>
 
 </div> 
 </body>
