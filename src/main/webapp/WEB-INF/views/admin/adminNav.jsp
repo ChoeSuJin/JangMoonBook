@@ -78,15 +78,13 @@
 	  <sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
         <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="mSales.do">매출관리</a></li>
+         <li><a href="mInventory.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
       <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
       	<li><a href="mAdminNotice.do">사내공지사항관리</a></li>
-        <li><a href="mBranchInfo.do">지점관리</a></li>
         <li><a href="mSales.do">매출관리</a></li>
-        <li><a href="mInventory.do">재고관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
-        <li><a href="mEbook.do">eBook</a></li>
 	  </sec:authorize>
 	  <sec:authorize access="hasAnyRole('ROLE_EBOOK')">
         <li><a href="mEbook.do">eBook</a></li>

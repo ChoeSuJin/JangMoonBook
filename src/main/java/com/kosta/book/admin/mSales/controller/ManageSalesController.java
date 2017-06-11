@@ -46,9 +46,9 @@ public class ManageSalesController {
 		
 		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
 		List list1 = dao.saleNewBook(vo);
-		List list2 = dao.saleUsedBook(vo);
-		String sumNew = dao.sumSaleNewBook(vo);
-		String sumUsed = dao.sumSaleUsedBook(vo);
+		List list2 = dao.saleForeignBook(vo);
+		String sumDomestic = dao.sumSaleDomesticBook(vo);
+		String sumForeign = dao.sumSaleForeignBook(vo);
 		
 		/*새책 판매 목록 페이징 처리*/
 		int allNewCount = list1.size();
@@ -82,19 +82,14 @@ public class ManageSalesController {
 		mav.addObject("currentUsedPage", 1);
 		mav.addObject("currentUsedBlock", 1);
 		
-		// 없으면 -> 0 
-		if(sumNew==null){
-			sumNew = "0";
-		}else if(sumUsed==null){
-			sumUsed = "0";
-		}
 		
-		System.out.println("sumNew = " + sumNew);
+		System.out.println("sumDomestic = " + sumDomestic);
+		System.out.println("sumForeign = " + sumForeign);
 		
 		mav.addObject("list1", list1);
 		mav.addObject("list2", list2);
-		mav.addObject("sumNew", sumNew);
-		mav.addObject("sumUsed", sumUsed);
+		mav.addObject("sumDomestic", sumDomestic);
+		mav.addObject("sumForeign", sumForeign);
 	
 		
 		mav.setViewName("/admin/manage/mSales");
@@ -141,6 +136,51 @@ public class ManageSalesController {
 		data.put("list", list);
 		data.put("page", map.get("currentNewPage"));
 		data.put("block", map.get("currentNewBlock"));
+		
+		
+		return data;
+	}
+	
+	@RequestMapping("/moveUsedBlock.do")
+	@ResponseBody
+	public HashMap<String, Object> moveUsedBlock(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
+		SalesListVO vo = new SalesListVO();
+		String branch = map.get("branch");
+		vo.setBranchName(branch);
+		
+		List list = dao.saleForeignBook(vo);
+		System.out.println(map.get("Block"));
+		
+		
+		data.put("list", list);
+		data.put("block", map.get("Block"));
+		data.put("page", Integer.parseInt(map.get("Block")) * 5 - 2);
+		System.out.println("send Block =" + map.get("Block"));
+		System.out.println("send page = " + (Integer.parseInt(map.get("Block")) * 5 - 2));
+		
+		return data;
+	}
+	
+	@RequestMapping("/moveUsedPage.do")
+	public @ResponseBody HashMap<String, Object> moveUsedPage(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
+		SalesListVO vo = new SalesListVO();
+		String branch = map.get("branch");
+		vo.setBranchName(branch);
+		List list = dao.saleForeignBook(vo);
+		
+		System.out.println(map.get("currentUsedPage"));
+		System.out.println(map.get("currentUsedBlock"));
+		
+		
+		data.put("list", list);
+		data.put("page", map.get("currentUsedPage"));
+		data.put("block", map.get("currentUsedBlock"));
 		
 		
 		return data;

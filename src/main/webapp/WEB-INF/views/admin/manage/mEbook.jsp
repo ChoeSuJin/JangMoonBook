@@ -172,7 +172,7 @@ function moveBlock(block) {
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#BookList">대여목록</a></li>
 			<li><a data-toggle="tab" href="#EbookPermit">대여허가요청</a></li>
-			<li><a data-toggle="tab" href="#ExtendPermit">기간연장요청</a></li>
+			<!-- <li><a data-toggle="tab" href="#ExtendPermit">기간연장요청</a></li> -->
 			<li><a data-toggle="tab" href="#insertNewOrg">새로운기업등록</a></li>
 		</ul>
 		<br>
