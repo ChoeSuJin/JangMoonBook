@@ -83,7 +83,7 @@
 	  </sec:authorize>
       <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
       	<li><a href="mAdminNotice.do">사내공지사항관리</a></li>
-        <li><a href="mSales.do">매출관리</a></li>
+        <li><a href="mTotalSale.do">매출관리</a></li>
         <li><a href="mEmployee.do">직원관리</a></li>
 	  </sec:authorize>
 	  <sec:authorize access="hasAnyRole('ROLE_EBOOK')">
