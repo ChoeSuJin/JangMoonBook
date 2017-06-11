@@ -7,10 +7,17 @@ public class CartVO {
 	private String title;
 	private String image;
 	private String status;
+	private String type;
 	private int price;	
 	private int amount; 
 	private int money;	
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getCartno() {
 		return cartno;
 	}

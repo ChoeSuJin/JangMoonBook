@@ -28,13 +28,17 @@
 </head><!--/head-->
 
 <body>
+<!-- img 랜덤으로 가져오기 위한 것 -->
+<jsp:useBean id="random" class="java.util.Random" scope="application"/>
+<!-- img 랜덤으로 가져오기 위한 것 -->
+
 	<!-- header -->
 	<jsp:include page="customerHeader.jsp"/>
 	<!-- header -->
 	
 	<section id="advertisement">
 		<div class="container">
-			<img src="${resources}/images/home/starbooks_logo.png" alt="logo" style="height:200px;"/>
+			<img src="${resources}/images/shop/advertisment_${random.nextInt(3)+1}.png" alt="logo" style="height:230px;"/>
 		</div>
 	</section>
 	
@@ -50,10 +54,6 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">${bookCg}</h2>
-						
-						<!-- img 랜덤으로 가져오기 위한 것 -->
-						<jsp:useBean id="random" class="java.util.Random" scope="application"/>
-						<!-- img 랜덤으로 가져오기 위한 것 -->
 						
 						<form action="searchBookCategory.do" method="post" style="float:right;margin-right:17px;">
 							<input type="text" name="title" placeholder="책 제목 입력">
@@ -81,6 +81,7 @@
 												<input type="hidden" name="title" value="${book.title}">
 												<input type="hidden" name="price" value="${book.price}">
 												<input type="hidden" name="image" value="${book.image}">
+												<input type="hidden" name="type" value="${book.type}">
 												<input type="hidden" name="status" value="장바구니">
 												<input type="hidden" name="amount" value="1">
 												<input type="hidden" id="session" name="session" value="${sessionScope.id}">

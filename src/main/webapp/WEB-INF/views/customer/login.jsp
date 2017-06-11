@@ -76,7 +76,8 @@
 				</div>
 				
 				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
+					<div class="signup-form" style="margin-top:58px;"><!--sign up form-->
+						<a href="organLoginForm.do">기관 로그인</a><br><br>
 						<a href="starBooks.do?cmd=join">회원가입</a>
 						<a href="starBooks.do?cmd=searchPwd">비밀번호찾기</a>
 					</div><!--/sign up form-->

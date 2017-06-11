@@ -56,24 +56,22 @@
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 								<img src="${resources}/images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2>${detail.title}</h2>
-								<span>
+								<p style="font-size:2em;">${detail.title}</p>
 									<span>${detail.price}</span><br>
-									<label style="float:left;margin-top:10px;margin-right:10px;">수량:</label>
-									<form action="cartInsert.do" method="post">
-										<input type="text" name="amount" value="1" />
+									<form action="cartInsert.do" method="post" style="margin-bottom:10px;">
+										<input type="text" name="amount" value="1" style="width:25px;height:28px;"/>
 										<input type="hidden" name="isbn" value="${detail.isbn}">
 										<input type="hidden" name="title" value="${detail.title}">
 										<input type="hidden" name="price" value="${detail.price}">
 										<input type="hidden" name="image" value="${detail.image}">
+										<input type="hidden" name="type" value="${detail.type}">
 										<input type="hidden" name="status" value="장바구니">
 										<input type="hidden" id="session" name="session" value="${sessionScope.id}">
-										<input type="submit" onclick="return check_cart()" class="btn add-to-cart" value="장바구니">
+										<input type="submit" style="margin-bottom:-1px;" onclick="return check_cart()" class="btn btn-default" value="장바구니">
 									</form>
-								</span>
-								<p><b>저자 :</b> ${detail.author}</p>
-								<p><b>분류 :</b> ${detail.type}</p>
-								<p><b>출판사 :</b> ${detail.publisher}</p>
+								<p style="font-size:1em;"><b>저자 :</b> ${detail.author}</p>
+								<p style="font-size:1em;"><b>분류 :</b> ${detail.type}</p>
+								<p style="font-size:1em;"><b>출판사 :</b> ${detail.publisher}</p>
 								<a href=""><img src="${resources}/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>

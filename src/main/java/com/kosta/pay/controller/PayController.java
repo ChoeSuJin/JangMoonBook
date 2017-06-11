@@ -74,6 +74,27 @@ public class PayController {
 		return data;
 	}
 	
+	@RequestMapping("pay/ebookPayment.do")
+	@ResponseBody
+	public HashMap<String, Object> ebookPayment(@RequestParam Map<String, String> map) {
+		
+		System.out.println("pay/ebookPayment.do");
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		String imp_uid = map.get("imp_uid");
+		String api_key = "imp_apikey";
+		String api_secret = "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f";
+		
+		IamportClient iClient = new IamportClient(api_key, api_secret);
+		IamportResponse<Payment> payment_response = iClient.paymentByImpUid(imp_uid);
+		Payment payment = payment_response.getResponse();
+		System.out.println(payment.getAmount());
+		System.out.println(payment.getMerchantUid());
+
+		data.put("rsp", payment_response.getResponse());
+		data.put("everythings_fine", true);
+		return data;
+	}
+	
 	@RequestMapping("pay/deliveryInsert.do")
 	public String deliveryComplete(String zipcode, String address1, String address2, String phone, String name, String id) {
 		System.out.println("pay/deliveryInsert.do");

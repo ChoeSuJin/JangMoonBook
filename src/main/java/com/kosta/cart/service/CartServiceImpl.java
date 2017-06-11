@@ -16,6 +16,26 @@ public class CartServiceImpl implements CartService {
 	@Inject
 	CartDAO cartDAO;
 	
+	@Override
+	public int checkInsertEbook(CartVO vo) {
+		return cartDAO.checkInsertEbook(vo);
+	}
+	
+	@Override
+	public int checkInsertEbookSalelist(CartVO vo) {
+		return cartDAO.checkInsertEbookSalelist(vo);
+	}
+
+	@Override
+	public int sumMoneyEbook(String id) {
+		return cartDAO.sumMoneyEbook(id);
+	}
+
+	@Override
+	public List<CartVO> listCartEbook(String id) {
+		return cartDAO.listCartEbook(id);
+	}
+	
 	
 	@Override
 	public void insert(CartVO vo) {
@@ -45,7 +65,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartVO countCart(String id, String isbn) {
+	public int countCart(String id, String isbn) {
 	
 		return cartDAO.countCart(id, isbn);
 	}
