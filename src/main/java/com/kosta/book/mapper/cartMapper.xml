@@ -10,13 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkInsertEbook" resultType="int">
 		select count(*) 
 		from cart 
-		where id=#{id} and isbn in (select isbn from book_info where type='E-Book')
+		where id='asdasda' and title=#{title} and isbn in (select isbn from book_info where type='E-Book')
 	</select>
 	
 	<select id="checkInsertEbookSalelist" resultType="int">
 		select count(*) 
 		from salelist
-		where id=#{id} and isbn in (select isbn from book_info where type='E-Book')
+		where id=#{id} and title=#{title} and isbn in (select isbn from book_info where type='E-Book')
 	</select>
 	
 	<insert id="insert">

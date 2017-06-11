@@ -167,15 +167,14 @@
 	<jsp:include page="customerFooter.jsp" />
 	<!-- footer -->
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	$(document).ready(function(){
-		var error="<c:out value='${sessionScope.error}'/>";
-		if(error!=""){
+		var error = sessionStorage.key('error');
+		if(error != ""){
 			alert('이미 장바구니에 있는 상품입니다.');
-			sessionStorage.removeItem('error');
 		}
 	});
-	</script>
+	</script> -->
 	<script src="${resources}/js/jquery.js"></script>
 	<script src="${resources}/js/bootstrap.min.js"></script>
 	<script src="${resources}/js/jquery.scrollUp.min.js"></script>

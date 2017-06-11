@@ -29,7 +29,6 @@ public class CartController {
 	public ModelAndView list(HttpSession session, ModelAndView mav, HttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		String id = (String)session.getAttribute("id");
-		String error = request.getParameter("error");
 		
 		List<CartVO> list=cartService.listCart(id);
 		List<CartVO> eList=cartService.listCartEbook(id);
@@ -47,7 +46,6 @@ public class CartController {
 		map.put("esumMoney", esumMoney);
 		map.put("fee", fee);	
 		map.put("sum", sumMoney + fee);	
-		if(error!=null) session.setAttribute("error", error);//ebook이 있는데 insert 할때 에러	
 		mav.addObject("map", map);
 		
 		String cmd = request.getParameter("cmd");
@@ -74,12 +72,12 @@ public class CartController {
 		
 		if(type.equals("E-Book")){
 			int check1 = cartService.checkInsertEbook(vo); // 장바구니에 ebook이 있는지 체크
-			int check2 = cartService.checkInsertEbookSalelist(vo); // 장바구니에 ebook이 있는지 체크
+			int check2 = cartService.checkInsertEbookSalelist(vo); // 구매목록에 ebook이 있는지 체크
 			int check_f = check1 + check2;
 			System.out.println("check_ebook : " + check_f);
 			
-			if(check_f >= 1){ // 장바구니에 ebook이 있는지 체크
-				return "redirect:cartList.do?error=alreadyEbook";
+			if(check_f >= 1){
+				return "redirect:cartList.do";
 			}
 			
 			cartService.insert(vo);
