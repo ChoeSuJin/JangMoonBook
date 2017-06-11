@@ -86,6 +86,20 @@ $('#modify_user').click(function(){
 	document.myPage.id.focus()
 });
 
+function modify_cancle(){
+	alert('기인정보수정을 취소하셨습니다.');
+	$('#modify_user').show();
+	$('#pwd').hide();
+	$('#ok').hide();
+	$('#cancel').hide();
+	$('#address').hide();
+	$('#sample6_postcode').attr("disabled", true);
+	$('#email').attr("disabled", true);
+	$('#phone').attr("disabled", true);
+	$('#sample6_address').attr("disabled", true);
+	$('#sample6_address2').attr("disabled", true);
+}
+
 function check_modify(){
 	
 	//아이디 입력여부 검사
@@ -494,5 +508,4 @@ function check_cart() {
 	}
 	
 }
-
 

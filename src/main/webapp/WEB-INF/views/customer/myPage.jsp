@@ -56,7 +56,7 @@
 										<form class="myPage-form" name="myPage" action="starBooks.do?cmd=modify" method="post" style="width:600px;margin:0 auto;">
 											아이디 <input type="text" name="d_id" id="d_id" disabled="disabled" value="${cm.id}">
 											<input type="hidden" name="id" id="id" value="${cm.id}">
-											암호 <input type="password" name="pwd" id="pwd" style="display:none" placeholder="기존의 암호를 입력하세요.">
+											<div id="pwd" style="display:none;">암호 <input type="password" name="pwd" placeholder="기존의 암호를 입력하세요."></div>
 											CLASS <input type="text" name="customerClass" id="customerclass" disabled="disabled" value="${cm.customerClass}">
 											이메일 <input type="text" name="email" id="email" disabled="disabled" value="${cm.email}">
 											연락처 <input type="text" name="phone" id="phone" disabled="disabled" value="${cm.phone}">
