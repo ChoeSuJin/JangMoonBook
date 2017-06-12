@@ -23,14 +23,13 @@ $(document).ready(function() {
 		var listDomestic = ${ listDomestic };
 		var listForeign = ${ listForeign };
 		
-		alert(listDomestic);
 		
 		var optionsCircle = {
 			'dataset':{
-				title: '월간 국내도서 / 외국도서 판매금액 비교',
-				values:[totalDomestic, totalForeign],
+				title: '종이책 / Ebook 매출 비교',
+				values:[totalDomestic + totalForeign, listDomestic[0] + listForeign[0]],
 				colorset: ['#2EB400', '#2BC8C9'],
-				fields: ['국내도서', '외국도서'],
+				fields: ['종이책', 'Ebook'],
 			},
 			'donut_width' : 35,
 			'core_circle_radius':50,
@@ -60,9 +59,19 @@ $(document).ready(function() {
 		};
 		Nwagon.chart(optionsColumn);
 		Nwagon.chart(optionsCircle);
+		
+		
+		$("saleBookByBranch").onclick( function() {
+			$("#Nwagon").show();
+			$("#Nwagon2").hide();
+		});
+		$("saleBookByType").onclick( function() {
+			$("#Nwagon").hide();
+			$("#Nwagon2").show();
+		});
 	
 });
-	
+
 
 </script>
 
@@ -74,20 +83,29 @@ $(document).ready(function() {
 
 	<div class="container">
 		<ul class="nav nav-tabs" style="margin-left:1%;">
-			<li class="active"><a data-toggle="tab" href="#saleNewBook">도서판매보기</a></li>
+			<li class="active"><a data-toggle="tab" href="#saleBookByBranch" name="saleBookByBranch">지점별 매출</a></li>
+			<li><a data-toggle="tab" href="#saleBookByType" name="saleBookByType">타입별 매출</a></li>
 		</ul>
 
 		<div class="tab-content" style="margin-left:5%;">
-			<div id="saleNewBook" class="tab-pane fade in active">
+			<div id="saleBookByBranch" class="tab-pane fade in active">
 				<h3>월간 판매량 비교</h3>
 				
 				<div id="Nwagon"></div>
-				<div id="Nwagon2"></div>
+				
 				
 			</div>
 
 			
 		</div>
+			<div id="saleBookByType" class="tab-pane fade">
+				<h3>월간 판매량 비교</h3>
+				
+				
+				<div id="Nwagon2"></div>
+				
+			</div>
+
 	</div>
 	</div>
 

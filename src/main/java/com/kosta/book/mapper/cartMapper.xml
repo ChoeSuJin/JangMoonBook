@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 장바구니에 기존상품이 있는지 확인 -->
 	<select id="countCart" resultType="int">
-		select count(*) from cart where id=#{id} and isbn=#{isbn}
+		select count(*) from cart where id=#{id} and isbn=#{isbn} and status='장바구니'
 	</select>
 
 	<!-- 기존 상품이 있으면 장바구니 수정 -->

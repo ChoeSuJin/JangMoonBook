@@ -132,6 +132,8 @@
     	var sum = <c:out value="${ map.sum }" />;
     	var cartCount = $("#lengthOfList").val();
     	
+    	$("#selectDate").datepicker({ minDate: 0});
+    	
     	if(name==""){
     		alert("이름을 입력하세요");
     		$("#name").focus();

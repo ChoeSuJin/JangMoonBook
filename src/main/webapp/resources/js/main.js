@@ -313,7 +313,6 @@ function sendCart() {
 	var cartCount = $("#lengthOfList").val();
 	for (var i = 0; i < cartCount; i++) {
 		var string = $("form[name=deliveryCart" + i + "]").serialize();
-		alert(string);
 		$.ajax( {
 			type:'POST',
 			url: '/book/pay/saleInsert.do',
@@ -336,7 +335,6 @@ function insertDelivery() {
 		data: string,
 		dataType : 'string',
 		success: function(data) {
-			alert(data);
 		}
 	})
 }
@@ -350,7 +348,6 @@ function selectBranch() {
 }
 
 function sendValue(name) {
-	alert(name);
 	$("#branchName").val(name);
 	$("#branchName").text(name);
 	$("branch").val(name);
@@ -374,6 +371,17 @@ function clickNowPay() {
 	var date = $("#selectDate").val();
 	var getPayData = $("#directCartLength").val();
 	var branch = $("#branchName").val();
+	
+	if(branch==""){
+		alert("지점을 선택하세요");
+		$("#branchName").focus();
+		return;
+	}
+	if(date == "") {
+		alert("날짜를 선택하세요");
+		$("#selectDate").focus();
+		return;
+	}
 	
 	IMP.request_pay({
 	    pg : 'inicis',
@@ -446,7 +454,16 @@ function clickGetPay() {
 	var date = $("#selectDate").val();
 	var getPayData = $("#directCartLength").val();
 	var branch = $("#branchName").val();
-	
+	if(branch==""){
+		alert("지점을 선택하세요");
+		$("#branchName").focus();
+		return;
+	}
+	if(date == "") {
+		alert("날짜를 선택하세요");
+		$("#selectDate").focus();
+		return;
+	}
 	
 	for (var i = 0; i < getPayData; i++) {
 		$("#date"+i+"").val(date);
@@ -458,11 +475,9 @@ function clickGetPay() {
 			data: string,
 			dataType : 'string',
 			success: function(data) {
-				alert(data);
 				window.location.href="../book/starBooks.do?cmd=main";
 			},
 			error : function() {
-				alert("clickGetPay error");
 				window.location.href="../book/starBooks.do?cmd=main";
 			}
 		})
@@ -471,9 +486,22 @@ function clickGetPay() {
 
 function check_cart() {
 	var session = $("#session").val();
+	var amount = $("#amount").val();
 	  
 	if (session == "") {
 		alert("장바구니 기능을 이용하시려면 로그인을 하세요");
+		return false;
+	}
+	if (typeof(amount) == "undefined")
+		return true;
+	if (typeof(amount) != typeof(1)) {
+		alert("숫자형식만입력 가능합니다.");
+		return false;
+	}
+	
+	
+	if (amount > 10) {
+		alert("10권까지 구매 가능합니다. 대량구매를 원하시면 직접 연락주세요.")
 		return false;
 	}
 	

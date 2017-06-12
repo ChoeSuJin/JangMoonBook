@@ -59,7 +59,7 @@
 								<p style="font-size:2em;">${detail.title}</p>
 									<span>${detail.price}</span><br>
 									<form action="cartInsert.do" method="post" style="margin-bottom:10px;">
-										<input type="text" name="amount" value="1" style="width:25px;height:28px;"/>
+										<input type="text" id="amount" name="amount" value="1" style="width:25px;height:28px;"/>
 										<input type="hidden" name="isbn" value="${detail.isbn}">
 										<input type="hidden" name="title" value="${detail.title}">
 										<input type="hidden" name="price" value="${detail.price}">

@@ -24,7 +24,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="${resources}/images/home/iframe1.png" alt="" />
+										<img src="${resources}/images/home/iframe1.jpg" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -39,7 +39,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="${resources}/images/home/iframe2.png" alt="" />
+										<img src="${resources}/images/home/iframe2.jpg" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -54,7 +54,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="${resources}/images/home/iframe3.png" alt="" />
+										<img src="${resources}/images/home/iframe3.jpg" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -64,6 +64,7 @@
 								<h2>24 DEC 2014</h2>
 							</div>
 						</div>
+						
 						
 					</div>
 					<div class="col-sm-3">
