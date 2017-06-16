@@ -71,11 +71,13 @@ public class BoardController {
 		return mav;
 	}
 	
+	// QnA 작성하는 Form으로 이동
 	@RequestMapping("/boardWrite.do")
 	public String write(){
 		return "board/write";
 	}
 	
+	// QnA 테이블에 insert
 	@RequestMapping("/boardInsert.do")
 	public String insert(@ModelAttribute BoardVO vo) throws Exception{
 		boardService.create(vo);		

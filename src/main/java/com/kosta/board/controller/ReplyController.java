@@ -22,7 +22,7 @@ public class ReplyController {
     @Inject
     ReplyService replyService;
     
-    // �뙎湲� �엯�젰
+    // 답글을 등록
     @RequestMapping("insert.do")
     public String insert(@ModelAttribute ReplyVO vo, HttpSession session){
         String id = (String) session.getAttribute("id");

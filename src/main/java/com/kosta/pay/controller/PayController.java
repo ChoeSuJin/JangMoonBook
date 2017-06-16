@@ -32,10 +32,15 @@ public class PayController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 배송결제를 처리하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping("pay/deliverPayment.do")
 	@ResponseBody
 	public HashMap<String, Object> complete(@RequestParam Map<String, String> map) {
 		
+		
+		// Iamport에서 제공하는 비밀키와 키를 이용하여 결제여부를 확인
+		// 결제가 성공하면 ajax 메소드에서 success를 수행
 		System.out.println("pay/deliverPayment.do");
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		String imp_uid = map.get("imp_uid");
@@ -48,11 +53,14 @@ public class PayController {
 		System.out.println(payment.getAmount());
 		System.out.println(payment.getMerchantUid());
 
+		// 결제정보와 제대로 되었다는 메세지를 함께 보냄
 		data.put("rsp", payment_response.getResponse());
 		data.put("everythings_fine", true);
 		return data;
 	}
 	
+	// 직접 수령을 처리하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping("pay/directPayment.do")
 	@ResponseBody
 	public HashMap<String, Object> directPayment(@RequestParam Map<String, String> map) {
@@ -74,6 +82,8 @@ public class PayController {
 		return data;
 	}
 	
+	// Ebook 결제를 처리하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping("pay/ebookPayment.do")
 	@ResponseBody
 	public HashMap<String, Object> ebookPayment(@RequestParam Map<String, String> map) {
@@ -95,6 +105,8 @@ public class PayController {
 		return data;
 	}
 	
+	// 배송목록에 추가하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping("pay/deliveryInsert.do")
 	public String deliveryComplete(String zipcode, String address1, String address2, String phone, String name, String id) {
 		System.out.println("pay/deliveryInsert.do");
@@ -115,7 +127,10 @@ public class PayController {
 		return "";
 	}
 	
-	@RequestMapping(value="pay/saleInsert.do", produces="application/text; charset=utf8")
+	// 판매 목록에 추가하는 메소드
+	// 등급재조정에 관한 메소드가 들어있다
+	// ajax로 전달되어 처리
+	@RequestMapping(value="pay/saleInsert.do", produces="application/text; charset=utf8")	// Web Notification을 이용하기때문에 UTF-8로 인코딩 필요
 	@ResponseBody
 	public String processSale(String id, String title, String dPrice, String isbn, String branchName, String quantity, String cartno) throws UnsupportedEncodingException {
 		
@@ -134,12 +149,14 @@ public class PayController {
 		cart.setId(id);
 		cart.setCartno(Integer.parseInt(cartno));
 		
+		// 판매목록에 insert -> 장바구니를 배송상태로 업데이트 -> 재고 차감
 		System.out.println(vo.toString());
 		PayDAO dao = sqlSession.getMapper(PayDAO.class);
 		dao.insertSaleList(vo);
 		dao.updateDelivery(cart);
 		dao.minusOnlineInventory(cart);
 		
+		// 등급 재조정
 		CustomerVO customer = dao.getCustomerInfo(id);
 		int sum6Month = dao.sum6MonthSale(id);
 		String newClass;
@@ -161,6 +178,8 @@ public class PayController {
 		
 	}
 	
+	// 직접 수령 테이블에 추가하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping("pay/insertGetPay.do")
 	@ResponseBody
 	public void insertGetPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
@@ -195,6 +214,7 @@ public class PayController {
 		sale.setQuantity(Integer.parseInt(quantity));
 		sale.setTitle(title);
 		
+		// 판매목록에 추가 -> 직접수령 목록에 추가 -> 장바구니에 직접수령으로 업데이트
 		dao.insertSaleList(sale);
 		
 		List orderno = dao.getOrderNo(id);
@@ -209,6 +229,8 @@ public class PayController {
 		
 	}
 	
+	// 결제후 수령을 처리하는 메소드
+	// ajax로 전달되어 처리
 	@RequestMapping(value="pay/insertNowPay.do", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String insertNowPay(String id, String title, String date, String dPrice, String isbn, String branch, String quantity, String cartno) throws ParseException {
@@ -242,6 +264,7 @@ public class PayController {
 		sale.setQuantity(Integer.parseInt(quantity));
 		sale.setTitle(title);
 		
+		// 판매 목록에 추가 -> 직접수령 목록에 추가 -> 장바구니 상태를 직접수령으로 변경
 		dao.insertSaleList(sale);
 		
 		List orderno = dao.getOrderNo(id);
@@ -251,6 +274,7 @@ public class PayController {
 		dao.insertNowPay(vo);;
 		dao.updateGetDirect(cart);
 		
+		// 등급 재조정
 		CustomerVO customer = dao.getCustomerInfo(id);
 		int sum6Month = dao.sum6MonthSale(id);
 		String newClass;
