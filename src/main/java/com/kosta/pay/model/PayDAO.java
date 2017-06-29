@@ -3,7 +3,7 @@ package com.kosta.pay.model;
 import java.util.List;
 
 import com.kosta.book.admin.mSales.model.SalesListVO;
-import com.kosta.cart.model.CartVO;
+import com.kosta.book.customer.cart.model.CartVO;
 
 public interface PayDAO {
 	
@@ -16,6 +16,4 @@ public interface PayDAO {
 	public void updateGetDirect(CartVO vo);
 	public void insertGetPay(GetDirectVO vo);
 	public void insertNowPay(GetDirectVO vo);
-	
-
 }

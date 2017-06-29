@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.book.admin.mSales.model.SalesListVO;
-import com.kosta.cart.model.CartVO;
+import com.kosta.book.customer.cart.model.CartVO;
 import com.kosta.pay.model.GetDeliveryVO;
 import com.kosta.pay.model.GetDirectVO;
 import com.kosta.pay.model.PayDAO;

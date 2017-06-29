@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- boardMapper.xml -->
 <mapper namespace = "board">
 
-	<select id = "listAll" resultType="com.kosta.board.model.BoardVO">
+	<select id = "listAll" resultType="com.kosta.book.customer.board.model.BoardVO">
 		select bno, title, content ,b.regdate, viewcnt, id from board b, customer c
 		<include refid="search" />
         order by bno desc, regdate desc 
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 
-	<select id="viewBoard" resultType = "com.kosta.board.model.BoardVO">
+	<select id="viewBoard" resultType = "com.kosta.book.customer.board.model.BoardVO">
 		select * from board where bno = #{bno}
 	</select>
 	

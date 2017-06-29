@@ -7,14 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace = "customer">
 	
 	<select id="customerList"
-			resultType="com.kosta.customer.model.CustomerVO">
+			resultType="com.kosta.book.customer.model.CustomerVO">
 		select * from customer order by id
 	</select>
 	<insert id="insertCustomer">
 		INSERT INTO CUSTOMER(ID, PWD, CUSTOMERCLASS, ZIPCODE, ADDRESS1, ADDRESS2,  EMAIL, PHONE) 
 	               VALUES(#{id}, #{pwd}, #{customerClass}, #{zipcode}, #{address1}, #{address2}, #{email}, #{phone})
 	</insert>
-	<select id = "viewCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+	<select id = "viewCustomer" resultType = "com.kosta.book.customer.model.CustomerVO">
 		select * from customer where id = #{id}
 	</select>
 	<update id="updateCustomer">
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id from customer
 			where id=#{id} and pwd=#{pwd}	
 	</select>
-	<select id = "loginCustomer" resultType = "com.kosta.customer.model.CustomerVO">
+	<select id = "loginCustomer" resultType = "com.kosta.book.customer.model.CustomerVO">
 		select * from customer where id = #{id} and pwd = #{pwd}
 	</select>
 </mapper>

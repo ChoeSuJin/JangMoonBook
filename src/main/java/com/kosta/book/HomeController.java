@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kosta.customer.model.BookDAO;
-import com.kosta.customer.model.NoticeDAO;
+import com.kosta.book.customer.model.BookDAO;
+import com.kosta.book.customer.model.NoticeDAO;
 
 @Controller
 public class HomeController {
