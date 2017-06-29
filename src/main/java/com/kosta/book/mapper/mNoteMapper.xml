@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.book.admin.mNote.model.NoteDAO">
+	
+	<insert id="sendNote" parameterType="com.kosta.book.admin.mNote.model.NoteVO">
+		insert into notes (noteNo, recv_id, sent_id, title, content, date_sent)
+		values (seq_noteNo.nextVal, #{recv_id}, #{sent_id}, #{title}, #{content}, sysdate)
+	</insert>
+	
+	<select id="readNote" parameterType="integer" resultType="com.kosta.book.admin.mNote.model.NoteVO">
+		 select * from notes where noteNo = #{ noteNo }
+	</select>
+	
+	<update id="setRead" parameterType="integer">
+		update notes set recv_read = 'Y' where noteNo = #{ noteNo }
+	</update>
+	
+	<update id="deleteSendNote" parameterType="integer">
+		update notes set sent_del = 'Y' where noteNo = #{noteNo}
+	</update>
+	
+	<update id="deleteRecvNote" parameterType="integer">
+		update notes set recv_del = 'Y' where noteNo = #{noteNo}
+	</update>
+	
+	<select id="viewSentList" resultType="com.kosta.book.admin.mNote.model.NoteVO">
+		select * from notes where sent_id = #{empNo} and sent_del = 'N'
+	</select>
+	
+	<select id="viewRecvList" resultType="com.kosta.book.admin.mNote.model.NoteVO">
+		select * from notes where recv_id = #{empNo} and recv_del = 'N'
+	</select>
+
+</mapper>

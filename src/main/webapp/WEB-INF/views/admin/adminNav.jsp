@@ -70,6 +70,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
+      <li><a href="mNote.do">쪽지관리</a></li>
       <sec:authorize access="hasAnyRole('ROLE_GOLD')">
         <li><a href="mInventory.do">재고관리</a></li>
         <li><a href="mCustomer.do">고객관리</a></li>
