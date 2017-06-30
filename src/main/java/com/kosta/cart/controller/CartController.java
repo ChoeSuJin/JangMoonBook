@@ -11,13 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.mInventory.model.BookInfoVO;
 import com.kosta.cart.model.CartVO;
 import com.kosta.cart.service.CartService;
-import com.kosta.customer.model.CustomerVO;
 
 @Controller
 public class CartController {
