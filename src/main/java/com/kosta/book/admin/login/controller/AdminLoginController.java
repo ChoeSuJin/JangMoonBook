@@ -20,7 +20,7 @@ public class AdminLoginController {
 	
 	@Autowired
 	SqlSession sqlSession;
-	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
+	
 	@RequestMapping("/adminLoginForm.do")
 	public String loginForm(HttpSession session) {
 		
@@ -29,12 +29,12 @@ public class AdminLoginController {
 		if (session.getAttribute("user") == null) {
 			return "/admin/adminLogin";
 		} else {
-			return "redirect:adminNav.do";
+			return "redirect:adminMain.do";
 		}
 		
 	}
-	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	@RequestMapping("/adminNav.do")
+	
+	@RequestMapping("/adminMain.do")
 	public String mainForm(Principal principal, HttpServletRequest request) {
 
 		String username = principal.getName();
@@ -60,6 +60,7 @@ public class AdminLoginController {
 		int directBook = dao.getCountDirectBook(branch);
 		int requestEbook = dao.getCountRequestEbook();
 		
+		session.setAttribute("name", vo.getName()); //·Î±×ÀÎÇÑ È¸¿øÀÇ ÀÌ¸§
 		session.setAttribute("user", vo);
 		String main = "main";
 		request.setAttribute("main", main);
@@ -70,9 +71,9 @@ public class AdminLoginController {
 		request.setAttribute("directBook", directBook);
 		request.setAttribute("requestEbook", requestEbook);
 		
-		return "/admin/adminNav";
+		return "/admin/adminMain";
 	}
-	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
 	@RequestMapping("/adminLoginError.do")
 	public String loginError(HttpServletRequest request){
 		String error = "error";

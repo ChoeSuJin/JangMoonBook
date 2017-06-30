@@ -20,17 +20,17 @@ public class CartDAOImpl implements CartDAO {
 	
 	@Override
 	public int checkInsertEbook(CartVO vo) {
-		return (int)sqlSession.selectOne("cart.checkInsertEbook", vo);
+		return sqlSession.selectOne("cart.checkInsertEbook", vo);
 	}
 	
 	@Override
 	public int checkInsertEbookSalelist(CartVO vo) {
-		return (int)sqlSession.selectOne("cart.checkInsertEbookSalelist", vo);
+		return sqlSession.selectOne("cart.checkInsertEbookSalelist", vo);
 	}
 
 	@Override
 	public int sumMoneyEbook(String id) {
-		return (int)sqlSession.selectOne("cart.sumMoneyEbook", id);
+		return sqlSession.selectOne("cart.sumMoneyEbook", id);
 	}
 
 	@Override

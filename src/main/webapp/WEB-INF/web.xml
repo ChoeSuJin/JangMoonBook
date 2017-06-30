@@ -78,8 +78,6 @@
     	<location>/WEB-INF/views/error/500.jsp</location>
     </error-page>
 
-
-	session 유효시간 설정(분단위)
 	<session-config>
 		<session-timeout>180</session-timeout>
 	</session-config>
