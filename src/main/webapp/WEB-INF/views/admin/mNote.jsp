@@ -156,7 +156,7 @@
 		<div id="sendNote" class="tab-pane fade">
 		
 			<table class="table table-striped">
-			<form action="sendNote.do" method="post" name="sendNoteForm">
+			<form action="sendNote.do" method="post" id="sendNoteForm">
 				<tr>
 					<td>받는사람</td>
 					<td><input type="text" name="recv_id"></td>
@@ -190,8 +190,11 @@
 
 	function checkNote() {
 		
-		var test = $("sendNoteForm recv_id").value;
-		alert(test);
+		var test = $("#sendNoteForm");
+		
+		var recv_id = test.recv_id.value;
+		
+		alert(recv_id);
 		
 		if ($("sendNoteForm recv_id").value == "") {
 			alert("받는 사람을 입력해주세요.");

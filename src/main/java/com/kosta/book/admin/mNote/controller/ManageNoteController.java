@@ -20,7 +20,7 @@ public class ManageNoteController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("/mNote.do")
+	@RequestMapping("/mNoteSend.do")
 	public ModelAndView mNote(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -32,19 +32,43 @@ public class ManageNoteController {
 		int empNo = user.getEmpNo();
 		
 		List sendList = dao.viewSentList(empNo);
-		List recvList = dao.viewRecvList(empNo);
 		
 		System.out.println("sendList size = " + sendList.size());
+		
+		mav.setViewName("/admin/mNoteSend");
+		mav.addObject("sendList", sendList);
+		mav.addObject("sendListSize", sendList.size());
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/mNoteReceive.do")
+	public ModelAndView mNoteReceive(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		
+		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
+		
+		String name = user.getName();
+		int empNo = user.getEmpNo();
+		
+		List recvList = dao.viewRecvList(empNo);
+		
 		System.out.println("recvList size = " + recvList.size());
 		
-		mav.setViewName("/admin/mNote");
-		mav.addObject("sendList", sendList);
+		mav.setViewName("/admin/mNoteReceive");
 		mav.addObject("recvList", recvList);
-		mav.addObject("sendListSize", sendList.size());
 		mav.addObject("recvListSize", recvList.size());
 		
 		return mav;
 		
+	}
+	
+	@RequestMapping("/sendNoteForm.do")
+	public String sendNoteForm() {
+		return "/admin/sendNote";
 	}
 	
 	@RequestMapping("/sendNote.do")
@@ -59,7 +83,7 @@ public class ManageNoteController {
 		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
 		dao.sendNote(vo);
 		
-		mav.setViewName("redirect:mNote.do");
+		mav.setViewName("redirect:mNoteSend.do");
 		return mav;
 	}
 	
@@ -70,7 +94,7 @@ public class ManageNoteController {
 		
 		dao.deleteRecvNote(vo.getNoteNo());
 		
-		return "redirect:mNote.do";
+		return "redirect:mNoteReceive.do";
 	}
 	
 	@RequestMapping("/sentMsgDel.do")
@@ -80,7 +104,7 @@ public class ManageNoteController {
 		
 		dao.deleteSendNote(vo.getNoteNo());
 		
-		return "redirect:mNote.do";
+		return "redirect:mNoteSend.do";
 	}
 
 }
