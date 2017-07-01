@@ -47,13 +47,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-	         보낸메세지
+	        쪽지보내기
         <small>${user.empNo}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
         <li>Message</li>
-        <li>보낸메세지</li>
+        <li>쪽지보내기</li>
       </ol>
     </section>
 
@@ -63,7 +63,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">보낸쪽지함</h3>
+              <h3 class="box-title">쪽지보내기</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -82,9 +82,9 @@
 					<td><textarea rows="10" cols="100" name="content"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<button onclick="checkNote();">보내기</button>
-						<button id="cancelNote">취소</button>
+					<td colspan="2" style="float: right;">
+						<button class="btn btn-flat btn-sm btn-primary" onclick="checkNote();">보내기</button>
+						<button class="btn btn-flat btn-sm btn-danger" id="cancelNote">취소</button>
 					</td>
 				</tr>
 			</form>

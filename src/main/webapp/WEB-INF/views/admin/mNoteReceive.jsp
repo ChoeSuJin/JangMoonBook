@@ -68,10 +68,12 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
+              <thead>
                 <th>보낸사람</th>
 				<th>제목</th>
 				<th>받은날짜</th>
 				<th>삭제</th>
+				</thead>
 				<c:if test="${ recvListSize == 0 }">
 					<tr>
 						<td colspan="3">받은 쪽지가 업습니다.</td>
@@ -102,7 +104,7 @@
 									        </div>
 											<div class="form-group">
 									             <label>제목</label>
-									             <input type="text" class="form-control" name="title" id="msg" value="${ list.title }">				  
+									             <input readonly="readonly" type="text" class="form-control" name="title" id="msg" value="${ list.title }">				  
 									           </div>
 											<div class="form-group">
 									             <label>내용</label><br>
@@ -122,7 +124,7 @@
 					<td>
 						<form action="recvMsgDel.do" method="post">
 							<input type="hidden" name="noteNo" value="${ list.noteNo }">
-							<input type="submit" value="삭제">
+							<input type="submit" class="btn btn-flat btn-sm bg-maroon" value="삭제">
 						</form>
 					</td>
 				</tr>
