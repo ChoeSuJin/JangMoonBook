@@ -45,7 +45,6 @@ public class BookController {
 		System.out.println("type : " + vo.getType());
 		model.addAttribute("list", bookDAO.orderBook(vo));
 		model.addAttribute("booktype", vo.getType());
-		
 		List list = bookDAO.bookSearchDao(vo);
 		
 		int contents = list.size();	// �??��?�� �? �??��
