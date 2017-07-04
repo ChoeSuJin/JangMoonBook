@@ -52,7 +52,8 @@ public class mInventoryController {
 		List list3 = dao.selectOrderList(branch);
 		List list4 = dao.selectGetDirectList(branch);
 
-		/*Àç°í¸ñ·Ï °ü·Ã ÆäÀÌÂ¡*/
+
+		/*å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ì§•*/
 
 		int allCount = list2.size();
 		int allPage =(allCount % 10 == 0) ? allCount / 10 : allCount / 10 + 1;
@@ -83,10 +84,10 @@ public class mInventoryController {
 	
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
 		
-		// cost, publisher¸¦ ¾ò´Â Äõ¸®¹®À» ÀÛ¼ºÇÏ¿© set ¸Ş¼Òµå¿¡ ÀÔ·Â
+		// cost, publisherå ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒœì‡½ì˜™å ì‹¹ìš¸ì˜™ set å ìŒ¨ì†Œë“œì— å ìŒ‰ë¤„ì˜™
 		
 		
-		// ³¯Â¥Ã³¸® => db¿¡¼­ sysdate·Î Ã³¸®ÇßÀ¾´Ï´Ù
+		// å ì™ì˜™ì§œì²˜å ì™ì˜™ => dbå ì™ì˜™å ì™ì˜™ sysdateå ì™ì˜™ ì²˜å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì‹¹ëŒì˜™
 		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		

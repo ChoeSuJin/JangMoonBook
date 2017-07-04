@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.book.admin.mOnlineSale.model.OnlineSalesDAO">
+	<select id="saleOnlineBook" resultType="com.kosta.book.admin.mOnlineSale.model.SalesListVO">
+		select * from salelist where branchname='online' and isbn not in (select isbn from book_info where type = 'E-Book')
+	</select>
+	<select id="sumSaleOnlineDomesticBook" resultType="String">
+		select nvl(sum(dprice * quantity), 0) from salelist where branchname='online' and isbn in (select isbn from book_info where type='국내도서')
+	</select>
+	
+	<select id="sumSaleOnlineForeignBook" resultType="String">
+		select nvl(sum(dprice * quantity), 0) from salelist where branchname='online' and isbn in (select isbn from book_info where type='외국도서')
+	</select>
+	
+</mapper>

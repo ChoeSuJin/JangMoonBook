@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kosta.book.admin.mQnABoard.model.ManageQnABoardDAO">
+	<select id="getList" resultType="com.kosta.book.admin.mQnABoard.model.QnABoardVO">
+		select * from board where bno not in (select bno from reply)
+	</select>
+	
+	<select id="viewBoard" resultType="com.kosta.book.admin.mQnABoard.model.QnABoardVO">
+		select * from board where bno = #{ bno }
+	</select>
+	
+	<insert id="regReply">
+		insert into reply values (reply_seq.nextVal, #{ bno }, #{ replyText}, '관리자', sysdate)
+	</insert>
+</mapper>

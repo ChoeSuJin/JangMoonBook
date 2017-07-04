@@ -21,10 +21,18 @@ public class OrganLoginController {
 	SqlSession sqlSession;
 	
 	@RequestMapping("/organLoginForm.do")
-	public String loginForm() {
-		System.out.println("∫‰ ¿Ã∏ß : organLogin");
+	public String loginForm(HttpSession session) {
 		
-		return "/organization/organLogin";
+		System.out.println("∫‰ ¿Ã∏ß : organLogin");
+		if (session.getAttribute("organ") == null) {
+			return "/organization/organLogin";			
+		}
+		else {
+			OrganLoginVO vo = (OrganLoginVO)session.getAttribute("organ");
+			System.out.println(vo.getOname());
+			return "redirect:OrganReqForm.do";
+		}
+		
 	}
 	
 	@RequestMapping("/organLogin.do")
@@ -53,4 +61,13 @@ public class OrganLoginController {
 		return mav;
 	}
 	
+	@RequestMapping("organLogout.do")
+	public String organLogout(HttpSession session) {
+		
+		session.invalidate();
+		
+		
+		
+		return "redirect:organLoginForm.do";
+	}
 }

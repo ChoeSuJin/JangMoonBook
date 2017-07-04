@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -172,6 +173,175 @@ function moveBlock(block) {
 			<li class="active"><a data-toggle="tab" href="#BookList">대여목록</a></li>
 			<li><a data-toggle="tab" href="#EbookPermit">대여허가요청</a></li>
 			<li><a data-toggle="tab" href="#ExtendPermit">기간연장요청</a></li>
+=======
+<c:set value="${pageContext.request.contextPath}/resources" var="resources" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EbookManageMain</title>
+</head>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		var pagePerBlock = 3;
+		var contentPerPage = 10;
+		
+		$(".orgList").hide();
+		$(".org_page").hide();
+		$(".next").hide();
+		$(".previous").hide();
+		var org_currentPage = <c:out value="${org_currentPage}" />;
+		var org_currentBlock = <c:out value="${org_currentBlock}" />;
+		for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+    		$("#"+ (i+1) + "").show(500);
+
+    	}
+		for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
+			$("#pg" + (i+1) + "").show(500);
+		}
+		
+		$("#next2").show(500);
+		
+	});
+
+	function getOrgList(ono) {
+		
+		$.ajax({
+            type : "POST",
+            url : "getOrgList.do",
+            data : {"ono" : ono},
+            dataType : "JSON",
+            error : function(){
+                alert('에러발생');
+            },
+            success : function(data){
+            	
+            	 var values = data.ebookList;
+            	 values=JSON.stringify(values);
+            	 var newVal = JSON.parse(values);
+            	 var allPage = newVal.length;
+            	 
+            	$("#list1").html("");
+            	var html = '<table class="table table-condensed" style="width : 45%; float: right;">'
+            				+ '<th>isbn</th><th>title</th>';
+            	if (newVal.length == 0) {
+            		html += '<tr><td colsapn=2>대여한 책이 없습니당</td></tr>';
+            	} else{
+	            	for(var i = 0; i< newVal.length; i++) {
+	            		html += '<tr><td>'+ newVal[i].isbn +'</td><td>' + newVal[i].title + '</td><td>';
+	                }
+            	}
+            	html += '</table>';
+            	$("#list1").prepend(html);
+
+            }
+             
+        })
+	}
+	
+function movePage(block, page) {
+	
+	var pagePerBlock = 3;
+	var contentPerPage = 10;
+		
+		$.ajax({
+            type : "POST",
+            url : "movePage.do",
+            data : {"org_currentPage" : page,
+            		"org_currentBlock" : block },
+            dataType : "JSON",
+            error : function(){
+                alert('에러발생');
+            },
+            success : function(data){
+
+            	var org_currentPage = data.page;
+            	var org_currentBlock = data.block;
+            	var getList = data.list;
+            	
+
+            	$(".orgList").hide();
+            	
+            	for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+            		$("#"+ (i+1) + "").show(500);
+            		
+            	}
+
+            }
+             
+        })
+	}
+	
+function moveBlock(block) {
+	var pagePerBlock = 3;
+	var contentPerPage = 10;
+
+	
+	$.ajax({
+        type : "POST",
+        url : "moveBlock.do",
+        data : {"Block" : block },
+        dataType : "JSON",
+        error : function(){
+            alert('에러발생');
+        },
+        success : function(data){
+        	
+        	$(".orgList").hide();
+    		$(".org_page").hide();
+    		$(".next").hide();
+    		$(".previous").hide();
+        	var org_currentPage = data.page;
+        	var org_currentBlock = data.block;
+        	var contentPerPage = 3;
+        	var getList = data.list;
+        	var allOrganBlock = <c:out value="${ allOrganBlock }" />;
+			var allOrganPage = <c:out value="${ allOrganPage }" />;
+			
+			
+			/* String->int 형변환 */
+			org_currentBlock *= 1;
+			org_currentPage *= 1;
+			allOrganBlock *= 1;
+			allOrganPage *= 1;
+			
+			if (allOrganBlock > org_currentBlock) {
+				$("#next"+ (org_currentBlock+1) + "").show(500);
+			}
+			if (org_currentBlock > 1) {
+				$("#previous"+ (org_currentBlock-1) + "").show(500);
+			}
+			
+			for(var i = (org_currentPage - 1) * contentPerPage; i < (org_currentPage) * contentPerPage; i++) {
+	    		$("#"+ (i+1) + "").show(500);
+	    	}
+			for(var i = (org_currentBlock - 1) * pagePerBlock; i < (org_currentBlock) * pagePerBlock; i++) {
+				$("#pg" + (i+1) + "").show(500);
+			}
+
+        }
+         
+    })
+}
+	
+	
+</script>
+<body>
+<!-- header -->
+<jsp:include page="../adminNav.jsp"/>
+<!-- header -->
+	<div class="container" >
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#BookList">대여목록</a></li>
+			<li><a data-toggle="tab" href="#EbookPermit">대여허가요청</a></li>
+			<!-- <li><a data-toggle="tab" href="#ExtendPermit">기간연장요청</a></li> -->
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 			<li><a data-toggle="tab" href="#insertNewOrg">새로운기업등록</a></li>
 		</ul>
 		<br>

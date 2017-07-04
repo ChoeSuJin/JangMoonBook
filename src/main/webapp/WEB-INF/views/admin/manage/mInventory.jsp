@@ -6,6 +6,7 @@
 <html>
 <head>
 <title>재 고 관 리</title>
+<<<<<<< HEAD
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,6 +32,35 @@ $(document).ready(function() {
 	var currentBlock = <c:out value="${currentBlock}" />;
 	for(var i = (currentPage - 1) * 10; i < (currentPage) * 10; i++) {
 		$("#normal"+ (i+1) + "").show();
+=======
+	<link href="${resources}/css/responsive.css?ver=1" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="${resources}/css/bootstrap.min.css?ver=1" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function button_event() {
+			if (confirm("등록 하시겠습니까 ?")) { //확인
+				$('#insert').submit();
+			} else { //취소
+				return false;
+			}
+		}
+  </script>
+</head>
+
+<script>
+$(document).ready(function() {
+	$(".normalList").hide();
+	$(".normalPage").hide();
+	$(".normalNext").hide();
+	$(".normalPrevious").hide();
+	var currentPage = <c:out value="${currentPage}" />;
+	var currentBlock = <c:out value="${currentBlock}" />;
+	for(var i = (currentPage - 1) * 10; i < (currentPage) * 10; i++) {
+		$("#normal"+ i + "").show();
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 	}
 	for(var i = (currentBlock - 1) * 5; i < (currentBlock) * 5; i++) {
 		$("#normalPg" + (i+1) + "").show();

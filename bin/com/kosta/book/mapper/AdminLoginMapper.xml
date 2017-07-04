@@ -9,4 +9,23 @@
 	<select id="loginEmployee" resultType="com.kosta.book.admin.login.model.EmployeeVO">
 		select * from employee where empno = #{empNo}
 	</select>
+<<<<<<< HEAD
+=======
+	
+	<select id="getCountNotDoQnA" resultType="integer">
+		select count(*) from board where bno not in (select bno from reply)
+	</select>
+	
+	<select id="getCountEmergencyBook" resultType="integer">
+		<![CDATA[select count(*) from inventory where branch =#{branch} and quantity <= 3 order by quantity]]>
+	</select>
+	
+	<select id="getCountDirectBook" resultType="integer">
+		select count(*) from getDirect where branch = #{branch} and (to_date(getDate, 'YY/MM/DD') - to_date(sysdate, 'YY/MM/DD')) = 0
+	</select>
+	
+	<select id="getCountRequestEbook" resultType="integer">
+		select count(*) from EBOOK_REQLIST
+	</select>
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 </mapper>

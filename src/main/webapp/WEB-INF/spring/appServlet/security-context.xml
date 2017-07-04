@@ -24,7 +24,7 @@
 			login-processing-url="/j_spring_security_check"
 			login-page="/adminloginForm.do"
 			authentication-failure-url="/adminLoginError.do?error"
-			default-target-url="/adminNav.do"
+			default-target-url="/adminMain.do"
 		/>
 		<security:logout 
 			logout-url="/j_spring_security_logout"

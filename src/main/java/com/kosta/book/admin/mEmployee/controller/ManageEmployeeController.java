@@ -26,10 +26,12 @@ public class ManageEmployeeController {
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
 		List<ManageEmployeeVO> list = null;
-		// session에 저장된 지점명 추출
+
+		
+		// 세션에서 지점 가져오기
 		HttpSession session = request.getSession();
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
-		String branch = user.getBranch();	
+		String branch = user.getBranch();
 		
 		if(vo.getName()!=null){	// 이름이 넘어오면 이름으로 검색 아니면 전체
 			vo.setBranch(branch);
@@ -38,8 +40,9 @@ public class ManageEmployeeController {
 			list = dao.selectAll(branch);
 		}
 		
+		mav.addObject("branch", branch);
 		mav.addObject("employeeList", list);
-		mav.setViewName("/admin/manage/mEmployee");
+		mav.setViewName("/admin/mEmployee");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}
@@ -62,7 +65,7 @@ public class ManageEmployeeController {
 		
 		List<ManageEmployeeVO> list = dao.selectAll(branch);
 		mav.addObject("employeeList", list);
-		mav.setViewName("/admin/manage/mEmployee");
+		mav.setViewName("/admin/mEmployee");
 		System.out.println("viewName : " + mav.getViewName());
 		return mav;
 	}
@@ -72,23 +75,37 @@ public class ManageEmployeeController {
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
 		
+		//세션에서 지점 가져오기
 		HttpSession session = request.getSession();
-		System.out.println(vo.getBranch());
-		
-		String empclass = vo.getEmpclass(); //직급 별로 다른 시퀀스 부여 하기위함
-		
-		if(empclass.equalsIgnoreCase("ROLE_BRONZE")){
-			dao.insertBronze(vo);	// 직원
-		}else if(empclass.equalsIgnoreCase("ROLE_GOLD")){
-			dao.insertGold(vo);		// 매니저
-		}else if(empclass.equalsIgnoreCase("ROLE_PLATINUM")){
-			dao.insertPlatinum(vo);	// 지점장
-		}else if(empclass.equalsIgnoreCase("ROLE_DIAMOND")){
-			dao.insertDiamond(vo);	// 본사 직원, 사장
+		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
+		String branch = user.getBranch();
+		System.out.println("branch : " + branch);
+		vo.setBranch(branch);
+
+		// 입력된 값이 없으면 등록 폼으로 이동
+		if(vo.getName() == null){ 
+			mav.addObject("branch", branch);
+			mav.setViewName("/admin/mEmployeeIn");
+			return mav;
 		}
 		
-//		List<ManageEmployeeVO> list = dao.selectAll(branch);
-//		mav.addObject("employeeList", list);
+		//직급 별로 다른 시퀀스 부여 하기위함
+		String empclass = vo.getEmpclass(); 
+		try {
+			if(empclass.equalsIgnoreCase("ROLE_BRONZE")){
+				dao.insertBronze(vo);	// 직원
+			}else if(empclass.equalsIgnoreCase("ROLE_GOLD")){
+				dao.insertGold(vo);		// 매니저
+			}else if(empclass.equalsIgnoreCase("ROLE_PLATINUM")){
+				dao.insertPlatinum(vo);	// 지점장
+			}else if(empclass.equalsIgnoreCase("ROLE_DIAMOND")){
+				dao.insertDiamond(vo);	// 본사 직원, 사장
+			}
+		} catch (Exception e) {
+			mav.addObject("registError", "error");
+			mav.setViewName("/admin/mEmployee");
+			return mav;
+		}
 		
 		mav.setViewName("redirect:mEmployee.do");
 		System.out.println("viewName : " + mav.getViewName());

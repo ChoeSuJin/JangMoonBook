@@ -56,9 +56,10 @@ public class AdminNoticeController {
 		AdminNoticeDAO dao = sqlSession.getMapper(AdminNoticeDAO.class);
 		AdminNoticeVO vo = new AdminNoticeVO();
 		vo.setNum(num);
+		dao.deleteAdminNotice(vo);
 		
 		
-		return "redirecd:mAdminNotice.do";
+		return "redirect:mAdminNotice.do";
 	}
 
 }

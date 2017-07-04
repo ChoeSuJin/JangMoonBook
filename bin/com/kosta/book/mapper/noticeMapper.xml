@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<<<<<<< HEAD
+<mapper namespace="com.kosta.book.customer.model.NoticeDAO">
+	<insert id="noticeWrite">
+		INSERT INTO customerNOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, NOTICE_SEQ.NEXTVAL, #{content})
+	</insert>
+	<select id="noticeList" resultType="com.kosta.book.customer.model.NoticeVO">	
+		SELECT * FROM customerNOTICE ORDER BY ARTICLENUMBER DESC
+	</select>
+	<select id="detailView" resultType="com.kosta.book.customer.model.NoticeVO">	
+=======
+<mapper namespace="com.kosta.customer.model.NoticeDAO">
+	<insert id="noticeWrite">
+		INSERT INTO customerNOTICE (TITLE, REGDATE, ArticleNumber, CONTENT) VALUES (#{title}, SYSDATE, NOTICE_SEQ.NEXTVAL, #{content})
+	</insert>
+	<select id="noticeList" resultType="com.kosta.customer.model.NoticeVO">	
+		SELECT * FROM customerNOTICE ORDER BY ARTICLENUMBER DESC
+	</select>
+	<select id="detailView" resultType="com.kosta.customer.model.NoticeVO">	
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
+		SELECT * FROM customerNOTICE WHERE articleNumber = ${articleNumber}
+	</select>
+	
+</mapper>

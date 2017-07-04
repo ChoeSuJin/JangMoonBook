@@ -3,28 +3,35 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kosta.book.customer.model.BookDAO">
+
+<mapper namespace="com.kosta.customer.model.BookDAO">
 	<select id="bookSearchDao" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE
 			type = #{type}
 			AND category = #{category}
-		ORDER BY TITLE DESC
+		ORDER BY book 
+	</select>
+	
+	<select id="orderBookCategory" resultType="com.kosta.book.customer.model.BookVO">
+		SELECT * 
+		FROM BOOK_INFO
+		WHERE category = #{category}
 	</select>
 	
 	<select id="orderBook" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE
-			type = #{type}
-		ORDER BY TITLE
+			type = #{type} and category=#{category}
+		ORDER BY book
 	</select>
 	
 	<select id="orderBookDetail" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
-		WHERE title = #{title}
+		WHERE isbn = #{isbn}
 	</select>
 	
 	<select id="searchBook" resultType="com.kosta.book.customer.model.BookVO">
@@ -32,62 +39,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BOOK_INFO
 			WHERE type = #{type}
 			AND TITLE like '%${title}%'
-		ORDER BY TITLE
+		ORDER BY book 
 	</select>
 	
-	<select id="allList" resultType="com.kosta.book.customer.model.BookVO">
-		SELECT * FROM BOOK_INFO WHERE TYPE = '국내도서' OR TYPE = '외국도서' OR TYPE = 'E-Book'  ORDER BY BOOK DESC
-	</select>
-	<insert id="bookWrite">
-		INSERT INTO BOOK_INFO
-		(title,
-		price, 
-		author, 
-		publisher, 
-		type, 
-		isbn, 
-		category
-		)		 
-		VALUES (
-			'${title}',
-			${price},
-			'${author}',
-			'${publisher}',
-			'${type}',
-			'${isbn}',
-			'${category}'
-				)
-	</insert>
-	<select id="bookOneSearchDao" resultType="com.kosta.book.customer.model.BookVO">
+	<select id="searchBookCategory" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
-			WHERE TITLE LIKE '%${title}%'
-			AND (TYPE = '국내도서'
-			OR TYPE = '외국도서'
-			OR TYPE = 'E-Book') 
-		ORDER BY TITLE DESC
-	</select>
-	<select id="bookNoTypeSearchDao" resultType="com.kosta.book.customer.model.BookVO">
-		SELECT * 
-		FROM BOOK_INFO
-		WHERE TITLE like '%${title}%'
-	</select>
-	<select id="bookTypeSearchDao" resultType="com.kosta.book.customer.model.BookVO">
-		SELECT * 
-		FROM BOOK_INFO
-			WHERE type like '%${type}%'
+			WHERE category = #{category}
 			AND TITLE like '%${title}%'
-		ORDER BY TITLE DESC
-		
+		ORDER BY book 
 	</select>
-	<select id="usedSelectDao" resultType="com.kosta.book.customer.model.BookVO">
-		SELECT * 
-		FROM BOOK_INFO
-			WHERE TITLE LIKE '%${title}%'
-			AND (TYPE = '국내도서'
-			OR TYPE = '외국도서'
-			OR TYPE = 'E-Book') 
-		ORDER BY TITLE DESC
-		
-	</select>
+
 </mapper>

@@ -1,7 +1,8 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=branch 'hyeshin' of https\://github.com/ChoeSuJin/JangMoonBook.git
+>>>>>>>=branch 'newMaster' of https\://github.com/ChoeSuJin/JangMoonBook.git
 eclipse.preferences.version=1
+encoding//src/main/java/com/kosta/book/admin/mInventory/controller/mInventoryController.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/board/controller/BoardController.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/cart/controller/CartController.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/cart/model/CartDAO.java=UTF-8
@@ -9,4 +10,5 @@ encoding//src/main/java/com/kosta/book/customer/cart/model/CartVO.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/cart/service/CartService.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/controller/BookController.java=UTF-8
 encoding//src/main/java/com/kosta/book/customer/model/CustomerDAO.java=UTF-8
+encoding//src/main/java/com/kosta/pay/controller/PayController.java=UTF-8
 encoding//src/main/webapp/resources/css/main.css=UTF-8

@@ -6,8 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- boardMapper.xml -->
 <mapper namespace = "board">
 
+<<<<<<< HEAD
+	<select id = "listAll" resultType="com.kosta.book.customer.board.model.BoardVO">
+		select bno, title, content ,b.regdate, viewcnt, id
+		from board b, customer c
+		<include refid="search" />
+        order by bno desc, regdate desc 
+	</select>
+	
+	<insert id = "insert">
+		insert into board (bno, title, writer,content)
+			values (bno_seq.nextval, #{title},#{writer},#{content})
+	</insert>
+	
+
+	<select id="viewBoard" resultType = "com.kosta.book.customer.board.model.BoardVO">
+=======
 	<select id = "listAll" resultType="com.kosta.board.model.BoardVO">
-		select bno, title, content ,b.regdate, viewcnt, id from board b, customer c
+		select bno, title, content ,b.regdate, viewcnt, id
+		from board b, customer c
 		<include refid="search" />
         order by bno desc, regdate desc 
 	</select>
@@ -19,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<select id="viewBoard" resultType = "com.kosta.board.model.BoardVO">
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 		select * from board where bno = #{bno}
 	</select>
 	
@@ -26,7 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="viewCount">
 		update board set viewcnt = viewcnt+1 where bno = #{bno}
 	</update>
-	
 	
 	<update id="update">
 		update board set title = #{title}, content=#{content} where bno = #{bno}

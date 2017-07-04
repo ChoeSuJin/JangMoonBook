@@ -4,10 +4,18 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class BookInfoVO {
 	
-	private String title, author, publisher, type, isbn, category, image;
+
+	private String title, author, publisher, type, isbn, category, image, id;
 	private int price;
 	private CommonsMultipartFile file;
 	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}

@@ -7,28 +7,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="cart">
 
+
+<select id="checkInsertEbook" resultType="int">
+		select count(*) 
+		from cart 
+		where id='asdasda' and title=#{title} and isbn in (select isbn from book_info where type='E-Book')
+	</select>
+	
+	<select id="checkInsertEbookSalelist" resultType="int">
+		select count(*) 
+		from salelist
+		where id=#{id} and title=#{title} and isbn in (select isbn from book_info where type='E-Book')
+	</select>
+
 	<insert id="insert">
-		insert into cart (status, cartno, id, isbn, title, price, amount)
-		values (#{status}, cart_seq.nextval,#{id}, #{isbn},#{title},#{price},#{amount})
+		insert into cart (status, cartno, id, isbn, title, price, amount,image)
+		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount},#{image})
 	</insert>
 
 	<select id="listCart" resultType="com.kosta.book.customer.cart.model.CartVO">
-		select cartno, title, price, isbn, sum(amount) amount, sum(price*amount) money 
-		from cart 
-		where id=#{id} and status = '장바구니' group by cartno, title, price, isbn
+		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
+     	from cart
+      	where id=#{id} and status = '장바구니' and isbn not in (select isbn from book_info where type='E-Book')
+    	group by cartno, title, price, isbn, image
+      	order by cartno
+	</select>
+
+	<select id="listCartEbook" resultType="com.kosta.book.customer.cart.model.CartVO">
+		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
+     	from cart
+      	where id=#{id} and status = '장바구니' and isbn in (select isbn from book_info where type='E-Book')
+    	group by cartno, title, price, isbn, image
+      	order by cartno
 	</select>
 
 	<select id="sumMoney" resultType="int">
-		select nvl(sum(price * amount) ,0) from cart where status = '장바구니'
+		select nvl(sum(price * amount) ,0) 
+		from cart 
+		where status = '장바구니' and id=#{id} and isbn not in (select isbn from book_info where type='E-Book')
+	</select>
+	
+	<select id="sumMoneyEbook" resultType="int">
+		select nvl(sum(price * amount) ,0) 
+		from cart 
+		where status = '장바구니' and id=#{id} and isbn in (select isbn from book_info where type='E-Book')
 	</select>
 
 	<delete id="delete">
-		delete from cart where isbn=#{isbn}
+		delete from cart where status='장바구니' and isbn=#{isbn} and id=#{id}
 	</delete>
 
 	<!-- 장바구니에 기존상품이 있는지 확인 -->
 	<select id="countCart" resultType="int">
-		select count(*) from cart where id=#{id} and isbn=#{isbn}
+		select count(*) from cart where id=#{id} and isbn=#{isbn} and status='장바구니'
 	</select>
 
 	<!-- 기존 상품이 있으면 장바구니 수정 -->
@@ -38,7 +69,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="modify">
 		update cart set amount=#{amount} where id=#{id} and isbn=#{isbn}
-	</update> 
+	</update>
+	
+	<select id="getDiscountRate" resultType="String">
+		select discount from customerclass where name = (select customerclass from customer where id = #{ id })
+	</select>
 	
 </mapper>
 

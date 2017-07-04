@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<<<<<<< HEAD
+<mapper namespace="com.kosta.book.customer.model.UsedBookDAO">
+=======
+<mapper namespace="com.kosta.customer.model.UsedBookDAO">
+>>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
+	<insert id="writeDao">
+		Insert into BOOK_INFO (TITLE,PRICE,AUTHOR,PUBLISHER,TYPE,ISBN,CATEGORY, id, book)
+		values (#{title}, #{price}, #{author} ,#{publisher} ,'중고도서',#{isbn} ,#{category}, #{id}, SEQ_BOOK.NEXTVAL)
+	</insert>
+</mapper>

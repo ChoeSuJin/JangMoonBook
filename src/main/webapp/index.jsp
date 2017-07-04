@@ -8,7 +8,6 @@
 </head>
 <body>
 	<a href="adminLoginForm.do">AdminLogin</a>
-	<a href="organLoginForm.do">OrganLogin</a>
 	<a href="starBooks.do?cmd=main">MainPage</a>
 </body>
 </html>

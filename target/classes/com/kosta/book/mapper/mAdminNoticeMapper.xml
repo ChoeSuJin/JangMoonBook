@@ -17,4 +17,8 @@
 	delete AdminNotice where num = #{ num }
 </delete>
 
+<select id="getTodayNotice" resultType="integer">
+	select count(*) from adminnotice where (to_date(REGDATE, 'YY/MM/DD') - to_date(sysdate, 'YY/MM/DD')) = 0
+</select>
+
 </mapper>

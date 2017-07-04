@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.book.admin.mTotalSale.model.TotalSaleDAO">
+
+	<select id="getDomesticList" resultType="Integer">
+		<![CDATA[select nvl(sum(dprice * quantity), 0) from salelist
+  			where to_date(sysdate, 'YY/MM/DD') - to_date(s_date, 'YY/MM/DD') < 31 and 
+  				isbn in (select isbn from book_info where type='국내도서')
+  			group by branchname order by BRANCHNAME]]>
+		
+	</select>
+	
+	<select id="getForeignList" resultType="Integer">
+		<![CDATA[select nvl(sum(dprice * quantity), 0) from salelist
+  			where to_date(sysdate, 'YY/MM/DD') - to_date(s_date, 'YY/MM/DD') < 31 and 
+  				isbn in (select isbn from book_info where type='외국도서')
+  			group by branchname order by BRANCHNAME]]>
+	</select>
+	
+</mapper>

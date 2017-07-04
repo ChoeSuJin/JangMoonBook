@@ -43,4 +43,22 @@
 		insert into getdirect values (#{orderno}, #{isbn}, #{title}, #{quantity}, #{id}, #{branch}, #{getDate}, 1)
 	</select>
 	
+	<select id="getDiscountRate" resultType="String">
+		select discount from customerclass where name = (select customerclass from customer where id = #{ id })
+	</select>
+	
+	<select id="sum6MonthSale" resultType="integer">
+		select sum(quantity * dprice)
+		from salelist
+		where id = #{ id } and s_date between to_date(add_months(sysdate, -6), 'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<select id="getCustomerInfo" resultType="com.kosta.book.customer.model.CustomerVO">
+		select * from customer where id=#{id}
+	</select>
+	
+	<update id="updateCustomerClass">
+		update customer set customerclass = '${param2}' where id = '${param1}'
+	</update>
+	
 </mapper>
