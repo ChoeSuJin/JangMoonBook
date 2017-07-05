@@ -114,7 +114,7 @@ public class CustomerController {
 			return mav;
 		}
 		
-		if(request.getParameter("error")!=null){	//Á¤º¸¼öÁ¤ ¾ÏÈ£°¡ Æ²·ÈÀ»½Ã
+		if(request.getParameter("error")!=null){	//ì •ë³´ìˆ˜ì • ì•”í˜¸ê°€ í‹€ë ¸ì„ì‹œ
 			mav.addObject("error", request.getParameter("error")); 
 		}
 		
@@ -150,7 +150,7 @@ public class CustomerController {
 					return "redirect:list.do";
 					
 				}else{
-					model.addAttribute("message", "»èÁ¦ ¼º°ø");
+					model.addAttribute("message", "ì‚­ì œ ì„±ê³µ");
 					model.addAttribute("dto", customerService.viewCustomer(id));
 					return "customer/view";
 				}

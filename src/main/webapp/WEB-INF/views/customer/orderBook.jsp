@@ -77,7 +77,7 @@
 									           </c:otherwise> 
 									          </c:choose>
 											<p style="color:skyblue">${book.price}원</p>
-									        <form action="cartInsert.do" method="post" name="cartForm">
+									        <form action="cart/insert.do" method="post" name="cartForm">
 												<input type="hidden" name="isbn" value="${book.isbn}">
 												<input type="hidden" name="title" value="${book.title}">
 												<input type="hidden" name="price" value="${book.price}">

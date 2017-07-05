@@ -21,7 +21,7 @@ public class BoardController {
 	@Inject
 	BoardServiceImpl boardService;
 	
-	@RequestMapping("/board/list.do")
+	@RequestMapping("/boardList.do")
 	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption, @RequestParam(defaultValue="") String keyword) throws Exception{
 		// 게시�? ?��
 		int count=boardService.countArticle(searchOption, keyword);
@@ -38,18 +38,18 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/board/write.do")
+	@RequestMapping("/boardWrite.do")
 	public String write(){
 		return "board/write";
 	}
 	
-	@RequestMapping("/board/insert.do")
+	@RequestMapping("/boardInsert.do")
 	public String insert(@ModelAttribute BoardVO vo) throws Exception{
 		boardService.create(vo);		
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 	
-	@RequestMapping("/board/view.do")
+	@RequestMapping("/boardView.do")
 	public ModelAndView view(@RequestParam int bno) throws Exception{
 		//議고?���닔 利앷�泥?��?��
 		boardService.increaseViewcnt(bno);
@@ -60,15 +60,15 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/board/update.do")
+	@RequestMapping("/boardUpdate.do")
 	public String update(@ModelAttribute BoardVO vo) throws Exception{
 		boardService.update(vo);
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 	
-	@RequestMapping("/board/delete.do")
+	@RequestMapping("/boardDelete.do")
 	public String delete(@RequestParam int bno) throws Exception{
 		boardService.delete(bno);
-		return "redirect:/board/list.do";
+		return "redirect:/boardList.do";
 	}
 }

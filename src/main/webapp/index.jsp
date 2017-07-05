@@ -9,6 +9,7 @@
 <body>
 	<a href="adminLoginForm.do">AdminLogin</a>
 	<a href="starBooks.do?cmd=main">MainPage</a>
+	<a href="sendAdMail.do">mail</a>
 </body>
 </html>
 

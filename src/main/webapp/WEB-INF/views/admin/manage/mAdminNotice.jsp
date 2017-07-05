@@ -25,44 +25,6 @@
 		<div class="tab-content" style="margin-left:5%;">
 
 			<div id="viewNotice" class="tab-pane fade in active">
-<<<<<<< HEAD
-				<div class="panel-group" id="accordion">
-				<table id="viewNoticeTable" class="table table-condensed">
-					<th>num</th>
-					<th>writer</th>
-					<th>title</th>
-					<th>regDate</th>
-					<th>삭제하기</th>
-					<c:forEach items="${ list }" var="list">
-					<div class="panel panel-default">
-							<tr class="panel panel-heading" class="panel-title">
-								<form action="deleteAdminNotice.do" method="post">
-								<input type="hidden" name="num" value="${ list.num }">						
-								<td>${ list.num }</td>
-								<td>${ list.writer }</td>
-								<td><a data-toggle="collapse" data-parent="#accordion" href="#notice${ list.num }">${ list.title }</a></td>
-								<td>${ list.regDate }</td>
-								<td><input type="submit" value="삭제"></td>
-								</form>
-							</tr>
-					
-						<tr id="notice${ list.num }" class="panel-collapse collapse">
-					        <div class="panel-body">
-								<td colspan="5">${ list.content }</td>
-							</div>
-							</tr>
-						<%-- <div id="notice${ list.num }" class="panel-collapse collapse">
-					        <tr id="notice${ list.num }" class="panel-collapse collapse">
-					        <div class="panel-body">
-								<td colspan="5">${ list.content }</td>
-							</div>
-							</tr>
-					    </div> --%>
-					</div>
-					</c:forEach>
-				</table>	
-				</div>
-=======
 				<h3>본사 공지사항</h3>
 					<div id="viewNotice">
 						<div class="panel-group" id="accordion">
@@ -94,7 +56,6 @@
 						</table>	
 						</div>
 					</div>
->>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 				
 			</div>		
 		

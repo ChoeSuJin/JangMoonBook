@@ -49,6 +49,7 @@
 						</ol>
 						
 						<div class="carousel-inner">
+						<c:out value="${bestSeller.index==0 }"></c:out>
 							<c:forEach var="bestSeller" items="${bestSeller}" varStatus="status" begin="0" end="5">
 								<c:choose>
 								<c:when test="${status.index==0}">

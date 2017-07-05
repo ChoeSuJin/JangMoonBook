@@ -28,64 +28,6 @@
 </head><!--/head-->
 
 <body>
-<<<<<<< HEAD
-	<header id="header"><!--header-->
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<p style="font-size:2.5em;color:skyblue;"><a href="starBooks.do?cmd=main">StarBooks</a></p>
-						</div>
-						<div class="btn-group pull-right">
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="starBooks.do?cmd=login">뒤로가기</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
-	
-	<section id="form"><!--form-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<h2>Join in StarBooks</h2>
-							<form action="starBooks.do?cmd=join" method="post" name="joinForm">
-								<input type="text" name="id" placeholder="아이디">
-								<input type="password" name="pwd" placeholder="비밀번호">
-								<input type="password" name="pwd2" placeholder="비밀번호 확인">
-								<input type="text" name="email" placeholder="이메일 주소">
-								<input type="text" name="phone" placeholder="연락처 - 기호 없이 입력하세요">
-								<input type="button" id="address" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-								<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
-								<input type="text" id="sample6_address" name="address1" placeholder="주소">
-								<input type="text" id="sample6_address2" name="address2" placeholder="상세주소">
-								<input type="button" id="btnJoin" onclick="join_check()" value="회원가입">
-							</form>
-					</div><!--/login form-->
-				</div>
-				
-			</div>
-		</div>
-	</section><!--/form-->
-=======
 	<!-- header -->
 	<jsp:include page="customerHeader.jsp"/>
 	<!-- header -->
@@ -118,7 +60,6 @@
 	<!-- footer -->
 	<jsp:include page="customerFooter.jsp"/>
 	<!-- footer -->
->>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
 	
     <script src="${resources}/js/jquery.js"></script>
 	<script src="${resources}/js/price-range.js"></script>

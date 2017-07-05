@@ -179,6 +179,11 @@
 		
 		<!-- gmail smtp -->
 		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
@@ -186,7 +191,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.1.6.RELEASE</version>
+			<version>4.3.0.RELEASE</version>
 		</dependency>	
 
 		<!-- Test -->

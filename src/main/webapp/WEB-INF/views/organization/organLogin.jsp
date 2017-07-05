@@ -26,14 +26,11 @@
                 <div class="panel-title">기관 로그인</div>
             </div>
             <div class="panel-body">
-<<<<<<< HEAD
-=======
             	<c:if test="${param.error != null}">
 					<div>
 						<p style="color:red;">로그인실패 사원번호와 비밀번호를 확인하세요.</p>
 					</div>
 				</c:if>
->>>>>>> branch 'newMaster' of https://github.com/ChoeSuJin/JangMoonBook.git
                 <form name='f' action="organLogin.do" method="post" id="login-form">
                     <div>
                         <input type="text" class="form-control" name="oname" placeholder="기관명을 입력하세요" autofocus>
