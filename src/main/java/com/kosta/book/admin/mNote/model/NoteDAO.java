@@ -6,6 +6,7 @@ public interface NoteDAO {
 	
 	public void sendNote(NoteVO vo);
 	public NoteVO readNote(int noteNo);
+	public int getIsRead(int noteNo);
 	public void setRead(int noteNo);
 	public void deleteSendNote(int noteNo);
 	public void deleteRecvNote(int noteNo);

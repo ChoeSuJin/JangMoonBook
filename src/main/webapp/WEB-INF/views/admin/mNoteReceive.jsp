@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -84,7 +85,7 @@
 				<tr>
 					<td>${ list.sent_id }</td>
 					<td>
-						<a data-toggle="modal" data-target="#recvNote${ list.noteNo }">${ list.title }</a>
+						<a data-toggle="modal" data-target="#recvNote${ list.noteNo }" onclick="setRead(${list.noteNo});">${ list.title }</a>
 						<div class="modal fade" id="recvNote${ list.noteNo }" role="dialog">
 						<div class="modal-dialog">
 							<!-- Modal content-->
@@ -120,7 +121,7 @@
 						</div>
 					</div>
 					</td>
-					<td>${ list.date_sent }</td>
+					<td><fmt:formatDate value="${ list.date_sent }" pattern="yyyy-MM-dd-HH-mm" /></td>
 					<td>
 						<form action="recvMsgDel.do" method="post">
 							<input type="hidden" name="noteNo" value="${ list.noteNo }">
@@ -377,6 +378,21 @@
       "autoWidth": false
     });
   });
+  
+  function setRead(noteNo) {
+	  $.ajax({
+  		url: "/book/setReadNote.do",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+    		noteNo : noteNo
+		},
+		success : function(data) {
+			alert("수신완료 설정함");
+		}
+	});
+  }
+  
 </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -72,6 +73,7 @@
                 <th>받는사람</th>
 				<th>제목</th>
 				<th>보낸날짜</th>
+				<th>수신여부</th>
 				<th>삭제</th>
 			</thead>
 				<c:if test="${ sendListSize == 0 }">
@@ -119,7 +121,15 @@
 						</div>
 					</div>
 					</td>
-					<td>${ list.date_sent }</td>
+					<td><fmt:formatDate value="${ list.date_sent }" pattern="yyyy-MM-dd HH:mm" /></td>
+					<td>
+					<c:if test="${ list.recv_read == 'N' }">
+						읽지 않음
+					</c:if>
+					<c:if test="${ list.recv_read == 'Y' }">
+						읽음(<fmt:formatDate value="${ list.date_read }" pattern="yyyy-MM-dd HH:mm" />)
+					</c:if>
+					</td>
 					<td>
 						<form action="sentMsgDel.do" method="post">
 							<input type="hidden" name="noteNo" value="${ list.noteNo }">

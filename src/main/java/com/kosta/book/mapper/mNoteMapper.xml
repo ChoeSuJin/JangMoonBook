@@ -14,8 +14,12 @@
 		 select * from notes where noteNo = #{ noteNo }
 	</select>
 	
+	<select id="getIsRead" resultType="int">
+		select count(*) from notes where noteNo = #{noteNo} and recv_read = 'Y'
+	</select>
+	
 	<update id="setRead" parameterType="integer">
-		update notes set recv_read = 'Y' where noteNo = #{ noteNo }
+		update notes set recv_read = 'Y', date_read = sysdate where noteNo = #{ noteNo }
 	</update>
 	
 	<update id="deleteSendNote" parameterType="integer">

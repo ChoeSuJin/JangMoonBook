@@ -31,6 +31,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   
@@ -68,22 +69,22 @@
             <!-- /.box-header -->
             <div class="box-body">
             <table id="example2" class="table table-bordered table-hover">
-            	<form action="sendNote.do" method="post" id="sendNoteForm">
+            <form action="sendNote.do" method="post" id="sendNoteForm">
 				<tr>
 					<td>받는사람</td>
-					<td><input type="text" name="recv_id"></td>
+					<td><input type="text" name="recv_id" id="recv_id"></td>
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="title"></td>
+					<td><input type="text" name="title" id="title"></td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><textarea rows="10" cols="100" name="content"></textarea></td>
+					<td><textarea rows="10" cols="100" name="content" id="content"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="float: right;">
-						<button class="btn btn-flat btn-sm btn-primary" onclick="checkNote();">보내기</button>
+						<button class="btn btn-flat btn-sm btn-primary" onclick="return checkNote();" id="btnSendNote">보내기</button>
 						<button class="btn btn-flat btn-sm btn-danger" id="cancelNote">취소</button>
 					</td>
 				</tr>
@@ -325,17 +326,33 @@
 <script src="${resources}/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+  
+  function checkNote() {
+	  alert("in checkNote");
+	  var recv_id = $("#recv_id");
+	  var title = $("#title");
+	  var content = $("content");
+	  
+	  
+	  if (recv_id.val() == "") {
+		  alert("받는사람을 입력해주세요.");
+			$("#recv_id").focus();
+			return false;
+	  }
+	  if (title.val() == "") {
+		  	alert("제목을 입력해주세요.");
+			$("#title").focus();
+			return false;
+	  }
+	  if (content.val() == "") {
+		  	alert("내용을 입력해주세요.");
+			$("#content").focus();
+			return false;
+	  }
+	  
+	  $("#sendNoteForm").submit();
+	  
+	}
 </script>
 </body>
 </html>

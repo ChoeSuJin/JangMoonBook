@@ -1,6 +1,8 @@
 package com.kosta.book.admin.mNote.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.book.admin.login.model.EmployeeVO;
@@ -105,6 +109,27 @@ public class ManageNoteController {
 		dao.deleteSendNote(vo.getNoteNo());
 		
 		return "redirect:mNoteSend.do";
+	}
+	
+	@RequestMapping("/setReadNote.do")
+	@ResponseBody
+	public HashMap<String, Object> setReadNote(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<>();
+		
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		int noteNo = Integer.parseInt(map.get("noteNo"));
+		
+		System.out.println("receive noteNo = " + noteNo);
+		
+		int count = dao.getIsRead(noteNo);
+		if (count == 0) {
+			dao.setRead(noteNo);			
+			System.out.println("success to set recv_read");
+		}
+		
+		return data;
+		
 	}
 
 }
