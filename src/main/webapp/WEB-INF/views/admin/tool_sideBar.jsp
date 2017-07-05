@@ -73,6 +73,7 @@
             <li><a href="mBranchInfo.do"><i class="fa fa-info"></i> 지점정보</a></li>
           </ul>
         </li>
+        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-envelope"></i>
@@ -87,6 +88,24 @@
             <li><a href="sendNoteForm.do"><i class="fa fa-send"></i> 쪽지보내기</a></li>
           </ul>
         </li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>Inventory</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="mInventoryEmergency.do"><i class="fa fa-mail-reply"></i> 주문요망</a></li>
+            <li><a href="mInventoryNormal.do"><i class="fa fa-mail-forward"></i> 재고확인</a></li>
+            <li><a href="mInventoryOrder.do"><i class="fa fa-send"></i> 주문확인</a></li>
+            <li><a href="mInventoryNewBook.do"><i class="fa fa-send"></i> 신책등록</a></li>
+            <li><a href="mInventoryGetDirectList.do"><i class="fa fa-send"></i> 수령확인</a></li>
+          </ul>
+        </li>
+        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Forms</span>
@@ -100,6 +119,7 @@
             <li><a href="${resources}/pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li>
+        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Tables</span>

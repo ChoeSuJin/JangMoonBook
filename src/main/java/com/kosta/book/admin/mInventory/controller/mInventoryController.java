@@ -34,8 +34,8 @@ public class mInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("mInventory.do")
-	public ModelAndView inventoryMainForm(HttpServletRequest request) {
+	@RequestMapping("mInventoryEmergency.do")
+	public ModelAndView inventoryEmergency(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
 		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
@@ -48,31 +48,75 @@ public class mInventoryController {
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
 
 		List list = dao.selectEmergency(branch);
-		List list2 = dao.selectNormal(branch);
-		List list3 = dao.selectOrderList(branch);
-		List list4 = dao.selectGetDirectList(branch);
 
-		/*����� ���� ����¡*/
-
-		int allCount = list2.size();
-		int allPage =(allCount % 10 == 0) ? allCount / 10 : allCount / 10 + 1;
-		int allBlock = (allPage % 5 == 0) ? allPage / 5 : allPage / 5 + 1;
-		
-		mav.addObject("currentBlock", 1);
-		mav.addObject("currentPage", 1);
-		mav.addObject("allCount", allCount);
-		mav.addObject("allPage", allPage);
-		mav.addObject("allBlock", allBlock);
-		System.out.println("allPage = " + allPage);
-		System.out.println("allBlock = " + allBlock);
-
-		mav.addObject("currentPage", 1);
-		mav.addObject("currentBlock", 1);
-		mav.setViewName("/admin/manage/mInventory");
+		mav.setViewName("/admin/mInventoryEmer");
 		mav.addObject("list", list);
-		mav.addObject("list2", list2);
-		mav.addObject("list3", list3);
-		mav.addObject("list4", list4);
+		return mav;
+	}
+	
+	@RequestMapping("mInventoryNormal.do")
+	public ModelAndView inventoryNormal(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
+
+		List list = dao.selectNormal(branch);
+
+		mav.setViewName("/admin/mInventoryNormal");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	@RequestMapping("mInventoryOrder.do")
+	public ModelAndView inventoryOrder(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
+
+		List list = dao.selectOrderList(branch);
+
+		mav.setViewName("/admin/mInventoryNormal");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	@RequestMapping("mInventoryNewBook.do")
+	public String inventoryNewBook() {
+		
+		return "/admin/mInventoryNewBook";
+	}
+	
+	@RequestMapping("mInventoryGetDirectList.do")
+	public ModelAndView inventoryGetDirectList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
+
+		List list = dao.selectGetDirectList(branch);
+
+		mav.setViewName("/admin/mInventoryGetDirect");
+		mav.addObject("list", list);
 		return mav;
 	}
 	
@@ -83,16 +127,16 @@ public class mInventoryController {
 	
 		InventoryDAO dao = sqlSession.getMapper(InventoryDAO.class);
 		
-		// cost, publisher�� ��� �������� �ۼ��Ͽ� set �޼ҵ忡 �Է�
+		// cost, publisher占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쌜쇽옙占싹울옙 set 占쌨소드에 占쌉뤄옙
 		
 		
-		// ��¥ó�� => db���� sysdate�� ó�������ϴ�
+		// 占쏙옙짜처占쏙옙 => db占쏙옙占쏙옙 sysdate占쏙옙 처占쏙옙占쏙옙占쏙옙占싹댐옙
 		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		
 		
 		dao.insertOrderList(vo);
-		return "redirect:mInventory.do";
+		return "redirect:mInventoryOrder.do";
 		
 	}
 	
@@ -109,7 +153,7 @@ public class mInventoryController {
 		dao.deleteOrder(vo);
 		
 		
-		return "redirect:mInventory.do";
+		return "redirect:mInventoryOrder.do";
 	}
 	
 	@RequestMapping("insertNewBook.do")
@@ -140,7 +184,7 @@ public class mInventoryController {
 					
 		}
 		
-		return "redirect:mInventory.do";
+		return "redirect:mInventoryNormal.do";
 	}
 	
 	@RequestMapping("/moveInventoryBlock.do")
@@ -197,7 +241,7 @@ public class mInventoryController {
 		System.out.println("deleteGetDirect");
 		
 
-		return "redirect:mInventory.do";
+		return "redirect:mInventoryGetDirectList.do";
 	}
 
 }
