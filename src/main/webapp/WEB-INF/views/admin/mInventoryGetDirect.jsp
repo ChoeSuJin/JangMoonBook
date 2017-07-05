@@ -82,24 +82,24 @@
 			</thead>
 				<c:forEach items="${ list }" var="list">
 					<tr>
-						<td>${ list.orderNo }</td>
-						<td>${ list.isbn }</td>
-						<td>${ list.title }</td>
-						<td>${ list.publisher }</td>
-						<td>${ list.quantity }</td>
-						<td>${ list.branch }</td>
-						<td>${ list.cost }</td>
-						<td>${ list.o_date }</td>
-						<input type="hidden" value="${ list.orderNumber }" name="orderNumber">
-						<input type="hidden" value="${ list.isbn }" name="isbn">
-						<input type="hidden" value="${ list.title }" name="title">
-						<input type="hidden" value="${ list.publisher }" name="publisher">
-						<input type="hidden" value="${ list.quantity }" name="quantity">
-						<input type="hidden" value="${ list.branch }" name="branch">
-						<input type="hidden" value="${ list.cost }" name="cost">
-						<input type="hidden" value="${ list.o_date }" name="o_date">
-						<td><input type="submit" class="btn btn-default" value="입고확인"> </td>
-					</tr>
+							<td>${ list.orderno }</td>
+							<td>${ list.isbn }</td>
+							<td>${ list.title }</td>
+							<td>${ list.quantity }</td>
+							<td>${ list.id }</td>
+							<td>${ list.getDate }</td>
+							<td>${ list.isPaid }</td>
+							<td>
+								<form action="proGetDirect.do" method="post">
+									<input type="hidden" name="orderno" value="${ list.orderno }">
+									<input type="hidden" name="branch" value="${ list.branch }">
+									<input type="hidden" name="isbn" value="${ list.isbn }">
+									<input type="hidden" name="quantity" value="${ list.quantity }">
+									<input type="hidden" name="id" value="${ list.id }">
+									<input type="submit" name="수령확인">
+								</form>
+							</td>
+						</tr>
 
 				</c:forEach>
 			</table>
@@ -349,20 +349,6 @@
       "autoWidth": false
     });
   });
-  
-  function setRead(noteNo) {
-	  $.ajax({
-  		url: "/book/setReadNote.do",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-    		noteNo : noteNo
-		},
-		success : function(data) {
-			alert("수신완료 설정함");
-		}
-	});
-  }
   
 </script>
 </body>

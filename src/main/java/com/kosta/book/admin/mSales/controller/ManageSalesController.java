@@ -26,6 +26,66 @@ public class ManageSalesController {
 	@Autowired
 	SqlSession sqlSession;
 	
+	@RequestMapping("mSalesDomestic.do")
+	public ModelAndView salesDomestic(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SalesListVO vo = new SalesListVO();
+		
+		HttpSession session = request.getSession();
+		
+		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
+		
+		
+		vo.setBranchName(user.getBranch());
+		System.out.println("user = " + user.getBranch());
+		
+		
+		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
+		List list1 = dao.saleNewBook(vo);
+		String sumDomestic = dao.sumSaleDomesticBook(vo);
+		
+		
+		System.out.println("sumDomestic = " + sumDomestic);
+		mav.addObject("list", list1);
+		mav.addObject("sumDomestic", sumDomestic);
+	
+		
+		mav.setViewName("/admin/mSalesDomestic");
+		return mav;
+	}
+	
+	@RequestMapping("mSalesForeign.do")
+	public ModelAndView salesForeign(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SalesListVO vo = new SalesListVO();
+		
+		HttpSession session = request.getSession();
+		
+		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
+		
+		
+		vo.setBranchName(user.getBranch());
+		System.out.println("user = " + user.getBranch());
+		
+		
+		SalesDAO dao = sqlSession.getMapper(SalesDAO.class);
+		List list1 = dao.saleForeignBook(vo);
+		String sumForeign = dao.sumSaleForeignBook(vo);
+		
+		
+		System.out.println("sumForeign = " + sumForeign);
+		mav.addObject("list", list1);
+		mav.addObject("sumForeign", sumForeign);
+	
+		
+		mav.setViewName("/admin/mSalesForeign");
+		return mav;
+	}
+	
 	
 	@RequestMapping("mSales.do")
 	public ModelAndView salesMainForm(HttpServletRequest request) {

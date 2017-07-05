@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-               재고관리
+               판매관리
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Inventory</li>
-        <li>주문확인</li>
+        <li>Sales</li>
+        <li>외국도서</li>
       </ol>
     </section>
 
@@ -64,43 +64,38 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">주문확인</h3>
+              <h3 class="box-title">외국도서</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
               <thead>
-                <th>주문번호</th>
+                <th>판매번호</th>
 				<th>ISBN</th>
 				<th>제목</th>
+				<th>아이디</th>
+				<th>할인가</th>
+				<th>지점</th>
 				<th>수량</th>
-				<th>주문자</th>
-				<th>수령날짜</th>
-				<th>결제여부</th>
-				<th>수령확인</th>
+				<th>판매일</th>
 			</thead>
-				<c:forEach items="${ list }" var="list">
+				<c:forEach items="${ list }" var="list" >
 					<tr>
-							<td>${ list.orderno }</td>
-							<td>${ list.isbn }</td>
-							<td>${ list.title }</td>
-							<td>${ list.quantity }</td>
-							<td>${ list.id }</td>
-							<td>${ list.getDate }</td>
-							<td>${ list.isPaid }</td>
-							<td>
-								<form action="proGetDirect.do" method="post">
-									<input type="hidden" name="orderno" value="${ list.orderno }">
-									<input type="hidden" name="branch" value="${ list.branch }">
-									<input type="hidden" name="isbn" value="${ list.isbn }">
-									<input type="hidden" name="quantity" value="${ list.quantity }">
-									<input type="hidden" name="id" value="${ list.id }">
-									<input type="submit" name="수령확인">
-								</form>
-							</td>
-						</tr>
-
+						<td>${ list.saleNumber }</td>
+						<td>${ list.isbn }</td>
+						<td>${ list.title }</td>
+						<td>${ list.id }</td>
+						<td>${ list.dPrice }</td>
+						<td>${ list.branchName }</td>
+						<td>${ list.quantity }</td>
+						<td>${ list.s_date }</td>
+					</tr>
 				</c:forEach>
+				<tfoot>
+				<tr>
+					<td colspan="8">총 = ${ sumForeign }원</td>
+				</tr>
+				</tfoot>
 			</table>
             </div>
             <!-- /.box-body -->
@@ -348,7 +343,7 @@
       "autoWidth": false
     });
   });
-  
+  }
   
 </script>
 </body>
