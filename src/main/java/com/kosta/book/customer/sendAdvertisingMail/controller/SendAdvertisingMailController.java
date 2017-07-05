@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SendAdvertisingMailController {
        
 	@Autowired
-	private JavaMailSender mailSender; // xml¿¡ µî·ÏÇÑ bean autowired
+	private JavaMailSender mailSender; // xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ bean autowired
 	
 	//String from, String to, String subject, String text, String formUrl
 	@RequestMapping(value = "/sendAdMail.do")
@@ -23,10 +23,10 @@ public class SendAdvertisingMailController {
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			
-			message.setFrom(new InternetAddress("g5hn_2d_ck@naver.com")); // º¸³»´Â»ç¶÷
-			message.addRecipient(RecipientType.TO, new InternetAddress("g5nh_2d_ck@naver.com")); // ¹Þ´Â»ç¶÷
-			message.setSubject("Á¦¸ñÀÔ´Ï´Ù"); // Á¦¸ñ
-			message.setText("<h1>³»¿ëÀÔ´Ï´Ù</h1><br>³»¿ëÀÔ´Ï´Ù", "utf-8", "html"); // ³»¿ë
+			message.setFrom(new InternetAddress("g5hn_2d_ck@naver.com")); // from
+			message.addRecipient(RecipientType.TO, new InternetAddress("g5hn_2d_ck@naver.com")); // to
+			message.setSubject("title"); // title
+			message.setText("<h1>content</h1><br>content", "utf-8", "html"); // content
 			mailSender.send(message);
 			
 		} catch (Exception e) {

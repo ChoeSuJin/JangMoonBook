@@ -21,8 +21,8 @@
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.naver.com" />
 		<beans:property name="port" value="587" />
-		<beans:property name="username" value="네이버 ID" />
-		<beans:property name="password" value="네이버 PW" />
+		<beans:property name="username" value="g5hn_2d_ck" />
+		<beans:property name="password" value="password" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
 				<beans:prop key="mail.smtp.auth">true</beans:prop>
