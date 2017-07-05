@@ -2,19 +2,6 @@ package com.kosta.book.admin.login.model;
 
 public class EmployeeVO {
 	
-	/*create table Employee (
-			  empNo number,
-			  pwd varchar2(20),
-			  name varchar2(20),
-			  empClass varchar2(20),
-			  address1 varchar2(200),
-			  address2 varchar2(200),
-			  phone varchar2(11),
-			  gender varchar2(1),
-			  birth varchar2(6),
-			  branch varchar2(20)
-			);*/
-	
 	private String pwd, name, empClass, address1, address2, phone, gender, birth, branch;
 	private int empNo;
 	public String getPwd() {

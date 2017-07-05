@@ -41,7 +41,7 @@ public class ManageBranchInfoController {
 
 		mav.addObject("empCount", empCount);
 		mav.addObject("branchInfo", list);
-		mav.setViewName("/admin/manage/mBranchInfo");
+		mav.setViewName("/admin/mBranchInfo");
 		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
 		
 		return mav;

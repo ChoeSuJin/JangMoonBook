@@ -33,7 +33,7 @@
 <!-- img 랜덤으로 가져오기 위한 것 -->
 				
 	<!-- header -->
-	<jsp:include page="customerHeader.jsp"/>
+	<%-- <jsp:include page="customerHeader.jsp"/> --%>
 	<!-- header -->
 	
 	<section id="advertisement">
@@ -111,7 +111,7 @@
 	</section>
 	
 	<!-- footer -->
-	<jsp:include page="customerFooter.jsp" />
+	<%-- <jsp:include page="customerFooter.jsp" /> --%>
 	<!-- footer -->
 	
     <script src="${resources}/js/jquery.js"></script>
