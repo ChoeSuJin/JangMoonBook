@@ -26,12 +26,18 @@ public class AdminNoticeController {
 		List list = dao.getAdminNotice();
 		
 		
-		mav.setViewName("/admin/manage/mAdminNotice");
+		mav.setViewName("/admin/mAdminNotice");
 		
 		mav.addObject("list", list);
 		
 		return mav;
 		
+	}
+	
+	@RequestMapping("mWriteAdminNotice.do")
+	public String writeAdminNotice() {
+		
+		return "/admin/mWriteAdminNotice";
 	}
 	
 	@RequestMapping("regAdminNotice.do")
