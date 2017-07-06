@@ -26,16 +26,17 @@ public class ManageCutsomerNoticeController {
 		
 		List<CustomerNoticeVO> list = dao.getList();
 		
-		for (int i = 0; i < list.size(); i++) {
-			
-			System.out.println(list.get(i));
-		}
-		
 		mav.addObject("list", list);
 		
-		mav.setViewName("/admin/manage/mCustomerNotice");
+		mav.setViewName("/admin/mCustomerNotice");
 		return mav;
 		
+	}
+	
+	@RequestMapping("mWriteCustomerNotice.do")
+	public String writeCustomerNoticeForm() {
+		
+		return "/admin/mWriteCustomerNotice";
 	}
 	
 	@RequestMapping("regCustomerNotice.do")
