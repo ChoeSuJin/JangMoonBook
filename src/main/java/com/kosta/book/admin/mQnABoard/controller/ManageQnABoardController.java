@@ -19,7 +19,7 @@ public class ManageQnABoardController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("mQNABoard.do")
+	@RequestMapping("mQnAList.do")
 	public ModelAndView qnaBoard() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -29,7 +29,7 @@ public class ManageQnABoardController {
 		List list = dao.getList();
 		
 		mav.addObject("list", list);
-		mav.setViewName("/admin/manage/mQnA");
+		mav.setViewName("/admin/mQnAList");
 		
 		return mav;
 	}
@@ -48,7 +48,7 @@ public class ManageQnABoardController {
 		QnABoardVO detail = dao.viewBoard(vo);
 		
 		
-		mav.setViewName("/admin/manage/mQnAReply");
+		mav.setViewName("/admin/mQnAReply");
 		mav.addObject("list", detail);
 		return mav;
 	}
@@ -62,7 +62,7 @@ public class ManageQnABoardController {
 		dao.regReply(vo);
 		
 		
-		return "redirect:mQNABoard.do";
+		return "redirect:mQnAList.do";
 	}
 	
 }
