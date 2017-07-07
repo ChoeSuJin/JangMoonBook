@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-               재고관리
+               온라인 재고관리
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Inventory</li>
-        <li>주문확인</li>
+        <li>Online Inventory</li>
+        <li>주문요망</li>
       </ol>
     </section>
 
@@ -64,47 +64,70 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">주문확인</h3>
+              <h3 class="box-title">주문요망</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <form action="orderConfirm.do" method="post">
               <table id="example2" class="table table-bordered table-hover">
               <thead>
-                <th>주문번호</th>
-				<th>ISBN</th>
+                <th>ISBN</th>
 				<th>제목</th>
 				<th>작가</th>
 				<th>수량</th>
 				<th>지점</th>
-				<th>가격</th>
-				<th>주문일</th>
-				<th>입고 확인</th>
+				<th>추가 주문</th>
 			</thead>
-				<c:forEach items="${ list3 }" var="list">
-					<tr>
-						<td>${ list.orderNumber }</td>
-						<td>${ list.isbn }</td>
-						<td>${ list.title }</td>
-						<td>${ list.publisher }</td>
-						<td>${ list.quantity }</td>
-						<td>${ list.branch }</td>
-						<td>${ list.cost }</td>
-						<td>${ list.o_date }</td>
-						<input type="hidden" value="${ list.orderNumber }" name="orderNumber">
-						<input type="hidden" value="${ list.isbn }" name="isbn">
-						<input type="hidden" value="${ list.title }" name="title">
-						<input type="hidden" value="${ list.publisher }" name="publisher">
-						<input type="hidden" value="${ list.quantity }" name="quantity">
-						<input type="hidden" value="${ list.branch }" name="branch">
-						<input type="hidden" value="${ list.cost }" name="cost">
-						<input type="hidden" value="${ list.o_date }" name="o_date">
-						<td><input type="submit" class="btn btn-default" value="입고확인"> </td>
-					</tr>
+				<c:set var="tag" value="${ '#' }" />
+					<c:forEach items="${ list }" var="list">
+						<tr>
 
+							<td>${ list.isbn }</td>
+							<td>${ list.title }</td>
+							<td>${ list.author }</td>
+							<td>${ list.quantity }</td>
+							<td>${ list.branch }</td>
+							<c:if test="${(list.quantity <= 3)}">
+								<td><button type="button" class="btn btn-default"
+										data-toggle="modal" data-target="${ tag }${ list.isbn }">추가주문하기</button></td>
+								<!-- Modal -->
+								<div class="modal fade" id="${ list.isbn }" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">추가 주문하기</h4>
+											</div>
+											
+											<form action="orderOnlineInven.do" method="post">
+												<div class="modal-body">
+													<p style="font-size:1.3em;float:left;">${ list.isbn }</p>
+													<p style="font-size:1.3em;margin-left:40px;float:left;">${ list.title }</p>
+													<p style="font-size:1.3em;margin-left:40px;float:left;">${ list.author }</p>
+													<p style="font-size:1.3em;margin-left:40px;float:left;">${ list.branch }</p><br><br>
+												</div>
+												<div class="modal-footer">
+													<h3 style="float:left;">주문수량</h3>
+													<input type="number" class="form-control"
+													id="quantity" name="quantity"><br>
+													<input type="hidden" name="title" value="${ list.title }">
+													<input type="hidden" name="isbn" value="${ list.isbn }">
+													<input type="hidden" name="branch" value="${ list.branch }">											
+													<input type="hidden" name="author" value="${ list.author }">											
+													<input type="submit" value="주문하기" class="btn btn-success">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal" style="width:80px;">주문취소</button>
+												</div>
+											</form> 
+											
+											</div>
+										</div>
+									</div>
+							</c:if>
+						</tr>
 					</c:forEach>
 			</table>
-			</form>
             </div>
             <!-- /.box-body -->
           </div>
@@ -351,7 +374,6 @@
       "autoWidth": false
     });
   });
-  
   
 </script>
 </body>

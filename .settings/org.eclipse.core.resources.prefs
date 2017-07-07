@@ -3,6 +3,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/kosta/board/controller/BoardController.java=UTF-8
 encoding//src/main/java/com/kosta/board/controller/ReplyController.java=UTF-8
 encoding//src/main/java/com/kosta/book/admin/mInventory/controller/mInventoryController.java=UTF-8
+encoding//src/main/java/com/kosta/book/admin/mOnlineInventory/controller/mOnlineInventoryController.java=UTF-8
 encoding//src/main/java/com/kosta/cart/controller/CartController.java=UTF-8
 encoding//src/main/java/com/kosta/cart/model/CartDAO.java=UTF-8
 encoding//src/main/java/com/kosta/cart/model/CartVO.java=UTF-8

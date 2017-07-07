@@ -89,7 +89,7 @@ public class mInventoryController {
 
 		List list = dao.selectOrderList(branch);
 
-		mav.setViewName("/admin/mInventoryNormal");
+		mav.setViewName("/admin/mInventoryOrder");
 		mav.addObject("list", list);
 		return mav;
 	}

@@ -161,6 +161,21 @@
           </ul>
         </li>
         
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>Online Inventory</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="mOnlineInventoryEmergency.do"><i class="fa fa-mail-reply"></i> 주문요망</a></li>
+            <li><a href="mOnlineInventoryNormal.do"><i class="fa fa-mail-forward"></i> 재고확인</a></li>
+            <li><a href="mOnlineInventoryOrder.do"><i class="fa fa-send"></i> 주문확인</a></li>
+          </ul>
+        </li>
+        
         
         
         <li class="treeview">

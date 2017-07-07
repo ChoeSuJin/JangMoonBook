@@ -30,6 +30,64 @@ public class mOnlineInventoryController {
 	@Autowired
 	SqlSession sqlSession;
 	
+	@RequestMapping("mOnlineInventoryOrder.do")
+	public ModelAndView onlineInventoryOrder(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		OnlineInventoryDAO dao = sqlSession.getMapper(OnlineInventoryDAO.class);
+
+		List list3 = dao.selectOrderList();
+		mav.setViewName("/admin/mOnlineInventoryOrder");
+		mav.addObject("list3", list3);
+		return mav;
+	}
+	
+	@RequestMapping("mOnlineInventoryNormal.do")
+	public ModelAndView onlineInventoryNormal(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		OnlineInventoryDAO dao = sqlSession.getMapper(OnlineInventoryDAO.class);
+
+		List list2 = dao.selectNormal();
+
+		mav.setViewName("/admin/mOnlineInventoryNormal");
+		mav.addObject("list2", list2);
+		return mav;
+	}
+	
+	@RequestMapping("mOnlineInventoryEmergency.do")
+	public ModelAndView onlineInventoryEmergency(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		EmployeeVO vo = (EmployeeVO) session.getAttribute("user");
+		String branch = vo.getBranch();
+		
+		System.out.println("branch = " + branch);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		OnlineInventoryDAO dao = sqlSession.getMapper(OnlineInventoryDAO.class);
+
+		List list = dao.selectEmergency();
+		mav.setViewName("/admin/mOnlineInventoryEmer");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
 	@RequestMapping("mOnlineInventory.do")
 	public ModelAndView inventoryMainForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -47,7 +105,7 @@ public class mOnlineInventoryController {
 		List list2 = dao.selectNormal();
 		List list3 = dao.selectOrderList();
 
-		/*����� ���� ����¡*/
+		/*占쏙옙占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙징*/
 
 		int allCount = list2.size();
 		int allPage =(allCount % 10 == 0) ? allCount / 10 : allCount / 10 + 1;
@@ -77,10 +135,10 @@ public class mOnlineInventoryController {
 	
 		OnlineInventoryDAO dao = sqlSession.getMapper(OnlineInventoryDAO.class);
 		
-		// cost, publisher�� ��� �������� �ۼ��Ͽ� set �޼ҵ忡 �Է�
+		// cost, publisher占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쌜쇽옙占싹울옙 set 占쌨소드에 占쌉뤄옙
 		
 		
-		// ��¥ó�� => db���� sysdate�� ó�������ϴ�
+		// 占쏙옙짜처占쏙옙 => db占쏙옙占쏙옙 sysdate占쏙옙 처占쏙옙占쏙옙占쏙옙占싹댐옙
 		
 		vo.setPublisher(dao.getPublisher(vo.getIsbn()));
 		vo.setCost(dao.getCost(vo.getIsbn()));		

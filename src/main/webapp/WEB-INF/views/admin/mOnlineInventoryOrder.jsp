@@ -48,12 +48,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-               재고관리
+               온라인 재고관리
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Inventory</li>
+        <li>Online Inventory</li>
         <li>주문확인</li>
       </ol>
     </section>
@@ -68,7 +68,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <form action="orderConfirm.do" method="post">
+            <form action="orderOnlineConfirm.do" method="post">
               <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <th>주문번호</th>
