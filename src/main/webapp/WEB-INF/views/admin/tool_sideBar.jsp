@@ -189,6 +189,20 @@
           </ul>
         </li>
         
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>Total Sales</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="mTotalSaleByBranch.do"><i class="fa fa-mail-reply"></i> 지점별 매출</a></li>
+            <li><a href="mTotalSaleByType.do"><i class="fa fa-mail-reply"></i> 타입별 매출</a></li>
+          </ul>
+        </li>
+        
         
         
         <li class="treeview">

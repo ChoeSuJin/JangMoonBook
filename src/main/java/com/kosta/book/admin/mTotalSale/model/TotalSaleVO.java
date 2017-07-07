@@ -4,6 +4,9 @@ public class TotalSaleVO {
 	
 	private String branchName, type;
 	private int sum;
+	
+	
+	
 	public String getBranchName() {
 		return branchName;
 	}

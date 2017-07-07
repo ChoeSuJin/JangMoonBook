@@ -16,8 +16,8 @@ public class ManageTotalSaleController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("mTotalSale.do")
-	public ModelAndView totalSale() {
+	@RequestMapping("mTotalSaleByBranch.do")
+	public ModelAndView totalSaleByBranch() {
 		ModelAndView mav = new ModelAndView();
 		
 		TotalSaleDAO dao = sqlSession.getMapper(TotalSaleDAO.class);
@@ -43,7 +43,39 @@ public class ManageTotalSaleController {
 		mav.addObject("listDomestic", listDomestic);
 		mav.addObject("listForeign", listForeign);
 		
-		mav.setViewName("/admin/manage/mTotalSales");
+		mav.setViewName("/admin/mTotalSaleByBranch");
+		
+		return mav;
+	}
+	
+	@RequestMapping("mTotalSaleByType.do")
+	public ModelAndView totalSaleByType() {
+		ModelAndView mav = new ModelAndView();
+		
+		TotalSaleDAO dao = sqlSession.getMapper(TotalSaleDAO.class);
+		
+		/*online - 강남 - 광주 - 수원 - 판교*/
+		
+		List<Integer> listDomestic = dao.getDomesticList();
+		List<Integer> listForeign = dao.getForeignList();
+		
+		int totalDomestic = 0;
+		int totalForeign = 0;
+		
+		for (int i = 0; i < listDomestic.size(); i++) {
+			totalDomestic += listDomestic.get(i).intValue();
+		}
+		
+		for (int i = 0; i< listForeign.size();i ++) {
+			totalForeign += listForeign.get(i).intValue();
+		}
+		
+		mav.addObject("totalDomestic", totalDomestic);
+		mav.addObject("totalForeign", totalForeign);
+		mav.addObject("listDomestic", listDomestic);
+		mav.addObject("listForeign", listForeign);
+		
+		mav.setViewName("/admin/mTotalSaleByType");
 		
 		return mav;
 	}
