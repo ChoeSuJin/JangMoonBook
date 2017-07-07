@@ -21,7 +21,7 @@ public class ManageOnlineSaleController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("mOnlineSale.do")
+	@RequestMapping("mOnlineSales.do")
 	public ModelAndView onlineSaleView() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -33,25 +33,11 @@ public class ManageOnlineSaleController {
 		String sumForeign = dao.sumSaleOnlineForeignBook();
 		
 		
-		mav.setViewName("/admin/manage/mOnlineSales");
+		mav.setViewName("/admin/mOnlineSales");
 		
-		int allOnlineCount = list.size();
-		int allOnlinePage =(allOnlineCount % 10 == 0) ? allOnlineCount / 10 : allOnlineCount / 10 + 1;
-		int allOnlineBlock = (allOnlinePage % 5 == 0) ? allOnlinePage / 5 : allOnlinePage / 5 + 1;
-		
-		mav.addObject("list", list);
-		mav.addObject("currentOnlineBlock", 1);
-		mav.addObject("currentOnlinePage", 1);
-		mav.addObject("allOnlineCount", allOnlineCount);
-		mav.addObject("allOnlinePage", allOnlinePage);
-		mav.addObject("allOnlineBlock", allOnlineBlock);
-		System.out.println("allOnlinePage = " + allOnlinePage);
-		System.out.println("allOnlineBlock = " + allOnlineBlock);
-
-		mav.addObject("currentOnlinePage", 1);
-		mav.addObject("currentOnlineBlock", 1);
 		mav.addObject("sumDomestic", sumDomestic);
 		mav.addObject("sumForeign", sumForeign);
+		mav.addObject("list", list);
 		return mav;
 	}
 	
