@@ -29,6 +29,47 @@ public class ManageEbookController {
 	@Autowired
 	SqlSession sqlSesison;
 	
+	@RequestMapping("/mEbookList.do")
+	public ModelAndView EbookManageListPOST() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
+		
+		//List<ManageEbookListVO> list1 = dao.getEbookList();
+		List<ManageEbookOrganVO> list2 = dao.getEbookOrganList();
+
+		mav.setViewName("/admin/mEbookList");
+		
+		mav.addObject("organList", list2);
+		return mav;
+		
+	}
+	
+	@RequestMapping("/mEbookPermitList.do")
+	public ModelAndView EbookPermitList() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		ManageEbookDAO dao = sqlSesison.getMapper(ManageEbookDAO.class);
+		
+		List<ManageEbookReqListVO> list3 = dao.getEbookPermitList();
+		
+		mav.setViewName("/admin/mEbookPermitList");
+		
+		mav.addObject("permitList", list3);
+
+		return mav;
+		
+	}
+	
+	@RequestMapping("/mEbookInsertNewOrg.do")
+	public String ebookInsertNewOrgForm() {
+		
+		return "/admin/mEbookInsertNewOrg";
+		
+	}
+	
 	
 	@RequestMapping("/mEbook.do")
 	public ModelAndView EbookManagePOST() {
@@ -89,6 +130,9 @@ public class ManageEbookController {
 		ManageEbookOrganVO vo = new ManageEbookOrganVO();
 		vo.setOno(Integer.parseInt(ono));
 		List<ManageEbookListVO> list = dao.getEbookList(vo);
+		vo = dao.getOrganInfo(vo);
+		
+		System.out.println("Organ name = " + vo.getOname());
 		
 		for (int i = 0 ; i < list.size(); i++) {
 			ManageEbookListVO v = (ManageEbookListVO) list.get(i);
@@ -97,6 +141,7 @@ public class ManageEbookController {
 		
 		data.put("ebookList", list);
 		data.put("ono", ono);
+		data.put("oname", vo.getOname());
 		
 		return data;
 	}
@@ -150,7 +195,7 @@ public class ManageEbookController {
 		
 		
 
-		return "redirect:mEbook.do";
+		return "redirect:mEbookList.do";
 	}
 	
 	@RequestMapping("/permitEbook.do")
@@ -171,7 +216,7 @@ public class ManageEbookController {
 		dao.insertEbookPermit(mVo);
 		dao.deleteEbookPermit(vo);
 		
-		return "redirect:mEbook.do";
+		return "redirect:mEbookPermitList.do";
 	}
 	
 	@RequestMapping("/extendPermit.do")

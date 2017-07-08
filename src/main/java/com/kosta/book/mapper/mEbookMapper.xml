@@ -22,6 +22,10 @@
 		select * from ebook_extendReqList
 	</select>
 	
+	<select id="getOrganInfo" resultType="com.kosta.book.admin.mEbook.model.ManageEbookOrganVO">
+		select * from ebook_organ where ono = #{ ono }
+	</select>
+	
 	
 	<select id="getAllListCount" resultType="Integer">
 		select count(*) from ebook_distlist

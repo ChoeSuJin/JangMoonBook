@@ -5,6 +5,13 @@ import java.util.List;
 public interface ManageEbookDAO {
 	
 	/**
+	 * 등록된 가맹점 정보를 가져오는 메소드
+	 * @param vo
+	 * @return ManageEbookOrganVO
+	 */
+	public ManageEbookOrganVO getOrganInfo(ManageEbookOrganVO vo);
+	
+	/**
 	 * Ebook 대여 계약을 맺은 기업목록을 불러오는 메소드
 	 * @return List<ManageEbookORganVO>
 	 */

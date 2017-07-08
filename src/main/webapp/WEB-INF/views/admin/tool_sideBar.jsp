@@ -203,6 +203,21 @@
           </ul>
         </li>
         
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>Ebook</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="mEbookList.do"><i class="fa fa-mail-reply"></i> 대여목록</a></li>
+            <li><a href="mEbookPermitList.do"><i class="fa fa-mail-reply"></i> 대여허가요청</a></li>
+            <li><a href="mEbookInsertNewOrg.do"><i class="fa fa-mail-reply"></i> 가맹점등록</a></li>
+          </ul>
+        </li>
+        
         
         
         <li class="treeview">
