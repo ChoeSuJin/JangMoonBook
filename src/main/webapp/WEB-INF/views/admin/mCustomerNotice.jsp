@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-         QnA
+         CustomerNotice
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>QnA</li>
-        <li>고객질문</li>
+        <li>CustomerNotice</li>
+        <li>고객공지사항</li>
       </ol>
     </section>
 

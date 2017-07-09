@@ -343,20 +343,6 @@
     });
   });
   
-  function setRead(noteNo) {
-	  $.ajax({
-  		url: "/book/setReadNote.do",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-    		noteNo : noteNo
-		},
-		success : function(data) {
-			alert("수신완료 설정함");
-		}
-	});
-  }
-  
 </script>
 </body>
 </html>

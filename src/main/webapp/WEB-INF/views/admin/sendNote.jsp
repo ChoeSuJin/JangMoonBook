@@ -328,10 +328,9 @@
 <script>
   
   function checkNote() {
-	  alert("in checkNote");
 	  var recv_id = $("#recv_id");
 	  var title = $("#title");
-	  var content = $("content");
+	  var content = $("#content");
 	  
 	  
 	  if (recv_id.val() == "") {

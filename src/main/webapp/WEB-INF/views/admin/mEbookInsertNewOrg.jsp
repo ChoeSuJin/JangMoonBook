@@ -69,7 +69,7 @@
             <!-- /.box-header -->
             <div class="box-body">
 				<br>
-				<form action="insertNewCom.do" method="post">
+				<form action="insertNewCom.do" method="post" id="insertNewOrg">
 					<div class="input-group">
 						<span class="input-group-addon" style="width:100px;height:40px;">가맹점이름</span> 
 						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
@@ -90,8 +90,7 @@
 						<input style="height:40px;width:300px;" id="msg" type="text" class="form-control" 
 							   name="type" placeholder="Additional Info">
 					</div>
-					
-					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기">
+					<button class="btn btn-default" style="width:400px;" onclick="return checkForm();" id="btnInsertNewOrg"></button>
 				</form>
             </div>
             <!-- /.box-body -->
@@ -339,6 +338,36 @@
       "autoWidth": false
     });
   });
+  
+  function checkForm() {
+	  var oname = $("oname");
+	  var opwd = $("opwd");
+	  var deadline = $("deadline");
+	  var type = $("type");
+	  
+	  if (oname.val() == "") {
+		  alert("기업이름을 입력해주세요.");
+		  $("oname").focus();
+		  return false;
+	  }
+	  if (opwd.val() == "") {
+		  alert("비밀번호를 입력해주세요.");
+		  $("opwd").focus();
+		  return false;
+	  }
+	  if (deadline.val() == "") {
+		  alert("계약만료일을 입력해주세요.");
+		  $("deadline").focus();
+		  return false;
+	  }
+	  if (type.val() == "") {
+		  alert("기업유형을 입력해주세요.");
+		  $("type").focus();
+		  return false;
+	  }
+	  
+	  $("#insertNewOrg").submit();
+  }
   
 </script>
 </body>

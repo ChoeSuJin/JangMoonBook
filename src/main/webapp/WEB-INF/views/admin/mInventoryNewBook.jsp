@@ -109,7 +109,7 @@
 						<input style="height:40px;width:300px;" id="msg" type="file" class="form-control" 
 							   name="file" placeholder="Additional Info">
 					</div>
-					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기" onclick="button_event();">
+					<input class="btn btn-default" style="width:400px;" type="submit" value="등록하기" onclick="return button_event();">
 				</form>
             </div>
             <!-- /.box-body -->
@@ -357,6 +357,56 @@
       "autoWidth": false
     });
   });
+  
+  function button_event() {
+	  var title = $("title");
+	  var price = $("price");
+	  var author = $("author");
+	  var publisher = $("publisher");
+	  var type = $("type");
+	  var isbn = $("isbn");
+	  var category = $("category");
+	  
+	  if (title.val() == "") {
+		  alert("제목을 입력해주세요.");
+		  $("title").focus();
+		  return false;
+	  }
+	  if (price.val() == "") {
+		  alert("가격을 입력해주세요.");
+		  $("price").focus();
+		  return false;
+	  }
+	  if (author.val() == "") {
+		  alert("작가를 입력해주세요.");
+		  $("author").focus();
+		  return false;
+	  }
+	  if (publisher.val() == "") {
+		  alert("출판사를 입력해주세요.");
+		  $("publisher").focus();
+		  return false;
+	  }
+	  if (type.val() == "") {
+		  alert("도서유형을 입력해주세요.");
+		  $("type").focus();
+		  return false;
+	  }
+	  if (isbn.val() == "") {
+		  alert("isbn을 입력해주세요.");
+		  $("isbn").focus();
+		  return false;
+	  }
+	  if (category.val() == "") {
+		  alert("카테고리를 입력해주세요.");
+		  $("category").focus();
+		  return false;
+	  }
+	  
+	  $("#insert").submint();
+	  
+	  
+  }
   
   
 </script>

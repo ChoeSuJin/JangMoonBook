@@ -54,7 +54,7 @@
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
         <li>QnA</li>
-        <li>고객질문</li>
+        <li>고객질문답변</li>
       </ol>
     </section>
 
@@ -64,7 +64,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">고객질문</h3>
+              <h3 class="box-title">고객질문답변</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -95,7 +95,7 @@
 						<textarea rows="2" cols="150" readonly="readonly">${ list.content }</textarea>
 					</td>
 				</tr>
-				<form method="post" action="regReply.do">
+				<form method="post" action="regReply.do" id="regReply">
 			<tr>
 				<td>답변</td>
 				<td>
@@ -105,7 +105,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="등록"></td>
+				<td><button class="btn btn-flat btn-sm btn-primary" onclick="return checkForm();"></button></td>
 			</tr>
 			</form>
 			</table>
@@ -345,6 +345,17 @@
 <!-- page script -->
 <script>
 
+function checkForm() {
+	var replyText = $("replyText");
+	
+	if (replyText.val() == "") {
+		alert("답변글이 등록되지 않았습니다.");
+		$("replyText").focus();
+		return false;
+	}
+	
+	$("#regReply").submit();
+}
   
 </script>
 </body>

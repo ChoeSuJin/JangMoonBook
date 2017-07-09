@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-         QnA
+         CustomerNotice
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>QnA</li>
-        <li>고객질문</li>
+        <li>CustomerNotice</li>
+        <li>고객공지사항</li>
       </ol>
     </section>
 
@@ -64,12 +64,12 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">고객질문</h3>
+              <h3 class="box-title">고객공지사항</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             <table id="example2" class="table table-bordered table-hover">
-            <form action="regCustomerNotice.do" method="post">
+            <form action="regCustomerNotice.do" method="post" id="regCustomerNotice">
             	<tr>
             		<td>제목</td>
             		<td><input type="text" class="form-control" id="title" name="title"></td>
@@ -80,7 +80,7 @@
             	</tr>
             	<tr>
             		<td></td>
-            		<td> <input type="submit" class="btn btn-default"></td>
+            		<td> <input type="submit" class="btn btn-default" onclick="return checkForm();"></td>
             	</tr>
             </form>
 			</table>
@@ -319,7 +319,25 @@
 <script src="${resources}/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-  
+
+function checkForm() {
+	var title = $("#title");
+	var content = $("#content");
+	
+	if (title.val() == "") {
+		alert("제목을 입력해주세요.");
+		$("#title").focus();
+		return false;
+	}
+	if (content.val() == "") {
+		alert("내용을 입력해주세요.");
+		$("#content").focus();
+		return false;
+	}
+	
+	$("#regCustomerNotice").submit();
+}
+
 </script>
 </body>
 </html>

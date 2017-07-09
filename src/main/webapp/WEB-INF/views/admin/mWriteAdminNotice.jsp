@@ -69,7 +69,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             <table id="example2" class="table table-bordered table-hover">
-            <form action="regAdminNotice.do" method="post">
+            <form action="regAdminNotice.do" method="post" id="regAdminNotice">
             	<tr>
             		<td>제목</td>
             		<td><input type="text" class="form-control" id="title" name="title"></td>
@@ -80,7 +80,7 @@
             	</tr>
             	<tr>
             		<td> <input type="hidden" value="${ sessionScope.user.name }" name="writer"></td>
-            		<td> <input type="submit" class="btn btn-default"></td>
+            		<td> <input type="submit" class="btn btn-default" onclick="return checkForm();"></td>
             	</tr>
             </form>
 			</table>
@@ -319,6 +319,24 @@
 <script src="${resources}/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+
+function checkForm() {
+	var title = $("#title");
+	var content = $("#content");
+	
+	if (title.val() == "") {
+		alert("제목을 입력해주세요.");
+		$("#title").focus();
+		return false;
+	}
+	if (content.val() == "") {
+		alert("내용을 입력해주세요.");
+		$("#content").focus();
+		return false;
+	}
+	
+	$("#regAdminNotic").submit();
+}
   
 </script>
 </body>
