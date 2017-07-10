@@ -27,22 +27,20 @@ public class ManageBranchInfoController {
 		ManageBranchInfoDAO dao = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		ManageBranchInfoVO vo = new ManageBranchInfoVO();
 		
-		// Security Session¿¡¼­ °ªÀ» °¡Á®¿È
 		// String name = request.getParameter("branch");
 		HttpSession session = request.getSession();
 		
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
 		String name = user.getBranch();
+		System.out.println("ì§€ì ëª… : " + name);
 		
-		System.out.println("ÁöÁ¡ ¸í : " + name);
-		
-		List<ManageBranchInfoVO> list = dao.select(name); //ÁöÁ¡Á¤º¸
-		int empCount = dao.selectEmpCount(name);		  //ÁöÁ¡º° Á÷¿ø¼ö
+		List<ManageBranchInfoVO> list = dao.select(name); 
+		int empCount = dao.selectEmpCount(name);		  
 
 		mav.addObject("empCount", empCount);
 		mav.addObject("branchInfo", list);
 		mav.setViewName("/admin/mBranchInfo");
-		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
+		System.out.println("ë·° ì´ë¦„ : " + mav.getViewName());
 		
 		return mav;
 	}
@@ -57,7 +55,7 @@ public class ManageBranchInfoController {
 		dao.update(vo);
 		
 		mav.setViewName("redirect:mBranchInfo.do");
-		System.out.println("ºä ³×ÀÓ : " + mav.getViewName());
+		System.out.println("ë·° ì´ë¦„ : " + mav.getViewName());
 		
 		return mav;
 	}

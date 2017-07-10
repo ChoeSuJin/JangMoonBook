@@ -81,10 +81,10 @@
                 <tbody>
                 <c:forEach var="emp" items="${employeeList}">                
 	                <tr>
-	                  <td><a data-toggle="modal" data-target="#_${emp.empno}">${emp.empno}</a>
-	                  <div class="modal fade" id="${emp_modal.empno}" role="dialog" aria-labelledby="exampleModalLabel">
+	                  <td><a data-toggle="modal" data-target="#empModal_${emp.empno}">${emp.empno}</a></td>
+	                  <div class="modal fade" tabindex="-1" id="empModal_${emp.empno}" role="dialog" aria-labelledby="gridSystemModalLabel">
 						  <div class="modal-dialog" role="document">
-							<form action="mEmployeeUD.do" method="post" name="empModifyForm">
+							<form action="mEmployeeUD.do" method="post" id="empModifyForm${emp.empno}">
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -93,36 +93,32 @@
 						      <div class="modal-body">
 						          <div class="form-group">
 						            <label for="recipient-name" class="control-label">이름</label>
-						            <input type="text" class="form-control" id="name${status.index}" name="name" value="${emp_modal.name}">
+						            <input readonly="readonly" class="form-control" name="name" value="${emp.name}">
 						          </div>
 						          <div class="form-group">
 						            <label for="message-text" class="control-label">연락처</label>
-						            <input type="text" class="form-control"  id="phone${status.index}" name="phone" value="${emp_modal.phone}">
+						            <input type="text" class="form-control"name="phone" value="${emp.phone}">
 						          </div>
 						          <div class="form-group">
 						            <label for="message-text" class="control-label">주소</label>
-						            <input type="text" class="form-control" name="address1" id="address1${status.index}" value="${emp_modal.address1}">
-						            <input type="text" class="form-control" name="address2" id="address2${status.index}" value="${emp_modal.address2}">
+						            <input type="button" class="btn btn-primary btn-block" onclick="execDaumPostcode(${emp.empno})" value="주소검색">
+						            <input type="text" class="form-control" name="address1" value="${emp.address1}">
+						            <input type="text" class="form-control" name="address2" value="${emp.address2}">
 						          </div>
 						          <div class="form-group">
 						            <label for="message-text" class="control-label">생년월일</label>
-						            <input type="text" class="form-control" id="birth${status.index}" name="birth" value="${emp_modal.birth}">
+						            <input type="text" class="form-control" name="birth" value="${emp.birth}">
 						          </div>
 						      </div>
 						      <div class="modal-footer">
-						        <!-- 모달창 몇개인지 세기위함 -->
-						        <c:if test="${status.last}">
-						        	<input type="text" id="endNum" value="${status.index}">
-						        </c:if> 
-						        <input type="text" value="${emp_modal.empno}" name="empno">
+						        <input type="hidden" value="${emp.empno}" name="empno">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						        <input type="button" onclick="return empModify_ch()" class="btn btn-primary" value="수정하기">
+						        <input type="button" onclick="return empModify_ch(${emp.empno})" class="btn btn-primary" value="수정하기">
 						      </div>
 						    </div>
 							</form>
 						  </div>
 					  </div>
-					  </td>
 	                  <td>${emp.name}</td>
 	                  <td>${emp.phone}</td>
 	                  <td>${emp.address1} - ${emp.address2}</td>
@@ -163,202 +159,16 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+  <jsp:include page="tool_controlSidebar.jsp" />
   <!-- /.control-sidebar -->
+  
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
-<!-- post code -->
+<!-- Post Code -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <!-- jQuery 2.2.3 -->
 <script src="${resources}/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -388,6 +198,81 @@
       "autoWidth": false
     });
   });
+  //직원정보 수정 유효성검사
+  function empModify_ch(empno){
+	  var form = document.getElementById("empModifyForm"+empno);
+	  if(form.name.value == ""){
+		  alert('이름을 입력해주세요.');
+		  form.name.focus();
+		  return false;
+	  }
+	  if(form.phone.value == ""){
+		  alert('연락처를 입력해주세요.');
+		  form.phone.focus();
+		  return false;
+	  }
+	  if(form.phone.value.length != 11){
+		  alert('연락처는 11자 입니다. 다시 입력해주세요.');
+		  form.phone.focus();
+		  return false;
+	  }
+	  if(form.address1.value == ""){
+		  alert('주소가 입력되지 않았습니다. 입력해주세요.');
+		  form.address1.focus();
+		  return false;
+	  }
+	  if(form.address2.value == ""){
+		  alert('상세주소가 입력되지 않았습니다. 입력해주세요.');
+		  form.address2.focus();
+		  return false;
+	  }
+	  if (confirm("직원정보를 수정 하시겠습니까 ?")) { //확인
+			form.submit();
+		} else { //취소
+			return false;
+	  }
+  }
+  function execDaumPostcode(empno) {
+      new daum.Postcode({
+          oncomplete: function(data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+              var fullAddr = ''; // 최종 주소 변수
+              var extraAddr = ''; // 조합형 주소 변수
+
+              // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  fullAddr = data.roadAddress;
+
+              } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  fullAddr = data.jibunAddress;
+              }
+
+              // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+              if(data.userSelectedType === 'R'){
+                  //법정동명이 있을 경우 추가한다.
+                  if(data.bname !== ''){
+                      extraAddr += data.bname;
+                  }
+                  // 건물명이 있을 경우 추가한다.
+                  if(data.buildingName !== ''){
+                      extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                  }
+                  // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                  fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+              }
+
+              var form = document.getElementById("empModifyForm"+empno);
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              form.address1.value = fullAddr;
+              form.address2.focus();
+              /* document.getElementById('address1').value = fullAddr;
+              document.getElementById('address2').focus(); */
+          }
+      }).open();
+   }
 </script>
 </body>
 </html>

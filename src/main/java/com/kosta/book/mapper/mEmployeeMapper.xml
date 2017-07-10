@@ -27,7 +27,7 @@
   									#{phone}, #{gender}, #{birth}, #{branch})
   	</insert>
   	<update id="update">
-  		update employee set pwd=#{pwd}, phone=#{phone} where empno=#{empno}
+  		update employee set address1=#{address1}, address2=#{address2}, birth=#{birth}, phone=#{phone} where empno=#{empno}
   	</update>
 	<delete id="delete">
 		delete employee where empno=#{empno}

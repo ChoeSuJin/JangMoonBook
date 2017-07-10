@@ -27,12 +27,11 @@ public class ManageEmployeeController {
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
 		List<ManageEmployeeVO> list = null;
 		
-		// ¼¼¼Ç¿¡¼­ ÁöÁ¡ °¡Á®¿À±â
 		HttpSession session = request.getSession();
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
 		String branch = user.getBranch();
 		
-		if(vo.getName()!=null){	// ÀÌ¸§ÀÌ ³Ñ¾î¿À¸é ÀÌ¸§À¸·Î °Ë»ö ¾Æ´Ï¸é ÀüÃ¼
+		if(vo.getName()!=null){	// ë„˜ì–´ì˜¨ ì´ë¦„ì´ ìˆìœ¼ë©´ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰
 			vo.setBranch(branch);
 			list = dao.selectByname(vo);
 		}else{
@@ -55,8 +54,8 @@ public class ManageEmployeeController {
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
 		String branch = user.getBranch();
 		
-		System.out.println("³Ñ¾î¿Â ÀÌ¸§ : " + vo.getName());
-		if(vo.getPwd()!=null){	// ºñ¹Ğ¹øÈ£°¡ ¾È³Ñ¾î ¿À¸é Á÷¿ø »èÁ¦.
+		System.out.println("ë„˜ì–´ì˜¨ ì´ë¦„ ê°’ : " + vo.getName());
+		if(vo.getName()!=null){	// ì´ë¦„ê°’ì´ ë„˜ì–´ì˜¤ë©´ ì—…ë°ì´íŠ¸ ì•„ë‹ˆë©´ ì‚­ì œ
 			dao.update(vo);
 		}else{
 			dao.delete(vo);
@@ -74,31 +73,30 @@ public class ManageEmployeeController {
 		ModelAndView mav= new ModelAndView();
 		ManageEmployeeDAO dao = sqlSession.getMapper(ManageEmployeeDAO.class);
 		
-		//¼¼¼Ç¿¡¼­ ÁöÁ¡ °¡Á®¿À±â
 		HttpSession session = request.getSession();
 		EmployeeVO user = (EmployeeVO) session.getAttribute("user");
 		String branch = user.getBranch();
 		System.out.println("branch : " + branch);
 		vo.setBranch(branch);
 
-		// ÀÔ·ÂµÈ °ªÀÌ ¾øÀ¸¸é µî·Ï ÆûÀ¸·Î ÀÌµ¿
+		
 		if(vo.getName() == null){ 
 			mav.addObject("branch", branch);
 			mav.setViewName("/admin/mEmployeeIn");
 			return mav;
 		}
 		
-		//Á÷±Ş º°·Î ´Ù¸¥ ½ÃÄö½º ºÎ¿© ÇÏ±âÀ§ÇÔ
+		
 		String empclass = vo.getEmpclass(); 
 		try {
 			if(empclass.equalsIgnoreCase("ROLE_BRONZE")){
-				dao.insertBronze(vo);	// Á÷¿ø
+				dao.insertBronze(vo);	
 			}else if(empclass.equalsIgnoreCase("ROLE_GOLD")){
-				dao.insertGold(vo);		// ¸Å´ÏÀú
+				dao.insertGold(vo);		
 			}else if(empclass.equalsIgnoreCase("ROLE_PLATINUM")){
-				dao.insertPlatinum(vo);	// ÁöÁ¡Àå
+				dao.insertPlatinum(vo);	
 			}else if(empclass.equalsIgnoreCase("ROLE_DIAMOND")){
-				dao.insertDiamond(vo);	// º»»ç Á÷¿ø, »çÀå
+				dao.insertDiamond(vo);	
 			}
 		} catch (Exception e) {
 			mav.addObject("registError", "error");
