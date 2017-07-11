@@ -91,130 +91,130 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-inbox"></i>
             <span>Inventory</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mInventoryEmergency.do"><i class="fa fa-mail-reply"></i> 주문요망</a></li>
-            <li><a href="mInventoryNormal.do"><i class="fa fa-mail-forward"></i> 재고확인</a></li>
-            <li><a href="mInventoryOrder.do"><i class="fa fa-send"></i> 주문확인</a></li>
-            <li><a href="mInventoryNewBook.do"><i class="fa fa-send"></i> 신책등록</a></li>
-            <li><a href="mInventoryGetDirectList.do"><i class="fa fa-send"></i> 수령확인</a></li>
+            <li><a href="mInventoryEmergency.do"><i class="fa fa-battery-0"></i> 주문요망</a></li>
+            <li><a href="mInventoryNormal.do"><i class="fa fa-battery-4"></i> 재고확인</a></li>
+            <li><a href="mInventoryOrder.do"><i class="fa fa-check"></i> 주문확인</a></li>
+            <li><a href="mInventoryNewBook.do"><i class="fa fa-book"></i> 신책등록</a></li>
+            <li><a href="mInventoryGetDirectList.do"><i class="fa fa-cart-arrow-down"></i> 수령확인</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-krw"></i>
             <span>Sales</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mSalesDomestic.do"><i class="fa fa-mail-reply"></i> 국내도서</a></li>
-            <li><a href="mSalesForeign.do"><i class="fa fa-mail-forward"></i> 외국도서</a></li>
+            <li><a href="mSalesDomestic.do"><i class="fa fa-bicycle"></i> 국내도서</a></li>
+            <li><a href="mSalesForeign.do"><i class="fa fa-ship"></i> 외국도서</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-question-circle"></i>
             <span>QnA</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mQnAList.do"><i class="fa fa-mail-reply"></i> QnA목록</a></li>
+            <li><a href="mQnAList.do"><i class="fa fa-question"></i> QnA목록</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-sticky-note"></i>
             <span>CustomerNotice</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mCustomerNotice.do"><i class="fa fa-mail-reply"></i> 공지사항목록</a></li>
-            <li><a href="mWriteCustomerNotice.do"><i class="fa fa-mail-reply"></i> 공지사항 등록하기</a></li>
+            <li><a href="mCustomerNotice.do"><i class="fa fa-align-justify"></i> 공지사항목록</a></li>
+            <li><a href="mWriteCustomerNotice.do"><i class="fa fa-font"></i> 공지사항 등록하기</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-list-ul"></i>
             <span>AdminNotice</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mAdminNotice.do"><i class="fa fa-mail-reply"></i> 공지사항목록</a></li>
-            <li><a href="mWriteAdminNotice.do"><i class="fa fa-mail-reply"></i> 공지사항 등록하기</a></li>
+            <li><a href="mAdminNotice.do"><i class="fa fa-list-alt"></i> 공지사항목록</a></li>
+            <li><a href="mWriteAdminNotice.do"><i class="fa fa-bold"></i> 공지사항 등록하기</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-inbox"></i>
             <span>Online Inventory</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mOnlineInventoryEmergency.do"><i class="fa fa-mail-reply"></i> 주문요망</a></li>
-            <li><a href="mOnlineInventoryNormal.do"><i class="fa fa-mail-forward"></i> 재고확인</a></li>
-            <li><a href="mOnlineInventoryOrder.do"><i class="fa fa-send"></i> 주문확인</a></li>
+            <li><a href="mOnlineInventoryEmergency.do"><i class="fa fa-battery-0"></i> 주문요망</a></li>
+            <li><a href="mOnlineInventoryNormal.do"><i class="fa fa-battery-4"></i> 재고확인</a></li>
+            <li><a href="mOnlineInventoryOrder.do"><i class="fa fa-check"></i> 주문확인</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-krw"></i>
             <span>Online Sales</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mOnlineSales.do"><i class="fa fa-mail-reply"></i> 온라인판매</a></li>
+            <li><a href="mOnlineSales.do"><i class="fa fa-line-chart"></i> 온라인판매</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-krw"></i>
             <span>Total Sales</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mTotalSaleByBranch.do"><i class="fa fa-mail-reply"></i> 지점별 매출</a></li>
-            <li><a href="mTotalSaleByType.do"><i class="fa fa-mail-reply"></i> 타입별 매출</a></li>
+            <li><a href="mTotalSaleByBranch.do"><i class="fa fa-bar-chart"></i> 지점별 매출</a></li>
+            <li><a href="mTotalSaleByType.do"><i class="fa fa-pie-chart"></i> 타입별 매출</a></li>
           </ul>
         </li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span>Ebook</span>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Ebook</span>	
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mEbookList.do"><i class="fa fa-mail-reply"></i> 대여목록</a></li>
-            <li><a href="mEbookPermitList.do"><i class="fa fa-mail-reply"></i> 대여허가요청</a></li>
-            <li><a href="mEbookInsertNewOrg.do"><i class="fa fa-mail-reply"></i> 가맹점등록</a></li>
+            <li><a href="mEbookList.do"><i class="fa fa-list-ol"></i> 대여목록</a></li>
+            <li><a href="mEbookPermitList.do"><i class="fa fa-th-list"></i> 대여허가요청</a></li>
+            <li><a href="mEbookInsertNewOrg.do"><i class="fa fa-user-plus"></i> 가맹점등록</a></li>
           </ul>
         </li>
       </ul>
