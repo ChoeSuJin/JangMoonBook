@@ -18,17 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kosta.book.customer.sendAdvertisingMail.model.SendAdvertisingMailDAO;
 import com.kosta.book.customer.sendAdvertisingMail.model.SendAdvertisingMailVO;
+
+import sun.net.www.protocol.mailto.MailToURLConnection;
  
 @Controller
 public class SendAdvertisingMailController {
        
 	@Autowired
-	private JavaMailSender mailSender; // xml�� ����� bean autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	//String from, String to, String subject, String text, String formUrl
+
 	@RequestMapping(value = "/sendAdMail.do")
 	public String sendMail(HttpServletRequest request) throws FileNotFoundException, URISyntaxException {
 		try {
@@ -43,16 +44,19 @@ public class SendAdvertisingMailController {
 			
 			SendAdvertisingMailDAO dao = sqlSession.getMapper(SendAdvertisingMailDAO.class);
 			List<SendAdvertisingMailVO> list = dao.sendEmailBookList();
-			
-			String mailContent = "";
+			String mailContent = "한국도서 링크 / 외국도서 링크 / E-book 링크<br>";
 			
 			for (int i = 0; i < 3; i++) {
 				mailContent = mailContent
-						+ "<a href=https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query="+list.get(i).getTitle()+">"+list.get(i).getTitle()+"<a><br>";
+						+ "<a href=https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query="
+						+list.get(i).getTitle()
+						+">"
+						+list.get(i).getTitle()
+						+"<a><br>";
 			}
+			mailContent = mailContent+"밑부분";
 			
-			//list.get(0).getTitle()
-			message.setText("한국도서 링크 / 외국도서 링크 / E-book 링크<br>"+mailContent+"밑부분", "utf-8", "html"); // content
+			message.setText(mailContent, "utf-8", "html"); // content
 			mailSender.send(message);
 			
 		} catch (Exception e) {
