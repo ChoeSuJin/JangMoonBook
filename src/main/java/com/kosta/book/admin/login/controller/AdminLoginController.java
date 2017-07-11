@@ -1,7 +1,9 @@
 package com.kosta.book.admin.login.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.kosta.book.admin.login.model.EmployeeDAO;
 import com.kosta.book.admin.login.model.EmployeeVO;
 import com.kosta.book.admin.mAdminNotice.model.AdminNoticeDAO;
@@ -60,7 +65,7 @@ public class AdminLoginController {
 		int directBook = dao.getCountDirectBook(branch);
 		int requestEbook = dao.getCountRequestEbook();
 		
-		session.setAttribute("name", vo.getName()); //·Î±×ÀÎÇÑ È¸¿øÀÇ ÀÌ¸§
+		session.setAttribute("name", vo.getName()); //ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 		session.setAttribute("user", vo);
 		String main = "main";
 		request.setAttribute("main", main);
@@ -79,5 +84,24 @@ public class AdminLoginController {
 		String error = "error";
 		request.setAttribute("error", error);
 		return "/admin/adminLogin";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getMessage.do")
+	public HashMap<String, Object> getMessageRealTime(@RequestParam Map<String, String> map) {
+	
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		int empNo = Integer.parseInt(map.get("empNo"));
+		
+		System.out.println(empNo);
+		EmployeeDAO dao = sqlSession.getMapper(EmployeeDAO.class);
+		
+		List list = dao.getCountNotReadMessage(empNo);
+		
+		data.put("count", list.size());
+		data.put("list", list);
+		
+		return data;
 	}
 }

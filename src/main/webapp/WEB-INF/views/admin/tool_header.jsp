@@ -54,77 +54,15 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success" id="setMessageCount"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
+              <li class="header">You have <font id="setMessageCountDiv"></font> unread messages</li>
+              <li id="messageList">
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="${resources}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="${resources}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="${resources}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="${resources}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="${resources}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                </ul>
+                <div id="listMessage"></div>
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="mNoteReceive.do">See All Messages</a></li>
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
@@ -309,4 +247,97 @@
     </nav>
   </header>
 </body>
+<!-- jQuery 2.2.3 -->
+<script src="${resources}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		updateMessage();
+	});
+	
+	function updateMessage() {
+		
+		var empNo = ${ user.empNo };
+		
+		$.ajax({
+			url: "getMessage.do",
+			type: "post",
+			dataType: "JSON",
+			data : {"empNo" : empNo},
+			error : function() {
+				alert("메세지 목록을 불러오지 못했습니다.");
+			},
+			success: function(data) {
+				var values = data.list;
+				values = JSON.stringify(values);
+				var list = JSON.parse(values);
+				var count = data.count;
+				
+				$("#setMessageCount").html(count);
+				$("#setMessageCountDiv").html(count);
+				
+				var html = '<ul class="menu">';
+				
+				
+				if (count == 0) {
+					html += '<li>';
+					html += '읽지않은 메세지가 없습니다.';
+					html += '</li>';
+					html += '</ul>';
+					
+					$("#listMessage").html(html);
+				} else {
+					for (var i = 0; i < 5; i++) {
+						var startTime = new Date();
+						var date = list[i].date_sent;
+						var second = startTime.getTime();
+						var time = (startTime - date) / 1000;
+						alert(time);
+						// time == 초단위
+						
+						html += '<li>';
+						html += '<a href="#">';
+						html += '<div class="pull-left">';
+						html += '<img src="${resources}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">';
+						html += '</div>';
+						html += '<h4>';
+						html += list[i].sent_id;
+						if (time < 60) {
+							// 몇초전으로 표시
+							html += '<small><i class="fa fa-clock-o"></i>' + parseInt(time) + '초 전</small>';
+						}
+						// 한시간 이내
+						else if (time < 60*60) {
+							time = time / 60;
+							// 몇 분전으로 표시
+							html += '<small><i class="fa fa-clock-o"></i>' + parseInt(time) + '분 전</small>';
+						}
+						//하루 이내
+						else if (time < 60*60*24) {
+							time = time / 60 / 24;
+							// 몇 시간전으로 표시
+							html += '<small><i class="fa fa-clock-o"></i>' + parseInt(time) + '시간 전</small>';
+						}
+						//1일 이후
+						else if (time >= 60*60*24) {
+							time = time / 60 / 60 / 24;
+							// 몇일 전으로 표시
+							html += '<small><i class="fa fa-clock-o"></i>' + parseInt(time) + '일 전</small>';
+						}
+						html += '</h4>';
+						html += '<p>' + list[i].title + '</p>';
+						html += '</a></li>';
+					}
+					$("#listMessage").html(html);
+				}
+				
+				
+			}
+		});
+		
+	}
+
+</script>
+
 </html>

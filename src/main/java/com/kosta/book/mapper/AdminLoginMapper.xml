@@ -25,4 +25,8 @@
 	<select id="getCountRequestEbook" resultType="integer">
 		select count(*) from EBOOK_REQLIST
 	</select>
+	
+	<select id="getCountNotReadMessage" resultType="com.kosta.book.admin.mNote.model.NoteVO" parameterType="integer">
+		select * from notes where recv_id = #{ empNo } and recv_read = 'N' and recv_del = 'N' order by date_sent desc
+	</select>
 </mapper>
