@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -23,7 +24,12 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="${resources}/dist/css/skins/_all-skins.min.css">
-
+  <style>
+     #map {
+	  height: 338px;
+	  width: 100%;
+	 }
+  </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -42,44 +48,240 @@
   <jsp:include page="tool_sideBar.jsp"></jsp:include>
   <!-- sideBar -->
   
-  <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
+<c:forEach var="branch" items="${branchInfo}">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-                직원관리
-        <small>${branch}</small>
+                지점정보
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Branch</li>
-        <li>지점정보</li>
+        <li> Branch</li>
+        <li> 지점정보</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
+
       <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">지점정보</h3>
+        <div class="col-md-3">
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="${resources}/dist/img/user4-128x128.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center">${branch.master}</h3>
+
+              <p class="text-muted text-center">지점장</p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>직원수</b> <a class="pull-right">${empCount}</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Branch</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              content
+              <strong><i class="fa fa-book margin-r-5"></i> 지점명</strong>
+
+              <p class="text-muted">
+              	&nbsp;&nbsp;&nbsp;&nbsp; ${branch.name} 지점 
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> 주소</strong>
+
+              <p class="text-muted"> &nbsp;&nbsp;&nbsp;&nbsp;- ${branch.address1} <br> &nbsp;&nbsp;&nbsp;&nbsp;- ${branch.address2}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> 영업시간</strong>
+
+              <p> &nbsp;&nbsp;&nbsp;&nbsp; ${branch.time}</p>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
         <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#branch" data-toggle="tab">지점정보</a></li>
+              <li><a href="#modify" data-toggle="tab">정보수정</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="branch">
+                <!-- Post -->
+                <div class="post">
+                 <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 지점명</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="name" id="inputName" value="${branch.name}" >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label"> 지점장</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="master" id="inputEmail" value="${branch.master}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label"> 연락처</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="phone" id="phone" value="${branch.phone}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 주소</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="address1" id="inputName" value="${branch.address1}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 상세주소</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="address2" id="inputName" value="${branch.address2}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label"> 영업시간</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="time" id="inputExperience" value="${branch.time}">
+                    </div>
+                  </div>
+                </form> 
+                </div>
+                <!-- /.post -->
+
+                <!-- Post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="${resources}/dist/img/user6-128x128.jpg" alt="User Image">
+                        <span class="username">
+                          <a>서울</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                    <span class="description">map & photo</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <div class="row margin-bottom">
+                    <div class="col-sm-6">
+                      <input type="hidden" id="address" value="${branch.address1} ${branch.address2}">
+                      <div id="map"></div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img class="img-responsive" src="${resources}/dist/img/photo2.png" alt="Photo">
+                          <br>
+                          <img class="img-responsive" src="${resources}/dist/img/photo3.jpg" alt="Photo">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                          <img class="img-responsive" src="${resources}/dist/img/photo4.jpg" alt="Photo">
+                          <br>
+                          <img class="img-responsive" src="${resources}/dist/img/photo1.png" alt="Photo">
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- /.post -->
+              </div>
+              <!-- /.tab-pane -->
+              
+              <div class="tab-pane" id="modify">
+                <form class="form-horizontal" action="mBranchInfoUpdate.do" method="post" name="modifyBranch">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 지점명</label>
+
+                    <div class="col-sm-10">
+                      <input readonly="readonly" class="form-control" name="name" id="inputName" value="${branch.name}" >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label"> 지점장</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="master" id="inputEmail" value="${branch.master}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label"> 연락처</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="phone" id="inputEmail" value="${branch.phone}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 주소</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="address1" id="inputName" value="${branch.address1}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label"> 상세주소</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="address2" id="inputName" value="${branch.address2}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label"> 영업시간</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="time" id="inputExperience" value="${branch.time}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input type="button" onclick="return modifyBranch_ch()" class="btn btn-danger" value="수정하기">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
       </div>
       <!-- /.row -->
+
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+</c:forEach>
+<!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.8
@@ -89,195 +291,9 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+  <jsp:include page="tool_controlSidebar.jsp" />
   <!-- /.control-sidebar -->
+  
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -301,7 +317,8 @@
 <script src="${resources}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${resources}/dist/js/demo.js"></script>
-<!-- page script -->
+<!-- google map -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBDDdQ0Ro5U-PJGssG36UOL45RzjQXCQy0"></script>
 <script>
   $(function () {
     $("#example1").DataTable();
@@ -314,6 +331,94 @@
       "autoWidth": false
     });
   });
+  
+  function modifyBranch_ch(){
+	  var form = document.modifyBranch;
+	  if(form.master.value == ""){
+		  alert('지점장을 입력해주세요.');
+		  form.master.focus();
+		  return false;
+	  }
+	  if(form.phone.value == ""){
+		  alert('연락처를 입력해주세요.');
+		  form.phone.focus();
+		  return false;
+	  }
+	  if(form.phone.value.length != 11){
+		  alert('연락처는 11자 입니다. 다시 입력해주세요.');
+		  form.phone.focus();
+		  return false;
+	  }
+	  if(form.address1.value == ""){
+		  alert('주소가 입력되지 않았습니다. 입력해주세요.');
+		  form.address1.focus();
+		  return false;
+	  }
+	  if(form.address2.value == ""){
+		  alert('상세주소가 입력되지 않았습니다. 입력해주세요.');
+		  form.address2.focus();
+		  return false;
+	  }
+	  if(form.time.value == ""){
+		  alert('영업시간이 입력되지 않았습니다. 입력해주세요.');
+		  form.time.focus();
+		  return false;
+	  }
+	  if (confirm("지점정보를 수정 하시겠습니까 ?")) { //확인
+			form.submit();
+		} else { //취소
+			return false;
+	  }
+  }
+   function initialize() {
+	     
+        var mapOptions = {
+                            zoom: 16, // 지도를 띄웠을 때의 줌 크기
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+         
+         
+        var map = new google.maps.Map(document.getElementById("map"), // div의 id과 값이 같아야 함. "map"
+                                    mapOptions);
+         
+        var size_x = 40; // 마커로 사용할 이미지의 가로 크기
+        var size_y = 40; // 마커로 사용할 이미지의 세로 크기
+     
+        // 마커로 사용할 이미지 주소
+        var image = new google.maps.MarkerImage( '주소 여기에 기입!',
+                                                    new google.maps.Size(size_x, size_y),
+                                                    '',
+                                                    '',
+                                                    new google.maps.Size(size_x, size_y));
+         
+        // Geocoding *****************************************************
+        var address = $('#address').val(); // DB에서 주소 가져와서 검색하거나 왼쪽과 같이 주소를 바로 코딩.
+        var phone = $('#phone').val(); 
+        var marker = null;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                marker = new google.maps.Marker({
+                                map: map,
+                                icon: image, // 마커로 사용할 이미지(변수)
+                                title: address, // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                                position: results[0].geometry.location
+                            });
+ 
+                var content = "Tel : "+phone; // 말풍선 안에 들어갈 내용
+             
+                // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                var infowindow = new google.maps.InfoWindow({ content: content});
+                google.maps.event.addListener(marker, "click", function() {infowindow.open(map,marker);});
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
+        // Geocoding // *****************************************************
+         
+    }
+    google.maps.event.addDomListener(window, 'load', initialize); 
 </script>
 </body>
 </html>

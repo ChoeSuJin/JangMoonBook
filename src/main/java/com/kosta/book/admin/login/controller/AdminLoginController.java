@@ -73,7 +73,7 @@ public class AdminLoginController {
 		
 		return "/admin/adminMain";
 	}
-	//�α��� ����
+	
 	@RequestMapping("/adminLoginError.do")
 	public String loginError(HttpServletRequest request){
 		String error = "error";
