@@ -7,15 +7,42 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.kosta.book.customer.model.CustomerDAO;
+import com.kosta.book.admin.mSales.model.SalesListVO;
+import com.kosta.book.customer.model.BookVO;
+import com.kosta.book.customer.model.CustomerDAOImpl;
 import com.kosta.book.customer.model.CustomerVO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
 	@Inject
-	CustomerDAO customerDAO;
+	CustomerDAOImpl customerDAO;
 	
+	@Override
+	public List<SalesListVO> myEbook(String id) {
+		return customerDAO.myEbook(id);
+	}
+
+	@Override
+	public int checkPwdMypage(CustomerVO vo) {
+		return customerDAO.checkPwdMypage(vo);
+	}
+
+	@Override
+	public List<SalesListVO> saleList(String id) {
+		return customerDAO.saleList(id);
+	}
+
+	@Override
+	public List<BookVO> bestSeller() {
+		return customerDAO.bestSeller();
+	}
+	
+	@Override
+	public List<BookVO> newBook() {
+		return customerDAO.newBook();
+	}
+
 	@Override
 	public boolean loginCheck(CustomerVO vo, HttpSession session) {
 		boolean result =customerDAO.loginCheck(vo);
@@ -76,5 +103,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean checkPwd(String id, String pwd) {
 		return customerDAO.checkPwd(id,pwd);
+	}
+
+	@Override
+	public boolean idCheck(String id) {
+		return customerDAO.idCheck(id);
+	}
+
+	@Override
+	public CustomerVO pwdCheck(CustomerVO vo) {
+		return customerDAO.pwdCheck(vo);
 	}
 }

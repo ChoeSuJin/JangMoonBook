@@ -2,17 +2,26 @@ package com.kosta.book.customer.model;
 
 import java.util.List;
 
+import com.kosta.book.admin.mSales.model.SalesListVO;
+
 public interface CustomerDAO {
 
-	public boolean loginCheck(CustomerVO vo);  // 濡쒓?���씤
-	public CustomerVO loginCustomer(CustomerVO vo);	//濡쒓?���씤 �꽦?�듭뿬遺�?
-	public List<CustomerVO> customerList(); // �쉶�썝 紐⑸�?
-	public void insertCustomer(CustomerVO vo); //�쉶�썝媛��엯
-	public CustomerVO viewCustomer(String id); //留덉?���럹�씠吏�
-	public void deleteCustomer(String id);  // �쉶�썝 �궘�젣
-	public void updateCustomer(CustomerVO vo);  // �쉶�썝�젙蹂� �닔�젙
-	public boolean checkPwd(String id, String pwd);	//?��꾨�踰덊?�� 泥댄�?
-	public String getClass(CustomerVO vo);	//?��꾨�踰덊?�� 泥댄�?
 	
+	public List<SalesListVO> myEbook(String id);  
+	public List<SalesListVO> saleList(String id);  
+	public List<BookVO> bestSeller();  
+	public List<BookVO> newBook();  
+	public boolean loginCheck(CustomerVO vo);  
+	public CustomerVO loginCustomer(CustomerVO vo);	
+	public List<CustomerVO> customerList();
+	public void insertCustomer(CustomerVO vo); 
+	public CustomerVO viewCustomer(String id); 
+	public void deleteCustomer(String id);  
+	public void updateCustomer(CustomerVO vo); 
+	public boolean checkPwd(String id, String pwd);	
+	public int checkPwdMypage(CustomerVO vo);	
+	public String getClass(CustomerVO vo);	
+	public boolean idCheck(String id);//아이디 중복체크
+	public CustomerVO pwdCheck(CustomerVO vo);// 비밀번호 찾기
 
 }
