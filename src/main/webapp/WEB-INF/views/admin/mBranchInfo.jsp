@@ -82,8 +82,6 @@
                   <b>직원수</b> <a class="pull-right">${empCount}</a>
                 </li>
               </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.box-body -->
           </div>
