@@ -81,12 +81,6 @@
                 <li class="list-group-item">
                   <b>직원수</b> <a class="pull-right">${empCount}</a>
                 </li>
-                <li class="list-group-item">
-                  <b>회원수</b> <a class="pull-right">12543</a>
-                </li>
-                <li class="list-group-item">
-                  <b>?????</b> <a class="pull-right">?????</a>
-                </li>
               </ul>
 
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
@@ -105,20 +99,20 @@
               <strong><i class="fa fa-book margin-r-5"></i> 지점명</strong>
 
               <p class="text-muted">
-              	${branch.name} 지점 
+              	&nbsp;&nbsp;&nbsp;&nbsp; ${branch.name} 지점 
               </p>
 
               <hr>
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> 주소</strong>
 
-              <p class="text-muted"> - ${branch.address1} <br> - ${branch.address2}</p>
+              <p class="text-muted"> &nbsp;&nbsp;&nbsp;&nbsp;- ${branch.address1} <br> &nbsp;&nbsp;&nbsp;&nbsp;- ${branch.address2}</p>
 
               <hr>
 
               <strong><i class="fa fa-file-text-o margin-r-5"></i> 영업시간</strong>
 
-              <p>${branch.time}</p>
+              <p> &nbsp;&nbsp;&nbsp;&nbsp; ${branch.time}</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -414,7 +408,7 @@
                                 position: results[0].geometry.location
                             });
  
-                var content = "Tel: = "+phone; // 말풍선 안에 들어갈 내용
+                var content = "Tel : "+phone; // 말풍선 안에 들어갈 내용
              
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({ content: content});

@@ -32,7 +32,7 @@
 <body>
 <header class="main-header">
     <!-- Logo -->
-    <a href="${resources}/index2.html" class="logo">
+    <a href="adminMain.do" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>B</span>
       <!-- logo for regular state and mobile devices -->
