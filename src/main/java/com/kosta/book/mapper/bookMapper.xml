@@ -3,8 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kosta.customer.model.BookDAO">
-	<select id="bookSearchDao" resultType="com.kosta.customer.model.BookVO">
+
+<mapper namespace="com.kosta.book.customer.model.BookDAO">
+	<select id="bookSearchDao" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE
@@ -13,13 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY book 
 	</select>
 	
-	<select id="orderBookCategory" resultType="com.kosta.customer.model.BookVO">
+	<select id="orderBookCategory" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE category = #{category}
 	</select>
 	
-	<select id="orderBook" resultType="com.kosta.customer.model.BookVO">
+	<select id="orderBook" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE
@@ -27,13 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY book
 	</select>
 	
-	<select id="orderBookDetail" resultType="com.kosta.customer.model.BookVO">
+	<select id="orderBookDetail" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 		WHERE isbn = #{isbn}
 	</select>
 	
-	<select id="searchBook" resultType="com.kosta.customer.model.BookVO">
+	<select id="searchBook" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 			WHERE type = #{type}
@@ -41,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY book 
 	</select>
 	
-	<select id="searchBookCategory" resultType="com.kosta.customer.model.BookVO">
+	<select id="searchBookCategory" resultType="com.kosta.book.customer.model.BookVO">
 		SELECT * 
 		FROM BOOK_INFO
 			WHERE category = #{category}

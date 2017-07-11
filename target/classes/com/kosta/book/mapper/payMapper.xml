@@ -15,11 +15,11 @@
 		insert into getDelivery values (#{orderno}, #{name}, #{zipcode}, #{address1}, #{address2}, sysdate, #{phone})
 	</insert>
 	
-	<update id="minusOnlineInventory" parameterType="com.kosta.cart.model.CartVO">
+	<update id="minusOnlineInventory" parameterType="com.kosta.book.customer.cart.model.CartVO">
 		update inventory set quantity = quantity - #{amount} where isbn = #{isbn} and branch = 'online'
 	</update>
 	
-	<update id="minusDirectInventory" parameterType="com.kosta.cart.model.CartVO">
+	<update id="minusDirectInventory" parameterType="com.kosta.book.customer.cart.model.CartVO">
 		update inventory set quantity = quantity - #{amount} where isbn = #{isbn} and branch = #{branchName}
 	</update>
 	
@@ -53,7 +53,7 @@
 		where id = #{ id } and s_date between to_date(add_months(sysdate, -6), 'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
 	</select>
 	
-	<select id="getCustomerInfo" resultType="com.kosta.customer.model.CustomerVO">
+	<select id="getCustomerInfo" resultType="com.kosta.book.customer.model.CustomerVO">
 		select * from customer where id=#{id}
 	</select>
 	

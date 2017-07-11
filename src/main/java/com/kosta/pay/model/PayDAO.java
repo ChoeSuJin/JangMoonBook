@@ -3,8 +3,8 @@ package com.kosta.pay.model;
 import java.util.List;
 
 import com.kosta.book.admin.mSales.model.SalesListVO;
-import com.kosta.cart.model.CartVO;
-import com.kosta.customer.model.CustomerVO;
+import com.kosta.book.customer.cart.model.CartVO;
+import com.kosta.book.customer.model.CustomerVO;
 
 public interface PayDAO {
 	

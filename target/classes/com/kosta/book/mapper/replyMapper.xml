@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         VALUES (reply_seq.NEXTVAL, #{bno}, #{replytext}, #{replyer})
     </insert>
    
-   <select id="viewReply" resultType="com.kosta.board.model.ReplyVO">
+   <select id="viewReply" resultType="com.kosta.book.customer.board.model.ReplyVO">
    		select * from reply
    		where bno=#{bno}
    </select>

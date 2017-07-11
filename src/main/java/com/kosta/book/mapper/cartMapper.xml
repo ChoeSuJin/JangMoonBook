@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="cart">
 
+
 <select id="checkInsertEbook" resultType="int">
 		select count(*) 
 		from cart 
@@ -24,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{status},cart_seq.nextval,#{id},#{isbn},#{title},#{price},#{amount},#{image})
 	</insert>
 
-	<select id="listCart" resultType="com.kosta.cart.model.CartVO">
+	<select id="listCart" resultType="com.kosta.book.customer.cart.model.CartVO">
 		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
      	from cart
       	where id=#{id} and status = '장바구니' and isbn not in (select isbn from book_info where type='E-Book')
@@ -32,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       	order by cartno
 	</select>
 
-	<select id="listCartEbook" resultType="com.kosta.cart.model.CartVO">
+	<select id="listCartEbook" resultType="com.kosta.book.customer.cart.model.CartVO">
 		select cartno, title, price, isbn, image, sum(amount) amount, sum(price*amount) money 
      	from cart
       	where id=#{id} and status = '장바구니' and isbn in (select isbn from book_info where type='E-Book')

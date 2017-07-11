@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-                직원관리
+	        받은쪽지함
         <small>${branch}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Employee</li>
-        <li>직원관리</li>
+        <li>Message</li>
+        <li>받은쪽지함</li>
       </ol>
     </section>
 
@@ -75,11 +75,6 @@
 				<th>받은날짜</th>
 				<th>삭제</th>
 				</thead>
-				<c:if test="${ recvListSize == 0 }">
-					<tr>
-						<td colspan="3">받은 쪽지가 업습니다.</td>
-					</tr>
-				</c:if>
 				<c:if test="${ recvListSize != 0 }">
 				<c:forEach items="${ recvList }" var="list">
 				<tr>

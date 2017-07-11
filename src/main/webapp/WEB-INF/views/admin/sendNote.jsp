@@ -83,7 +83,8 @@
 					<td><textarea rows="10" cols="100" name="content" id="content"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="float: right;">
+					<td></td>
+					<td style="float: right;">
 						<button class="btn btn-flat btn-sm btn-primary" onclick="return checkNote();" id="btnSendNote">보내기</button>
 						<button class="btn btn-flat btn-sm btn-danger" id="cancelNote">취소</button>
 					</td>

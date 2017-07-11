@@ -76,11 +76,6 @@
 				<th>수신여부</th>
 				<th>삭제</th>
 			</thead>
-				<c:if test="${ sendListSize == 0 }">
-					<tr>
-						<td colspan="3">보낸 쪽지가 업습니다.</td>
-					</tr>
-				</c:if>
 				<c:if test="${ sendListSize != 0 }">
 				<c:forEach items="${ sendList }" var="list">
 				<tr>
