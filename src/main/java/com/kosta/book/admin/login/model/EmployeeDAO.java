@@ -1,34 +1,42 @@
 package com.kosta.book.admin.login.model;
 
+import java.util.List;
+
+import com.kosta.book.admin.mInventory.model.OrderListVO;
+import com.kosta.customer.model.BookVO;
+
 public interface EmployeeDAO {
 	
 	/**
-	 * Admin ·Î±×ÀÎ ¸Þ¼Òµå
+	 * Admin ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param empNo
 	 * @return EmployeeVO
 	 */
 	public EmployeeVO loginEmployee(int empNo);
 	/**
-	 * ¹ÌÃ³¸® QnA °¹¼ö¸¦ ÀÐ¾î¿À´Â ¸Þ¼Òµå
+	 * ï¿½ï¿½Ã³ï¿½ï¿½ QnA ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 * @return int
 	 */
 	public int getCountNotDoQnA();
 	/**
-	 * ÀÔ°í¿ä¸Á µµ¼­ °¹¼ö¸¦ ÀÐ¾î¿À´Â ¸Þ¼Òµå
+	 * ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param branch
 	 * @return int
 	 */
 	public int getCountEmergencyBook(String branch);
 	/**
-	 * ¿À´Ã Á÷Á¢¼ö·ÉÇÏ´Â µµ¼­ °Ç¼ö¸¦ ÀÐ¾î¿À´Â ¸Þ¼Òµå
+	 * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param branch
 	 * @return int
 	 */
 	public int getCountDirectBook(String branch);
 	/**
-	 * Ebook ´ë¿©¿äÃ»À» ÀÐ¾î¿À´Â ¸Þ¼Òµå
+	 * Ebook ï¿½ë¿©ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 * @return int
 	 */
 	public int getCountRequestEbook();
+	public int getInventory(String branch);
+	public List<BookVO> newBook();
+	public List<OrderListVO> latestOrder(String branch);
 
 }

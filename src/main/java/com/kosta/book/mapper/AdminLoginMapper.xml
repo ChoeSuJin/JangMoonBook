@@ -25,4 +25,20 @@
 	<select id="getCountRequestEbook" resultType="integer">
 		select count(*) from EBOOK_REQLIST
 	</select>
+	
+	<select id="getInventory" resultType="integer">
+		select count(*) from inventory where branch=#{branch}
+	</select>
+	
+	<select id="newBook" resultType="com.kosta.customer.model.BookVO">
+		<![CDATA[SELECT *
+      FROM (SELECT * FROM BOOK_INFO A ORDER BY BOOK DESC ) 
+      WHERE ROWNUM <=5]]>
+	</select>
+	
+	<select id="latestOrder" resultType="com.kosta.book.admin.mInventory.model.OrderListVO">
+		<![CDATA[SELECT *
+      FROM (SELECT * FROM orderList A ORDER BY ORDERNUMBER DESC ) 
+      WHERE branch=#{branch} and ROWNUM <=7]]>
+	</select>
 </mapper>

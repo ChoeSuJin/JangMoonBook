@@ -10,10 +10,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.kosta.book.admin.login.model.EmployeeDAO;
 import com.kosta.book.admin.login.model.EmployeeVO;
 import com.kosta.book.admin.mAdminNotice.model.AdminNoticeDAO;
 import com.kosta.book.admin.mAdminNotice.model.AdminNoticeVO;
+import com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoDAO;
+import com.kosta.book.admin.mBranchInfo.model.ManageBranchInfoVO;
+import com.kosta.book.admin.mInventory.model.OrderListVO;
+import com.kosta.customer.model.BookVO;
 
 @Controller
 public class AdminLoginController {
@@ -41,26 +46,30 @@ public class AdminLoginController {
 		System.out.println("username =" + username);
 		
 		EmployeeDAO dao = sqlSession.getMapper(EmployeeDAO.class);
+		ManageBranchInfoDAO BranchDAO = sqlSession.getMapper(ManageBranchInfoDAO.class);
 		EmployeeVO vo = dao.loginEmployee(Integer.parseInt(username));
+		String branch = vo.getBranch();
 		
 		HttpSession session = request.getSession();
 		
 		AdminNoticeDAO dao2 = sqlSession.getMapper(AdminNoticeDAO.class);
 		List<AdminNoticeVO> list = dao2.getAdminNotice();
+		List<ManageBranchInfoVO> BranchVO = BranchDAO.select(branch); 
+		List<BookVO> newBook = dao.newBook(); 
+		List<OrderListVO> latestOrder = dao.latestOrder(branch); 
 		
 		if (session.getAttribute("isInitLogin") == null) {
 			session.setAttribute("isInitLogin", 0);
 		}
 		
-		String branch = vo.getBranch();
-		
 		int todayAdminNotice = dao2.getTodayNotice();
 		int notDoQnA = dao.getCountNotDoQnA();
 		int emergencyBook = dao.getCountEmergencyBook(branch);
 		int directBook = dao.getCountDirectBook(branch);
+		int inventory = dao.getInventory(branch);
 		int requestEbook = dao.getCountRequestEbook();
 		
-		session.setAttribute("name", vo.getName()); //로그인한 회원의 이름
+		session.setAttribute("name", vo.getName());
 		session.setAttribute("user", vo);
 		String main = "main";
 		request.setAttribute("main", main);
@@ -70,6 +79,10 @@ public class AdminLoginController {
 		request.setAttribute("emergencyBook", emergencyBook);
 		request.setAttribute("directBook", directBook);
 		request.setAttribute("requestEbook", requestEbook);
+		request.setAttribute("branch", BranchVO);
+		request.setAttribute("inventory", inventory);
+		request.setAttribute("newBook", newBook);
+		request.setAttribute("latestOrder", latestOrder);
 		
 		return "/admin/adminMain";
 	}
