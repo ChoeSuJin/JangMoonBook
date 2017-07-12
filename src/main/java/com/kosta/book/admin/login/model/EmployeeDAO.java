@@ -41,5 +41,12 @@ public interface EmployeeDAO {
 	 * @return NoteVO
 	 */
 	public List<NoteVO> getCountNotReadMessage(int empNo);
+	
+	/**
+	 * 당일 판매된 책 권수를 가져오는 메소드
+	 * @param branch
+	 * @return
+	 */
+	public int getCountTodaySales(String branch);
 
 }

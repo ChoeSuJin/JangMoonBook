@@ -29,4 +29,8 @@
 	<select id="getCountNotReadMessage" resultType="com.kosta.book.admin.mNote.model.NoteVO" parameterType="integer">
 		select * from notes where recv_id = #{ empNo } and recv_read = 'N' and recv_del = 'N' order by date_sent desc
 	</select>
+	
+	<select id="getCountTodaySales" resultType="integer">
+		select nvl(sum(quantity), 0) from salelist where branchname = #{branch} and (to_date(s_date, 'YY/MM/DD') - to_date(sysdate, 'YY/MM/DD')) = 0
+	</select>
 </mapper>

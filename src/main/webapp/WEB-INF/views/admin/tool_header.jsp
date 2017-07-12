@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -52,7 +53,7 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="updateMessage();">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success" id="setMessageCount"></span>
             </a>
@@ -67,42 +68,55 @@
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="updateNotification();">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning" id="setNotificationCount"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">You have <font id="setNotificationCountDiv"></font> notifications</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  <li>
+                  <li class="notification">
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users text-aqua"></i> <font id="todayAdminNotice"></font> 개의 새로 등록된 공지사항
                     </a>
                   </li>
-                  <li>
+                  <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM')">
+                  <li class="notification">
                     <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
+                      <i class="fa fa-warning text-yellow"></i> <font id="emergencyBook"></font> 건의 주문요망
                     </a>
                   </li>
-                  <li>
+                  </sec:authorize>
+                  <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM', 'ROLE_ONLINE')">
+                  <li class="notification">
                     <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
+                      <i class="fa fa-shopping-cart text-green"></i> <font id="todaySales"></font> 건의 판매
                     </a>
                   </li>
-
-                  <li>
+                  </sec:authorize>
+                  <sec:authorize access="hasAnyRole('ROLE_BRONZE', 'ROLE_GOLD', 'ROLE_PLATINUM')">
+                  <li class="notification">
                     <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                      <i class="fa fa-users text-red"></i> <font id="directBook"></font> 건의 당일 수령 예정
                     </a>
                   </li>
-                  <li>
+                  </sec:authorize>
+                  <sec:authorize access="hasAnyRole('ROLE_WRITER')">
+                  <li class="notification">
                     <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
+                      <i class="fa fa-warning text-yellow"></i> <font id="notDoQnA"></font> 개의 미처리된 QnA
                     </a>
                   </li>
+                  </sec:authorize>
+                  <sec:authorize access="hasAnyRole('ROLE_EBOOK')">
+                  <li class="notification">
+                    <a href="#">
+                      <i class="fa fa-user text-red"></i> <font id="requestEbook"></font>건의 Ebook 대여 요청
+                    </a>
+                  </li>
+                  </sec:authorize>
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -254,6 +268,7 @@
 
 	$(document).ready(function() {
 		updateMessage();
+		updateNotification();
 	});
 	
 	function updateMessage() {
@@ -293,7 +308,6 @@
 						var date = list[i].date_sent;
 						var second = startTime.getTime();
 						var time = (startTime - date) / 1000;
-						alert(time);
 						// time == 초단위
 						
 						html += '<li>';
@@ -315,7 +329,7 @@
 						}
 						//하루 이내
 						else if (time < 60*60*24) {
-							time = time / 60 / 24;
+							time = time / 60 / 60;
 							// 몇 시간전으로 표시
 							html += '<small><i class="fa fa-clock-o"></i>' + parseInt(time) + '시간 전</small>';
 						}
@@ -336,6 +350,38 @@
 			}
 		});
 		
+	}
+	
+	function updateNotification() {
+		var empNo = ${ user.empNo };
+		
+		$.ajax({
+			url: "getNotification.do",
+			type: "post",
+			dataType: "JSON",
+			data : {"empNo" : empNo},
+			error : function() {
+				alert("알림목록을 불러오지 못했습니다.");
+			},
+			success: function(data) {
+				var todayAdminNotice = data.todayAdminNotice;
+				var notDoQnA = data.notDoQnA;
+				var emergencyBook = data.emergencyBook;
+				var directBook = data.directBook;
+				var requestEbook = data.requestEbook;
+				
+				$("#todayAdminNotice").html(todayAdminNotice);
+				$("#notDoQnA").html(notDoQnA);
+				$("#emergencyBook").html(emergencyBook);
+				$("#directBook").html(directBook);
+				$("#requestEbook").html(requestEbook);
+				
+				var countNotification = $(".notification").length;
+				
+				$("#setNotificationCount").html(countNotification);
+				$("#setNotificationCountDiv").html(countNotification);
+			}
+		});
 	}
 
 </script>

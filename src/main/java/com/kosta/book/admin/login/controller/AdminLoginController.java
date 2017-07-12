@@ -104,4 +104,34 @@ public class AdminLoginController {
 		
 		return data;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getNotification.do")
+	public HashMap<String, Object> getNotificationRealTime(@RequestParam Map<String, String> map) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		int empNo = Integer.parseInt(map.get("empNo"));
+		
+		System.out.println(empNo);
+		EmployeeDAO dao = sqlSession.getMapper(EmployeeDAO.class);
+		AdminNoticeDAO dao2 = sqlSession.getMapper(AdminNoticeDAO.class);
+		
+		EmployeeVO vo = dao.loginEmployee(empNo);
+		String branch = vo.getBranch();
+		
+		int todayAdminNotice = dao2.getTodayNotice();
+		int notDoQnA = dao.getCountNotDoQnA();
+		int emergencyBook = dao.getCountEmergencyBook(branch);
+		int directBook = dao.getCountDirectBook(branch);
+		int requestEbook = dao.getCountRequestEbook();
+		int todaySales = dao.getCountTodaySales(branch);
+		
+		data.put("todayAdminNotice", todayAdminNotice);
+		data.put("notDoQnA", notDoQnA);
+		data.put("emergencyBook", emergencyBook);
+		data.put("directBook", directBook);
+		data.put("requestEbook", requestEbook);
+		data.put("todaySales", todaySales);
+		return data;
+	}
 }
