@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -32,6 +31,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   
@@ -48,13 +48,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-	        받은쪽지함
-        <small>${branch}</small>
+	        광고메일보내기
+        <small>${user.empNo}</small>
       </h1>
       <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Home</li>
-        <li>Message</li>
-        <li>받은쪽지함</li>
+        <li>AdvertiseMail</li>
+        <li>광고메일보내기</li>
       </ol>
     </section>
 
@@ -64,71 +64,32 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">받은쪽지함</h3>
+              <h3 class="box-title">광고메일보내기</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
-              <thead>
-                <th>보낸사람</th>
-				<th>제목</th>
-				<th>받은날짜</th>
-				<th>삭제</th>
-				</thead>
-				<c:if test="${ recvListSize != 0 }">
-				<c:forEach items="${ recvList }" var="list">
-				<tr>
-					<td>${ list.sent_id }</td>
-					<td>
-						<a data-toggle="modal" data-target="#recvNote${ list.noteNo }" onclick="setRead(${list.noteNo});">${ list.title }</a>
-						<div class="modal fade" id="recvNote${ list.noteNo }" role="dialog">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">받은 메세지</h4>
-								</div>
-								<div class="modal-body">
-								
-									<!-- 직원 정보 수정 -->
-									<div class="recvNote">
-											<div class="form-group">
-									             <label>보낸사람</label>
-									             <input readonly="readonly" class="form-control" name="sent_id" value="${ list.sent_id }">				  
-									        </div>
-											<div class="form-group">
-									             <label>제목</label>
-									             <input readonly="readonly" type="text" class="form-control" name="title" id="msg" value="${ list.title }">				  
-									           </div>
-											<div class="form-group">
-									             <label>내용</label><br>
-									             <textarea class="form-control" rows="5" name="content" readonly="readonly">${ list.content }</textarea>
-									        </div>
-											
-									</div>
-								</div>
-								<div class="modal-footer">
-									<input type="submit" value="닫기" data-dismiss="modal" class="btn btn-default" style="float:right;">
-      							</div>
-							</div>
-						</div>
-					</div>
-					</td>
-					<td><fmt:formatDate value="${ list.date_sent }" pattern="yyyy-MM-dd-HH-mm" /></td>
-					<td>
-						<form action="recvMsgDel.do" method="post">
-							<input type="hidden" name="noteNo" value="${ list.noteNo }">
-							<input type="submit" class="btn btn-flat btn-sm bg-maroon" value="삭제">
-						</form>
-					</td>
-				</tr>
-				</c:forEach>
-				</c:if>
+            <table id="example2" class="table table-bordered table-hover">
+            <form action="sendAdMail.do" method="post" id="sendNoteForm">
+            <tr>
+            	<td colspan="2">새로 들어온 책 3개를 전송합니다.</td>
+            </tr>
+            <tr>
+            	<td>제목</td>
+            	<td><input id="title" name="title" type="text" placeholder="보내실 매일의 제목을 입력해주세요" size="50" value="새로 들어온 책을 빠르게 만나보세요!"> </td>
+            </tr>
+            <tr>
+            	<td></td>
+            	<td><input id="btnSubmit" type="button" onclick="alertToUser();" value="확인"></td>
+            </tr>
+			</form>
+			
+                
 			</table>
             </div>
             <!-- /.box-body -->
+            <div class="overlay" id="loading">
+			  <i class="fa fa-refresh fa-spin"></i>
+			</div>
           </div>
           <!-- /.box -->
         </div>
@@ -362,31 +323,35 @@
 <script src="${resources}/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+$(document).ready(function() {
+	$(".overlay").hide();
+});
   
-  function setRead(noteNo) {
-	  $.ajax({
-  		url: "/book/setReadNote.do",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-    		noteNo : noteNo
+function alertToUser() {
+	var title = $("#title").val();
+	alert("전송에는 다소 시간이 소요될 수 있습니다.");
+	$.ajax({
+		type: "post",
+		url: "sendAdMail.do",
+		dataType : "JSON",
+		data : { "title" : title },
+		error : function() {
+			alert("정상적으로 전송되지 않았습니다.")
 		},
-		success : function(data) {
-		}
+		success : function() {
+			alert("전송이 완료되었습니다.");
+		},
+		beforeSend: function () {
+			$(".overlay").show();
+
+     	},
+    	complete: function () {
+    		$(".overlay").hide();
+    		location.reaload();
+     	}
+		
 	});
-  }
-  
+}
 </script>
 </body>
 </html>

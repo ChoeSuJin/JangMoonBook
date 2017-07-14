@@ -152,6 +152,18 @@
             <li><a href="mWriteCustomerNotice.do"><i class="fa fa-font"></i> 공지사항 등록하기</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-sticky-note"></i>
+            <span>AdvertiseMail</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="sendAdvertiseMail.do"><i class="fa fa-envelope"></i> 광고메일보내기</a></li>
+          </ul>
+        </li>
         </sec:authorize>
         
         <li class="treeview">
