@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
   <c:set value="${pageContext.request.contextPath}/resources" var="resources" />
@@ -59,6 +60,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
+        <sec:authorize access="hasAnyRole('ROLE_PLATINUM')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i>
@@ -73,7 +75,7 @@
             <li><a href="mBranchInfo.do"><i class="fa fa-info"></i> 지점정보</a></li>
           </ul>
         </li>
-        
+        </sec:authorize>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-envelope"></i>
@@ -88,7 +90,7 @@
             <li><a href="sendNoteForm.do"><i class="fa fa-send"></i> 쪽지보내기</a></li>
           </ul>
         </li>
-        
+        <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-inbox"></i>
@@ -105,7 +107,8 @@
             <li><a href="mInventoryGetDirectList.do"><i class="fa fa-cart-arrow-down"></i> 수령확인</a></li>
           </ul>
         </li>
-        
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-krw"></i>
@@ -119,7 +122,8 @@
             <li><a href="mSalesForeign.do"><i class="fa fa-ship"></i> 외국도서</a></li>
           </ul>
         </li>
-        
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_WRITER')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-question-circle"></i>
@@ -132,7 +136,9 @@
             <li><a href="mQnAList.do"><i class="fa fa-question"></i> QnA목록</a></li>
           </ul>
         </li>
+        </sec:authorize>
         
+        <sec:authorize access="hasAnyRole('ROLE_WRITER')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-sticky-note"></i>
@@ -146,6 +152,7 @@
             <li><a href="mWriteCustomerNotice.do"><i class="fa fa-font"></i> 공지사항 등록하기</a></li>
           </ul>
         </li>
+        </sec:authorize>
         
         <li class="treeview">
           <a href="#">
@@ -157,10 +164,12 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="mAdminNotice.do"><i class="fa fa-list-alt"></i> 공지사항목록</a></li>
+            <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
             <li><a href="mWriteAdminNotice.do"><i class="fa fa-bold"></i> 공지사항 등록하기</a></li>
+            </sec:authorize>
           </ul>
         </li>
-        
+        <sec:authorize access="hasAnyRole('ROLE_ONLINE')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-inbox"></i>
@@ -188,7 +197,9 @@
             <li><a href="mOnlineSales.do"><i class="fa fa-line-chart"></i> 온라인판매</a></li>
           </ul>
         </li>
+        </sec:authorize>
         
+        <sec:authorize access="hasAnyRole('ROLE_DIAMOND')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-krw"></i>
@@ -202,7 +213,9 @@
             <li><a href="mTotalSaleByType.do"><i class="fa fa-pie-chart"></i> 타입별 매출</a></li>
           </ul>
         </li>
+        </sec:authorize>
         
+        <sec:authorize access="hasAnyRole('ROLE_EBOOK')">
         <li class="treeview">
           <a href="#">
             <i class="fa fa-file-pdf-o"></i>
@@ -217,6 +230,7 @@
             <li><a href="mEbookInsertNewOrg.do"><i class="fa fa-user-plus"></i> 가맹점등록</a></li>
           </ul>
         </li>
+        </sec:authorize>
       </ul>
     </section>
     <!-- /.sidebar -->

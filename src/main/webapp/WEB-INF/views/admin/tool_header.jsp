@@ -33,7 +33,7 @@
 <body>
 <header class="main-header">
     <!-- Logo -->
-    <a href="${resources}/index2.html" class="logo">
+    <a href="adminMain.do" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>B</span>
       <!-- logo for regular state and mobile devices -->
@@ -78,41 +78,46 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li class="notification">
-                    <a href="#">
+                    <a href="mAdminNotice.do">
                       <i class="fa fa-users text-aqua"></i> <font id="todayAdminNotice"></font> 개의 새로 등록된 공지사항
                     </a>
                   </li>
-                  <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM')">
+                  <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM', 'ROLE_ONLINE')">
                   <li class="notification">
-                    <a href="#">
+                  	<sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM')">
+                    <a href="mInventoryEmergency.do">
+                    </sec:authorize>
+                    <sec:authorize access="hasAnyRole('ROLE_ONLINE')">
+                    <a href="mOnlineInventoryEmergency.do">
+                    </sec:authorize>
                       <i class="fa fa-warning text-yellow"></i> <font id="emergencyBook"></font> 건의 주문요망
                     </a>
                   </li>
                   </sec:authorize>
                   <sec:authorize access="hasAnyRole('ROLE_GOLD', 'ROLE_PLATINUM', 'ROLE_ONLINE')">
                   <li class="notification">
-                    <a href="#">
+                    <a href="mSalesDomestic.do">
                       <i class="fa fa-shopping-cart text-green"></i> <font id="todaySales"></font> 건의 판매
                     </a>
                   </li>
                   </sec:authorize>
                   <sec:authorize access="hasAnyRole('ROLE_BRONZE', 'ROLE_GOLD', 'ROLE_PLATINUM')">
                   <li class="notification">
-                    <a href="#">
+                    <a href="mInventoryGetDirectList.do">
                       <i class="fa fa-users text-red"></i> <font id="directBook"></font> 건의 당일 수령 예정
                     </a>
                   </li>
                   </sec:authorize>
                   <sec:authorize access="hasAnyRole('ROLE_WRITER')">
                   <li class="notification">
-                    <a href="#">
+                    <a href="mQnAList.do">
                       <i class="fa fa-warning text-yellow"></i> <font id="notDoQnA"></font> 개의 미처리된 QnA
                     </a>
                   </li>
                   </sec:authorize>
                   <sec:authorize access="hasAnyRole('ROLE_EBOOK')">
                   <li class="notification">
-                    <a href="#">
+                    <a href="mEbookPermitList.do">
                       <i class="fa fa-user text-red"></i> <font id="requestEbook"></font>건의 Ebook 대여 요청
                     </a>
                   </li>
@@ -120,80 +125,6 @@
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Create a nice theme
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Some task I need to do
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Make beautiful transitions
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
             </ul>
           </li>
           <c:set var="user" value="${sessionScope.user}" />
@@ -369,12 +300,14 @@
 				var emergencyBook = data.emergencyBook;
 				var directBook = data.directBook;
 				var requestEbook = data.requestEbook;
+				var todaySales = data.todaySales;
 				
 				$("#todayAdminNotice").html(todayAdminNotice);
 				$("#notDoQnA").html(notDoQnA);
 				$("#emergencyBook").html(emergencyBook);
 				$("#directBook").html(directBook);
 				$("#requestEbook").html(requestEbook);
+				$("#todaySales").html(todaySales);
 				
 				var countNotification = $(".notification").length;
 				
